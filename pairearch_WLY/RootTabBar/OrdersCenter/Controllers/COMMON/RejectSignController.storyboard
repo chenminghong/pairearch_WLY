@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Reject Sign Controller-->
+        <scene sceneID="sbx-QC-bb5">
+            <objects>
+                <viewController storyboardIdentifier="RejectSignController" id="lBj-t0-gKA" customClass="RejectSignController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ese-h7-k43"/>
+                        <viewControllerLayoutGuide type="bottom" id="7l2-a2-yGP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KJd-RK-D14">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v80-fY-Tmn">
+                                <rect key="frame" x="20" y="70" width="335" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="XG2-Ri-ktn"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uvY-nf-jO6">
+                                <rect key="frame" x="20" y="135" width="335" height="125"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="4Oo-ph-myB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohE-Gv-L67">
+                                <rect key="frame" x="142" y="310" width="90" height="30"/>
+                                <color key="backgroundColor" red="0.93705266710000001" green="0.39020347599999999" blue="0.1872715056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="C8F-sx-RXP"/>
+                                    <constraint firstAttribute="height" constant="30" id="fub-Hw-5Kg"/>
+                                </constraints>
+                                <state key="normal" title="提交">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="commitButtonAction:" destination="lBj-t0-gKA" eventType="touchUpInside" id="XGW-K0-LNi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uvY-nf-jO6" firstAttribute="centerX" secondItem="v80-fY-Tmn" secondAttribute="centerX" id="2Hg-n4-rb3"/>
+                            <constraint firstAttribute="trailing" secondItem="v80-fY-Tmn" secondAttribute="trailing" constant="20" id="2u3-ch-BR4"/>
+                            <constraint firstItem="uvY-nf-jO6" firstAttribute="top" secondItem="v80-fY-Tmn" secondAttribute="bottom" constant="30" id="SYf-7J-zVY"/>
+                            <constraint firstItem="v80-fY-Tmn" firstAttribute="leading" secondItem="KJd-RK-D14" secondAttribute="leading" constant="20" id="ScK-vx-1bD"/>
+                            <constraint firstItem="v80-fY-Tmn" firstAttribute="top" secondItem="Ese-h7-k43" secondAttribute="bottom" constant="50" id="WUj-Ub-uFz"/>
+                            <constraint firstItem="uvY-nf-jO6" firstAttribute="width" secondItem="v80-fY-Tmn" secondAttribute="width" id="p5z-q2-paT"/>
+                            <constraint firstItem="ohE-Gv-L67" firstAttribute="top" secondItem="uvY-nf-jO6" secondAttribute="bottom" constant="50" id="u4S-1t-oMY"/>
+                            <constraint firstItem="ohE-Gv-L67" firstAttribute="centerX" secondItem="uvY-nf-jO6" secondAttribute="centerX" id="vN9-VV-Mkq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="commitBtn" destination="ohE-Gv-L67" id="nR6-3k-Mjg"/>
+                        <outlet property="reasonTV" destination="uvY-nf-jO6" id="TP5-LT-cQS"/>
+                        <outlet property="selectTf" destination="v80-fY-Tmn" id="ae6-9S-ERw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jUu-OI-aJR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="50" y="163"/>
+        </scene>
+    </scenes>
+</document>

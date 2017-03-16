@@ -1,0 +1,116 @@
+//
+//  Pairearch_WLY.pch
+//  pairearch_WLY
+//
+//  Created by Leo on 2017/2/14.
+//  Copyright © 2017年 Leo. All rights reserved.
+//
+
+#ifndef Pairearch_WLY_pch
+#define Pairearch_WLY_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#pragma mark -- Resource Header File
+
+//第三方头文件
+#import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
+#import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
+#import <BaiduMapAPI_Location/BMKLocationService.h>//引入定位功能所有的头文件
+
+#import <AFNetworking.h>  
+#import <MBProgressHUD.h>
+#import <MBProgressHUD+BWMExtension.h>
+#import <Masonry.h>
+
+
+//自定义头文件
+#import "NavigationController.h"
+#import "NetworkHelper.h"
+#import "LocationUploadManager.h"
+#import "BaseModel.h"
+#import "PaireachAPI.h"
+#import "MJRefreshUtil.h"
+#import "AppDelegate.h"
+#import "FileHelper.h"
+#import "LoginModel.h"
+#import "RootTabController.h"
+#import "OrderStatus.h"
+#import "OrderStatusManager.h"
+#import "OrderStatusKABaseController.h"
+#import <UserNotifications/UserNotifications.h>
+
+
+
+
+#pragma mark -- Define
+
+//关键字
+#define BAIDU_AK @"NudffmrH77cIxCdxQQtSd1PeNw75zbBR"  //百度地图AK
+#define SERVER_ID    133374  //百度鹰眼服务的serverId
+#define LOGIN_STATE  @"login_state"   //登录状态关键字
+#define USER_NUMBER  @"user_number"   //存储电话
+#define USER_ACCOUNT @"user_account"  //用户密码
+#define USER_INFO    @"user_info"     //用户信息
+
+//适配
+#define kWidthProportion  ([UIScreen mainScreen].bounds.size.width / 375)
+#define kHeightProportion ([UIScreen mainScreen].bounds.size.height / 667)
+
+//颜色RGB
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+//table分割线颜色
+#define TABLE_SEPARATOR_COLOR  UIColorFromRGB(0xeeeeee)
+
+//APP主题颜色
+#define TOP_BOTTOMBAR_COLOR     UIColorFromRGB(0xE2DDD2)  //顶部和底部导航条颜色
+
+#define MAIN_THEME_COLOR        UIColorFromRGB(0xFF5722)  //正常主题颜色
+
+#define THEME_COLOR_KA          MAIN_THEME_COLOR          //KA订单主题颜色
+
+#define THEME_COLOR_BACK        UIColorFromRGB(0xC00000)  //BACK订单主题颜色
+
+#define THEME_COLOR_COMMON      THEME_COLOR_KA  //COMMON订单主题颜色
+
+#define ABNORMAL_THEME_COLOR  UIColorFromRGB(0x979797)  //非正常主题颜色
+
+//tabbar颜色
+#define BUTTON_COLOR  UIColorFromRGB(0x66543C)
+
+//HUD隐藏的时间间隔
+#define HUD_HIDE_TIMEINTERVAL  2.0
+
+//屏幕宽高
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+
+//接口
+#define kPort @"http://14w92q3315.iask.in/itip/szitipwebsvc/receiveWoYunServiceRest/busnessTtsMesssage"
+
+//errort关键字
+#define ERROR_MSG @"NSLocalizedDescription" //Error key
+
+//个人中心界面字样宽度
+#define kPersonalCenterFontWidth 100
+
+//个人中心界面图标边长
+#define kPersonalCenterIconSideLength 32
+
+//个人中心界面箭头边长
+#define kPersonalCenterArrowSideLength 14
+
+//cell的label字体大小
+#define CELL_LABEL_FONTSIZE     13.0
+
+//cell的label默认高度
+#define CELL_LABEL_HEIGHT     18.0
+
+
+
+
+
+#endif /* Pairearch_WLY_pch */
