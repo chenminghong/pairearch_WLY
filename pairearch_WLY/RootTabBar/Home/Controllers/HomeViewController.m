@@ -225,6 +225,7 @@
 }
 
 - (void)dealloc {
+    //移除观察者
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

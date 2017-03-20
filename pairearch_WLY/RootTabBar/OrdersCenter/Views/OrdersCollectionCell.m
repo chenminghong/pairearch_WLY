@@ -86,21 +86,12 @@
 
 - (void)setListModelArr:(NSMutableArray *)listModelArr {
     _listModelArr = listModelArr;
-    if (self.indexPath.item == 0) {
-        if (listModelArr.count <= 0) {
-            [self.transpotBtn setHidden:YES];
-        } else {
-            [self.transpotBtn setHidden:NO];
-        }
-    } else {
-        [self.transpotBtn setHidden:YES];
-    }
 }
 
 //  请求网络数据
 - (void)loadDataFromNet {
     NSString *driverTel = [[NSUserDefaults standardUserDefaults] objectForKey:USER_NUMBER];
-    self.listModelArr = [NSMutableArray array];
+    [self.listModelArr removeAllObjects];
     [OrderListModel getDataWithParameters:@{@"driverTel":driverTel? driverTel:@"", @"status":self.type? self.type:@""} endBlock:^(id model, NSError *error) {
         if (!error) {
             self.listModelArr = [NSMutableArray arrayWithArray:model];
@@ -110,6 +101,16 @@
         }
         [self.listTableView reloadData];
         [MJRefreshUtil endRefresh:self.listTableView];
+        //显示隐藏底部“接收运单按钮”
+        if (self.indexPath.item == 0) {
+            if (self.listModelArr.count <= 0) {
+                [self.transpotBtn setHidden:YES];
+            } else {
+                [self.transpotBtn setHidden:NO];
+            }
+        } else {
+            [self.transpotBtn setHidden:YES];
+        }
     }];
 }
 

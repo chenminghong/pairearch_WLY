@@ -132,17 +132,36 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    __weak typeof(self) weakself = self;
     AbnormalSignCell *cell = [AbnormalSignCell getCellWithTable:tableView indexPath:indexPath abnormalBlock:^(OrderDetailModel *model, UIButton *sender) {
         NSDictionary *paraDict = @{@"orderCode":model.ORDER_CODE, @"shpmNum":model.SHPM_NUM};
         [[NetworkHelper shareClient] POST:ORDER_REJECT_GET_API parameters:paraDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
             NSString *msg = responseDict[@"msg"];
             NSInteger resultFlag = [responseDict[@"status"] integerValue];
+            [MBProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL/2];
             if (resultFlag == 1) {
                 model.SHPM_STATUS = @"241";
-                [self.tableView reloadData];
+                [weakself.tableView reloadData];
+                
+                //判断是否全部异常签收
+                BOOL allAbnormalFlag = YES;
+                for (NSArray *modelArr in weakself.dataListArr) {
+                    for (OrderDetailModel *tempModel in modelArr) {
+                        if ([tempModel.SHPM_STATUS integerValue] != 241) {
+                            allAbnormalFlag = NO;
+                            break;
+                        }
+                    }
+                }
+                if (allAbnormalFlag) {
+                    weakself.footerView.startTransportBtn.backgroundColor = ABNORMAL_THEME_COLOR;
+                    weakself.footerView.startTransportBtn.userInteractionEnabled = NO;
+                } else {
+                    weakself.footerView.startTransportBtn.backgroundColor = MAIN_THEME_COLOR;
+                    weakself.footerView.startTransportBtn.userInteractionEnabled = YES;
+                }
             }
-            [MBProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL/2];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL/2];
         }];
@@ -150,6 +169,7 @@
     cell.detailModel = [self.dataListArr[indexPath.section] objectAtIndex:indexPath.row];
     return cell;
 }
+
 
 #pragma mark -- ButtonAction
 

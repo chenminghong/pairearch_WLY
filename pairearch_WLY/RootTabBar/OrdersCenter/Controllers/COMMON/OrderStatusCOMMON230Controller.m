@@ -45,13 +45,13 @@
 
 - (void)setDataListArr:(NSMutableArray *)dataListArr {
     _dataListArr = [NSMutableArray arrayWithArray:[self classificationModelWithDetailModelArr:dataListArr]];
-    [self.tableView reloadData];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (NSArray *)classificationModelWithDetailModelArr:(NSArray *)detailModelArr {
     DetailCommonModel *tempModel;
     for (DetailCommonModel *detailModel in detailModelArr) {
-        if ([detailModel.SHPM_STATUS integerValue] != ORDER_STATUS_230 && [detailModel.SHPM_STATUS integerValue] != ORDER_STATUS_242) {
+        if ([detailModel.SHPM_STATUS integerValue] != ORDER_STATUS_230 && [detailModel.SHPM_STATUS integerValue] != ORDER_STATUS_241 && [detailModel.SHPM_STATUS integerValue] != ORDER_STATUS_242) {
             tempModel = detailModel;
             break;
         }
@@ -172,10 +172,11 @@
     CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM] width:(kScreenWidth - 100.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 100.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat height = 70.0+loadNumberConstant+loadAddressConstant;
-    if ([detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_242 || [detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_245) {
+    if ([detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_241 || [detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_242 || [detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_245) {
         CGFloat labelHeight = [BaseModel heightForTextString:@"已正常签收(或者异常签收)" width:((kScreenWidth - 100.0)) fontSize:CELL_LABEL_FONTSIZE];
         height += (labelHeight + 10.0);
     }
+    NSLog(@"%ld, %f", (long)[detailModel.SHPM_STATUS integerValue], height);
     return height;
 }
 
