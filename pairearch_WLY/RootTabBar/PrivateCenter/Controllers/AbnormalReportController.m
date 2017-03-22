@@ -45,7 +45,7 @@
 
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        LxGridViewFlowLayout *layout = [[LxGridViewFlowLayout alloc] init];
         _margin = 4;
         _itemWH = (self.view.tz_width - 2 * _margin - 4) / 3 - _margin;
         layout.itemSize = CGSizeMake(_itemWH, _itemWH);
@@ -138,6 +138,29 @@
     return cell;
 }
 
+#pragma mark - LxGridViewDataSource
+
+/// 以下三个方法为长按排序相关代码
+- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.item < _selectedPhotos.count;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)sourceIndexPath canMoveToIndexPath:(NSIndexPath *)destinationIndexPath {
+    return (sourceIndexPath.item < _selectedPhotos.count && destinationIndexPath.item < _selectedPhotos.count);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)sourceIndexPath didMoveToIndexPath:(NSIndexPath *)destinationIndexPath {
+    UIImage *image = _selectedPhotos[sourceIndexPath.item];
+    [_selectedPhotos removeObjectAtIndex:sourceIndexPath.item];
+    [_selectedPhotos insertObject:image atIndex:destinationIndexPath.item];
+    
+    id asset = _selectedAssets[sourceIndexPath.item];
+    [_selectedAssets removeObjectAtIndex:sourceIndexPath.item];
+    [_selectedAssets insertObject:asset atIndex:destinationIndexPath.item];
+    
+    [_collectionView reloadData];
+}
+
 
 #pragma mark -- CollectionView Delegate
 
@@ -155,10 +178,12 @@
     } else {
         cell.imageView.image = _selectedPhotos[indexPath.row];
         cell.asset = _selectedAssets[indexPath.row];
+        [cell.deleteBtn setImage:[UIImage imageNamed:@"delete_img"] forState:UIControlStateNormal];
         cell.deleteBtn.hidden = NO;
     }
     cell.gifLable.hidden = YES;
     cell.deleteBtn.tag = indexPath.row;
+    [cell.deleteBtn addTarget:self action:@selector(deleteBtnClik:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 
@@ -253,11 +278,11 @@
 
 //弹出选择相册
 - (void)pushImagePickerController {
-    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:3 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
     
     
 #pragma mark - 四类个性化设置，这些参数都可以不传，此时会走默认设置
-//    imagePickerVc.selectedAssets = _selectedAssets; // 目前已经选中的图片数组
+    imagePickerVc.selectedAssets = _selectedAssets; // 目前已经选中的图片数组
     
     // 2. Set the appearance
     // 2. 在这里设置imagePickerVc的外观
@@ -276,8 +301,9 @@
     
     /// 5. Single selection mode, valid when maxImagesCount = 1
     /// 5. 单选模式,maxImagesCount为1时才生效
-    imagePickerVc.showSelectBtn = NO;
+    imagePickerVc.showSelectBtn = YES;
     imagePickerVc.allowTakePicture = NO;
+    imagePickerVc.alwaysEnableDoneBtn = YES;
     /*
      [imagePickerVc setCropViewSettingBlock:^(UIView *cropView) {
      cropView.layer.borderColor = [UIColor redColor].CGColor;
@@ -296,42 +322,50 @@
     [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
 
+//删除按钮点击事件
+- (void)deleteBtnClik:(UIButton *)sender {
+    [_selectedPhotos removeObjectAtIndex:sender.tag];
+    [_selectedAssets removeObjectAtIndex:sender.tag];
+    
+    [_collectionView performBatchUpdates:^{
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:sender.tag inSection:0];
+        [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
+    } completion:^(BOOL finished) {
+        [_collectionView reloadData];
+    }];
+}
+
 //提交按钮点击事件
 - (void)commitButtonAction:(UIButton *)sender {
     AbnormalReportCell *cell = (AbnormalReportCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     NSDictionary *paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"driverName":[LoginModel shareLoginModel].name, @"orderCode":cell.loadNumberTf.text, @"remark":cell.loadNumberTv.text};
     
-    MBProgressHUD *hud = [MBProgressHUD bwm_showTitle:kBWMMBProgressHUDMsgLoading toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-    [[NetworkHelper shareClient] POST:ABNORMAL_UPLOAD_API parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        [formData appendPartWithFileData:UIImageJPEGRepresentation(_selectedPhotos[0], 0.8) name:@"file" fileName:@"abnormal_upload.jpg" mimeType:@"image/jpeg"];
-    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [NetworkHelper POST:ABNORMAL_UPLOAD_API parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        for (NSInteger i = 0; i < _selectedPhotos.count; i++) {
+            [formData appendPartWithFileData:UIImageJPEGRepresentation(_selectedPhotos[0], 0.8) name:@"file" fileName:[NSString stringWithFormat:@"abnormal_upload%ld.jpg", i] mimeType:@"image/jpeg"];
+        }
+    } progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         __block NSInteger status = [responseDict[@"status"] integerValue];
         NSString *msg = responseDict[@"msg"];
-        [hud hide:NO];
         MBProgressHUD *tempHUD = [MBProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         [tempHUD setCompletionBlock:^{
             if (status == 1) {
                 [self.navigationController popViewControllerAnimated:YES];
             }
         }];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSError *error) {
         [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
     }];
 }
 
 #pragma mark - TZImagePickerControllerDelegate
 
-/// User click cancel button
 /// 用户点击了取消
 - (void)tz_imagePickerControllerDidCancel:(TZImagePickerController *)picker {
     // NSLog(@"cancel");
 }
 
-// The picker should dismiss itself; when it dismissed these handle will be called.
-// If isOriginalPhoto is YES, user picked the original photo.
-// You can get original photo with asset, by the method [[TZImageManager manager] getOriginalPhotoWithAsset:completion:].
-// The UIImage Object in photos default width is 828px, you can set it by photoWidth property.
 // 这个照片选择器会自己dismiss，当选择器dismiss的时候，会执行下面的代理方法
 // 如果isSelectOriginalPhoto为YES，表明用户选择了原图
 // 你可以通过一个asset获得原图，通过这个方法：[[TZImageManager manager] getOriginalPhotoWithAsset:completion:]

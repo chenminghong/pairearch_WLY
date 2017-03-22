@@ -62,10 +62,6 @@
         PHAsset *phAsset = asset;
         _videoImageView.hidden = phAsset.mediaType != PHAssetMediaTypeVideo;
         _gifLable.hidden = ![[phAsset valueForKey:@"filename"] containsString:@"GIF"];
-    } else if ([asset isKindOfClass:[ALAsset class]]) {
-        ALAsset *alAsset = asset;
-        _videoImageView.hidden = ![[alAsset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo];
-        _gifLable.hidden = YES;
     }
  }
 

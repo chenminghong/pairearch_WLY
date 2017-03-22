@@ -81,10 +81,7 @@ static BTRACE *traceInstance = NULL;
     content.body = [NSString localizedUserNotificationStringForKey:contentDes arguments:nil];
     content.sound = [UNNotificationSound defaultSound];
     
-    // 在 alertTime 后推送本地推送
-//    UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:alerTime repeats:NO];
-    
-    NSString *requestIdentifier = @"sampleRequest";
+    NSString *requestIdentifier = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
     UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestIdentifier content:content trigger:nil];
     
     //添加推送成功后的处理！
