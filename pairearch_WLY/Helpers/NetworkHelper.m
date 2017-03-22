@@ -138,8 +138,8 @@
             block(formData);
         }
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        [hud hide:NO];
         if (progress) {
+            [hud hide:NO];
             progress(uploadProgress);
         }
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -149,7 +149,6 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [hud hide:NO];
-        [MBProgressHUD bwm_showTitle:kBWMMBProgressHUDMsgLoadError toView:window hideAfter:2.0];
         if (failure) {
             failure(error);
         }

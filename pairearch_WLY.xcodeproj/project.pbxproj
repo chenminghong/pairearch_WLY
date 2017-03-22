@@ -50,6 +50,12 @@
 		B35727931E556155003F9B2F /* BaiduTraceSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B357278E1E555515003F9B2F /* BaiduTraceSDK.framework */; };
 		B35727941E556155003F9B2F /* BaiduTraceSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B357278E1E555515003F9B2F /* BaiduTraceSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B35D79361E666AB800ED730B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B35D79351E666AB800ED730B /* MapKit.framework */; };
+		B37BA6C91E80C443001A74B8 /* AbnormalReportController.m in Sources */ = {isa = PBXBuildFile; fileRef = B37BA6C81E80C443001A74B8 /* AbnormalReportController.m */; };
+		B37BA6CB1E80D300001A74B8 /* AbnormalReportController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B37BA6CA1E80D300001A74B8 /* AbnormalReportController.storyboard */; };
+		B37BA6CF1E80FA29001A74B8 /* AbnormalReportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B37BA6CD1E80FA29001A74B8 /* AbnormalReportCell.m */; };
+		B37BA6D01E80FA29001A74B8 /* AbnormalReportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B37BA6CE1E80FA29001A74B8 /* AbnormalReportCell.xib */; };
+		B37BA6D51E8127A9001A74B8 /* LxGridViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B37BA6D21E8127A9001A74B8 /* LxGridViewFlowLayout.m */; };
+		B37BA6D61E8127A9001A74B8 /* TZTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B37BA6D41E8127A9001A74B8 /* TZTestCell.m */; };
 		B37CB1F71E6958DB00A1463F /* OrderStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B37CB1F61E6958DB00A1463F /* OrderStatusManager.m */; };
 		B37CB22C1E6E96F900A1463F /* OrderStatusKABaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = B37CB22B1E6E96F900A1463F /* OrderStatusKABaseController.m */; };
 		B37CB2451E6FEFCC00A1463F /* NestedSelectStateController.m in Sources */ = {isa = PBXBuildFile; fileRef = B37CB2311E6FEFCC00A1463F /* NestedSelectStateController.m */; };
@@ -218,6 +224,16 @@
 		B35D79331E666A2B00ED730B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		B35D79341E666A2C00ED730B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		B35D79351E666AB800ED730B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B37BA6C71E80C443001A74B8 /* AbnormalReportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbnormalReportController.h; sourceTree = "<group>"; };
+		B37BA6C81E80C443001A74B8 /* AbnormalReportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbnormalReportController.m; sourceTree = "<group>"; };
+		B37BA6CA1E80D300001A74B8 /* AbnormalReportController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AbnormalReportController.storyboard; sourceTree = "<group>"; };
+		B37BA6CC1E80FA29001A74B8 /* AbnormalReportCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbnormalReportCell.h; sourceTree = "<group>"; };
+		B37BA6CD1E80FA29001A74B8 /* AbnormalReportCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbnormalReportCell.m; sourceTree = "<group>"; };
+		B37BA6CE1E80FA29001A74B8 /* AbnormalReportCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AbnormalReportCell.xib; sourceTree = "<group>"; };
+		B37BA6D11E8127A9001A74B8 /* LxGridViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridViewFlowLayout.h; sourceTree = "<group>"; };
+		B37BA6D21E8127A9001A74B8 /* LxGridViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridViewFlowLayout.m; sourceTree = "<group>"; };
+		B37BA6D31E8127A9001A74B8 /* TZTestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZTestCell.h; sourceTree = "<group>"; };
+		B37BA6D41E8127A9001A74B8 /* TZTestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZTestCell.m; sourceTree = "<group>"; };
 		B37CB1F41E694D3E00A1463F /* OrderStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderStatus.h; sourceTree = "<group>"; };
 		B37CB1F51E6958DB00A1463F /* OrderStatusManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStatusManager.h; sourceTree = "<group>"; };
 		B37CB1F61E6958DB00A1463F /* OrderStatusManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStatusManager.m; sourceTree = "<group>"; };
@@ -538,6 +554,9 @@
 				B38411371E5E832C00F7069F /* AlterPasswordViewController.m */,
 				B38411381E5E832C00F7069F /* VersionInfoViewController.h */,
 				B38411391E5E832C00F7069F /* VersionInfoViewController.m */,
+				B37BA6C71E80C443001A74B8 /* AbnormalReportController.h */,
+				B37BA6C81E80C443001A74B8 /* AbnormalReportController.m */,
+				B37BA6CA1E80D300001A74B8 /* AbnormalReportController.storyboard */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -562,6 +581,13 @@
 				B38411421E5E91DE00F7069F /* CancelLoginCell.h */,
 				B38411431E5E91DE00F7069F /* CancelLoginCell.m */,
 				B38411441E5E91DE00F7069F /* CancelLoginCell.xib */,
+				B37BA6CC1E80FA29001A74B8 /* AbnormalReportCell.h */,
+				B37BA6CD1E80FA29001A74B8 /* AbnormalReportCell.m */,
+				B37BA6CE1E80FA29001A74B8 /* AbnormalReportCell.xib */,
+				B37BA6D11E8127A9001A74B8 /* LxGridViewFlowLayout.h */,
+				B37BA6D21E8127A9001A74B8 /* LxGridViewFlowLayout.m */,
+				B37BA6D31E8127A9001A74B8 /* TZTestCell.h */,
+				B37BA6D41E8127A9001A74B8 /* TZTestCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1099,8 +1125,10 @@
 				B381DAE51E77DB8B00D752C1 /* CommonPickerView.xib in Resources */,
 				B3D3B2AB1E66EA550033EF84 /* SaftyCheckCell.xib in Resources */,
 				B307BF951E777F3B005D7979 /* RejectSignController.storyboard in Resources */,
+				B37BA6D01E80FA29001A74B8 /* AbnormalReportCell.xib in Resources */,
 				B357276E1E543268003F9B2F /* OrdersCenterController.storyboard in Resources */,
 				B307BF901E767DE3005D7979 /* CommonNomalSignCell.xib in Resources */,
+				B37BA6CB1E80D300001A74B8 /* AbnormalReportController.storyboard in Resources */,
 				B32228E91E52A2C300ED50ED /* LaunchScreen.storyboard in Resources */,
 				B38411461E5E91DE00F7069F /* CancelLoginCell.xib in Resources */,
 				B37CB26B1E6FF08400A1463F /* GetRefuseFooterView.xib in Resources */,
@@ -1186,6 +1214,7 @@
 				B384110F1E5D875700F7069F /* FileDirPathUtil.m in Sources */,
 				B35727811E545865003F9B2F /* NetworkHelper.m in Sources */,
 				B307BF991E77826A005D7979 /* HaveBackOrderCell.m in Sources */,
+				B37BA6C91E80C443001A74B8 /* AbnormalReportController.m in Sources */,
 				B37CB2661E6FF08400A1463F /* AbnormalSignCell.m in Sources */,
 				B37CB2A61E7032B400A1463F /* BACKNestedSelectController.m in Sources */,
 				B38411401E5E89C700F7069F /* PersonalCenterCell.m in Sources */,
@@ -1214,6 +1243,7 @@
 				B37CB22C1E6E96F900A1463F /* OrderStatusKABaseController.m in Sources */,
 				B37CB24A1E6FEFCC00A1463F /* OrderStatusKA230Controller.m in Sources */,
 				B37CB2681E6FF08400A1463F /* EvaluationTableCell.m in Sources */,
+				B37BA6CF1E80FA29001A74B8 /* AbnormalReportCell.m in Sources */,
 				B37CB2461E6FEFCC00A1463F /* OrderStatusKA212Controller.m in Sources */,
 				B38410FB1E5D875700F7069F /* FileHelper.m in Sources */,
 				B307BF7C1E72A07F005D7979 /* DetailCommonModel.m in Sources */,
@@ -1231,6 +1261,7 @@
 				B384110E1E5D875700F7069F /* CustomButton.m in Sources */,
 				B307BF531E728473005D7979 /* OrderStatusCOMMON220Controller.m in Sources */,
 				B37CB26A1E6FF08400A1463F /* GetRefuseFooterView.m in Sources */,
+				B37BA6D61E8127A9001A74B8 /* TZTestCell.m in Sources */,
 				B38411111E5D875700F7069F /* InputValueCheckUtil.m in Sources */,
 				B3CC54C61E6037D60072EA47 /* WQLPaoMaView.m in Sources */,
 				B357272F1E53FC61003F9B2F /* RootTabController.m in Sources */,
@@ -1266,6 +1297,7 @@
 				B38410B61E5D375600F7069F /* BaseModel.m in Sources */,
 				B37CB2451E6FEFCC00A1463F /* NestedSelectStateController.m in Sources */,
 				B37CB2471E6FEFCC00A1463F /* OrderStatusKA220Controller.m in Sources */,
+				B37BA6D51E8127A9001A74B8 /* LxGridViewFlowLayout.m in Sources */,
 				B307BF651E728561005D7979 /* Common212HeaderView.m in Sources */,
 				B32228DB1E52A2C300ED50ED /* main.m in Sources */,
 				B3CC54B51E601C920072EA47 /* PaomaLabel.m in Sources */,

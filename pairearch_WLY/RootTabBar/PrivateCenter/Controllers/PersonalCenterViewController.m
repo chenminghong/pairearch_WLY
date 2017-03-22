@@ -12,6 +12,7 @@
 #import "VersionInfoViewController.h"
 #import "AboutUsViewController.h"
 #import "LoginViewController.h"
+#import "AbnormalReportController.h"
 
 #import "PersonalCenterCell.h"
 #import "CancelLoginCell.h"
@@ -39,30 +40,31 @@
     
     self.title = @"个人中心";
     
-    self.titltArr = @[@"修改密码", @"版本信息", @"关于我们"];
-    self.imageNameArr = @[@"shezhimima", @"banbenxinxi", @"guayuwomen"];
+    self.titltArr = @[@"异常上报", @"修改密码", @"版本信息", @"关于我们"];
+    self.imageNameArr = @[@"yichang", @"shezhimima", @"banbenxinxi", @"guayuwomen"];
     
     self.tableView = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] bounds] style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
     //设置分隔线颜色
     [self.tableView setSeparatorColor:TABLE_SEPARATOR_COLOR];
     //设置分隔线样式
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 20.0, 0, 0);
     [self.view addSubview:self.tableView];
 }
-//设置行数
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (0 == section) {
-        return 3;
+        return self.titltArr.count;
     } else {
         return 1;
     }
 }
-//重用池
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (0 == indexPath.section) {
         PersonalCenterCell *cell = [PersonalCenterCell getCellWithTable:tableView];
         cell.mainLabel.text = self.titltArr[indexPath.row];
@@ -74,16 +76,14 @@
     }
 }
 
-//行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 53;
 }
-//区数
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
 
-//区的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (0 == section) {
         return 0.00000001;
@@ -94,11 +94,15 @@
 //点击cell触发
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (0 == indexPath.section) {
-        if (0 == indexPath.row) {
+        if (indexPath.row == 0) {
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"AbnormalReportController" bundle:[NSBundle mainBundle]];
+            AbnormalReportController *abnormalRVC = [sb instantiateViewControllerWithIdentifier:@"AbnormalReportController"];
+            [self.navigationController pushViewController:abnormalRVC animated:YES];
+        } else if (indexPath.row == 1) {
             AlterPasswordViewController *alterPasswordVC = [[AlterPasswordViewController alloc] init];
             alterPasswordVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:alterPasswordVC animated:YES];
-        } else if (1 == indexPath.row) {
+        } else if (indexPath.row == 2) {
             VersionInfoViewController *versionInfoVC = [[VersionInfoViewController alloc] init];
             versionInfoVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:versionInfoVC animated:YES];
