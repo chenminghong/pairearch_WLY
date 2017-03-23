@@ -70,13 +70,8 @@
             } else {
                 [MBProgressHUD bwm_showTitle:@"网络连接已断开，请检查网络！" toView:self.window hideAfter:HUD_HIDE_TIMEINTERVAL];
             }
-        } else {
-            if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
-                [self addNetLocalNotificationWithDesStr:@"网络连接成功！"];
-            } else {
-                [MBProgressHUD bwm_showTitle:@"网络连接成功！" toView:self.window hideAfter:HUD_HIDE_TIMEINTERVAL];
-            }
-        }    }];
+        }
+    }];
     [manager startMonitoring];
     
 }

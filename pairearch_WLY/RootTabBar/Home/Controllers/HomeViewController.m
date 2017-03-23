@@ -161,8 +161,6 @@
         NSArray *modelArr = model;
         if (modelArr.count) {
             self.dataModelArr = [NSMutableArray arrayWithArray:model];
-        } else {
-            [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL / 2.0];
         }
         [self.tableView reloadData];
         if (self.dataModelArr.count) {

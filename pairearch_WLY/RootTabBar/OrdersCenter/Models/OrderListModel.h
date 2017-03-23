@@ -71,7 +71,7 @@
 
 @property (nonatomic, copy) NSString *STATUS;              //订单状态
 
-@property (nonatomic, strong) NSString *STATUS_NAME;       //订单状态描述
+@property (nonatomic, copy) NSString *STATUS_NAME;         //订单状态描述
 
 @property (nonatomic, copy) NSString *DC_NAME;             //收货地名称
 
@@ -79,7 +79,10 @@
 
 @property (nonatomic, copy) NSString *PLAN_ACHIEVE_TIME;   //预约到货时间
 
+@property (nonatomic, copy) NSString *DRIVER_ORDER_TIME;   //运单开始时间
+
 @property (nonatomic, assign) BOOL isSelected;             //是否选中
+
 
 
 @end
