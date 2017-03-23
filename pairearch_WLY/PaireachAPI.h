@@ -16,6 +16,7 @@
 //#define PAIREACH_BASE_URL                @"http://192.168.1.14:8086/tts/client/"   //王敬刚
 #define PAIREACH_BASE_URL                @"http://106.14.39.65:8285/itip/client/"  //线上
 //#define PAIREACH_BASE_URL                @"http://192.168.1.14:8086/itip/client/"  //备用
+//#define PAIREACH_BASE_URL                @"http://dt.paireach.com/itip/client/"   //双至域名
 
 
 /*============================首页相关=============================*/
@@ -96,7 +97,7 @@
 
 
 
-
+/*============================通知中心相关=============================*/
 
 #pragma mark -- 通知中心
 

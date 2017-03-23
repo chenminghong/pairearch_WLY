@@ -80,6 +80,9 @@
     
     //获取首页Data数据
     [self getHomePageData];
+    
+    //检查是否有新版本要进行更新
+    [self checkAppVersion];
 }
 
 - (void)paomaViewStartAnimation {
@@ -189,6 +192,41 @@
     //设置文字颜色
     [str addAttribute:NSForegroundColorAttributeName value:vaColor range:range];
     labell.attributedText = str;
+}
+
+//检查App版本信息
+- (void)checkAppVersion {
+    //构建版本获取appID
+    NSString *updateUrl = [NSString stringWithFormat:@"http://itunes.apple.com/cn/lookup?id=%@", APP_ID];
+    [[NetworkHelper shareClient] GET:updateUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *receiveDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        if ([[receiveDic valueForKey:@"resultCount"] integerValue] > 0) {
+            
+            NSDictionary *versionDict = [[receiveDic valueForKey:@"results"] objectAtIndex:0];
+            //APP最新版本
+            NSString *latestVersion = [versionDict objectForKey:@"version"];
+            latestVersion = [latestVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
+            CGFloat latest = [latestVersion floatValue];
+            
+            //APP当前版本
+            NSString *appCurVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+            appCurVersion = [appCurVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
+            CGFloat current = [appCurVersion floatValue];
+            
+            latest = 1.2;
+            current = 1.1;
+            if (latest > current) {
+                UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"提示" message:@"发现需要升级的新版本，现在去更新？" preferredStyle:UIAlertControllerStyleAlert];
+                
+                __block NSString *trackViewUrl = [versionDict objectForKey:@"trackViewUrl"];
+                UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:trackViewUrl]]; //跳转到App Store下载页面
+                }];
+                [alertView addAction:sure];
+                [self presentViewController:alertView animated:YES completion:nil];
+            }
+        }
+    } failure:nil];
 }
 
 #pragma mark -- TableViewDelegate
