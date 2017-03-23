@@ -174,13 +174,13 @@
         if (status == 1) {
             __weak typeof(self) weakself = self;
             [hud setCompletionBlock:^(){
-                if (self.dataListArr.count == 1) {
+                if (weakself.dataListArr.count == 1) {
                     OrderStatusKA220Controller *checkVC = [OrderStatusKA220Controller new];
-                    checkVC.paraDict = self.paraDict;
-                    checkVC.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:self.orderStatus orderType:self.orderType];
+                    checkVC.paraDict = weakself.paraDict;
+                    checkVC.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:weakself.orderStatus orderType:weakself.orderType];
                     [weakself.navigationController pushViewController:checkVC animated:YES];
                 } else {
-                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    [weakself.navigationController popToRootViewControllerAnimated:YES];
                 }
             }];
         }

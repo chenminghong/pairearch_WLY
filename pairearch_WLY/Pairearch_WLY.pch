@@ -85,6 +85,13 @@
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
+//DebugLog
+#ifndef __OPTIMIZE__
+#define NSLog(...) NSLog(__VA_ARGS__)
+#else
+#define NSLog(...){}
+#endif
+
 //接口
 #define kPort @"http://14w92q3315.iask.in/itip/szitipwebsvc/receiveWoYunServiceRest/busnessTtsMesssage"
 

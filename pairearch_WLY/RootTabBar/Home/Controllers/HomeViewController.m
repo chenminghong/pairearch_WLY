@@ -213,8 +213,6 @@
             appCurVersion = [appCurVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
             CGFloat current = [appCurVersion floatValue];
             
-            latest = 1.2;
-            current = 1.1;
             if (latest > current) {
                 UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"提示" message:@"发现需要升级的新版本，现在去更新？" preferredStyle:UIAlertControllerStyleAlert];
                 
