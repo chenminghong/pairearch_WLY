@@ -38,7 +38,6 @@
     PersonalCenterViewController *privateVC = [PersonalCenterViewController new];
     NavigationController *privateNC = [self addNavigationItemForViewController:privateVC];
     
-    
     self.tabBar.translucent = NO;
     self.tabBar.barTintColor = TOP_BOTTOMBAR_COLOR;
     self.viewControllers = @[homeNC, orderNC, privateNC];
