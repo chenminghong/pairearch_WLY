@@ -7,7 +7,7 @@
 //
 
 #import "VersionInfoViewController.h"
-#define kVersionInfo @"我来运1.0.0"
+#define kVersionInfo @"百威-我来运V1.0.0"
 #define kCopyrightInfo @"Copyright©2017 上海双至供应链管理有限公司"
 
 @interface VersionInfoViewController ()
@@ -41,11 +41,9 @@
     versionInfoL.textAlignment = 1;
     [self.view addSubview:versionInfoL];
     [versionInfoL mas_makeConstraints:^(MASConstraintMaker *make) {
-       
         make.top.equalTo(logoImageView.mas_bottom).with.offset(20);
         make.centerX.equalTo(weakSelf.view);
-        make.size.mas_equalTo(CGSizeMake(100, 30));
-        
+        make.height.mas_equalTo(30);
     }];
     
     //版权信息

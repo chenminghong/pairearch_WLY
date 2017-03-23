@@ -51,7 +51,8 @@
     self.safetyCheckBtn.layer.borderWidth = 0.5;
     
     self.userIconBtn.layer.masksToBounds = YES;
-    self.userIconBtn.layer.cornerRadius = CGRectGetWidth(self.userIconBtn.bounds) / 2.0;
+    self.userIconBtn.layer.cornerRadius = (kScreenWidth * 6) / 32 / 2.0;
+    
     
     self.userNameLabel.textColor = UIColorFromRGB(0x666666);
     self.userNumberLabel.textColor = UIColorFromRGB(0x666666);
