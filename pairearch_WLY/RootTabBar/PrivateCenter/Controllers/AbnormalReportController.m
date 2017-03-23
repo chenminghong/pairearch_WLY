@@ -342,7 +342,7 @@
     
     [NetworkHelper POST:ABNORMAL_UPLOAD_API parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         for (NSInteger i = 0; i < _selectedPhotos.count; i++) {
-            [formData appendPartWithFileData:UIImageJPEGRepresentation(_selectedPhotos[0], 0.8) name:@"file" fileName:[NSString stringWithFormat:@"abnormal_upload%ld.jpg", i] mimeType:@"image/jpeg"];
+            [formData appendPartWithFileData:UIImageJPEGRepresentation(_selectedPhotos[0], 0.8) name:@"file" fileName:[NSString stringWithFormat:@"abnormal_upload%ld.jpg", (long)i] mimeType:@"image/jpeg"];
         }
     } progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];

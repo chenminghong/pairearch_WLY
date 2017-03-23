@@ -122,7 +122,7 @@
     [paraDict setObject:[LoginModel shareLoginModel].tel forKey:@"driverTel"];
     for (NSInteger i = 0; i < self.modelArr.count; i++) {
         SafetyCheckModel *model = self.modelArr[i];
-        NSString *key = [NSString stringWithFormat:@"isChecked1%ld", i];
+        NSString *key = [NSString stringWithFormat:@"isChecked1%ld", (long)i];
         [paraDict setObject:[model.selected boolValue]? @"true":@"false" forKey:key];
     }
     
