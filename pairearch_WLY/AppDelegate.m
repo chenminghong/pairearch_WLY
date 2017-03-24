@@ -10,6 +10,7 @@
 
 #import "LoginViewController.h"
 #import "RootTabController.h"
+#import <BaiduMobStat.h>
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate>
 
@@ -31,6 +32,10 @@
     
     //网络变化执行动作
     [self netWorkDidChangeAction];
+    
+    //添加百度统计
+    [[BaiduMobStat defaultStat] startWithAppId:APP_KEY];
+    
     return YES;
 }
 
