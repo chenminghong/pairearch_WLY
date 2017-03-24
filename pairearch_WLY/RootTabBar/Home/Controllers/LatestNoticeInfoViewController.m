@@ -11,8 +11,10 @@
 #import "AutoHeight.h"
 
 @interface LatestNoticeInfoViewController ()
+
 @property (nonatomic, strong) UILabel *titleL;
 @property (nonatomic, strong) UILabel *contentL;
+
 @end
 
 @implementation LatestNoticeInfoViewController
@@ -21,7 +23,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = UIColorFromRGB(0xCBC9C7);
+    self.view.backgroundColor = [UIColor whiteColor];
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"最新公告";

@@ -30,8 +30,6 @@
     //注册本地通知
     [self registerLocalNotification];
     
-    //检查版本更新
-    [self checkAppVersion];
     //网络变化执行动作
     [self netWorkDidChangeAction];
     return YES;
@@ -60,39 +58,6 @@
     }];
 }
 
-//检查App版本信息
-- (void)checkAppVersion {
-    //构建版本获取appID
-    NSString *appID = @"";
-    NSString *updateUrl = [NSString stringWithFormat:@"http://itunes.apple.com/cn/lookup?id=%@",appID];
-    [[NetworkHelper shareClient] GET:updateUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *receiveDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-        if ([[receiveDic valueForKey:@"resultCount"] integerValue] > 0) {
-            
-//            NSString *trackViewUrl = [[[receiveDic valueForKey:@"results"] objectAtIndex:0] valueForKey:@"trackViewUrl"];
-            //APP最新版本
-            NSString *latestVersion = [[[receiveDic valueForKey:@"results"] objectAtIndex:0] valueForKey:@"version"];
-            latestVersion = [latestVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
-            CGFloat latest = [latestVersion floatValue];
-            
-            //APP当前版本
-            NSString *appCurVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-            appCurVersion = [appCurVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
-            CGFloat current = [appCurVersion floatValue];
-            
-            latest = 1.2;
-            current = 1.1;
-            if (latest > current) {
-                UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"提示" message:@"发现需要升级的版本，现在去更新？" preferredStyle:UIAlertControllerStyleAlert];
-                
-                UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/yi-ka-tongbic-ban/id1139094792?l=en&mt=8"]]; //跳转到App Store下载页面
-                }];
-                [alertView addAction:sure];
-                [self.window.rootViewController presentViewController:alertView animated:YES completion:nil];
-            }
-        }
-    } failure:nil];
 //添加网络变化通知
 - (void)netWorkDidChangeAction {
     AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
