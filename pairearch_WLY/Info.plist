@@ -21,7 +21,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.0.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -29,10 +29,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>应用将在后台更新您的位置信息，用于行驶路线的采集和承运商对司机的考核。司机从接受运单到完成收获的过程中，我来运app将会进行后台持续定位。如果允许使用在后台运行的全球定位系统，将会大大降低电池寿命。</string>
 	<key>NSCameraUsageDescription</key>
 	<string>访问相机以拍照</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>应用将在后台更新您的位置信息，用于行驶路线的采集和承运商对司机的考核。司机从接受运单到完成收获的过程中，我来运app将会进行后台持续定位。如果允许使用在后台运行的全球定位系统，将会大大降低电池寿命。</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>访问相册以选择照片</string>
 	<key>UIBackgroundModes</key>
