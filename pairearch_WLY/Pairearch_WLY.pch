@@ -45,7 +45,7 @@
 
 //关键字
 #define BAIDU_AK @"NudffmrH77cIxCdxQQtSd1PeNw75zbBR"  //百度地图AK
-#define SERVER_ID    133374  //百度鹰眼服务的serverId
+#define SERVER_ID    133374           //百度鹰眼服务的serverId
 #define LOGIN_STATE  @"login_state"   //登录状态关键字
 #define USER_NUMBER  @"user_number"   //存储电话
 #define USER_ACCOUNT @"user_account"  //用户密码

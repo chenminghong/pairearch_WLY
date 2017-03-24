@@ -13,4 +13,7 @@
 //获取返回按钮
 + (UIBarButtonItem *)getNavigationBackItemWithTarget:(id)target SEL:(SEL)sel;
 
+//隐藏底部线条
+- (void)hideNavigationBarBottomLine;
+
 @end

@@ -111,7 +111,8 @@
         [self.view addSubview:self.bottomLabel];
         self.bottomLabel.font = [UIFont systemFontOfSize:13.0];
         self.bottomLabel.textColor = UIColorFromRGB(0x666666);
-        self.bottomLabel.backgroundColor = UIColorFromRGB(0xF1D6D8);
+//        self.bottomLabel.backgroundColor = UIColorFromRGB(0xF1D6D8);
+        self.bottomLabel.backgroundColor = TOP_BOTTOMBAR_COLOR;
         [self.bottomLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.view);
             make.bottom.equalTo(self.view);
@@ -143,8 +144,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBar.barTintColor = UIColorFromRGB(0xF2F2F2);
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:MAIN_THEME_COLOR, NSFontAttributeName:[UIFont systemFontOfSize:18.0]}];
+//    self.navigationController.navigationBar.barTintColor = UIColorFromRGB(0xF2F2F2);
+//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:MAIN_THEME_COLOR, NSFontAttributeName:[UIFont systemFontOfSize:18.0]}];
     
     NSString *phoneNumber = [[NSUserDefaults standardUserDefaults] valueForKey:USER_NUMBER];
     if (phoneNumber.length) {
@@ -181,10 +182,10 @@
 //模态出登录界面
 + (void)showSelfInController:(UIViewController *)controller completeBlock:(void (^)())completeBlock {
     LoginViewController *loginVC = [LoginViewController new];
-    NavigationController *navigationC = [[NavigationController alloc] initWithRootViewController:loginVC];
+    NavigationController *navigationVC = [[NavigationController alloc] initWithRootViewController:loginVC];
     //显示第一个tabBar
     __weak typeof(controller) weakController = controller;
-    [controller presentViewController:navigationC animated:YES completion:^{
+    [controller presentViewController:navigationVC animated:YES completion:^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setBool:NO forKey:LOGIN_STATE];
         [defaults removeObjectForKey:USER_ACCOUNT];

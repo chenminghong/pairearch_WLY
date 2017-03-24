@@ -17,7 +17,6 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
@@ -48,7 +47,7 @@
     [self.window setRootViewController:rootTab];
 }
 
-//注册通知
+//注册本地通知
 - (void)registerLocalNotification {
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
@@ -58,7 +57,7 @@
     }];
 }
 
-//添加网络变化通知
+//网络变化通知
 - (void)netWorkDidChangeAction {
     AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
     [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
