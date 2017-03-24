@@ -51,7 +51,8 @@
     self.safetyCheckBtn.layer.borderWidth = 0.5;
     
     self.userIconBtn.layer.masksToBounds = YES;
-    self.userIconBtn.layer.cornerRadius = CGRectGetWidth(self.userIconBtn.bounds) / 2.0;
+    self.userIconBtn.layer.cornerRadius = (kScreenWidth * 6) / 32 / 2.0;
+    
     
     self.userNameLabel.textColor = UIColorFromRGB(0x666666);
     self.userNumberLabel.textColor = UIColorFromRGB(0x666666);
@@ -79,6 +80,9 @@
     
     //获取首页Data数据
     [self getHomePageData];
+    
+    //检查是否有新版本要进行更新
+    [self checkAppVersion];
 }
 
 - (void)paomaViewStartAnimation {
@@ -161,8 +165,6 @@
         NSArray *modelArr = model;
         if (modelArr.count) {
             self.dataModelArr = [NSMutableArray arrayWithArray:model];
-        } else {
-            [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL / 2.0];
         }
         [self.tableView reloadData];
         if (self.dataModelArr.count) {
@@ -190,6 +192,39 @@
     //设置文字颜色
     [str addAttribute:NSForegroundColorAttributeName value:vaColor range:range];
     labell.attributedText = str;
+}
+
+//检查App版本信息
+- (void)checkAppVersion {
+    //构建版本获取appID
+    NSString *updateUrl = [NSString stringWithFormat:@"http://itunes.apple.com/cn/lookup?id=%@", APP_ID];
+    [[NetworkHelper shareClient] GET:updateUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *receiveDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        if ([[receiveDic valueForKey:@"resultCount"] integerValue] > 0) {
+            
+            NSDictionary *versionDict = [[receiveDic valueForKey:@"results"] objectAtIndex:0];
+            //APP最新版本
+            NSString *latestVersion = [versionDict objectForKey:@"version"];
+            latestVersion = [latestVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
+            CGFloat latest = [latestVersion floatValue];
+            
+            //APP当前版本
+            NSString *appCurVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+            appCurVersion = [appCurVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
+            CGFloat current = [appCurVersion floatValue];
+            
+            if (latest > current) {
+                UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"提示" message:@"发现需要升级的新版本，现在去更新？" preferredStyle:UIAlertControllerStyleAlert];
+                
+                __block NSString *trackViewUrl = [versionDict objectForKey:@"trackViewUrl"];
+                UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:trackViewUrl]]; //跳转到App Store下载页面
+                }];
+                [alertView addAction:sure];
+                [self presentViewController:alertView animated:YES completion:nil];
+            }
+        }
+    } failure:nil];
 }
 
 #pragma mark -- TableViewDelegate

@@ -35,10 +35,13 @@
 /*============================个人中心用户相关=============================*/
 
 //用户登录
-#define USER_LOGIN_API                    @"loginForDriver.a"               //POST
+#define USER_LOGIN_API                    @"loginForDriver.a"               //post
 
 //修改密码
-#define CHANGE_PASSWORD_API               @"changeDriverPwd.a"              //POST
+#define CHANGE_PASSWORD_API               @"changeDriverPwd.a"              //post
+
+//异常反馈
+#define ABNORMAL_UPLOAD_API               @"uploadAbnormalPresentationInfo.a"  //post
 
 
 
@@ -94,7 +97,7 @@
 
 
 
-
+/*============================通知中心相关=============================*/
 
 #pragma mark -- 通知中心
 

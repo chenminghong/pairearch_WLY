@@ -38,8 +38,8 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    CLLocation *loc = [locations objectAtIndex:0];
-    NSLog(@"经纬度:%f/%f ", loc.coordinate.latitude, loc.coordinate.longitude);
+//    CLLocation *loc = [locations objectAtIndex:0];
+ //   NSLog(@"经纬度:%f/%f ", loc.coordinate.latitude, loc.coordinate.longitude);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {

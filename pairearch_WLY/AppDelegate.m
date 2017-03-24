@@ -27,11 +27,13 @@
         [self mainAppPage];
     }
     
-    //注册通知
+    //注册本地通知
     [self registerLocalNotification];
     
     //检查版本更新
     [self checkAppVersion];
+    //网络变化执行动作
+    [self netWorkDidChangeAction];
     return YES;
 }
 
@@ -91,6 +93,38 @@
             }
         }
     } failure:nil];
+//添加网络变化通知
+- (void)netWorkDidChangeAction {
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        if (status == AFNetworkReachabilityStatusNotReachable) {
+            if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
+                [self addNetLocalNotificationWithDesStr:@"网络连接已断开，请检查网络！"];
+            } else {
+                [MBProgressHUD bwm_showTitle:@"网络连接已断开，请检查网络！" toView:self.window hideAfter:HUD_HIDE_TIMEINTERVAL];
+            }
+        }
+    }];
+    [manager startMonitoring];
+    
+}
+
+//添加本地通知
+- (void)addNetLocalNotificationWithDesStr:(NSString *)desStr {
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    UNMutableNotificationContent *content = [UNMutableNotificationContent new];
+    content.body = [NSString localizedUserNotificationStringForKey:desStr arguments:nil];
+    content.sound = [UNNotificationSound defaultSound];
+    
+    NSString *requestIdentifier = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestIdentifier content:content trigger:nil];
+    
+    //添加推送成功后的处理！
+    [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        if (!error) {
+            NSLog(@"本地通知添加成功");
+        }
+    }];
 }
 
 

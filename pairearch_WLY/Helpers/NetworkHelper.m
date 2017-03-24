@@ -132,14 +132,14 @@
 
 + (NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(id)parameters constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block progress:(void (^)(NSProgress *uploadProgress))progress success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSError *error))failure {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    __weak MBProgressHUD *hud = [MBProgressHUD bwm_showHUDAddedTo:window title:kBWMMBProgressHUDMsgLoading animated:YES];
+    __weak MBProgressHUD *hud = [MBProgressHUD bwm_showHUDAddedTo:window title:nil animated:YES];
     return [[NetworkHelper shareClient] POST:URLString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         if (block) {
             block(formData);
         }
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        [hud hide:NO];
         if (progress) {
+            [hud hide:NO];
             progress(uploadProgress);
         }
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -149,7 +149,6 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [hud hide:NO];
-        [MBProgressHUD bwm_showTitle:kBWMMBProgressHUDMsgLoadError toView:window hideAfter:2.0];
         if (failure) {
             failure(error);
         }
