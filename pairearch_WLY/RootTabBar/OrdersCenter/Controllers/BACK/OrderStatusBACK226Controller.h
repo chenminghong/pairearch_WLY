@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OrderStatusBACK226Controller : UIViewController
+@interface OrderStatusBACK226Controller : BaseViewController
 
 @property (nonatomic, strong) NSDictionary *paraDict;  //参数
 

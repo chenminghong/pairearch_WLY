@@ -1,31 +1,41 @@
 //
-//  OrderStatusKABaseController.m
+//  BaseViewController.m
 //  pairearch_WLY
 //
 //  Created by Leo on 2017/3/27.
 //  Copyright © 2017年 Leo. All rights reserved.
 //
 
-#import "OrderStatusKABaseController.h"
+#import "BaseViewController.h"
 
-@interface OrderStatusKABaseController ()
+@interface BaseViewController ()
 
 @end
 
-@implementation OrderStatusKABaseController
+@implementation BaseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    NSLog(@"CLASS = %@", NSStringFromClass([self class]));
+    
+    //页面开始
+    [[BaiduMobStat defaultStat] pageviewStartWithName:NSStringFromClass([self class])];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    //界面消失刷新首页面
-    [[NSNotificationCenter defaultCenter] postNotificationName:ORDERSCENTER_RELOAD_NAME object:nil];
+    NSLog(@"%@", NSStringFromClass([self class]));
+    
+    //页面结束
+    [[BaiduMobStat defaultStat] pageviewEndWithName:NSStringFromClass([self class])];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

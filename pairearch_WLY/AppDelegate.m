@@ -10,7 +10,6 @@
 
 #import "LoginViewController.h"
 #import "RootTabController.h"
-#import <BaiduMobStat.h>
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate>
 

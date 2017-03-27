@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OrdersCenterController : UIViewController
+@interface OrdersCenterController : BaseViewController
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LatestNoticeInfoViewController : UIViewController
+@interface LatestNoticeInfoViewController : BaseViewController
 @property (nonatomic, strong) NSString *latestNoticeTitle;
 @property (nonatomic, strong) NSString *latestNoticeContent;
 @end

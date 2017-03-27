@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HaveBackOrderController : UIViewController
+@interface HaveBackOrderController : BaseViewController
 
 @property (nonatomic, strong) NSDictionary *paraDict;  //参数
 

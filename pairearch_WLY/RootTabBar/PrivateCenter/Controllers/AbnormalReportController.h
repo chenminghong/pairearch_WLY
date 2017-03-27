@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AbnormalReportController : UIViewController
+@interface AbnormalReportController : BaseViewController
 
 @end

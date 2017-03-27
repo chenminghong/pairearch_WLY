@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VersionInfoViewController : UIViewController
+@interface VersionInfoViewController : BaseViewController
 
 @end

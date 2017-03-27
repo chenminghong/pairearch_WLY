@@ -38,6 +38,8 @@
 		B32228E41E52A2C300ED50ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B32228E21E52A2C300ED50ED /* Main.storyboard */; };
 		B32228E61E52A2C300ED50ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B32228E51E52A2C300ED50ED /* Assets.xcassets */; };
 		B32228E91E52A2C300ED50ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B32228E71E52A2C300ED50ED /* LaunchScreen.storyboard */; };
+		B336CC181E88C026000F3928 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B336CC171E88C026000F3928 /* BaseViewController.m */; };
+		B336CC1E1E88C4C6000F3928 /* OrderStatusKABaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = B336CC1D1E88C4C6000F3928 /* OrderStatusKABaseController.m */; };
 		B356DC011E63CD5100FCDB33 /* OrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B356DC001E63CD5100FCDB33 /* OrderListModel.m */; };
 		B357272F1E53FC61003F9B2F /* RootTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = B357272E1E53FC61003F9B2F /* RootTabController.m */; };
 		B35727501E5404EA003F9B2F /* OrdersCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B357274C1E5404EA003F9B2F /* OrdersCenterController.m */; };
@@ -57,7 +59,6 @@
 		B37BA6D51E8127A9001A74B8 /* LxGridViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B37BA6D21E8127A9001A74B8 /* LxGridViewFlowLayout.m */; };
 		B37BA6D61E8127A9001A74B8 /* TZTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B37BA6D41E8127A9001A74B8 /* TZTestCell.m */; };
 		B37CB1F71E6958DB00A1463F /* OrderStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B37CB1F61E6958DB00A1463F /* OrderStatusManager.m */; };
-		B37CB22C1E6E96F900A1463F /* OrderStatusKABaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = B37CB22B1E6E96F900A1463F /* OrderStatusKABaseController.m */; };
 		B37CB2451E6FEFCC00A1463F /* NestedSelectStateController.m in Sources */ = {isa = PBXBuildFile; fileRef = B37CB2311E6FEFCC00A1463F /* NestedSelectStateController.m */; };
 		B37CB2461E6FEFCC00A1463F /* OrderStatusKA212Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = B37CB2331E6FEFCC00A1463F /* OrderStatusKA212Controller.m */; };
 		B37CB2471E6FEFCC00A1463F /* OrderStatusKA220Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = B37CB2351E6FEFCC00A1463F /* OrderStatusKA220Controller.m */; };
@@ -205,6 +206,10 @@
 		B32228E51E52A2C300ED50ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B32228E81E52A2C300ED50ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B32228EA1E52A2C300ED50ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B336CC161E88C026000F3928 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		B336CC171E88C026000F3928 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		B336CC1C1E88C4C6000F3928 /* OrderStatusKABaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStatusKABaseController.h; sourceTree = "<group>"; };
+		B336CC1D1E88C4C6000F3928 /* OrderStatusKABaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStatusKABaseController.m; sourceTree = "<group>"; };
 		B356DBFF1E63CD5100FCDB33 /* OrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListModel.h; sourceTree = "<group>"; };
 		B356DC001E63CD5100FCDB33 /* OrderListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListModel.m; sourceTree = "<group>"; };
 		B357272D1E53FC61003F9B2F /* RootTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabController.h; sourceTree = "<group>"; };
@@ -238,8 +243,6 @@
 		B37CB1F41E694D3E00A1463F /* OrderStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderStatus.h; sourceTree = "<group>"; };
 		B37CB1F51E6958DB00A1463F /* OrderStatusManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStatusManager.h; sourceTree = "<group>"; };
 		B37CB1F61E6958DB00A1463F /* OrderStatusManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStatusManager.m; sourceTree = "<group>"; };
-		B37CB22A1E6E96F900A1463F /* OrderStatusKABaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStatusKABaseController.h; sourceTree = "<group>"; };
-		B37CB22B1E6E96F900A1463F /* OrderStatusKABaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStatusKABaseController.m; sourceTree = "<group>"; };
 		B37CB2301E6FEFCC00A1463F /* NestedSelectStateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NestedSelectStateController.h; sourceTree = "<group>"; };
 		B37CB2311E6FEFCC00A1463F /* NestedSelectStateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NestedSelectStateController.m; sourceTree = "<group>"; };
 		B37CB2321E6FEFCC00A1463F /* OrderStatusKA212Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStatusKA212Controller.h; sourceTree = "<group>"; };
@@ -473,6 +476,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B336CC151E88C010000F3928 /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B336CC161E88C026000F3928 /* BaseViewController.h */,
+				B336CC171E88C026000F3928 /* BaseViewController.m */,
+			);
+			path = BaseViewController;
+			sourceTree = "<group>";
+		};
 		B357272C1E53FC3D003F9B2F /* RootTabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -633,6 +645,7 @@
 		B35727631E540D9D003F9B2F /* General */ = {
 			isa = PBXGroup;
 			children = (
+				B336CC151E88C010000F3928 /* BaseViewController */,
 				B37CB2291E6E96F900A1463F /* OrderStatusBaseController */,
 				B38410BA1E5D875700F7069F /* Service */,
 				B38410B31E5D374600F7069F /* BaseModel */,
@@ -696,8 +709,8 @@
 		B37CB2291E6E96F900A1463F /* OrderStatusBaseController */ = {
 			isa = PBXGroup;
 			children = (
-				B37CB22A1E6E96F900A1463F /* OrderStatusKABaseController.h */,
-				B37CB22B1E6E96F900A1463F /* OrderStatusKABaseController.m */,
+				B336CC1C1E88C4C6000F3928 /* OrderStatusKABaseController.h */,
+				B336CC1D1E88C4C6000F3928 /* OrderStatusKABaseController.m */,
 			);
 			path = OrderStatusBaseController;
 			sourceTree = "<group>";
@@ -1245,7 +1258,6 @@
 				B3D3B2A51E66EA550033EF84 /* SafetyCheckController.m in Sources */,
 				B37CB2AB1E7032B400A1463F /* OrderStatusBACK230Controller.m in Sources */,
 				B37CB2801E700CB000A1463F /* BackDetailModel.m in Sources */,
-				B37CB22C1E6E96F900A1463F /* OrderStatusKABaseController.m in Sources */,
 				B37CB24A1E6FEFCC00A1463F /* OrderStatusKA230Controller.m in Sources */,
 				B37CB2681E6FF08400A1463F /* EvaluationTableCell.m in Sources */,
 				B37BA6CF1E80FA29001A74B8 /* AbnormalReportCell.m in Sources */,
@@ -1260,6 +1272,7 @@
 				B307BF701E728C0A005D7979 /* OutFacCheckCell.m in Sources */,
 				B307BF8F1E767DE3005D7979 /* CommonNomalSignCell.m in Sources */,
 				B381DADE1E779D2C00D752C1 /* CommonBackModel.m in Sources */,
+				B336CC181E88C026000F3928 /* BaseViewController.m in Sources */,
 				B384108C1E5BD9CA00F7069F /* ListTableCell.m in Sources */,
 				B37CB2701E6FF08400A1463F /* StartTransportFooterView.m in Sources */,
 				B37CB24C1E6FEFCC00A1463F /* OrderStatusKA240Controller.m in Sources */,
@@ -1278,6 +1291,7 @@
 				B37CB26C1E6FF08400A1463F /* OrderDetailCell.m in Sources */,
 				B35727921E556053003F9B2F /* LocationUploadManager.m in Sources */,
 				B37CB26E1E6FF08400A1463F /* OrderDetailHeaderView.m in Sources */,
+				B336CC1E1E88C4C6000F3928 /* OrderStatusKABaseController.m in Sources */,
 				B384111F1E5D893C00F7069F /* LoginModel.m in Sources */,
 				B35727501E5404EA003F9B2F /* OrdersCenterController.m in Sources */,
 				B38411451E5E91DE00F7069F /* CancelLoginCell.m in Sources */,

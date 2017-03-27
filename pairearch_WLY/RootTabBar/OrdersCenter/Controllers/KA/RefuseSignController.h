@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RefuseSignController : UIViewController
+@interface RefuseSignController : BaseViewController
 
 @property (nonatomic, strong) NSDictionary *paraDict;  //参数
 

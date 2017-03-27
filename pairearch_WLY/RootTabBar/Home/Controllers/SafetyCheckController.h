@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SafetyCheckController : UIViewController
+@interface SafetyCheckController : BaseViewController
 
 @end
