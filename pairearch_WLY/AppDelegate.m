@@ -34,7 +34,7 @@
     [self netWorkDidChangeAction];
     
     //添加百度统计
-    [[BaiduMobStat defaultStat] startWithAppId:APP_KEY];
+    [self startBaiduMob];
     
     return YES;
 }
@@ -94,6 +94,27 @@
             NSLog(@"本地通知添加成功");
         }
     }];
+}
+
+//百度统计
+- (void)startBaiduMob {
+    //添加百度统计
+    
+    BaiduMobStat *statTracker = [BaiduMobStat defaultStat];
+    statTracker.enableExceptionLog = YES; // 是否允许截获并发送崩溃信息，请设置YES或者NO
+    statTracker.channelId = @"appStore";//设置您的app的发布渠道
+    statTracker.sessionResumeInterval = 600;//设置应用进入后台再回到前台为同一次session的间隔时间[0~600s],超过600s则设为600s，默认为30s
+    statTracker.enableDebugOn = YES; //调试的时候打开，会有log打印，发布时候关闭
+    /*如果有需要，可自行传入adid
+     NSString *adId = @"";
+     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0f){
+        adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+     }
+     statTracker.adid = adId;
+     */
+    
+    //开始上传
+    [statTracker startWithAppId:APP_KEY];
 }
 
 
