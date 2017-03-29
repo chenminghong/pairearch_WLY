@@ -60,7 +60,7 @@
     self.bannerView.backgroundColor = TOP_BOTTOMBAR_COLOR;
     
     //从后台到前台开始动画
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paomaViewStartAnimation) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotificationAction) name:UIApplicationWillEnterForegroundNotification object:nil];
     
     //请求首页数据
     [self getHomePageData];
@@ -85,6 +85,13 @@
     [self checkAppVersion];
 }
 
+//程序活跃的时候调用
+- (void)applicationDidBecomeActiveNotificationAction {
+    [self paomaViewStartAnimation];
+    [self checkAppVersion];
+}
+
+//开始跑马灯
 - (void)paomaViewStartAnimation {
     if (self.tabBarController.selectedIndex == 0) {
         [self.paoma startAnimation];
@@ -154,9 +161,7 @@
         if (self.safetyCheckBtn.currentTitle.length > 4) {
             [self fuwenbenLabel:self.safetyCheckBtn.titleLabel FontNumber:self.safetyCheckBtn.titleLabel.font AndRange:NSMakeRange(4, 1) AndColor:[UIColor redColor]];
         }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
+    } failure:nil];
 }
 
 //获取首页Data数据
@@ -218,7 +223,7 @@
                 
                 __block NSString *trackViewUrl = [versionDict objectForKey:@"trackViewUrl"];
                 UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:trackViewUrl]]; //跳转到App Store下载页面
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:trackViewUrl] options:@{@"open":@"update"} completionHandler:nil];
                 }];
                 [alertView addAction:sure];
                 [self presentViewController:alertView animated:YES completion:nil];
@@ -255,7 +260,7 @@
 #pragma mark -- ButtonAction
 
 - (IBAction)telePhoneAction:(UIButton *)sender {
-    NSMutableString* str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@", @"021-66188125"];
+    NSString *str=[NSString stringWithFormat:@"telprompt://%@", @"021-66188125"];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 }
 
