@@ -37,8 +37,6 @@
 
 @property (nonatomic, strong) UIImagePickerController *imagePickerVc;
 
-
-
 @end
 
 @implementation AbnormalReportController
@@ -279,46 +277,14 @@
 //弹出选择相册
 - (void)pushImagePickerController {
     TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:3 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
-    
-    
-#pragma mark - 四类个性化设置，这些参数都可以不传，此时会走默认设置
     imagePickerVc.selectedAssets = _selectedAssets; // 目前已经选中的图片数组
-    
-    // 2. Set the appearance
-    // 2. 在这里设置imagePickerVc的外观
     imagePickerVc.navigationBar.barTintColor = TOP_BOTTOMBAR_COLOR;
     imagePickerVc.barItemTextFont = [UIFont systemFontOfSize:16.0];
-    
-    
-    // 3. Set allow picking video & photo & originalPhoto or not
-    // 3. 设置是否可以选择视频/图片/原图
-    // 4. 照片排列按修改时间升序
-    // imagePickerVc.minImagesCount = 3;
-    // imagePickerVc.alwaysEnableDoneBtn = YES;
-    
-    // imagePickerVc.minPhotoWidthSelectable = 3000;
-    // imagePickerVc.minPhotoHeightSelectable = 2000;
-    
-    /// 5. Single selection mode, valid when maxImagesCount = 1
-    /// 5. 单选模式,maxImagesCount为1时才生效
     imagePickerVc.showSelectBtn = YES;
     imagePickerVc.allowTakePicture = NO;
     imagePickerVc.alwaysEnableDoneBtn = YES;
-    /*
-     [imagePickerVc setCropViewSettingBlock:^(UIView *cropView) {
-     cropView.layer.borderColor = [UIColor redColor].CGColor;
-     cropView.layer.borderWidth = 2.0;
-     }];*/
-    
-    //imagePickerVc.allowPreview = NO;
-#pragma mark - 到这里为止
-    
-    // You can get the photos by block, the same as by delegate.
-    // 你可以通过block或者代理，来得到用户选择的照片.
-//    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
-//        
-//    }];
-    
+    imagePickerVc.allowPickingGif = NO;
+    imagePickerVc.allowPickingVideo = NO;
     [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
 

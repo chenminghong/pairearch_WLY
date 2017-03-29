@@ -38,6 +38,7 @@
 		B32228E41E52A2C300ED50ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B32228E21E52A2C300ED50ED /* Main.storyboard */; };
 		B32228E61E52A2C300ED50ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B32228E51E52A2C300ED50ED /* Assets.xcassets */; };
 		B32228E91E52A2C300ED50ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B32228E71E52A2C300ED50ED /* LaunchScreen.storyboard */; };
+		B33090211E8BA4EA00CB898F /* SAMKeychainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B33090201E8BA4EA00CB898F /* SAMKeychainManager.m */; };
 		B336CC181E88C026000F3928 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B336CC171E88C026000F3928 /* BaseViewController.m */; };
 		B336CC1E1E88C4C6000F3928 /* OrderStatusKABaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = B336CC1D1E88C4C6000F3928 /* OrderStatusKABaseController.m */; };
 		B356DC011E63CD5100FCDB33 /* OrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B356DC001E63CD5100FCDB33 /* OrderListModel.m */; };
@@ -123,7 +124,6 @@
 		B38411411E5E89C700F7069F /* PersonalCenterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B384113F1E5E89C700F7069F /* PersonalCenterCell.xib */; };
 		B38411451E5E91DE00F7069F /* CancelLoginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B38411431E5E91DE00F7069F /* CancelLoginCell.m */; };
 		B38411461E5E91DE00F7069F /* CancelLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B38411441E5E91DE00F7069F /* CancelLoginCell.xib */; };
-		B39CA34B1E7BE28F0090F633 /* AppUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B39CA34A1E7BE28F0090F633 /* AppUpdateManager.m */; };
 		B3A4A3CD1E70ECE1001C551B /* BackListDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A4A3CB1E70ECE1001C551B /* BackListDetailCell.m */; };
 		B3A4A3CE1E70ECE1001C551B /* BackListDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A4A3CC1E70ECE1001C551B /* BackListDetailCell.xib */; };
 		B3CC54B51E601C920072EA47 /* PaomaLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3CC54B41E601C920072EA47 /* PaomaLabel.m */; };
@@ -206,6 +206,8 @@
 		B32228E51E52A2C300ED50ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B32228E81E52A2C300ED50ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B32228EA1E52A2C300ED50ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B330901F1E8BA4EA00CB898F /* SAMKeychainManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMKeychainManager.h; sourceTree = "<group>"; };
+		B33090201E8BA4EA00CB898F /* SAMKeychainManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMKeychainManager.m; sourceTree = "<group>"; };
 		B336CC161E88C026000F3928 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		B336CC171E88C026000F3928 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		B336CC1C1E88C4C6000F3928 /* OrderStatusKABaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStatusKABaseController.h; sourceTree = "<group>"; };
@@ -363,8 +365,6 @@
 		B38411421E5E91DE00F7069F /* CancelLoginCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CancelLoginCell.h; sourceTree = "<group>"; };
 		B38411431E5E91DE00F7069F /* CancelLoginCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CancelLoginCell.m; sourceTree = "<group>"; };
 		B38411441E5E91DE00F7069F /* CancelLoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CancelLoginCell.xib; sourceTree = "<group>"; };
-		B39CA3491E7BE28F0090F633 /* AppUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUpdateManager.h; sourceTree = "<group>"; };
-		B39CA34A1E7BE28F0090F633 /* AppUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUpdateManager.m; sourceTree = "<group>"; };
 		B3A4A3CA1E70ECE1001C551B /* BackListDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackListDetailCell.h; sourceTree = "<group>"; };
 		B3A4A3CB1E70ECE1001C551B /* BackListDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackListDetailCell.m; sourceTree = "<group>"; };
 		B3A4A3CC1E70ECE1001C551B /* BackListDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BackListDetailCell.xib; sourceTree = "<group>"; };
@@ -690,8 +690,8 @@
 				B35727911E556053003F9B2F /* LocationUploadManager.m */,
 				B37CB1F51E6958DB00A1463F /* OrderStatusManager.h */,
 				B37CB1F61E6958DB00A1463F /* OrderStatusManager.m */,
-				B39CA3491E7BE28F0090F633 /* AppUpdateManager.h */,
-				B39CA34A1E7BE28F0090F633 /* AppUpdateManager.m */,
+				B330901F1E8BA4EA00CB898F /* SAMKeychainManager.h */,
+				B33090201E8BA4EA00CB898F /* SAMKeychainManager.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1287,6 +1287,7 @@
 				B32228DE1E52A2C300ED50ED /* AppDelegate.m in Sources */,
 				B3D3B2AA1E66EA550033EF84 /* SaftyCheckCell.m in Sources */,
 				B37CB24D1E6FEFCC00A1463F /* OrderStatusKA245Controller.m in Sources */,
+				B33090211E8BA4EA00CB898F /* SAMKeychainManager.m in Sources */,
 				B37CB2691E6FF08400A1463F /* EvalutionHeaderView.m in Sources */,
 				B37CB26C1E6FF08400A1463F /* OrderDetailCell.m in Sources */,
 				B35727921E556053003F9B2F /* LocationUploadManager.m in Sources */,
@@ -1305,7 +1306,6 @@
 				B307BF501E7283D8005D7979 /* OrderStatusCOMMON212Controller.m in Sources */,
 				B38410881E5BD4F400F7069F /* OrdersCollectionCell.m in Sources */,
 				B38411311E5E830400F7069F /* CancelLoginTableViewCell.m in Sources */,
-				B39CA34B1E7BE28F0090F633 /* AppUpdateManager.m in Sources */,
 				B38411321E5E830400F7069F /* FeedbackIdeaTableViewCell.m in Sources */,
 				B3A4A3CD1E70ECE1001C551B /* BackListDetailCell.m in Sources */,
 				B357277A1E5435AE003F9B2F /* MyLocationManager.m in Sources */,
