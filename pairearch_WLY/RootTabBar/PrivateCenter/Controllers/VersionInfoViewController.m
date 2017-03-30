@@ -7,7 +7,8 @@
 //
 
 #import "VersionInfoViewController.h"
-#define kVersionInfo @"百威-我来运V1.0.0"
+
+#define kVersionInfo @"百威-我来运V1.0.1"
 #define kCopyrightInfo @"Copyright©2017 上海双至供应链管理有限公司"
 
 @interface VersionInfoViewController ()
