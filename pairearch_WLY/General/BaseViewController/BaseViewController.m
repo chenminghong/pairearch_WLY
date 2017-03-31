@@ -21,9 +21,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    NSLog(@"CLASS = %@", NSStringFromClass([self class]));
-    
+        
     //页面开始
     [[BaiduMobStat defaultStat] pageviewStartWithName:NSStringFromClass([self class])];
 }

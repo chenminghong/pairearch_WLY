@@ -117,7 +117,6 @@
         }
     }];
     [manager startMonitoring];
-    
 }
 
 //添加本地通知

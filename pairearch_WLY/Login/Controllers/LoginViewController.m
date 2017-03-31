@@ -189,7 +189,6 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setBool:NO forKey:LOGIN_STATE];
         [defaults removeObjectForKey:USER_ACCOUNT];
-        [defaults removeObjectForKey:USER_NUMBER];
         weakController.tabBarController.selectedIndex = 0;
         if (completeBlock) {
             completeBlock();

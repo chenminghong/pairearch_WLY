@@ -37,7 +37,7 @@
     //版本信息
     UILabel *versionInfoL = [[UILabel alloc] init];
     versionInfoL.textColor = UIColorFromRGB(0x666666);
-    versionInfoL.text = kVersionInfo;
+    versionInfoL.text = [NSString stringWithFormat:@"%@V%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
     versionInfoL.font = [UIFont systemFontOfSize:18.0];
     versionInfoL.textAlignment = 1;
     [self.view addSubview:versionInfoL];

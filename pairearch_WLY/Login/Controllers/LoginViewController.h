@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : BaseViewController
 
 //判断是否登录
 + (BOOL)isLogin;
