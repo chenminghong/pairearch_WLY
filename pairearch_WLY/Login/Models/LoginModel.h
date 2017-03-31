@@ -64,6 +64,9 @@
 //是否登录
 + (BOOL)isLoginState;
 
+//初始化数据
+- (void)initData;
+
 //更新用户信息数据
 - (void)updateUserInfoWithInfoDict:(NSDictionary *)infoDict;
 

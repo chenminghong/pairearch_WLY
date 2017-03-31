@@ -18,12 +18,19 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         loginModel = [LoginModel new];
-        NSDictionary *userInfo = [LoginModel readUserInfo];
-        if (userInfo) {
-            [loginModel setValuesForKeysWithDictionary:userInfo];
-        }
     });
     return loginModel;
+}
+
+//初始化数据
+- (void)initData {
+    NSDictionary *userInfo = [LoginModel readUserInfo];
+    if (userInfo) {
+        [self setValuesForKeysWithDictionary:userInfo];
+    }
+    if (self.name && self.tel) {
+        [[LocationUploadManager shareManager] setEntityWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
+    }
 }
 
 - (void)setValue:(id)value forKey:(NSString *)key {
@@ -37,11 +44,9 @@
     
 }
 
-- (void)setName:(NSString *)name {
-    _name = name;
-    
-    //重新设置追踪的实体名称
-    [[LocationUploadManager shareManager] setEntityWithEntityName:name];
+- (void)setTel:(NSString *)tel {
+    _tel = tel;
+    //开启定位上传
 }
 
 + (NSURLSessionDataTask *)getDataWithParameters:(NSDictionary *)paramDict endBlock:(void (^)(id, NSError *))endBlock {

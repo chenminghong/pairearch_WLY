@@ -25,7 +25,7 @@
     // Do any additional setup after loading the view.
     
     //先初始化登录用户信息数据
-    [LoginModel shareLoginModel];
+    [[LoginModel shareLoginModel] initData];
     
     UIStoryboard *homeSB = [UIStoryboard storyboardWithName:@"HomeViewController" bundle:nil];
     HomeViewController *homeVC = [homeSB instantiateViewControllerWithIdentifier:@"HomeViewController"];

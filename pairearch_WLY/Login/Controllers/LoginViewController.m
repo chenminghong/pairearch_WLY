@@ -193,6 +193,7 @@
         if (completeBlock) {
             completeBlock();
         }
+        [[LocationUploadManager shareManager] stopTrace];
     }];
 }
 
@@ -251,17 +252,13 @@
         [hud hide:YES];
         if (!error) {
             MBProgressHUD *hud = [MBProgressHUD bwm_showTitle:@"登录成功!" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL / 2.0];
+            [[LocationUploadManager shareManager] setEntityWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
             [hud setCompletionBlock:^(){
                 [self hideLoginPage];
             }];
         } else {
-            NSInteger code = error.code;
-            if (code == 0) {
-                NSString *message = error.userInfo[ERROR_MSG];
-                [MBProgressHUD bwm_showTitle:message toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-            } else {
-                [MBProgressHUD bwm_showTitle:[NSString stringWithFormat:@"%@", error.userInfo[ERROR_MSG]] toView:self.view hideAfter:2.0];
-            }
+            NSString *message = error.userInfo[ERROR_MSG];
+            [MBProgressHUD bwm_showTitle:message toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         }
     }];
 }
