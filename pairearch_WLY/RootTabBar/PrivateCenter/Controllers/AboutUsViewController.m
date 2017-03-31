@@ -7,7 +7,7 @@
 //
 
 #import "AboutUsViewController.h"
-#define kAboutWLY @"关于百威-我来运1.0.0"
+#define kAboutWLY @"关于百威-我来运"
 #define kAboutWLYContent @"百威-我来运定位于优化运输行业运作，提升资源匹配效率，为货运行业双方提供信息和交易的平台，通过平台对运输各方的认证，保证运输双方的利益。"
 #define kAboutShangHaiPaireach @"关于上海双至"
 #define kAboutShangHaiPaireachContent @"公司致力于设计、开发、推广创新的智能运输集成平台，以软件即服务的方式（SaaS)、兼顾PC与APP端，向用户提供服务。以“不断超越的科技创新，永不懈怠的服务精神”的企业理念，旨在把运输供应链上的货主、第三方物流公司、运输公司、司机甚至包括最终收货人无缝连接起来，形成一个透明、高效、合作、共赢的在线生态系统，实现双至使命，即：致力于将【供应链】打造成【共赢链】。\n公司目前产品：TTS（运输跟踪系统）、我来运（安卓版APP）；\n运营中的平台：ITIP（智能运输集成平台）。"

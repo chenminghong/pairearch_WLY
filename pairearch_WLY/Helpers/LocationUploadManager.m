@@ -13,8 +13,8 @@ static BTRACE *traceInstance = NULL;
 
 #define TEMP_ENTITY_NAME  @"entity_name"
 
-#define GATHER_TIMEINTERVAL  180.0    //位置信息采集周期
-#define PACK_TIMEINTERVAL    180.0    //位置信息上传周期
+#define GATHER_TIMEINTERVAL  30.0    //位置信息采集周期
+#define PACK_TIMEINTERVAL    60.0    //位置信息上传周期
 
 
 @implementation LocationUploadManager
