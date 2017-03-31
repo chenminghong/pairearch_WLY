@@ -11,6 +11,8 @@
 #import "LoginViewController.h"
 #import "RootTabController.h"
 
+#import <XHVersion.h>
+
 @interface AppDelegate ()<UNUserNotificationCenterDelegate>
 
 @end
@@ -35,8 +37,49 @@
     //添加百度统计
     [self startBaiduMob];
     
+    //版本更新
+//    [XHVersion checkNewVersion];
+    
+    [self checkAppVersion];
+    
     return YES;
 }
+
+//检查App版本信息
+- (void)checkAppVersion {
+    //构建版本获取appID
+    NSString *updateUrl = [NSString stringWithFormat:@"http://itunes.apple.com/cn/lookup?id=%@", APP_ID];
+    [[NetworkHelper shareClient] GET:updateUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *receiveDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        if ([[receiveDic valueForKey:@"resultCount"] integerValue] > 0) {
+            
+            NSDictionary *versionDict = [[receiveDic valueForKey:@"results"] objectAtIndex:0];
+            //APP最新版本
+            NSString *latestVersion = [versionDict objectForKey:@"version"];
+            latestVersion = [latestVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
+            CGFloat latest = [latestVersion floatValue];
+            
+            //APP当前版本
+            NSString *appCurVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+            appCurVersion = [appCurVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
+            CGFloat current = [appCurVersion floatValue];
+            
+            
+            if (latest > current && ![self.window.rootViewController.presentedViewController isKindOfClass:[UIAlertController class]]) {
+                UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"提示" message:@"发现需要升级的新版本，现在去更新？" preferredStyle:UIAlertControllerStyleAlert];
+                
+                __block NSString *trackViewUrl = [versionDict objectForKey:@"trackViewUrl"];
+                UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:trackViewUrl] options:@{@"open":@"update"} completionHandler:nil];
+                }];
+                [alertView addAction:sure];
+                [self.window.rootViewController presentViewController:alertView animated:YES completion:nil];
+                NSLog(@"%@", [self.window.rootViewController.presentedViewController class]);
+            }
+        }
+    } failure:nil];
+}
+
 
 //切换回登录页
 - (void)loginPage {
@@ -124,6 +167,8 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    
+    [self checkAppVersion];
 }
 
 
