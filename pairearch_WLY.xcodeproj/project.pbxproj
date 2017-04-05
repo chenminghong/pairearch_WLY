@@ -50,7 +50,7 @@
 		B357277A1E5435AE003F9B2F /* MyLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B35727791E5435AE003F9B2F /* MyLocationManager.m */; };
 		B35727811E545865003F9B2F /* NetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B35727801E545865003F9B2F /* NetworkHelper.m */; };
 		B35727921E556053003F9B2F /* LocationUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B35727911E556053003F9B2F /* LocationUploadManager.m */; };
-		B35727931E556155003F9B2F /* BaiduTraceSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B357278E1E555515003F9B2F /* BaiduTraceSDK.framework */; };
+		B35727931E556155003F9B2F /* BaiduTraceSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B357278E1E555515003F9B2F /* BaiduTraceSDK.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B35727941E556155003F9B2F /* BaiduTraceSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B357278E1E555515003F9B2F /* BaiduTraceSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B35D79361E666AB800ED730B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B35D79351E666AB800ED730B /* MapKit.framework */; };
 		B37BA6C91E80C443001A74B8 /* AbnormalReportController.m in Sources */ = {isa = PBXBuildFile; fileRef = B37BA6C81E80C443001A74B8 /* AbnormalReportController.m */; };
@@ -1374,7 +1374,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Paireach supply chain management Co., Ltd. (CB93LUJYU2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Paireach supply chain management Co., Ltd. (CB93LUJYU2)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1426,7 +1426,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Paireach supply chain management Co., Ltd. (CB93LUJYU2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Paireach supply chain management Co., Ltd. (CB93LUJYU2)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
