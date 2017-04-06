@@ -38,8 +38,6 @@
     [self startBaiduMob];
     
     //版本更新
-//    [XHVersion checkNewVersion];
-    
     [self checkAppVersion];
     
     return YES;
@@ -64,14 +62,27 @@
             appCurVersion = [appCurVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
             CGFloat current = [appCurVersion floatValue];
             
+            NSArray *ignoreVersonArr = [[NSUserDefaults standardUserDefaults] arrayForKey:IGNORE_UPDATE_VERSIONS];
+            for (NSString *ignoreVersion in ignoreVersonArr) {
+                if ([ignoreVersion isEqualToString:latestVersion]) {
+                    return;
+                }
+            }
             
             if (latest > current && ![self.window.rootViewController.presentedViewController isKindOfClass:[UIAlertController class]]) {
                 UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"提示" message:@"发现需要升级的新版本，现在去更新？" preferredStyle:UIAlertControllerStyleAlert];
                 
                 __block NSString *trackViewUrl = [versionDict objectForKey:@"trackViewUrl"];
+                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"忽略" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    NSMutableArray *versions = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:IGNORE_UPDATE_VERSIONS]];
+                    [versions addObject:latestVersion];
+                    [[NSUserDefaults standardUserDefaults] setObject:versions forKey:IGNORE_UPDATE_VERSIONS];
+                }];
+                
                 UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:trackViewUrl] options:@{@"open":@"update"} completionHandler:nil];
                 }];
+                [alertView addAction:cancel];
                 [alertView addAction:sure];
                 [self.window.rootViewController presentViewController:alertView animated:YES completion:nil];
                 NSLog(@"%@", [self.window.rootViewController.presentedViewController class]);
@@ -167,7 +178,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     
-    [self checkAppVersion];
+//    [self checkAppVersion];
 }
 
 

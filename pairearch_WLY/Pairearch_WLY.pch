@@ -118,6 +118,12 @@
 //cell的label默认高度
 #define CELL_LABEL_HEIGHT     18.0
 
+////提醒更新的次数
+//#define PROMPT_COUNT  @"prompt_count"
+
+//忽略更新的版本号
+#define IGNORE_UPDATE_VERSIONS @"ignore_update_version"
+
 
 
 

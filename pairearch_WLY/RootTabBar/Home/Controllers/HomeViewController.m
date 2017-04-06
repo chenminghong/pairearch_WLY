@@ -81,8 +81,6 @@
     //获取首页Data数据
     [self getHomePageData];
     
-    //检查是否有新版本要进行更新
-//    [self checkAppVersion];
 }
 
 //程序活跃的时候调用
