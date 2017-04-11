@@ -85,7 +85,7 @@
                 [alertView addAction:cancel];
                 [alertView addAction:sure];
                 [self.window.rootViewController presentViewController:alertView animated:YES completion:nil];
-                NSLog(@"%@", [self.window.rootViewController.presentedViewController class]);
+                NSLog(@"trackViewUrl=%@", trackViewUrl);
             }
         }
     } failure:nil];
