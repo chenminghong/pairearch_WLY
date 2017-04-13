@@ -86,6 +86,13 @@
 
 - (void)setListModelArr:(NSMutableArray *)listModelArr {
     _listModelArr = listModelArr;
+    if (_indexPath.row == 1) {
+        if (listModelArr.count <= 0) {
+            [[LocationUploadManager shareManager] stopTrace];
+        } else {
+            [[LocationUploadManager shareManager] startTrace];
+        }
+    }
 }
 
 //  请求网络数据

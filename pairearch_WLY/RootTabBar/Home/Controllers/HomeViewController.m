@@ -173,10 +173,13 @@
             HomePageModel *model = self.dataModelArr[0];
             if ([model.type isEqualToString:@"unabsorbed"]) {
                 self.headLabel.text = @"新单提示";
+                [[LocationUploadManager shareManager] stopTrace];
             } else if ([model.type isEqualToString:@"distribution"]) {
                 self.headLabel.text = @"装货在途";
+                [[LocationUploadManager shareManager] startTrace];
             } else {
                 self.headLabel.text = @"";
+                [[LocationUploadManager shareManager] stopTrace];
             }
         } else {
             self.headLabel.text = @"";
