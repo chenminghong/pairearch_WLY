@@ -65,8 +65,9 @@
     
     //确定button
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setBackgroundImage:[UIImage imageNamed:@"btn_big_nor.png"] forState:UIControlStateNormal];
-    [button  setTitle:@"确定" forState:UIControlStateNormal];
+//    [button setBackgroundImage:[UIImage imageNamed:@"btn_big_nor.png"] forState:UIControlStateNormal];
+    button.backgroundColor = MAIN_THEME_COLOR;
+    [button setTitle:@"确定" forState:UIControlStateNormal];
     [button setTintColor:[UIColor whiteColor]];
     [button addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
