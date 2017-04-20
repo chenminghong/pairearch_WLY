@@ -21,6 +21,8 @@
 #import "TZPhotoPreviewController.h"
 #import "TZGifPhotoPreviewController.h"
 
+#define MAX_IMAGE_COUNT  3   //最大可以选择的照片张数
+
 @interface AbnormalReportController ()<UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, TZImagePickerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UIAlertViewDelegate,UINavigationControllerDelegate>
 {
     NSMutableArray *_selectedPhotos;
@@ -269,14 +271,75 @@
             }
             [self presentViewController:_imagePickerVc animated:YES completion:nil];
         } else {
+            [MBProgressHUD bwm_showTitle:@"相机功能无法使用或没有相机！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL/2.0];
             NSLog(@"模拟器中无法打开照相机，请在真机中使用");
         }
     }
 }
 
+
+/**
+ 拍照结束回调
+
+ @param picker imagepickerVC对象
+ @param info 拍照获取的资源
+ */
+- (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    if ([type isEqualToString:@"public.image"]) {
+        TZImagePickerController *tzImagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:MAX_IMAGE_COUNT delegate:self];
+        [tzImagePickerVc showProgressHUD];
+        UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+        // save photo and get asset / 保存图片，获取到asset
+        [[TZImageManager manager] savePhotoWithImage:image completion:^(NSError *error){
+            if (error) {
+                [tzImagePickerVc hideProgressHUD];
+                NSLog(@"图片保存失败 %@",error);
+            } else {
+                [[TZImageManager manager] getCameraRollAlbum:NO allowPickingImage:YES completion:^(TZAlbumModel *model) {
+                    [[TZImageManager manager] getAssetsFromFetchResult:model.result allowPickingVideo:NO allowPickingImage:YES completion:^(NSArray<TZAssetModel *> *models) {
+                        [tzImagePickerVc hideProgressHUD];
+                        TZAssetModel *assetModel = [models firstObject];
+                        if (tzImagePickerVc.sortAscendingByModificationDate) {
+                            assetModel = [models lastObject];
+                        }
+                        [self refreshCollectionViewWithAddedAsset:assetModel.asset image:image];
+                    }];
+                }];
+            }
+        }];
+    }
+}
+
+
+/**
+ 刷新上传图片列表
+
+ @param asset 新拍照的照片资源
+ @param image 拍照获取的图片
+ */
+- (void)refreshCollectionViewWithAddedAsset:(id)asset image:(UIImage *)image {
+    if (!_selectedPhotos) {
+        _selectedPhotos = [NSMutableArray array];
+    }
+    if (!_selectedAssets) {
+        _selectedAssets = [NSMutableArray array];
+    }
+    
+    if (_selectedPhotos.count < MAX_IMAGE_COUNT) {
+        [_selectedAssets addObject:asset];
+        [_selectedPhotos addObject:image];
+        [_collectionView reloadData];
+    } else {
+        [MBProgressHUD bwm_showTitle:[NSString stringWithFormat:@"最多只能上传%d张照片！", MAX_IMAGE_COUNT] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+    }
+}
+
+
 //弹出选择相册
 - (void)pushImagePickerController {
-    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:3 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:MAX_IMAGE_COUNT columnNumber:4 delegate:self pushPhotoPickerVc:YES];
     imagePickerVc.selectedAssets = _selectedAssets; // 目前已经选中的图片数组
     imagePickerVc.navigationBar.barTintColor = TOP_BOTTOMBAR_COLOR;
     imagePickerVc.barItemTextFont = [UIFont systemFontOfSize:16.0];
@@ -285,6 +348,7 @@
     imagePickerVc.alwaysEnableDoneBtn = YES;
     imagePickerVc.allowPickingGif = NO;
     imagePickerVc.allowPickingVideo = NO;
+    imagePickerVc.allowCrop = NO;
     [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
 
