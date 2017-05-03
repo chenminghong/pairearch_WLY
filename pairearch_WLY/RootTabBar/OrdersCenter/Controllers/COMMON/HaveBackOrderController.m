@@ -63,7 +63,10 @@
             //对model数据进行分类
             self.dataListArr = [NSMutableArray arrayWithArray:model];
         } else {
-            [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            NSString *tempMsg = [error.userInfo[ERROR_MSG] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            if (tempMsg.length > 0) {
+                [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            }
         }
     }];
 }
@@ -72,7 +75,12 @@
     [NetworkHelper POST:urlStr parameters:paraDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSInteger status = [responseObject[@"status"] integerValue];
         NSString *msg = responseObject[@"msg"];
-        MBProgressHUD *hud = [MBProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        
+        NSString *tempMsg = [msg stringByReplacingOccurrencesOfString:@" " withString:@""];
+        MBProgressHUD *hud = nil;
+        if (tempMsg.length > 0) {
+            hud = [MBProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        }
         if (status == 1) {
             __weak typeof(self) weakself = self;
             [hud setCompletionBlock:^(){

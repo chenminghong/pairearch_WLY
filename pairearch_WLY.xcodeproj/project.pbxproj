@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FE9632A1EB9B30200F916DD /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE963291EB9B30200F916DD /* ProgressHUD.m */; };
 		76DA3C9EDAD9C136CDB7CBDB /* libPods-pairearch_WLY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E253EE02D936D5B70824B760 /* libPods-pairearch_WLY.a */; };
 		B307BF471E7238E5005D7979 /* HomePageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B307BF461E7238E5005D7979 /* HomePageModel.m */; };
 		B307BF501E7283D8005D7979 /* OrderStatusCOMMON212Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = B307BF4F1E7283D8005D7979 /* OrderStatusCOMMON212Controller.m */; };
@@ -156,6 +157,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0FE963281EB9B30200F916DD /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
+		0FE963291EB9B30200F916DD /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		4B0612EA886C1F63FFF37775 /* Pods-pairearch_WLY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pairearch_WLY.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pairearch_WLY/Pods-pairearch_WLY.debug.xcconfig"; sourceTree = "<group>"; };
 		B307BF451E7238E5005D7979 /* HomePageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageModel.h; sourceTree = "<group>"; };
 		B307BF461E7238E5005D7979 /* HomePageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageModel.m; sourceTree = "<group>"; };
@@ -412,6 +415,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FE963271EB9B2E800F916DD /* ProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				0FE963281EB9B30200F916DD /* ProgressHUD.h */,
+				0FE963291EB9B30200F916DD /* ProgressHUD.m */,
+			);
+			path = ProgressHUD;
+			sourceTree = "<group>";
+		};
 		292A3E722AE506B1E6F3136F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -649,6 +661,7 @@
 		B35727631E540D9D003F9B2F /* General */ = {
 			isa = PBXGroup;
 			children = (
+				0FE963271EB9B2E800F916DD /* ProgressHUD */,
 				B336CC151E88C010000F3928 /* BaseViewController */,
 				B37CB2291E6E96F900A1463F /* OrderStatusBaseController */,
 				B38410BA1E5D875700F7069F /* Service */,
@@ -1312,6 +1325,7 @@
 				B38411451E5E91DE00F7069F /* CancelLoginCell.m in Sources */,
 				B37CB27A1E6FF0F100A1463F /* OrderDetailModel.m in Sources */,
 				B3D3B2A71E66EA550033EF84 /* SafetyCheckModel.m in Sources */,
+				0FE9632A1EB9B30200F916DD /* ProgressHUD.m in Sources */,
 				B37CB2481E6FEFCC00A1463F /* OrderStatusKA226Controller.m in Sources */,
 				B3D3B2A21E66EA550033EF84 /* HomeViewController.m in Sources */,
 				B37CB1F71E6958DB00A1463F /* OrderStatusManager.m in Sources */,

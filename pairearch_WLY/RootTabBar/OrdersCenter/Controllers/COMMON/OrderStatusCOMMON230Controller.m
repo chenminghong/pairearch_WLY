@@ -220,22 +220,23 @@
         [cell.checkButton setTitle:@"入厂确认" forState:UIControlStateNormal];
         cell.detailModel = detailModel;
         return cell;
-    } else if ([detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_240) {  //正常签收
-        CommonNomalSignCell *cell = [CommonNomalSignCell getCellWithTable:tableView buttonBlock:^(NSInteger index, DetailCommonModel *model) {
-            if (index == 0) {
-                [self normalSignButtonActionWithDetailModel:detailModel];
-            } else {
-                [self abnormalSignButtonActionWithDetailModel:detailModel];
-            }
-        }];
-        cell.detailModel = detailModel;
-        return cell;
     }
-    OutFacCheckCell *cell = [OutFacCheckCell getCellWithTable:tableView buttonBlock:^(NSInteger index, DetailCommonModel *model) {
-        [self haveBackOrderButtonActionWithDetailModel:detailModel];
+//    else if ([detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_240) {  //正常签收
+    CommonNomalSignCell *cell = [CommonNomalSignCell getCellWithTable:tableView buttonBlock:^(NSInteger index, DetailCommonModel *model) {
+        if (index == 0) {
+            [self normalSignButtonActionWithDetailModel:detailModel];
+        } else {
+            [self abnormalSignButtonActionWithDetailModel:detailModel];
+        }
     }];
     cell.detailModel = detailModel;
     return cell;
+//    }
+//    OutFacCheckCell *cell = [OutFacCheckCell getCellWithTable:tableView buttonBlock:^(NSInteger index, DetailCommonModel *model) {
+//        [self haveBackOrderButtonActionWithDetailModel:detailModel];
+//    }];
+//    cell.detailModel = detailModel;
+//    return cell;
 }
 
 #pragma mark -- Button点击事件

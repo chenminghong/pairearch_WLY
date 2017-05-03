@@ -145,7 +145,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [hud hide:NO];
-        NSString *description = error.localizedFailureReason.length == 0? @"修改密码失败!":error.localizedFailureReason;
+        NSString *description = [error.localizedFailureReason stringByReplacingOccurrencesOfString:@" " withString:@""].length == 0? @"修改密码失败!":error.localizedFailureReason;
         [MBProgressHUD bwm_showTitle:description toView:self.view hideAfter:2.0];
         
     }];
