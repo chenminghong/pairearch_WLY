@@ -315,7 +315,6 @@
             NSInteger status = [listModel.STATUS integerValue];
             NSString *transportCode = listModel.TRANSPORT_CODE;
             NSDictionary *paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"orderCode":codeStr, @"userName":[LoginModel shareLoginModel].name};
-            
             if (indexPath.item != 2) {
                 if ([transportCode isEqualToString:ORDER_TYPE_KA]) {
                     [self jumpToKaControllerWithStatus:status paraDict:paraDict];

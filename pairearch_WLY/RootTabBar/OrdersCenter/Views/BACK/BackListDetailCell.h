@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *assortLabel;
 @property (weak, nonatomic) IBOutlet UILabel *loadNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *loadAddressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *toAddressLabel;
 
 @property (nonatomic, strong) BackDetailModel *detailModel;
 

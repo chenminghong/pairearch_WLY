@@ -169,6 +169,7 @@
     //设置cell状态
     if ([cell.orderModel.TRANSPORT_CODE isEqualToString:ORDER_TYPE_KA]) {
         cell.assortLabel.text = @"KA";
+        cell.abnormalReportBtn.backgroundColor = THEME_COLOR_KA;
         if (self.indexPath.item == 2) {
             cell.assortLabel.backgroundColor = ABNORMAL_THEME_COLOR;
             cell.stateLabel.backgroundColor = ABNORMAL_THEME_COLOR;
@@ -182,6 +183,7 @@
         }
     } else if ([cell.orderModel.TRANSPORT_CODE isEqualToString:ORDER_TYPE_BACK]) {
         cell.assortLabel.text = @"回";
+        cell.abnormalReportBtn.backgroundColor = THEME_COLOR_BACK;
         if (self.indexPath.item == 2) {
             cell.assortLabel.backgroundColor = ABNORMAL_THEME_COLOR;
             cell.stateLabel.backgroundColor = ABNORMAL_THEME_COLOR;
@@ -195,6 +197,7 @@
         }
     } else if ([cell.orderModel.TRANSPORT_CODE isEqualToString:ORDER_TYPE_COMMON]) {
         cell.assortLabel.text = @"常";
+        cell.abnormalReportBtn.backgroundColor = THEME_COLOR_COMMON;
         if (self.indexPath.item == 2) {
             cell.assortLabel.backgroundColor = ABNORMAL_THEME_COLOR;
             cell.stateLabel.backgroundColor = ABNORMAL_THEME_COLOR;

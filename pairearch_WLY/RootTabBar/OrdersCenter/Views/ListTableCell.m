@@ -37,8 +37,7 @@
     
     self.assortLabel.layer.masksToBounds = YES;
     self.assortLabel.layer.cornerRadius = CGRectGetWidth(self.assortLabel.bounds) / 2.0;
-    
-    self.abnormalReportBtn.backgroundColor = MAIN_THEME_COLOR;
+
     self.abnormalReportBtn.titleLabel.numberOfLines = 2;
     [self.abnormalReportBtn setTitle:@"异常\n上报" forState:UIControlStateNormal];
     
