@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#import "ListTableCell.h"
+
 typedef void(^PushActionBlock)(NSArray *selectModelArr, NSIndexPath *indexPath);
 
-@interface OrdersCollectionCell : UICollectionViewCell<UITableViewDelegate, UITableViewDataSource>
+typedef void(^AbnormalReportBlock)(NSString *loadNumber);
+
+
+@interface OrdersCollectionCell : UICollectionViewCell<UITableViewDelegate, UITableViewDataSource, AbnormalReportDelegate>
 
 @property (nonatomic, strong) UITableView *listTableView;
 
@@ -26,11 +31,21 @@ typedef void(^PushActionBlock)(NSArray *selectModelArr, NSIndexPath *indexPath);
 
 @property (nonatomic, strong) NSMutableArray *reloadFlags;  //存储刷新标识(1:需要刷新, 0:不需要刷新)
 
+@property (nonatomic, strong) AbnormalReportBlock abnormalReportBlock;
+
 
 //加载cell
 + (instancetype)getCellWithCollectionView:(UICollectionView *)collectionView indexPath:(NSIndexPath *)indexPath pushBlock:(PushActionBlock)pushBlock;
 
 //  请求网络数据
 - (void)loadDataFromNet;
+
+
+/**
+ 异常上报按钮点击事件
+
+ @param block 异常上报按钮点击事件回调
+ */
+- (void)addAbnormalReportBlock:(AbnormalReportBlock)block;
 
 @end

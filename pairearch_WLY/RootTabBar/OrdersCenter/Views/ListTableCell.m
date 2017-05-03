@@ -38,6 +38,10 @@
     self.assortLabel.layer.masksToBounds = YES;
     self.assortLabel.layer.cornerRadius = CGRectGetWidth(self.assortLabel.bounds) / 2.0;
     
+    self.abnormalReportBtn.backgroundColor = MAIN_THEME_COLOR;
+    self.abnormalReportBtn.titleLabel.numberOfLines = 2;
+    [self.abnormalReportBtn setTitle:@"异常\n上报" forState:UIControlStateNormal];
+    
     self.telephoneBtn.hidden = YES;
 }
 
@@ -91,7 +95,7 @@
 
 //打电话按钮处理事件
 - (IBAction)makeTelephoneCallAction:(id)sender {
-    NSMutableString* str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@", @"10000"];
+    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@", @"10000"];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 }
 
@@ -102,6 +106,18 @@
 //    if (self.fightSingleBlock) {
 //        self.fightSingleBlock();
 //    }
+}
+
+
+/**
+ 异常上报按钮点击事件
+
+ @param sender 异常上报按钮
+ */
+- (IBAction)abnormalButtonAction:(UIButton *)sender {
+    if ([self.abnormalDelegate respondsToSelector:@selector(abnormalReportActionWithLoadNumber:)]) {
+        [self.abnormalDelegate abnormalReportActionWithLoadNumber:self.orderModel.CODE];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

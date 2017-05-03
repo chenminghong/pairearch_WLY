@@ -25,6 +25,7 @@
 #import "OrderStatusCOMMON226Controller.h"
 #import "OrderStatusCOMMON228Controller.h"
 #import "CommonSelectStateController.h"
+#import "AbnormalReportController.h"
 
 
 @interface OrdersCenterController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate>
@@ -328,6 +329,12 @@
     }];
     cell.indexPath = indexPath;
     cell.reloadFlags = self.reloadFlags;
+    [cell addAbnormalReportBlock:^(NSString *loadNumber) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"AbnormalReportController" bundle:[NSBundle mainBundle]];
+        AbnormalReportController *abnormalVC = [sb instantiateViewControllerWithIdentifier:@"AbnormalReportController"];
+        abnormalVC.loadNumber = loadNumber;
+        [self.navigationController pushViewController:abnormalVC animated:YES];
+    }];
     return cell;
 }
 

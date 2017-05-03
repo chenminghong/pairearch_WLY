@@ -99,6 +99,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     //设置提交按钮
     UIButton *commitButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [commitButton setTitle:@"提交" forState:UIControlStateNormal];
@@ -134,7 +135,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     AbnormalReportCell *cell = [AbnormalReportCell getCellWithTable:tableView];
     [cell.contentView addSubview:self.collectionView];
-
+    cell.loadNumberTf.text = self.loadNumber;
     return cell;
 }
 

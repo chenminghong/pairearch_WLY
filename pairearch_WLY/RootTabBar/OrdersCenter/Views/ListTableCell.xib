@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -134,6 +134,17 @@
                             <action selector="makeTelephoneCallAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="42X-Ga-Fh6"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofM-3Y-UDR">
+                        <rect key="frame" x="7" y="85" width="40" height="40"/>
+                        <color key="backgroundColor" red="0.93705266710000001" green="0.39020347599999999" blue="0.1872715056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="异常上报">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="abnormalButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="izi-xW-BBv"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="iUu-RN-Q7Y" firstAttribute="leading" secondItem="CWh-5I-iG1" secondAttribute="trailing" constant="10" id="2d6-kf-CBh"/>
@@ -149,6 +160,7 @@
                     <constraint firstItem="aIa-xB-4Z3" firstAttribute="leading" secondItem="7iC-ha-qvk" secondAttribute="trailing" constant="10" id="Fqc-VZ-tjl"/>
                     <constraint firstItem="xpi-ML-iEU" firstAttribute="leading" secondItem="Ozb-Iq-87c" secondAttribute="leading" id="FyP-XA-yuO"/>
                     <constraint firstItem="CWh-5I-iG1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="H9j-f6-PHI"/>
+                    <constraint firstItem="ofM-3Y-UDR" firstAttribute="width" secondItem="trN-ao-ENl" secondAttribute="width" id="HeQ-YV-p1b"/>
                     <constraint firstItem="7iC-ha-qvk" firstAttribute="leading" secondItem="YH0-yN-fWq" secondAttribute="leading" id="Ig1-kF-XNR"/>
                     <constraint firstItem="yUO-T1-7M9" firstAttribute="centerX" secondItem="CWh-5I-iG1" secondAttribute="centerX" id="JNP-m7-RI7"/>
                     <constraint firstItem="aIa-xB-4Z3" firstAttribute="centerY" secondItem="7iC-ha-qvk" secondAttribute="centerY" id="Jf5-Qu-8Tp"/>
@@ -172,8 +184,11 @@
                     <constraint firstItem="cJH-6v-wmU" firstAttribute="trailing" secondItem="zDv-ys-6DM" secondAttribute="trailing" id="dRz-K6-ii2"/>
                     <constraint firstItem="zDv-ys-6DM" firstAttribute="top" secondItem="gah-Q0-V7p" secondAttribute="bottom" constant="10" id="dUu-kw-ROF"/>
                     <constraint firstAttribute="trailingMargin" secondItem="iUu-RN-Q7Y" secondAttribute="trailing" constant="40" id="g8O-EV-KMa"/>
+                    <constraint firstItem="ofM-3Y-UDR" firstAttribute="centerX" secondItem="trN-ao-ENl" secondAttribute="centerX" id="gDC-wa-8qC"/>
+                    <constraint firstItem="ofM-3Y-UDR" firstAttribute="height" secondItem="trN-ao-ENl" secondAttribute="height" id="hXb-BX-Wao"/>
                     <constraint firstItem="7iC-ha-qvk" firstAttribute="top" secondItem="YH0-yN-fWq" secondAttribute="bottom" constant="5" id="lVD-7J-OpU"/>
                     <constraint firstItem="U80-YX-qLM" firstAttribute="top" secondItem="d92-Kg-Gii" secondAttribute="bottom" id="nsK-rA-Nz6"/>
+                    <constraint firstItem="ofM-3Y-UDR" firstAttribute="centerY" secondItem="trN-ao-ENl" secondAttribute="centerY" id="oR1-7n-fzB"/>
                     <constraint firstItem="gah-Q0-V7p" firstAttribute="leading" secondItem="YH0-yN-fWq" secondAttribute="leading" id="wmw-cC-x4v"/>
                     <constraint firstItem="U80-YX-qLM" firstAttribute="centerX" secondItem="d92-Kg-Gii" secondAttribute="centerX" id="xOF-eE-wkZ"/>
                     <constraint firstItem="YH0-yN-fWq" firstAttribute="centerX" secondItem="U80-YX-qLM" secondAttribute="centerX" id="yec-Fz-yWG"/>
@@ -181,6 +196,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="abnormalReportBtn" destination="ofM-3Y-UDR" id="OwX-Z5-RNy"/>
                 <outlet property="assortLabel" destination="CWh-5I-iG1" id="xBL-Ob-WyU"/>
                 <outlet property="getAddressLabel" destination="Ozb-Iq-87c" id="Ury-Iq-WPb"/>
                 <outlet property="getNameLabel" destination="cJH-6v-wmU" id="1CU-4u-Iiy"/>

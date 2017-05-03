@@ -10,4 +10,6 @@
 
 @interface AbnormalReportController : BaseViewController
 
+@property (nonatomic, copy) NSString *loadNumber;
+
 @end

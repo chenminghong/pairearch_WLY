@@ -154,10 +154,16 @@
     cell.orderModel = self.listModelArr[indexPath.row];
     
     //处理选择框显示和隐藏
-    if (self.indexPath.item != 0) {
-        cell.selectedBtn.hidden = YES;
-    } else {
+    if (self.indexPath.item == 0) {
         cell.selectedBtn.hidden = NO;
+        cell.abnormalReportBtn.hidden = YES;
+    } else if (self.indexPath.item == 1) {
+        cell.selectedBtn.hidden = YES;
+        cell.abnormalReportBtn.hidden = NO;
+        cell.abnormalDelegate = self;
+    } else if (self.indexPath.item == 2) {
+        cell.selectedBtn.hidden = YES;
+        cell.abnormalReportBtn.hidden = YES;
     }
     
     //设置cell状态
@@ -232,6 +238,25 @@
         }
         self.pushBlock(modelArr, self.indexPath);
     }
+}
+
+
+/**
+ 异常上报按钮点击事件
+ */
+- (void)abnormalReportActionWithLoadNumber:(NSString *)loadNumber {
+    if (self.abnormalReportBlock) {
+        self.abnormalReportBlock(loadNumber);
+    }
+}
+
+/**
+ 异常上报按钮点击事件
+ 
+ @param block 异常上报按钮点击事件回调
+ */
+- (void)addAbnormalReportBlock:(AbnormalReportBlock)block {
+    self.abnormalReportBlock = block;
 }
 
 @end
