@@ -29,8 +29,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    NSLog(@"%@", NSStringFromClass([self class]));
-    
     //页面结束
     [[BaiduMobStat defaultStat] pageviewEndWithName:NSStringFromClass([self class])];
 }

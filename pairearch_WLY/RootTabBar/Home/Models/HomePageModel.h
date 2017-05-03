@@ -22,4 +22,6 @@
 
 @property (nonatomic, copy) NSString *type;                 //订单当前状态类型(distribution)
 
+@property (nonatomic, copy) NSString *STATUS;               //运单状态
+
 @end

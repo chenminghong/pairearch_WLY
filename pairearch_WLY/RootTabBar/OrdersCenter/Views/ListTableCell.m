@@ -98,7 +98,11 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 }
 
-//选中按钮处理事件
+/**
+ 选中按钮的点击事件
+
+ @param sender 选中按钮
+ */
 - (IBAction)selectButtonAction:(UIButton *)sender {
 //    sender.selected = !sender.selected;
 //    self.orderModel.isSelected = sender.selected;

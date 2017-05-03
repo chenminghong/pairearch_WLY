@@ -118,9 +118,6 @@
                             <constraint firstAttribute="width" constant="40" id="tDB-LJ-YhV"/>
                         </constraints>
                         <state key="normal" image="kongkuang"/>
-                        <connections>
-                            <action selector="selectButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="fnc-it-Sms"/>
-                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yUO-T1-7M9">
                         <rect key="frame" x="10" y="177" width="35" height="35"/>

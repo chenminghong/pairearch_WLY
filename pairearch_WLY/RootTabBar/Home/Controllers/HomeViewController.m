@@ -15,6 +15,25 @@
 #import "HomeTableCell.h"
 #import "HomePageModel.h"
 
+#import "OrdersCollectionCell.h"
+#import "OrderListModel.h"
+#import "OrderStatusKA212Controller.h"
+#import "OrderStatusKA220Controller.h"
+#import "OrderStatusKA226Controller.h"
+#import "OrderStatusKA228Controller.h"
+#import "OrderStatusKA230Controller.h"
+#import "OrderStatusKA238Controller.h"
+#import "NestedSelectStateController.h"
+#import "OrderStatusKA245Controller.h"
+#import "BACKNestedSelectController.h"
+
+#import "OrderStatusCOMMON212Controller.h"
+#import "OrderStatusCOMMON220Controller.h"
+#import "OrderStatusCOMMON226Controller.h"
+#import "OrderStatusCOMMON228Controller.h"
+#import "CommonSelectStateController.h"
+#import "AbnormalReportController.h"
+
 @interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIButton *safetyCheckBtn;
@@ -68,8 +87,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    NSLog(@"count:%ld", self.navigationController.viewControllers.count);
+    if (!self.navigationController.isNavigationBarHidden) {
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+    }
     
-    self.navigationController.navigationBar.hidden = YES;
     self.userNameLabel.text = [LoginModel shareLoginModel].name;
     self.userNumberLabel.text = [LoginModel shareLoginModel].tel;
     
@@ -81,6 +103,14 @@
     //获取首页Data数据
     [self getHomePageData];
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    NSLog(@"count:%ld", self.navigationController.viewControllers.count);
+    if (self.navigationController.viewControllers.count >= 2) {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+    }
 }
 
 //程序活跃的时候调用
@@ -223,6 +253,170 @@
     cell.homeModel = self.dataModelArr[indexPath.row];
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    HomePageModel *homeModel = self.dataModelArr[indexPath.row];
+    NSInteger status = [homeModel.STATUS integerValue];
+    NSString *transportCode = homeModel.TRANSPORT_CODE;
+    NSDictionary *paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"orderCode":homeModel.CODE, @"userName":[LoginModel shareLoginModel].name};
+    if ([transportCode isEqualToString:ORDER_TYPE_KA]) {
+        [self jumpToKaControllerWithStatus:status paraDict:paraDict];
+    } else if ([transportCode isEqualToString:ORDER_TYPE_BACK]) {
+        [self jumpToBackControllerWithStatus:status paraDict:paraDict];
+    } else if ([transportCode isEqualToString:ORDER_TYPE_COMMON]) {
+        [self jumpToCommonControllerWithStatus:status paraDict:paraDict];
+    }
+}
+
+//KA界面跳转逻辑
+- (void)jumpToKaControllerWithStatus:(NSInteger)status paraDict:(NSDictionary *)paraDict {
+    switch (status) {
+        case ORDER_STATUS_212:
+        {
+            OrderStatusKA212Controller *orderDetailVC = [OrderStatusKA212Controller new];
+            orderDetailVC.orderStatus = status;
+            orderDetailVC.paraDict = paraDict;
+            [self.navigationController pushViewController:orderDetailVC animated:YES];
+        }
+            break;
+            
+        case ORDER_STATUS_220:
+        {
+            OrderStatusKA220Controller *checkVC = [OrderStatusKA220Controller new];
+            checkVC.paraDict = paraDict;
+            checkVC.orderStatus = status;
+            [self.navigationController pushViewController:checkVC animated:YES];
+        }
+            break;
+            
+        case ORDER_STATUS_226:
+        {
+            OrderStatusKA226Controller *enterCheckVC = [OrderStatusKA226Controller new];
+            enterCheckVC.paraDict = paraDict;
+            enterCheckVC.orderStatus = status;
+            [self.navigationController pushViewController:enterCheckVC animated:YES];
+        }
+            break;
+            
+        case ORDER_STATUS_228:
+        {
+            OrderStatusKA228Controller *outVC = [OrderStatusKA228Controller new];
+            outVC.paraDict = paraDict;
+            outVC.orderStatus = status;
+            [self.navigationController pushViewController:outVC animated:YES];
+        }
+            break;
+            
+        case ORDER_STATUS_230:
+        case ORDER_STATUS_238:
+        case ORDER_STATUS_240:
+        {
+            NestedSelectStateController *nestedVC = [NestedSelectStateController new];
+            nestedVC.paraDict = paraDict;
+            nestedVC.orderStatus = status;
+            [self.navigationController pushViewController:nestedVC animated:YES];
+        }
+            break;
+            
+        case ORDER_STATUS_245:
+        {
+            OrderStatusKA245Controller *evaluationVC = [OrderStatusKA245Controller new];
+            evaluationVC.paraDict = paraDict;
+            [self.navigationController pushViewController:evaluationVC animated:YES];
+        }
+            break;
+            
+        default:
+        {
+            OrderStatusKA212Controller *orderDetailVC = [OrderStatusKA212Controller new];
+            orderDetailVC.orderStatus = status;
+            orderDetailVC.paraDict = paraDict;
+            [self.navigationController pushViewController:orderDetailVC animated:YES];
+        }
+            break;
+    }
+}
+
+//BACK界面跳转逻辑
+- (void)jumpToBackControllerWithStatus:(NSInteger)status paraDict:(NSDictionary *)paraDict{
+    BACKNestedSelectController *backVC = [BACKNestedSelectController new];
+    backVC.orderStatus = status;
+    backVC.paraDict = paraDict;
+    [self.navigationController pushViewController:backVC animated:YES];
+}
+
+//COMMON界面跳转逻辑
+- (void)jumpToCommonControllerWithStatus:(NSInteger)status paraDict:(NSDictionary *)paraDict{
+    switch (status) {
+        case ORDER_STATUS_212:
+        {
+            OrderStatusCOMMON212Controller *orderDetailVC = [OrderStatusCOMMON212Controller new];
+            orderDetailVC.orderStatus = status;
+            orderDetailVC.paraDict = paraDict;
+            [self.navigationController pushViewController:orderDetailVC animated:YES];
+        }
+            break;
+            
+        case ORDER_STATUS_220:
+        {
+            OrderStatusCOMMON220Controller *checkVC = [OrderStatusCOMMON220Controller new];
+            checkVC.paraDict = paraDict;
+            checkVC.orderStatus = status;
+            [self.navigationController pushViewController:checkVC animated:YES];
+        }
+            break;
+            
+        case ORDER_STATUS_226:
+        {
+            OrderStatusCOMMON226Controller *enterCheckVC = [OrderStatusCOMMON226Controller new];
+            enterCheckVC.paraDict = paraDict;
+            enterCheckVC.orderStatus = status;
+            [self.navigationController pushViewController:enterCheckVC animated:YES];
+        }
+            break;
+            
+        case ORDER_STATUS_228:
+        {
+            OrderStatusCOMMON228Controller *outVC = [OrderStatusCOMMON228Controller new];
+            outVC.paraDict = paraDict;
+            outVC.orderStatus = status;
+            [self.navigationController pushViewController:outVC animated:YES];
+        }
+            break;
+            
+        case ORDER_STATUS_230:
+        case ORDER_STATUS_238:
+        case ORDER_STATUS_240:
+        {
+            CommonSelectStateController *nestedVC = [CommonSelectStateController new];
+            nestedVC.paraDict = paraDict;
+            nestedVC.orderStatus = status;
+            [self.navigationController pushViewController:nestedVC animated:YES];
+        }
+            break;
+            
+            
+        case ORDER_STATUS_245:
+        {
+            OrderStatusKA245Controller *evaluationVC = [OrderStatusKA245Controller new];
+            evaluationVC.paraDict = paraDict;
+            [self.navigationController pushViewController:evaluationVC animated:YES];
+        }
+            break;
+            
+            
+            
+        default:
+        {
+            CommonSelectStateController *nestedVC = [CommonSelectStateController new];
+            nestedVC.paraDict = paraDict;
+            nestedVC.orderStatus = status;
+            [self.navigationController pushViewController:nestedVC animated:YES];
+        }
+            break;
+    }
+}
+
 
 #pragma mark -- ButtonAction
 
