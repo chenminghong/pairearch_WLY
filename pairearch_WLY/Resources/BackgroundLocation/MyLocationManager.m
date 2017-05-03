@@ -76,9 +76,7 @@
 }
 
 //上传位置信息到服务器
-- (void)updateLocationToServer {
-    NSLog(@"经纬度:%f/%f aaaaa", self.location.coordinate.latitude, self.location.coordinate.longitude);
-    
+- (void)updateLocationToServer {    
     if (self.location != nil) {
         [self begainBackgroundUpdateTask];
         [[NetworkHelper shareClient] POST:@"" parameters:@{} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

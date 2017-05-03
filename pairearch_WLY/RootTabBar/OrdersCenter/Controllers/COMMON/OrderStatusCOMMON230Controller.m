@@ -176,7 +176,6 @@
         CGFloat labelHeight = [BaseModel heightForTextString:@"已正常签收(或者异常签收)" width:((kScreenWidth - 100.0)) fontSize:CELL_LABEL_FONTSIZE];
         height += (labelHeight + 10.0);
     }
-    NSLog(@"%ld, %f", (long)[detailModel.SHPM_STATUS integerValue], height);
     return height;
 }
 

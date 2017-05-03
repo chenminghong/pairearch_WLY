@@ -34,7 +34,6 @@
         
     } failure:^(NSError *error) {
         endBlock(nil, error);
-        NSLog(@"%@", error.userInfo[@"NSLocalizedDescription"]);
     }];
 }
 

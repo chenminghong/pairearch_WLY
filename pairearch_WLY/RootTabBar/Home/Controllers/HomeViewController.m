@@ -87,7 +87,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSLog(@"count:%ld", self.navigationController.viewControllers.count);
     if (!self.navigationController.isNavigationBarHidden) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
     }
@@ -107,7 +106,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    NSLog(@"count:%ld", self.navigationController.viewControllers.count);
     if (self.navigationController.viewControllers.count >= 2) {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     }
