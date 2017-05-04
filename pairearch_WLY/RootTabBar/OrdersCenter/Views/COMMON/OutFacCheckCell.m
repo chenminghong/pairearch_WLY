@@ -28,15 +28,15 @@
     
     self.signNumberLabel.text = [NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM];
     self.signAddressLabel.text = [NSString stringWithFormat:@"%@", detailModel.TO_SHPG_ADDR];
-    if ([detailModel.isEmpty integerValue] == 0) {
-        [self.checkButton setTitle:@"已签收" forState:UIControlStateNormal];
-        self.checkButton.userInteractionEnabled = NO;
-        self.checkButton.backgroundColor = ABNORMAL_THEME_COLOR;
-    } else {
-        [self.checkButton setTitle:@"有单回空" forState:UIControlStateNormal];
-        self.checkButton.userInteractionEnabled = YES;
-        self.checkButton.backgroundColor = THEME_COLOR_BACK;
-    }
+    [self.checkButton setTitle:@"已签收" forState:UIControlStateNormal];
+    self.checkButton.userInteractionEnabled = NO;
+    self.checkButton.backgroundColor = ABNORMAL_THEME_COLOR;
+//    if ([detailModel.isEmpty integerValue] == 0) {
+//    } else {
+//        [self.checkButton setTitle:@"有单回空" forState:UIControlStateNormal];
+//        self.checkButton.userInteractionEnabled = YES;
+//        self.checkButton.backgroundColor = THEME_COLOR_BACK;
+//    }
 }
 
 - (void)awakeFromNib {

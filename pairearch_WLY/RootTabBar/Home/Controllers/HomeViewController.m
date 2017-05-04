@@ -192,10 +192,10 @@
 //获取首页Data数据
 - (void)getHomePageData {
     [HomePageModel getDataWithParameters:@{@"driverTel":[LoginModel shareLoginModel].tel? [LoginModel shareLoginModel].tel:@""} endBlock:^(id model, NSError *error) {
-        NSArray *modelArr = model;
-        if (modelArr.count) {
-            self.dataModelArr = [NSMutableArray arrayWithArray:model];
-        }
+//        NSArray *modelArr = model;
+//        if (modelArr.count) {
+//        }
+        self.dataModelArr = [NSMutableArray arrayWithArray:model];
         [self.tableView reloadData];
         if (self.dataModelArr.count) {
             HomePageModel *model = self.dataModelArr[0];
