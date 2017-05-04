@@ -13,6 +13,7 @@
 #import "OrderStatusKA230Controller.h"
 #import "OrderStatusKA238Controller.h"
 #import "OrderStatusKA240Controller.h"
+#import "OrderStatusKA245Controller.h"
 
 
 @interface NestedSelectStateController ()
@@ -104,6 +105,14 @@
             childVC.orderStatus = status;
             childVC.dataListArr = self.dataListArr;
             [self addChildController:childVC];
+        }
+            break;
+            
+        case ORDER_STATUS_245:
+        {
+            OrderStatusKA245Controller *evaluationVC = [OrderStatusKA245Controller new];
+            evaluationVC.paraDict = self.paraDict;
+            [self addChildController:evaluationVC];
         }
             break;
             
