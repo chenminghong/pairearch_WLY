@@ -372,14 +372,17 @@
     
     if (cell.loadNumberTf.text.length <= 0) {
         [MBProgressHUD bwm_showTitle:@"请输入异常单号！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        return;
     }
     
     if (cell.loadNumberTv.text.length <= 0) {
         [MBProgressHUD bwm_showTitle:@"请异常原因！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        return;
     }
     
     if (_selectedPhotos.count <= 0) {
         [MBProgressHUD bwm_showTitle:@"请上传异常图片！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        return;
     }
     
     NSDictionary *paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"driverName":[LoginModel shareLoginModel].name, @"orderCode":cell.loadNumberTf.text, @"remark":cell.loadNumberTv.text};
