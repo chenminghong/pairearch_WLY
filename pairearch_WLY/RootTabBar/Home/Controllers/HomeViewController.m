@@ -63,6 +63,7 @@
     
     [self.view addSubview:self.paoma];
     [self.view addSubview:self.tableView];
+    [MJRefreshUtil pullDownRefresh:self andScrollView:self.tableView andAction:@selector(getHomePageData)];
     
     self.safetyCheckBtn.layer.masksToBounds = YES;
     self.safetyCheckBtn.layer.cornerRadius = 5.0;
@@ -192,9 +193,10 @@
 //获取首页Data数据
 - (void)getHomePageData {
     [HomePageModel getDataWithParameters:@{@"driverTel":[LoginModel shareLoginModel].tel? [LoginModel shareLoginModel].tel:@""} endBlock:^(id model, NSError *error) {
-//        NSArray *modelArr = model;
-//        if (modelArr.count) {
-//        }
+        if (error) {
+            [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            return;
+        }
         self.dataModelArr = [NSMutableArray arrayWithArray:model];
         [self.tableView reloadData];
         if (self.dataModelArr.count) {
@@ -211,7 +213,9 @@
             }
         } else {
             self.headLabel.text = @"";
+            [MBProgressHUD bwm_showTitle:@"暂无订单！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         }
+        [MJRefreshUtil endRefresh:self.tableView];
     }];
 }
 
