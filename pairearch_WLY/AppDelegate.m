@@ -70,20 +70,25 @@
             }
             
             if (latest > current && ![self.window.rootViewController.presentedViewController isKindOfClass:[UIAlertController class]]) {
-                UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"提示" message:@"发现需要升级的新版本，现在去更新？" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"提示" message:@"发现可以升级的新版本，现在去更新？" preferredStyle:UIAlertControllerStyleAlert];
                 
                 __block NSString *trackViewUrl = [versionDict objectForKey:@"trackViewUrl"];
-                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"忽略" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                
+                UIAlertAction *sure = [UIAlertAction actionWithTitle:@"更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:trackViewUrl] options:@{@"open":@"update"} completionHandler:nil];
+                }];
+                
+                UIAlertAction *ignore = [UIAlertAction actionWithTitle:@"忽略" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     NSMutableArray *versions = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:IGNORE_UPDATE_VERSIONS]];
                     [versions addObject:latestVersion];
                     [[NSUserDefaults standardUserDefaults] setObject:versions forKey:IGNORE_UPDATE_VERSIONS];
                 }];
                 
-                UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:trackViewUrl] options:@{@"open":@"update"} completionHandler:nil];
+                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 }];
-                [alertView addAction:cancel];
                 [alertView addAction:sure];
+                [alertView addAction:ignore];
+                [alertView addAction:cancel];
                 [self.window.rootViewController presentViewController:alertView animated:YES completion:nil];
                 NSLog(@"trackViewUrl=%@", trackViewUrl);
             }
