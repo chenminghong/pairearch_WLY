@@ -131,7 +131,6 @@
                 [weakself.navigationController popToRootViewControllerAnimated:YES];
             }];
         }
-        
     } failure:^(NSError *error) {
         [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
     }];
