@@ -128,7 +128,7 @@
     [NetworkHelper POST:ORDER_EVALUATION_API parameters:evaluaDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSInteger status = [responseObject[@"status"] integerValue];
         NSString *msg = [NSString stringWithFormat:@"%@！", responseObject[@"msg"]];
-        MBProgressHUD *hud= [MBProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        MBProgressHUD *hud= [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         if (status) {
             [hud setCompletionBlock:^(){
                 [self.navigationController popToRootViewControllerAnimated:YES];

@@ -85,13 +85,17 @@
     return YES;
 }
 
-
 //提交按钮事件
 - (IBAction)commitButtonAction:(id)sender {
+    [self.view endEditing:YES];
+    if (self.reasonTV.text.length <= 0) {
+        [ProgressHUD bwm_showTitle:@"请输入异常签收原因！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL / 2.0];
+        return;
+    }
     [NetworkHelper POST:ORDER_REJECT_GET_API parameters:self.paraDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSString *msg = responseObject[@"msg"];
         NSInteger resultFlag = [responseObject[@"status"] integerValue];
-        MBProgressHUD *hud = [MBProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        MBProgressHUD *hud = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         if (resultFlag == 1) {
             __weak typeof(self) weakself = self;
             [hud setCompletionBlock:^(){
@@ -99,7 +103,7 @@
             }];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
     }];
 }
 

@@ -15,7 +15,7 @@
     if (tempTitle.length > 0) {
         return [super bwm_showTitle:title toView:view hideAfter:afterSecond];
     }
-    title = @"未知错误";
+    title = @"系统错误";
     return [super bwm_showTitle:title toView:view hideAfter:afterSecond];
 }
 

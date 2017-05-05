@@ -65,7 +65,7 @@
         } else {
             NSString *tempMsg = [error.userInfo[ERROR_MSG] stringByReplacingOccurrencesOfString:@" " withString:@""];
             if (tempMsg.length > 0) {
-                [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+                [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
             }
         }
     }];
@@ -79,7 +79,7 @@
         NSString *tempMsg = [msg stringByReplacingOccurrencesOfString:@" " withString:@""];
         MBProgressHUD *hud = nil;
         if (tempMsg.length > 0) {
-            hud = [MBProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            hud = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         }
         if (status == 1) {
             __weak typeof(self) weakself = self;
@@ -89,7 +89,7 @@
             }];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
     }];
 }
 
@@ -187,14 +187,14 @@
             [NetworkHelper POST:ORDER_SURE_BACK_API parameters:paraDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
                 NSString *status = responseObject[@"status"];
                 NSString *msg = responseObject[@"msg"];
-                MBProgressHUD *hud = [MBProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+                MBProgressHUD *hud = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
                 if ([status integerValue] == 1) {
                     [hud setCompletionBlock:^(){
                         [self.navigationController popViewControllerAnimated:YES];
                     }];
                 }
             } failure:^(NSError *error) {
-                [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+                [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
             }];
         }];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -216,14 +216,14 @@
     [NetworkHelper POST:ORDER_CANCEL_BACK_API parameters:paraDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSString *status = responseObject[@"status"];
         NSString *msg = responseObject[@"msg"];
-        MBProgressHUD *hud = [MBProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        MBProgressHUD *hud = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         if ([status integerValue] == 1) {
             [hud setCompletionBlock:^(){
                 [self.navigationController popViewControllerAnimated:YES];
             }];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
     }];
 }
 

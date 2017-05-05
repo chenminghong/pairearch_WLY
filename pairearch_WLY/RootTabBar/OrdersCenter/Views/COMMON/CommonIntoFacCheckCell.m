@@ -29,12 +29,12 @@
     self.signNumberLabel.text = [NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM];
     self.signAddressLabel.text = [NSString stringWithFormat:@"%@", detailModel.TO_SHPG_ADDR];
     
-    if ([detailModel.selected boolValue]) {
-        self.checkButton.backgroundColor = MAIN_THEME_COLOR;
-        self.checkButton.userInteractionEnabled = YES;
-    } else {
+    if ([detailModel.enable isEqualToString:@"N"]) {
         self.checkButton.backgroundColor = ABNORMAL_THEME_COLOR;
         self.checkButton.userInteractionEnabled = NO;
+    } else {
+        self.checkButton.backgroundColor = MAIN_THEME_COLOR;
+        self.checkButton.userInteractionEnabled = YES;
     }
     
 }

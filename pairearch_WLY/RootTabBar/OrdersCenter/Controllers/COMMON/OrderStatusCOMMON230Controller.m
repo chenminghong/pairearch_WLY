@@ -44,27 +44,27 @@
 }
 
 - (void)setDataListArr:(NSMutableArray *)dataListArr {
-    _dataListArr = [NSMutableArray arrayWithArray:[self classificationModelWithDetailModelArr:dataListArr]];
+    _dataListArr = dataListArr;
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
 }
 
-- (NSArray *)classificationModelWithDetailModelArr:(NSArray *)detailModelArr {
-    DetailCommonModel *tempModel;
-    for (DetailCommonModel *detailModel in detailModelArr) {
-        if ([detailModel.SHPM_STATUS integerValue] != ORDER_STATUS_230 && [detailModel.SHPM_STATUS integerValue] != ORDER_STATUS_241 && [detailModel.SHPM_STATUS integerValue] != ORDER_STATUS_242) {
-            tempModel = detailModel;
-            break;
-        }
-    }
-    if (tempModel) {
-        for (DetailCommonModel *detailModel in detailModelArr) {
-            if (detailModel != tempModel) {
-                detailModel.selected = @0;
-            }
-        }
-    }
-    return detailModelArr;
-}
+//- (NSArray *)classificationModelWithDetailModelArr:(NSArray *)detailModelArr {
+//    DetailCommonModel *tempModel;
+//    for (DetailCommonModel *detailModel in detailModelArr) {
+//        if ([detailModel.SHPM_STATUS integerValue] != ORDER_STATUS_230 && [detailModel.SHPM_STATUS integerValue] != ORDER_STATUS_241 && [detailModel.SHPM_STATUS integerValue] != ORDER_STATUS_242) {
+//            tempModel = detailModel;
+//            break;
+//        }
+//    }
+//    if (tempModel) {
+//        for (DetailCommonModel *detailModel in detailModelArr) {
+//            if (detailModel != tempModel) {
+//                detailModel.selected = @0;
+//            }
+//        }
+//    }
+//    return detailModelArr;
+//}
 
 //获取网络请求参数
 - (NSDictionary *)getParaDictFromModelsWithDetailModel:(DetailCommonModel *)detailModel {
@@ -81,7 +81,7 @@
             //对model数据进行分类
             self.dataListArr = [NSMutableArray arrayWithArray:model];
         } else {
-            [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         }
     }];
 }
@@ -92,7 +92,7 @@
     [NetworkHelper POST:urlStr parameters:paraDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSInteger status = [responseObject[@"status"] integerValue];
         NSString *msg = responseObject[@"msg"];
-        MBProgressHUD *hud = [MBProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        MBProgressHUD *hud = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         if (status == 1) {
             __weak typeof(self) weakself = self;
             [hud setCompletionBlock:^(){
@@ -101,7 +101,7 @@
             }];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
     }];
 }
 

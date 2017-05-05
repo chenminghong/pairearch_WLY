@@ -14,7 +14,7 @@
 - (instancetype)initWithDict:(NSDictionary *)dict {
     self = [super initWithDict:dict];
     if (self) {
-        self.selected = @1;
+//        self.selected = @1;
     }
     return self;
 }

@@ -129,14 +129,14 @@
     [NetworkHelper POST:SAFETY_CONFIRMATION_API parameters:paraDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSString *msg = responseObject[@"msg"];
         NSInteger status = [responseObject[@"status"] integerValue];
-        MBProgressHUD *hud = [MBProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        MBProgressHUD *hud = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         if (status == 1) {
             [hud setCompletionBlock:^(){
                 [self.navigationController dismissViewControllerAnimated:YES completion:nil];
             }];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
     }];
 }
 

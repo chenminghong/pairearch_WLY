@@ -104,7 +104,7 @@
             self.listModelArr = [NSMutableArray arrayWithArray:model];
             [self.reloadFlags replaceObjectAtIndex:self.indexPath.item withObject:@(0)];
         } else {
-            [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.listTableView.superview hideAfter:HUD_HIDE_TIMEINTERVAL];
+            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.listTableView.superview hideAfter:HUD_HIDE_TIMEINTERVAL];
         }
         [self.listTableView reloadData];
         [MJRefreshUtil endRefresh:self.listTableView];

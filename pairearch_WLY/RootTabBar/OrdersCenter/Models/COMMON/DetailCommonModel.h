@@ -44,10 +44,12 @@
 
 
 
-@property (nonatomic, strong) NSString *isEmpty;                 //是否有回空单（0：没有；1：有）
+@property (nonatomic, copy) NSString *isEmpty;                 //是否有回空单（0：没有；1：有）
 
-@property (nonatomic, strong) NSString *TO_SHPG_LOC_CD;          //回空详情界面参数
+@property (nonatomic, copy) NSString *TO_SHPG_LOC_CD;          //回空详情界面参数
 
-@property (nonatomic, strong) NSNumber *selected;                //是否正在走流程(1:状态为230， 或者242； 0:状态既不是230， 也不是245)
+//@property (nonatomic, strong) NSNumber *selected;              //是否正在走流程(1:状态为230， 或者242； 0:状态既不是230， 也不是245)
+
+@property (nonatomic, copy) NSString *enable;
 
 @end

@@ -397,7 +397,7 @@
         NSString *msg = responseDict[@"msg"];
         NSString *tempMsg = [msg stringByReplacingOccurrencesOfString:@" " withString:@""];
         if (tempMsg.length > 0) {
-            MBProgressHUD *tempHUD = [MBProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            MBProgressHUD *tempHUD = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
             [tempHUD setCompletionBlock:^{
                 if (status == 1) {
                     [self.navigationController popViewControllerAnimated:YES];
@@ -405,7 +405,7 @@
             }];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
     }];
 }
 
