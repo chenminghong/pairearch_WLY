@@ -36,7 +36,7 @@ static BTRACE *traceInstance = NULL;
         if (traceInstance != NULL) {
             [[LocationUploadManager shareManager] stopTrace];
         }
-        traceInstance = [[BTRACE alloc] initWithAk:BAIDU_AK mcode:[[NSBundle mainBundle] bundleIdentifier] serviceId:SERVER_ID entityName:[entityName stringByReplacingOccurrencesOfString:@" " withString:@""] operationMode:2];
+        traceInstance = [[BTRACE alloc] initWithAk:BAIDU_AK mcode:[[NSBundle mainBundle] bundleIdentifier] serviceId:SERVICE_ID entityName:[entityName stringByReplacingOccurrencesOfString:@" " withString:@""] operationMode:2];
         [traceInstance setInterval:GATHER_TIMEINTERVAL packInterval:PACK_TIMEINTERVAL];
         [[LocationUploadManager shareManager] startTrace];
     }

@@ -11,7 +11,6 @@
 #import "LoginViewController.h"
 #import "RootTabController.h"
 
-#import <XHVersion.h>
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate>
 
