@@ -1,21 +1,15 @@
 //
-//  LocationUploadManager.m
+//  UploadLocationManager.m
 //  pairearch_WLY
 //
-//  Created by Leo on 2017/2/16.
+//  Created by Jean on 2017/5/8.
 //  Copyright © 2017年 Leo. All rights reserved.
 //
 
 #import "LocationUploadManager.h"
 
-
-static BTRACE *traceInstance = NULL;
-
-#define TEMP_ENTITY_NAME  @"entity_name"
-
 #define GATHER_TIMEINTERVAL  30.0    //位置信息采集周期
 #define PACK_TIMEINTERVAL    60.0    //位置信息上传周期
-
 
 @implementation LocationUploadManager
 
@@ -25,59 +19,146 @@ static BTRACE *traceInstance = NULL;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedManager = [LocationUploadManager new];
+        // 使用SDK的任何功能前，都需要先调用initInfo:方法设置基础信息。
+        BTKServiceOption *sop = [[BTKServiceOption alloc] initWithAK:BAIDU_AK mcode:[[NSBundle mainBundle] bundleIdentifier] serviceID:SERVICE_ID keepAlive:true];
+        [[BTKAction sharedInstance] initInfo:sop];
+        [sharedManager changeGatherAndPackIntervals:GATHER_TIMEINTERVAL packInterval:PACK_TIMEINTERVAL];
     });
     return sharedManager;
 }
 
-//重新设置追踪的实体
-- (void)setEntityWithEntityName:(NSString *)entityName {
-    if (entityName.length) {
-        //重新开始定位上传服务
-        if (traceInstance != NULL) {
-            [[LocationUploadManager shareManager] stopTrace];
+#pragma mark - service轨迹服务 请求
+
+- (void)startServiceWithEntityName:(NSString *)entityName {
+    BTKStartServiceOption *op = [[BTKStartServiceOption alloc] initWithEntityName:entityName];
+    [[BTKAction sharedInstance] startService:op delegate:self];
+    [self startGather];
+}
+
+- (void)stopService {
+    [[BTKAction sharedInstance] stopService:self];
+    [self stopGather];
+}
+
+- (void)startGather {
+    [[BTKAction sharedInstance] startGather:self];
+}
+
+- (void)stopGather {
+    [[BTKAction sharedInstance] stopGather:self];
+}
+
+- (void)changeGatherAndPackIntervals:(NSUInteger)gatherInterval packInterval:(NSUInteger)packInterval {
+    [[BTKAction sharedInstance] changeGatherAndPackIntervals:gatherInterval packInterval:packInterval delegate:self];
+}
+
+
+
+#pragma mark - service轨迹服务 回调
+- (void)onStartService:(BTKServiceErrorCode)error {
+    NSLog(@"start service response: %lu", (unsigned long)error);
+}
+
+- (void)onStopService:(BTKServiceErrorCode)error {
+    NSLog(@"stop service response: %lu", (unsigned long)error);
+}
+
+- (void)onStartGather:(BTKGatherErrorCode)error {
+    NSLog(@"start gather response: %lu", (unsigned long)error);
+}
+
+- (void)onStopGather:(BTKGatherErrorCode)error {
+    NSLog(@"stop gather response: %lu", (unsigned long)error);
+}
+
+- (void)onChangeGatherAndPackIntervals:(BTKChangeIntervalErrorCode)error {
+    NSLog(@"change gather and pack intervals response: %lu", (unsigned long)error);
+}
+
+- (void)onGetPushMessage:(BTKPushMessage *)message {
+    NSLog(@"收到推送消息，消息类型: %@", @(message.type));
+    if (message.type == 0x03) {
+        BTKPushMessageFenceAlarmContent *content = (BTKPushMessageFenceAlarmContent *)message.content;
+        if (content.actionType == BTK_FENCE_MONITORED_OBJECT_ACTION_TYPE_ENTER) {
+            [[self class] registerNotificationWithContent:[NSString stringWithFormat:@"您已进入地理围栏 %@", content.fenceName]];
+            NSLog(@"被监控对象 %@ 进入服务端地理围栏 %@ ", content.monitoredObject, content.fenceName);
+        } else if (content.actionType == BTK_FENCE_MONITORED_OBJECT_ACTION_TYPE_EXIT) {
+            [[self class] registerNotificationWithContent:[NSString stringWithFormat:@"您已离开地理围栏 %@", content.fenceName]];
+            NSLog(@"被监控对象 %@ 离开 服务端地理围栏 %@ ", content.monitoredObject, content.fenceName);
         }
-        traceInstance = [[BTRACE alloc] initWithAk:BAIDU_AK mcode:[[NSBundle mainBundle] bundleIdentifier] serviceId:SERVICE_ID entityName:[entityName stringByReplacingOccurrencesOfString:@" " withString:@""] operationMode:2];
-        [traceInstance setInterval:GATHER_TIMEINTERVAL packInterval:PACK_TIMEINTERVAL];
-        [[LocationUploadManager shareManager] startTrace];
+    } else if (message.type == 0x04) {
+        BTKPushMessageFenceAlarmContent *content = (BTKPushMessageFenceAlarmContent *)message.content;
+        if (content.actionType == BTK_FENCE_MONITORED_OBJECT_ACTION_TYPE_ENTER) {
+            NSLog(@"被监控对象 %@ 进入 客户端地理围栏 %@ ", content.monitoredObject, content.fenceName);
+        } else if (content.actionType == BTK_FENCE_MONITORED_OBJECT_ACTION_TYPE_EXIT) {
+            NSLog(@"被监控对象 %@ 离开 客户端地理围栏 %@ ", content.monitoredObject, content.fenceName);
+        }
     }
 }
 
-//开始追踪轨迹
-- (void)startTrace {
-    [[BTRACEAction shared] startTrace:self trace:traceInstance];
+
+#pragma mark - API entity - 请求
+- (void)addEntity:(NSString *)entityName {
+    NSArray *columnArr = [entityName componentsSeparatedByString:@"_"];
+    NSDictionary *columnKey = @{@"city":@"上海"};
+    if (columnArr.count > 2) {
+        columnKey = @{@"user_name":columnArr[0], @"tel":columnArr[1]};
+    }
+    BTKAddEntityRequest *request = [[BTKAddEntityRequest alloc] initWithEntityName:@"entityA" entityDesc:[NSString stringWithFormat:@"实体%@", entityName] columnKey:columnKey serviceID:SERVICE_ID tag:31];
+    [[BTKEntityAction sharedInstance] addEntityWith:request delegate:self];
 }
 
-//结束追踪轨迹
-- (void)stopTrace {
-    [[BTRACEAction shared] stopTrace:self trace:traceInstance];
-    NSLog(@"停止上传位置信息");
+- (void)deleteEntity:(NSString *)entityName {
+    BTKDeleteEntityRequest *request = [[BTKDeleteEntityRequest alloc] initWithEntityName:entityName serviceID:SERVICE_ID tag:32];
+    [[BTKEntityAction sharedInstance] deleteEntityWith:request delegate:self];
 }
 
-#pragma mark -- ApplicationServiceDelegate
-
-//开始追踪调用的方法
-- (void)onStartTrace:(NSInteger)errNo errMsg:(NSString *)errMsg {
-    NSLog(@"errNo: %ld, errMsg: %@", (long)errNo, errMsg);
+- (void)updateEntity:(NSString *)entityName {
+    NSArray *columnArr = [entityName componentsSeparatedByString:@"_"];
+    NSDictionary *columnKey = @{@"city":@"上海"};
+    if (columnArr.count > 2) {
+        columnKey = @{@"user_name":columnArr[0], @"tel":columnArr[1]};
+    }
+    BTKUpdateEntityRequest *request = [[BTKUpdateEntityRequest alloc] initWithEntityName:@"entityA" entityDesc:[NSString stringWithFormat:@"实体%@", entityName] columnKey:columnKey serviceID:SERVICE_ID tag:33];
+    [[BTKEntityAction sharedInstance] updateEntityWith:request delegate:self];
 }
 
-//结束追踪调用的方法
-- (void)onStopTrace:(NSInteger)errNo errMsg:(NSString *)errMsg {
-    NSLog(@"errNo: %ld, errMsg: %@", (long)errNo, errMsg);
+- (void)queryEntityWithEntityNames:(NSArray *)entityNames {
+    BTKQueryEntityFilterOption *filter = [[BTKQueryEntityFilterOption alloc] init];
+    filter.entityNames = entityNames;
+    BTKQueryEntityRequest *request = [[BTKQueryEntityRequest alloc] initWithFilter:filter outputCoordType:BTK_COORDTYPE_BD09LL pageIndex:1 pageSize:100 serviceID:SERVICE_ID tag:34];
+    [[BTKEntityAction sharedInstance] queryEntityWith:request delegate:self];
 }
 
-//地理围栏通知
-- (void)onPushTrace:(uint8_t)msgType msgContent:(NSString *)msgContent {
-    [[self class] registerNotification:5 content:msgContent];
+#pragma mark - API entity - 回调
+- (void)onAddEntity:(NSData *)response {
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
+    NSLog(@"add entity response: %@", dict);
+}
+
+- (void)onDeleteEntity:(NSData *)response {
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
+    NSLog(@"delete entity response: %@", dict);
+}
+
+- (void)onUpdateEntity:(NSData *)response {
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
+    NSLog(@"update entity response: %@", dict);
+}
+
+- (void)onQueryEntity:(NSData *)response {
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
+    NSLog(@"query entity response: %@", dict);
 }
 
 //使用 UNNotification 本地通知
-+ (void)registerNotification:(NSInteger)alerTime content:(NSString *)contentDes {
++ (void)registerNotificationWithContent:(NSString *)contentDes {
     // 使用 UNUserNotificationCenter 来管理通知
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     
     //需创建一个包含待通知内容的 UNMutableNotificationContent 对象，注意不是 UNNotificationContent ,此对象为不可变对象。
     UNMutableNotificationContent *content = [UNMutableNotificationContent new];
-//    content.title = [NSString localizedUserNotificationStringForKey:@"您好!" arguments:nil];
+    //    content.title = [NSString localizedUserNotificationStringForKey:@"您好!" arguments:nil];
     content.body = [NSString localizedUserNotificationStringForKey:contentDes arguments:nil];
     content.sound = [UNNotificationSound defaultSound];
     
@@ -91,14 +172,5 @@ static BTRACE *traceInstance = NULL;
         }
     }];
 }
-
-//每次打包数据需要返回包信息的方法
-- (NSDictionary<NSString *,NSString *> *)trackAttr {
-//    NSLog(@"DATE:%@", [NSDate date]);
-    
-    return @{@"UUID":[[UIDevice currentDevice] identifierForVendor].UUIDString};
-}
-
-
 
 @end

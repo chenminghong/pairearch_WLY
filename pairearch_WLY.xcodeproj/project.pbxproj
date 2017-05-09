@@ -139,7 +139,6 @@
 		B3D3B2A91E66EA550033EF84 /* HomeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3D3B29E1E66EA550033EF84 /* HomeTableCell.xib */; };
 		B3D3B2AA1E66EA550033EF84 /* SaftyCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D3B2A01E66EA550033EF84 /* SaftyCheckCell.m */; };
 		B3D3B2AB1E66EA550033EF84 /* SaftyCheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3D3B2A11E66EA550033EF84 /* SaftyCheckCell.xib */; };
-		B3FE7FD51E973F9800652BB8 /* libUMOnlineConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3FE7FD31E973F9800652BB8 /* libUMOnlineConfig.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -394,8 +393,6 @@
 		B3D3B2A01E66EA550033EF84 /* SaftyCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaftyCheckCell.m; sourceTree = "<group>"; };
 		B3D3B2A11E66EA550033EF84 /* SaftyCheckCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaftyCheckCell.xib; sourceTree = "<group>"; };
 		B3F313FE1E52B672002DD95D /* Pairearch_WLY.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pairearch_WLY.pch; sourceTree = "<group>"; };
-		B3FE7FD31E973F9800652BB8 /* libUMOnlineConfig.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMOnlineConfig.a; sourceTree = "<group>"; };
-		B3FE7FD41E973F9800652BB8 /* UMOnlineConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMOnlineConfig.h; sourceTree = "<group>"; };
 		DA209D93E108EC9758676C90 /* Pods-pairearch_WLY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pairearch_WLY.release.xcconfig"; path = "Pods/Target Support Files/Pods-pairearch_WLY/Pods-pairearch_WLY.release.xcconfig"; sourceTree = "<group>"; };
 		E253EE02D936D5B70824B760 /* libPods-pairearch_WLY.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pairearch_WLY.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -407,7 +404,6 @@
 			files = (
 				76DA3C9EDAD9C136CDB7CBDB /* libPods-pairearch_WLY.a in Frameworks */,
 				B35D79361E666AB800ED730B /* MapKit.framework in Frameworks */,
-				B3FE7FD51E973F9800652BB8 /* libUMOnlineConfig.a in Frameworks */,
 				B35727931E556155003F9B2F /* BaiduTraceSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -908,7 +904,6 @@
 		B384109E1E5C3CFE00F7069F /* Vender */ = {
 			isa = PBXGroup;
 			children = (
-				B3FE7FD21E973F9800652BB8 /* UMOnlineConfig */,
 				B3CC54C31E6037D60072EA47 /* WQLPaoMaView */,
 				B3CC54BC1E6020090072EA47 /* AutoHeight */,
 				B3CC54B21E601C920072EA47 /* PaomaLabel */,
@@ -1085,15 +1080,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		B3FE7FD21E973F9800652BB8 /* UMOnlineConfig */ = {
-			isa = PBXGroup;
-			children = (
-				B3FE7FD31E973F9800652BB8 /* libUMOnlineConfig.a */,
-				B3FE7FD41E973F9800652BB8 /* UMOnlineConfig.h */,
-			);
-			path = UMOnlineConfig;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1108,6 +1094,7 @@
 				47867739503503674FEB4960 /* [CP] Embed Pods Frameworks */,
 				5D7044C1E871407E3B77497B /* [CP] Copy Pods Resources */,
 				B35727951E556155003F9B2F /* Embed Frameworks */,
+				0FBBD0AE1EC07D9D0022C25A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1201,6 +1188,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0FBBD0AE1EC07D9D0022C25A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone";
+		};
 		47867739503503674FEB4960 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

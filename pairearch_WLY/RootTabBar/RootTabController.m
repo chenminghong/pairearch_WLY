@@ -14,7 +14,7 @@
 #import "PersonalCenterViewController.h"
 #import "LoginViewController.h"
 
-@interface RootTabController ()<ApplicationServiceDelegate>
+@interface RootTabController ()
 
 @end
 

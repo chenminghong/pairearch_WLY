@@ -29,7 +29,7 @@
         [self setValuesForKeysWithDictionary:userInfo];
     }
     if (self.name && self.tel) {
-        [[LocationUploadManager shareManager] setEntityWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
+        [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
     }
 }
 

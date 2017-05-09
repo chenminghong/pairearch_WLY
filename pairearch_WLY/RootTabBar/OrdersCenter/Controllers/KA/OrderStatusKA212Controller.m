@@ -183,7 +183,7 @@
                     [weakself.navigationController popToRootViewControllerAnimated:YES];
                 }
             }];
-            [[LocationUploadManager shareManager] startTrace];
+            [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];;
         }
     } failure:^(NSError *error) {
         [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];

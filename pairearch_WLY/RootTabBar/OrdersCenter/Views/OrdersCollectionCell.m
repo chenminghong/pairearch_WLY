@@ -88,9 +88,9 @@
     _listModelArr = listModelArr;
     if (_indexPath.row == 1) {
         if (listModelArr.count <= 0) {
-            [[LocationUploadManager shareManager] stopTrace];
+            [[LocationUploadManager shareManager] stopService];
         } else {
-            [[LocationUploadManager shareManager] startTrace];
+            [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
         }
     }
 }

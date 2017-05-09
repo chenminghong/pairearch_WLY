@@ -193,7 +193,7 @@
         if (completeBlock) {
             completeBlock();
         }
-        [[LocationUploadManager shareManager] stopTrace];
+        [[LocationUploadManager shareManager] stopService];
     }];
 }
 
@@ -252,7 +252,7 @@
         [hud hide:YES];
         if (!error) {
             MBProgressHUD *hud = [MBProgressHUD bwm_showTitle:@"登录成功!" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL / 2.0];
-            [[LocationUploadManager shareManager] setEntityWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
+            [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
             [hud setCompletionBlock:^(){
                 [self hideLoginPage];
             }];

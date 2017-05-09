@@ -203,13 +203,13 @@
             HomePageModel *model = self.dataModelArr[0];
             if ([model.type isEqualToString:@"unabsorbed"]) {
                 self.headLabel.text = @"新单提示";
-                [[LocationUploadManager shareManager] stopTrace];
+                [[LocationUploadManager shareManager] stopService];
             } else if ([model.type isEqualToString:@"distribution"]) {
                 self.headLabel.text = @"装货在途";
-                [[LocationUploadManager shareManager] startTrace];
+                [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
             } else {
                 self.headLabel.text = @"";
-                [[LocationUploadManager shareManager] stopTrace];
+                [[LocationUploadManager shareManager] stopService];
             }
         } else {
             self.headLabel.text = @"";
