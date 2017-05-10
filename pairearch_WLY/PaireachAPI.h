@@ -13,11 +13,11 @@
 
 /*============================BaseUrl相关=============================*/
 //API前缀定义
-//#define PAIREACH_BASE_URL                @"http://192.168.1.14:8086/tts/client/"   //王敬刚
-//#define PAIREACH_BASE_URL                @"http://106.14.39.65:8285/itip/client/"  //线上
-//#define PAIREACH_BASE_URL                @"http://192.168.1.14:8086/itip/client/"  //备用
-//#define PAIREACH_BASE_URL                @"http://dt.paireach.com/itip/client/"   //双至域名
-#define PAIREACH_BASE_URL                @"http://139.219.188.45/itip/client/"   //双至IP
+//#define PAIREACH_BASE_URL                @"http://192.168.0.158:8086/itip/client/"    //Leo
+#define PAIREACH_BASE_URL                @"http://106.14.39.65:8285/itip/client/"     //测试线上
+//#define PAIREACH_BASE_URL                @"http://192.168.1.14:8086/itip/client/"     //备用
+//#define PAIREACH_BASE_URL                @"http://dt.paireach.com/itip/client/"       //双至域名
+//#define PAIREACH_BASE_URL                @"http://139.219.188.45/itip/client/"        //双至IP
 
 
 

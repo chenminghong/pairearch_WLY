@@ -132,23 +132,23 @@
 
 #pragma mark - API entity - 回调
 - (void)onAddEntity:(NSData *)response {
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
-    NSLog(@"add entity response: %@", dict);
+//    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
+//    NSLog(@"add entity response: %@", dict);
 }
 
 - (void)onDeleteEntity:(NSData *)response {
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
-    NSLog(@"delete entity response: %@", dict);
+//    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
+//    NSLog(@"delete entity response: %@", dict);
 }
 
 - (void)onUpdateEntity:(NSData *)response {
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
-    NSLog(@"update entity response: %@", dict);
+//    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
+//    NSLog(@"update entity response: %@", dict);
 }
 
 - (void)onQueryEntity:(NSData *)response {
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
-    NSLog(@"query entity response: %@", dict);
+//    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
+//    NSLog(@"query entity response: %@", dict);
 }
 
 //使用 UNNotification 本地通知

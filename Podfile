@@ -4,14 +4,14 @@ platform :ios, '7.0'
 
 target ‘pairearch_WLY’ do
 
-pod 'AFNetworking'
-pod 'MJRefresh'
+pod 'AFNetworking', '~> 3.1.0'
+pod 'MJRefresh', '~> 3.1.12'
 
-pod 'MBProgressHUD+BWMExtension'
+pod 'MBProgressHUD+BWMExtension', '~> 1.0.1'
 pod 'MBProgressHUD'
-pod 'Masonry'
-pod 'TZImagePickerController'
-pod 'SAMKeychain'
+pod 'Masonry', '~> 1.0.2'
+pod 'TZImagePickerController', '~> 1.7.8'
+pod 'SAMKeychain', '~> 1.5.2'
 
 #pod 'SDWebImage'
 #pod 'BaiduMobStat'
