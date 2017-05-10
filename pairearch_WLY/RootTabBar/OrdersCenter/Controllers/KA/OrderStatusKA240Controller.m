@@ -139,7 +139,7 @@
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
             NSString *msg = responseDict[@"msg"];
             NSInteger resultFlag = [responseDict[@"status"] integerValue];
-            [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL/2];
+            [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
             if (resultFlag == 1) {
                 model.SHPM_STATUS = @"241";
                 [weakself.tableView reloadData];
@@ -163,7 +163,7 @@
                 }
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL/2];
+            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         }];
     }];
     cell.detailModel = [self.dataListArr[indexPath.section] objectAtIndex:indexPath.row];

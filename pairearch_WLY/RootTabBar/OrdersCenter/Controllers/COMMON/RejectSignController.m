@@ -89,7 +89,7 @@
 - (IBAction)commitButtonAction:(id)sender {
     [self.view endEditing:YES];
     if (self.reasonTV.text.length <= 0) {
-        [ProgressHUD bwm_showTitle:@"请输入异常签收原因！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL / 2.0];
+        [ProgressHUD bwm_showTitle:@"请输入异常签收原因！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         return;
     }
     [NetworkHelper POST:ORDER_REJECT_GET_API parameters:self.paraDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {

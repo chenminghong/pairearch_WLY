@@ -251,7 +251,7 @@
     [LoginModel getDataWithParameters:paramDict endBlock:^(LoginModel *model, NSError *error) {
         [hud hide:YES];
         if (!error) {
-            MBProgressHUD *hud = [MBProgressHUD bwm_showTitle:@"登录成功!" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL / 2.0];
+            MBProgressHUD *hud = [MBProgressHUD bwm_showTitle:@"登录成功!" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
             [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
             [hud setCompletionBlock:^(){
                 [self hideLoginPage];

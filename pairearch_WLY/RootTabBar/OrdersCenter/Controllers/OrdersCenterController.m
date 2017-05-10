@@ -290,12 +290,12 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     OrdersCollectionCell *cell = [OrdersCollectionCell getCellWithCollectionView:collectionView indexPath:indexPath pushBlock:^(NSArray *selectModelArr, NSIndexPath *indexPath) {
         if (selectModelArr.count == 0) {
-            [MBProgressHUD bwm_showTitle:@"请选择要接收的运单！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL/2.0];
+            [MBProgressHUD bwm_showTitle:@"请选择要接收的运单！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         }
         if (selectModelArr.count > 1) {
             for (OrderListModel *model in selectModelArr) {
                 if (![model.TRANSPORT_CODE isEqualToString:ORDER_TYPE_KA]) {
-                    [MBProgressHUD bwm_showTitle:@"只有KA可以拼单！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL/2.0];
+                    [MBProgressHUD bwm_showTitle:@"只有KA可以拼单！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
                     return;
                 }
             }

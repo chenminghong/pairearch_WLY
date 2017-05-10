@@ -85,7 +85,7 @@
 #define BUTTON_COLOR  UIColorFromRGB(0x66543C)
 
 //HUD隐藏的时间间隔
-#define HUD_HIDE_TIMEINTERVAL  2.0
+#define HUD_HIDE_TIMEINTERVAL  1.0
 
 //屏幕宽高
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
