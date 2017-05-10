@@ -23,14 +23,14 @@
     [super viewWillAppear:animated];
         
     //页面开始
-    [[BaiduMobStat defaultStat] pageviewStartWithName:NSStringFromClass([self class])];
+//    [[BaiduMobStat defaultStat] pageviewStartWithName:NSStringFromClass([self class])];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
     //页面结束
-    [[BaiduMobStat defaultStat] pageviewEndWithName:NSStringFromClass([self class])];
+//    [[BaiduMobStat defaultStat] pageviewEndWithName:NSStringFromClass([self class])];
 }
 
 - (void)didReceiveMemoryWarning {
