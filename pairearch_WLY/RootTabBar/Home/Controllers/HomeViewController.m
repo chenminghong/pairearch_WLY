@@ -195,6 +195,8 @@
     [HomePageModel getDataWithParameters:@{@"driverTel":[LoginModel shareLoginModel].tel? [LoginModel shareLoginModel].tel:@""} endBlock:^(id model, NSError *error) {
         if (error) {
             [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            self.headLabel.text = error.userInfo[ERROR_MSG];
+            [MJRefreshUtil endRefresh:self.tableView];
             return;
         }
         self.dataModelArr = [NSMutableArray arrayWithArray:model];
@@ -212,8 +214,9 @@
                 [[LocationUploadManager shareManager] stopService];
             }
         } else {
-            self.headLabel.text = @"";
-            [MBProgressHUD bwm_showTitle:@"暂无订单！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            self.headLabel.text = @"暂无数据";
+            [MBProgressHUD bwm_showTitle:@"暂无数据" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            [[LocationUploadManager shareManager] stopService];
         }
         [MJRefreshUtil endRefresh:self.tableView];
     }];

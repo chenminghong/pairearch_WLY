@@ -25,8 +25,7 @@
             }
             endBlock(modelsArr, nil);
         } else {
-            NSError *error = [NSError errorWithDomain:PAIREACH_BASE_URL code:status userInfo:@{ERROR_MSG:msg}];
-            endBlock(nil, error);
+            endBlock([NSMutableArray array], nil);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         endBlock(nil, error);
