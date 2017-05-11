@@ -33,8 +33,9 @@
     //网络变化执行动作
     [self netWorkDidChangeAction];
     
-    //添加百度统计
-//    [self startBaiduMob];
+    //添加友盟统计
+    [self initUmengClick];
+//    [self getDeviceID];
     
     //版本更新
     [self checkAppVersion];
@@ -151,6 +152,33 @@
         }
     }];
 }
+
+/**
+ 初始化友盟统计SDK
+ */
+- (void)initUmengClick {
+    UMConfigInstance.appKey = UMENF_STATISTICS_APPKEY;
+    UMConfigInstance.channelId = @"App Store";
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+    [MobClick setLogEnabled:YES];
+    [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
+}
+
+//获取设备的DeviceID
+//- (void)getDeviceID {
+//    Class cls = NSClassFromString(@"UMANUtil");
+//    SEL deviceIDSelector = @selector(openUDIDString);
+//    NSString *deviceID = nil;
+//    if(cls && [cls respondsToSelector:deviceIDSelector]){
+//        deviceID = [cls performSelector:deviceIDSelector];
+//    }
+//    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:@{@"oid" : deviceID}
+//                                                       options:NSJSONWritingPrettyPrinted
+//                                                         error:nil];
+//    NSLog(@"%@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+//    
+//}
 
 //百度统计
 //- (void)startBaiduMob {

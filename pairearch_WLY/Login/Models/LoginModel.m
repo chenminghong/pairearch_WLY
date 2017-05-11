@@ -29,7 +29,14 @@
         [self setValuesForKeysWithDictionary:userInfo];
     }
     if (self.name && self.tel) {
-        [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
+        NSString *name = [NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel];
+        
+        //开启定位上传功能
+        [[LocationUploadManager shareManager] startServiceWithEntityName:name];
+        
+        //开启友盟账号登录
+        [[LocationUploadManager shareManager] startServiceWithEntityName:name];
+        [MobClick profileSignInWithPUID:name];
     }
 }
 

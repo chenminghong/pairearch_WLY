@@ -194,6 +194,9 @@
             completeBlock();
         }
         [[LocationUploadManager shareManager] stopService];
+        
+        //友盟账号退出登录
+        [MobClick profileSignOff];
     }];
 }
 
@@ -252,7 +255,14 @@
         [hud hide:YES];
         if (!error) {
             MBProgressHUD *hud = [MBProgressHUD bwm_showTitle:@"登录成功!" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-            [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
+            NSString *name = [NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel];
+            
+            //开启定位上传功能
+            [[LocationUploadManager shareManager] startServiceWithEntityName:name];
+            
+            //友盟统计账号登录
+            [MobClick profileSignInWithPUID:name];
+            
             [hud setCompletionBlock:^(){
                 [self hideLoginPage];
             }];
