@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="98"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="成" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7j-3D-2Dk">
@@ -29,20 +29,20 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="负载单号：TH1702100" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUd-jd-skb">
-                        <rect key="frame" x="65" y="17.5" width="235" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="负载单号：00000000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="22x-qF-jnY">
+                        <rect key="frame" x="65" y="20" width="227" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.93705266710000001" green="0.39020347599999999" blue="0.1872715056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货地址：上海吴泾**路**号" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSm-Se-syc">
-                        <rect key="frame" x="65" y="37.5" width="235" height="20"/>
+                        <rect key="frame" x="65" y="39" width="227" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.93705266710000001" green="0.39020347599999999" blue="0.1872715056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预约装货时间：2017-02-09   8:00-9:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRQ-tM-NHV">
-                        <rect key="frame" x="30" y="62.5" width="260" height="16"/>
+                        <rect key="frame" x="30" y="64" width="260" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -56,20 +56,19 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="dSm-Se-syc" firstAttribute="centerX" secondItem="hUd-jd-skb" secondAttribute="centerX" id="4WW-cD-HL7"/>
+                    <constraint firstItem="dSm-Se-syc" firstAttribute="leading" secondItem="22x-qF-jnY" secondAttribute="leading" id="4xZ-K8-eLY"/>
                     <constraint firstItem="KRQ-tM-NHV" firstAttribute="top" secondItem="dSm-Se-syc" secondAttribute="bottom" constant="5" id="5VS-W7-JSN"/>
-                    <constraint firstItem="dSm-Se-syc" firstAttribute="height" secondItem="hUd-jd-skb" secondAttribute="height" id="ABm-G9-ZiA"/>
                     <constraint firstItem="KRQ-tM-NHV" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="BSq-fr-tJc"/>
+                    <constraint firstItem="22x-qF-jnY" firstAttribute="leading" secondItem="q7j-3D-2Dk" secondAttribute="trailing" constant="10" id="CLD-DY-5sb"/>
                     <constraint firstItem="q7j-3D-2Dk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="I23-cR-Xyt"/>
                     <constraint firstItem="KRQ-tM-NHV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="PeQ-Lf-qGr"/>
-                    <constraint firstItem="q7j-3D-2Dk" firstAttribute="centerY" secondItem="hUd-jd-skb" secondAttribute="bottom" id="TT5-p4-QgI"/>
-                    <constraint firstItem="dSm-Se-syc" firstAttribute="width" secondItem="hUd-jd-skb" secondAttribute="width" id="VZE-sz-aNe"/>
-                    <constraint firstItem="hUd-jd-skb" firstAttribute="leading" secondItem="q7j-3D-2Dk" secondAttribute="trailing" constant="10" id="i1G-l3-89Q"/>
-                    <constraint firstItem="dSm-Se-syc" firstAttribute="top" secondItem="hUd-jd-skb" secondAttribute="bottom" id="iv1-im-8Sc"/>
+                    <constraint firstItem="dSm-Se-syc" firstAttribute="top" secondItem="22x-qF-jnY" secondAttribute="bottom" id="TsP-eT-w4l"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="22x-qF-jnY" secondAttribute="trailing" constant="20" id="mgg-fS-LtA"/>
                     <constraint firstItem="VEa-zm-STH" firstAttribute="leading" secondItem="q7j-3D-2Dk" secondAttribute="leading" id="oV6-wB-faN"/>
-                    <constraint firstAttribute="trailing" secondItem="hUd-jd-skb" secondAttribute="trailing" constant="20" id="okF-b3-gDW"/>
                     <constraint firstItem="VEa-zm-STH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="p97-3f-BB6"/>
                     <constraint firstItem="q7j-3D-2Dk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="pPa-DO-sA9"/>
+                    <constraint firstItem="dSm-Se-syc" firstAttribute="trailing" secondItem="22x-qF-jnY" secondAttribute="trailing" id="psA-pd-i01"/>
+                    <constraint firstItem="22x-qF-jnY" firstAttribute="top" secondItem="q7j-3D-2Dk" secondAttribute="top" id="rAY-J4-Ssm"/>
                 </constraints>
             </tableViewCellContentView>
             <constraints>
@@ -78,7 +77,7 @@
             <connections>
                 <outlet property="assortLabel" destination="q7j-3D-2Dk" id="r5C-xK-pOK"/>
                 <outlet property="loadAddressLabel" destination="dSm-Se-syc" id="uqb-t0-CEC"/>
-                <outlet property="loadNumberLabel" destination="hUd-jd-skb" id="zhr-Xt-S9Z"/>
+                <outlet property="loadNumberLabel" destination="22x-qF-jnY" id="sIB-G0-SH3"/>
                 <outlet property="reservationTimeLabel" destination="KRQ-tM-NHV" id="4Xo-rT-nQ5"/>
                 <outlet property="separatorView" destination="VEa-zm-STH" id="OiA-Xy-bDe"/>
             </connections>
