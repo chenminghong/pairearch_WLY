@@ -33,8 +33,8 @@
     
     self.heavierTonLabel.text = [NSString stringWithFormat:@"货物吨重：%@", detailModel.BW_WGT];
     self.signNumberLabel.text = [NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM];
-    self.signAddressLabel.text = [NSString stringWithFormat:@"%@", detailModel.TO_SHPG_ADDR];
-    self.contactPersonLabel.text = [NSString stringWithFormat:@"%@", detailModel.DRIVER_MOBILE];
+    self.signAddressLabel.text = [NSString stringWithFormat:@"收货地址：%@", detailModel.TO_SHPG_ADDR];
+    self.contactPersonLabel.text = [NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_MOBILE];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

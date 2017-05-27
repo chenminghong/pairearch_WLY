@@ -27,7 +27,7 @@
     _detailModel = detailModel;
     
     self.signNumberLabel.text = [NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM];
-    self.signAddressLabel.text = [NSString stringWithFormat:@"%@", detailModel.TO_SHPG_ADDR];
+    self.signAddressLabel.text = [NSString stringWithFormat:@"收货地址：%@", detailModel.TO_SHPG_ADDR];
     [self.checkButton setTitle:@"已签收" forState:UIControlStateNormal];
     self.checkButton.userInteractionEnabled = NO;
     self.checkButton.backgroundColor = ABNORMAL_THEME_COLOR;
