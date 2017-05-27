@@ -44,8 +44,8 @@
 - (void)setDetailModel:(OrderDetailModel *)detailModel {
     _detailModel = detailModel;
     self.orderCodeLabel.text = [NSString stringWithFormat:@"负载单号：%@", detailModel.ORDER_CODE];
-    self.fromLocNameLabel.text = [NSString stringWithFormat:@"发货方名称：%@", detailModel.FRM_SHPG_LOC_NAME];
-    self.fromLocAddLabel.text = [NSString stringWithFormat:@"发货方地址：%@", detailModel.FRM_SHPG_ADDR];
+    self.fromLocNameLabel.text = [NSString stringWithFormat:@"发货地名称：%@", detailModel.FRM_SHPG_LOC_NAME];
+    self.fromLocAddLabel.text = [NSString stringWithFormat:@"发货地址：%@", detailModel.FRM_SHPG_ADDR];
     self.reserveUpTimeLabel.text = [NSString stringWithFormat:@"预约装货时间：%@", detailModel.APPOINTMENT_START_TIME];
     self.contactNameLabel.text = [NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_NAME];
     self.contactNumberLabel.text = [NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_MOBILE];

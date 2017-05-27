@@ -61,7 +61,7 @@
 
 @property (nonatomic, copy) NSString *SOURCE_NAME;         //发货地名称
 
-@property (nonatomic, copy) NSString *SOURCE_ADDR;         //发货地地址
+@property (nonatomic, copy) NSString *SOURCE_ADDR;         //发货地址
 
 @property (nonatomic, copy) NSString *PLAN_DELIVER_TIME;   //预约发货时间
 

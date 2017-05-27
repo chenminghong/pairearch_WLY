@@ -162,6 +162,7 @@
                 checkVC.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:self.orderStatus orderType:self.orderType];
                 [weakself.navigationController pushViewController:checkVC animated:YES];
             }];
+            [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
         }
     } failure:^(NSError *error) {
         [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];

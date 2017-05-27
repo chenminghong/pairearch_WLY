@@ -111,6 +111,7 @@
 
 #pragma mark -- 按钮响应事件
 
+//接收运单按钮响应时间
 - (void)startTransportAction:(UIButton *)sender {
     NSString *driverTel = [LoginModel shareLoginModel].tel;
     BackDetailModel *model = self.dataListArr[0];
@@ -120,6 +121,7 @@
     [self networkWithUrlStr:ORDER_GETLOAD_API paraDict:paraDict];
 }
 
+//post操作
 - (void)networkWithUrlStr:(NSString *)urlStr paraDict:(NSDictionary *)paraDict {
     [NetworkHelper POST:urlStr parameters:paraDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSInteger status = [responseObject[@"status"] integerValue];
@@ -133,6 +135,7 @@
                 nestedVC.orderStatus = status;
                 [weakself.navigationController pushViewController:nestedVC animated:YES];
             }];
+            [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
         }
     } failure:^(NSError *error) {
         [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
