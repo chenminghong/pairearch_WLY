@@ -81,9 +81,6 @@
     
     //从后台到前台开始动画
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotificationAction) name:UIApplicationWillEnterForegroundNotification object:nil];
-    
-    //请求首页数据
-    [self getHomePageData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
