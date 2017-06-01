@@ -29,6 +29,7 @@
     //关于我来运
     UILabel *aboutWLY = [[UILabel alloc] init];
     aboutWLY.text = kAboutWLY;
+    aboutWLY.font = [UIFont boldSystemFontOfSize:18.0];
     [aboutWLY sizeToFit];
     [self.view addSubview:aboutWLY];
     [aboutWLY mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -41,7 +42,7 @@
     UILabel *aboutWLYContent = [[UILabel alloc] init];
     aboutWLYContent.text = kAboutWLYContent;
     aboutWLYContent.numberOfLines = 0;
-    aboutWLYContent.font = [UIFont systemFontOfSize:15];
+    aboutWLYContent.font = [UIFont systemFontOfSize:16];
     [aboutWLYContent sizeToFit];
     [self.view addSubview:aboutWLYContent];
     [aboutWLYContent mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -55,6 +56,7 @@
     //关于上海双至
     UILabel *aboutShangHaiPaireach = [[UILabel alloc] init];
     aboutShangHaiPaireach.text = kAboutShangHaiPaireach;
+    aboutShangHaiPaireach.font = [UIFont boldSystemFontOfSize:18.0];
     [aboutShangHaiPaireach sizeToFit];
     [self.view addSubview:aboutShangHaiPaireach];
     [aboutShangHaiPaireach mas_makeConstraints:^(MASConstraintMaker *make) {

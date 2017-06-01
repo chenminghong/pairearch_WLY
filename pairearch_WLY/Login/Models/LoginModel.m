@@ -35,7 +35,6 @@
         [[LocationUploadManager shareManager] startServiceWithEntityName:name];
         
         //开启友盟账号登录
-        [[LocationUploadManager shareManager] startServiceWithEntityName:name];
         [MobClick profileSignInWithPUID:name];
     }
 }
