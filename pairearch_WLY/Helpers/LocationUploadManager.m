@@ -30,6 +30,7 @@
 #pragma mark - service轨迹服务 请求
 
 - (void)startServiceWithEntityName:(NSString *)entityName {
+    self.latestEntityName = entityName;
     BTKStartServiceOption *op = [[BTKStartServiceOption alloc] initWithEntityName:entityName];
     [[BTKAction sharedInstance] startService:op delegate:self];
     [self startGather];
@@ -52,7 +53,10 @@
     [[BTKAction sharedInstance] changeGatherAndPackIntervals:gatherInterval packInterval:packInterval delegate:self];
 }
 
-
+- (void)queryTrackLatestPoint {
+    BTKQueryTrackLatestPointRequest *request = [[BTKQueryTrackLatestPointRequest alloc] initWithEntityName:self.latestEntityName processOption:nil outputCootdType:BTK_COORDTYPE_BD09LL serviceID:SERVICE_ID tag:100];
+    [[BTKTrackAction sharedInstance] queryTrackLatestPointWith:request delegate:self];
+}
 
 #pragma mark - service轨迹服务 回调
 - (void)onStartService:(BTKServiceErrorCode)error {
@@ -96,6 +100,10 @@
     }
 }
 
+- (void)onQueryTrackLatestPoint:(NSData *)response {
+    id responseObject = [NSJSONSerialization JSONObjectWithData:response options:0 error:nil];
+    NSLog(@"%@", responseObject);
+}
 
 #pragma mark - API entity - 请求
 - (void)addEntity:(NSString *)entityName {

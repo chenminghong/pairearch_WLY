@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F4C925E1EE0103400546AFF /* BidPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4C925A1EE0103400546AFF /* BidPickerView.m */; };
+		0F4C925F1EE0103400546AFF /* BidSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4C925C1EE0103400546AFF /* BidSelectView.m */; };
+		0F4C92601EE0103400546AFF /* BidSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F4C925D1EE0103400546AFF /* BidSelectView.xib */; };
+		0F4C92631EE0226900546AFF /* RejectReasonListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4C92621EE0226900546AFF /* RejectReasonListModel.m */; };
+		0F4C92671EE02E3A00546AFF /* RejectSignCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4C92651EE02E3A00546AFF /* RejectSignCell.m */; };
+		0F4C92681EE02E3A00546AFF /* RejectSignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F4C92661EE02E3A00546AFF /* RejectSignCell.xib */; };
 		0FE9632A1EB9B30200F916DD /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE963291EB9B30200F916DD /* ProgressHUD.m */; };
 		76DA3C9EDAD9C136CDB7CBDB /* libPods-pairearch_WLY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E253EE02D936D5B70824B760 /* libPods-pairearch_WLY.a */; };
 		B307BF471E7238E5005D7979 /* HomePageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B307BF461E7238E5005D7979 /* HomePageModel.m */; };
@@ -156,6 +162,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0F4C92591EE0103400546AFF /* BidPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidPickerView.h; sourceTree = "<group>"; };
+		0F4C925A1EE0103400546AFF /* BidPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidPickerView.m; sourceTree = "<group>"; };
+		0F4C925B1EE0103400546AFF /* BidSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidSelectView.h; sourceTree = "<group>"; };
+		0F4C925C1EE0103400546AFF /* BidSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidSelectView.m; sourceTree = "<group>"; };
+		0F4C925D1EE0103400546AFF /* BidSelectView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BidSelectView.xib; sourceTree = "<group>"; };
+		0F4C92611EE0226900546AFF /* RejectReasonListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RejectReasonListModel.h; sourceTree = "<group>"; };
+		0F4C92621EE0226900546AFF /* RejectReasonListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RejectReasonListModel.m; sourceTree = "<group>"; };
+		0F4C92641EE02E3A00546AFF /* RejectSignCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RejectSignCell.h; sourceTree = "<group>"; };
+		0F4C92651EE02E3A00546AFF /* RejectSignCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RejectSignCell.m; sourceTree = "<group>"; };
+		0F4C92661EE02E3A00546AFF /* RejectSignCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RejectSignCell.xib; sourceTree = "<group>"; };
 		0FE963281EB9B30200F916DD /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
 		0FE963291EB9B30200F916DD /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		4B0612EA886C1F63FFF37775 /* Pods-pairearch_WLY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pairearch_WLY.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pairearch_WLY/Pods-pairearch_WLY.debug.xcconfig"; sourceTree = "<group>"; };
@@ -866,6 +882,14 @@
 				B37CB2631E6FF08400A1463F /* StartTransportFooterView.h */,
 				B37CB2641E6FF08400A1463F /* StartTransportFooterView.m */,
 				B37CB2651E6FF08400A1463F /* StartTransportFooterView.xib */,
+				0F4C92591EE0103400546AFF /* BidPickerView.h */,
+				0F4C925A1EE0103400546AFF /* BidPickerView.m */,
+				0F4C925B1EE0103400546AFF /* BidSelectView.h */,
+				0F4C925C1EE0103400546AFF /* BidSelectView.m */,
+				0F4C925D1EE0103400546AFF /* BidSelectView.xib */,
+				0F4C92641EE02E3A00546AFF /* RejectSignCell.h */,
+				0F4C92651EE02E3A00546AFF /* RejectSignCell.m */,
+				0F4C92661EE02E3A00546AFF /* RejectSignCell.xib */,
 			);
 			path = KA;
 			sourceTree = "<group>";
@@ -897,6 +921,8 @@
 				B37CB2761E6FF0F100A1463F /* EvaluationTableModel.m */,
 				B37CB2771E6FF0F100A1463F /* OrderDetailModel.h */,
 				B37CB2781E6FF0F100A1463F /* OrderDetailModel.m */,
+				0F4C92611EE0226900546AFF /* RejectReasonListModel.h */,
+				0F4C92621EE0226900546AFF /* RejectReasonListModel.m */,
 			);
 			path = KA;
 			sourceTree = "<group>";
@@ -1157,6 +1183,7 @@
 				B381DAE51E77DB8B00D752C1 /* CommonPickerView.xib in Resources */,
 				B3D3B2AB1E66EA550033EF84 /* SaftyCheckCell.xib in Resources */,
 				B307BF951E777F3B005D7979 /* RejectSignController.storyboard in Resources */,
+				0F4C92601EE0103400546AFF /* BidSelectView.xib in Resources */,
 				B37BA6D01E80FA29001A74B8 /* AbnormalReportCell.xib in Resources */,
 				B357276E1E543268003F9B2F /* OrdersCenterController.storyboard in Resources */,
 				B307BF901E767DE3005D7979 /* CommonNomalSignCell.xib in Resources */,
@@ -1181,6 +1208,7 @@
 				B37CB26F1E6FF08400A1463F /* OrderDetailHeaderView.xib in Resources */,
 				B307BF9A1E77826A005D7979 /* HaveBackOrderCell.xib in Resources */,
 				B384108D1E5BD9CA00F7069F /* ListTableCell.xib in Resources */,
+				0F4C92681EE02E3A00546AFF /* RejectSignCell.xib in Resources */,
 				B32228E41E52A2C300ED50ED /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1267,6 +1295,7 @@
 				B384111B1E5D886000F7069F /* LoginViewController.m in Sources */,
 				B381DAE11E77DB6500D752C1 /* CommonPickerView.m in Sources */,
 				B37CB2A91E7032B400A1463F /* OrderStatusBACK226Controller.m in Sources */,
+				0F4C925E1EE0103400546AFF /* BidPickerView.m in Sources */,
 				B38411101E5D875700F7069F /* FuctionUtil.m in Sources */,
 				B356DC011E63CD5100FCDB33 /* OrderListModel.m in Sources */,
 				B37CB2AD1E7032B400A1463F /* OrderStatusBACK240Controller.m in Sources */,
@@ -1290,6 +1319,7 @@
 				B37BA6CF1E80FA29001A74B8 /* AbnormalReportCell.m in Sources */,
 				B37CB2461E6FEFCC00A1463F /* OrderStatusKA212Controller.m in Sources */,
 				B38410FB1E5D875700F7069F /* FileHelper.m in Sources */,
+				0F4C92631EE0226900546AFF /* RejectReasonListModel.m in Sources */,
 				B307BF7C1E72A07F005D7979 /* DetailCommonModel.m in Sources */,
 				B307BF561E72848C005D7979 /* OrderStatusCOMMON226Controller.m in Sources */,
 				B384110D1E5D875700F7069F /* AlertInfoUtil.m in Sources */,
@@ -1326,6 +1356,7 @@
 				B37CB27A1E6FF0F100A1463F /* OrderDetailModel.m in Sources */,
 				B3D3B2A71E66EA550033EF84 /* SafetyCheckModel.m in Sources */,
 				0FE9632A1EB9B30200F916DD /* ProgressHUD.m in Sources */,
+				0F4C925F1EE0103400546AFF /* BidSelectView.m in Sources */,
 				B37CB2481E6FEFCC00A1463F /* OrderStatusKA226Controller.m in Sources */,
 				B3D3B2A21E66EA550033EF84 /* HomeViewController.m in Sources */,
 				B37CB1F71E6958DB00A1463F /* OrderStatusManager.m in Sources */,
@@ -1335,6 +1366,7 @@
 				B38410881E5BD4F400F7069F /* OrdersCollectionCell.m in Sources */,
 				B38411311E5E830400F7069F /* CancelLoginTableViewCell.m in Sources */,
 				B38411321E5E830400F7069F /* FeedbackIdeaTableViewCell.m in Sources */,
+				0F4C92671EE02E3A00546AFF /* RejectSignCell.m in Sources */,
 				B3A4A3CD1E70ECE1001C551B /* BackListDetailCell.m in Sources */,
 				B357277A1E5435AE003F9B2F /* MyLocationManager.m in Sources */,
 				B37CB2AC1E7032B400A1463F /* OrderStatusBACK238Controller.m in Sources */,

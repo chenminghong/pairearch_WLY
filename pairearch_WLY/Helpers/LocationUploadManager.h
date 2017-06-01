@@ -12,6 +12,8 @@
 
 @interface LocationUploadManager : NSObject<BTKTraceDelegate, BTKFenceDelegate, BTKTrackDelegate, BTKEntityDelegate>
 
+@property (nonatomic, copy) NSString *latestEntityName;
+
 
 /**
  初始化定位上传助手对象

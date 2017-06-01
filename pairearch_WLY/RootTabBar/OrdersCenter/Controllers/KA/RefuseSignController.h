@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSDictionary *paraDict;  //参数
 
+@property (nonatomic, copy) NSString *loadNumber;
+
 @end

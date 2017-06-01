@@ -59,7 +59,6 @@
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         _collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-        [self.view addSubview:_collectionView];
         [_collectionView registerClass:[TZTestCell class] forCellWithReuseIdentifier:@"TZTestCell"];
     }
     return _collectionView;
