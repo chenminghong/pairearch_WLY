@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) NSArray *dataListArr;   //数据源
 
+@property (nonatomic, strong) id selectModel;   //选中的数据模型
+
 //初始化
 + (RejectSignCell *)getCellWithTable:(UITableView *)table;
 

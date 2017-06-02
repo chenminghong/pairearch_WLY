@@ -89,6 +89,48 @@
     return status;
 }
 
+
+#pragma mark -- 接口参数统一添加经纬度坐标
+
+- (NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(id)parameters progress:(void (^)(NSProgress * _Nonnull))downloadProgress success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure {
+    
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    NSString *latitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.latitude];
+    NSString *longitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.longitude];
+    
+    [paraDict setObject:latitude forKey:@"lat"];
+    [paraDict setObject:longitude forKey:@"lng"];
+    
+    return [super GET:URLString parameters:paraDict progress:downloadProgress success:success failure:failure];
+}
+
+- (NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(id)parameters progress:(void (^)(NSProgress * _Nonnull))uploadProgress success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure {
+    
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    NSString *latitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.latitude];
+    NSString *longitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.longitude];
+    
+    [paraDict setObject:latitude forKey:@"lat"];
+    [paraDict setObject:longitude forKey:@"lng"];
+    
+    return [super POST:URLString parameters:paraDict progress:uploadProgress success:success failure:failure];
+}
+
+- (NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(id)parameters constructingBodyWithBlock:(void (^)(id<AFMultipartFormData> _Nonnull))block progress:(void (^)(NSProgress * _Nonnull))uploadProgress success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure {
+    
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    NSString *latitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.latitude];
+    NSString *longitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.longitude];
+    
+    [paraDict setObject:latitude forKey:@"lat"];
+    [paraDict setObject:longitude forKey:@"lng"];
+    
+    return [super POST:URLString parameters:paraDict constructingBodyWithBlock:block progress:uploadProgress success:success failure:failure];
+}
+
+
+#pragma mark -- 封装网络请求接口供网路请求调用
+
 + (NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(id)parameters progress:(void (^)(NSProgress *))progress success:(void (^)(NSURLSessionDataTask *task, MBProgressHUD *hud, id responseObject))success failure:(void (^)(NSError *))failure {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     __weak MBProgressHUD *hud = [MBProgressHUD bwm_showHUDAddedTo:window title:kBWMMBProgressHUDMsgLoading animated:YES];

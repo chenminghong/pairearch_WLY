@@ -11,6 +11,7 @@
 #define GATHER_TIMEINTERVAL  30.0    //位置信息采集周期
 #define PACK_TIMEINTERVAL    60.0    //位置信息上传周期
 
+
 @implementation LocationUploadManager
 
 //初始化
@@ -27,6 +28,45 @@
     return sharedManager;
 }
 
+- (CLLocationManager *)manager {
+    if (!_manager) {
+        self.manager = [CLLocationManager new];
+        self.manager.delegate = self;
+        [self.manager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+        self.manager.pausesLocationUpdatesAutomatically = NO;
+        self.manager.allowsBackgroundLocationUpdates = YES;
+        if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+            /** 后台定位 */
+            [self.manager requestAlwaysAuthorization];
+        }
+        
+        if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
+            /** iOS9新特性：将允许出现这种场景：同一app中多个location manager：一些只能在前台定位，另一些可在后台定位（并可随时禁止其后台定位）。 */
+            [self.manager setAllowsBackgroundLocationUpdates:YES];
+        }
+    }
+    return _manager;
+}
+
+/**
+ 位置更新提示
+ 
+ @param manager 定位助手类
+ @param locations 存储定位的位置信息
+ */
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    CLLocation *newLocation = [locations lastObject];
+    self.latestLocation = newLocation;
+    NSLog(@"经度：%f,纬度：%f,海拔：%f,航向：%f,行走速度：%f", self.latestLocation.coordinate.longitude, self.latestLocation.coordinate.latitude, self.latestLocation.altitude, self.latestLocation.course, self.latestLocation.speed);
+}
+
+
+- (CLLocation *)latestLocation {
+    CLLocationCoordinate2D coordinate = [DYLocationConverter bd09FromWgs84:_latestLocation.coordinate];
+    return [[CLLocation alloc] initWithCoordinate:coordinate altitude:_latestLocation.altitude horizontalAccuracy:_latestLocation.horizontalAccuracy verticalAccuracy:_latestLocation.verticalAccuracy course:_latestLocation.course speed:_latestLocation.speed timestamp:_latestLocation.timestamp];
+}
+
+
 #pragma mark - service轨迹服务 请求
 
 - (void)startServiceWithEntityName:(NSString *)entityName {
@@ -34,11 +74,13 @@
     BTKStartServiceOption *op = [[BTKStartServiceOption alloc] initWithEntityName:entityName];
     [[BTKAction sharedInstance] startService:op delegate:self];
     [self startGather];
+    [self.manager startUpdatingLocation];
 }
 
 - (void)stopService {
     [[BTKAction sharedInstance] stopService:self];
     [self stopGather];
+    [self.manager stopUpdatingLocation];
 }
 
 - (void)startGather {
@@ -180,5 +222,7 @@
         }
     }];
 }
+
+
 
 @end

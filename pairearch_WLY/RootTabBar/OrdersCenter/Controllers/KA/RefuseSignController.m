@@ -58,7 +58,6 @@
     
     //获取异常列表数据
     [self getReasonList];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -74,6 +73,16 @@
     commitButton.frame = CGRectMake(kScreenWidth - 100, 0, 50, 44);
     UIBarButtonItem *commitItem = [[UIBarButtonItem alloc] initWithCustomView:commitButton];
     self.navigationItem.rightBarButtonItem = commitItem;
+    
+    self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction)];
+}
+
+- (void)popBackAction {
+    if (self.isBackRoot) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 
@@ -89,7 +98,27 @@
 
 //提交按钮事件
 - (void)commitButtonAction:(UIButton *)sender {
-    [NetworkHelper POST:ORDER_REJECT_GET_API parameters:self.paraDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.view endEditing:YES];
+    RejectSignCell *cell = (RejectSignCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    RejectReasonListModel *model = cell.selectModel;
+    NSString *orderCode = [NSString stringWithFormat:@"%@", self.paraDict[@"orderCode"]];
+    NSString *orderNum = [NSString stringWithFormat:@"%@", self.paraDict[@"shpmNum"]];
+    NSDictionary *paraDict = @{@"orderCode":orderCode,
+                               @"orderNum":orderNum,
+                               @"driverName":[LoginModel shareLoginModel].name,
+                               @"driverTel":[LoginModel shareLoginModel].tel,
+                               @"remark":cell.reasonTV.text,
+                               @"productCode":@"",
+                               @"productName":@"",
+                               @"abnormalNum":@"",
+                               @"lxCode":self.lxCode,
+                               @"dictCode":model.reasonId.length? model.reasonId:@"",
+                               @"dictName":model.name.length? model.name:@""};
+    [NetworkHelper POST:ORDER_REJECT_GET_API parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        for (NSInteger i = 0; i < _selectedPhotos.count; i++) {
+            [formData appendPartWithFileData:UIImageJPEGRepresentation(_selectedPhotos[i], 0.5) name:@"file" fileName:[NSString stringWithFormat:@"abnormal_upload%ld.jpg", (long)i] mimeType:@"image/jpeg"];
+        }
+    } progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSString *msg = responseObject[@"msg"];
         NSInteger resultFlag = [responseObject[@"status"] integerValue];
         MBProgressHUD *hud = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
@@ -130,7 +159,7 @@
     if (!_imagePickerVc) {
         _imagePickerVc = [[UIImagePickerController alloc] init];
         _imagePickerVc.delegate = self;
-        // set appearance / 改变相册选择页的导航栏外观
+        // set appearance 改变相册选择页的导航栏外观
         _imagePickerVc.navigationBar.barTintColor = self.navigationController.navigationBar.barTintColor;
         _imagePickerVc.navigationBar.tintColor = self.navigationController.navigationBar.tintColor;
         UIBarButtonItem *tzBarItem, *BarItem;
@@ -386,6 +415,7 @@
     imagePickerVc.allowPickingGif = NO;
     imagePickerVc.allowPickingVideo = NO;
     imagePickerVc.allowCrop = NO;
+    imagePickerVc.isSelectOriginalPhoto = NO;  //返回缩略图
     [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
 

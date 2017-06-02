@@ -135,7 +135,7 @@
     __weak typeof(self) weakself = self;
     AbnormalSignCell *cell = [AbnormalSignCell getCellWithTable:tableView indexPath:indexPath abnormalBlock:^(OrderDetailModel *model, UIButton *sender) {
         NSDictionary *paraDict = @{@"orderCode":model.ORDER_CODE, @"shpmNum":model.SHPM_NUM};
-        [[NetworkHelper shareClient] POST:ORDER_REJECT_GET_API parameters:paraDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [[NetworkHelper shareClient] POST:KA_ABNORMAL_SIGN_API parameters:paraDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
             NSString *msg = responseDict[@"msg"];
             NSInteger resultFlag = [responseDict[@"status"] integerValue];

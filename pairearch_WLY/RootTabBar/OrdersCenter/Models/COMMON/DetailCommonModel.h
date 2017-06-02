@@ -32,7 +32,7 @@
 
 //交货
 
-@property (nonatomic, copy) NSString *BW_WGT;              //总重量
+@property (nonatomic, copy) NSString *BW_WGT;                   //总重量
 
 @property (nonatomic, copy) NSString *SHPM_NUM;                  //交货单
 

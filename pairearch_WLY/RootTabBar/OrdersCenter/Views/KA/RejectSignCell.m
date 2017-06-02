@@ -52,6 +52,14 @@
     return _placeHoldLabel;
 }
 
+- (void)setDataListArr:(NSArray *)dataListArr {
+    _dataListArr = dataListArr;
+    if (dataListArr.count > 0) {
+        self.selectModel = dataListArr[0];
+        self.selectTf.text = [dataListArr[0] valueForKey:@"name"];
+    }
+}
+
 #pragma mark -- UITextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
@@ -64,8 +72,10 @@
         [ProgressHUD bwm_showTitle:@"暂无可选数据" toView:self hideAfter:HUD_HIDE_TIMEINTERVAL];
         return NO;
     }
+    __weak typeof(self) weakSelf;
     [BidPickerView showSelectViewWithTitle:@"请选择原因" dataArr:self.dataListArr selectBlock:^(id model) {
-        self.selectTf.text = [model valueForKey:@"name"];
+        weakSelf.selectModel = model;
+        weakSelf.selectTf.text = [model valueForKey:@"name"];
     }];
     return NO;
 }

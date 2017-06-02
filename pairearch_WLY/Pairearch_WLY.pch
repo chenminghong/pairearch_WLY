@@ -23,6 +23,7 @@
 //#import <BaiduMobStat.h>
 #import <UMMobClick/MobClick.h>
 #import <SAMKeychain.h>
+#import <DYLocationConverter.h>
 
 
 //自定义头文件

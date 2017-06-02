@@ -9,10 +9,15 @@
 #import <Foundation/Foundation.h>
 
 #import "BaiduTraceSDK/BaiduTraceSDK.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface LocationUploadManager : NSObject<BTKTraceDelegate, BTKFenceDelegate, BTKTrackDelegate, BTKEntityDelegate>
+@interface LocationUploadManager : NSObject<BTKTraceDelegate, BTKFenceDelegate, BTKTrackDelegate, BTKEntityDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, copy) NSString *latestEntityName;
+
+@property (nonatomic, strong) CLLocationManager *manager;  //定位助手
+
+@property (nonatomic, strong) CLLocation *latestLocation;  //存储最新的位置信息
 
 
 /**
