@@ -171,7 +171,7 @@
         }
     }];
     refuseVC.paraDict = paraDict;
-    refuseVC.lxCode = ABNORMAL_TYPE_YCQS;
+    refuseVC.lxCode = ABNORMAL_CODE_262;
     refuseVC.isBackRoot = NO;
     return;
     

@@ -115,9 +115,9 @@
 
 
 //异常签收类型编码
-#define ABNORMAL_TYPE_JJQS           @"JJQS"   //拒绝签收
-#define ABNORMAL_TYPE_YCQS           @"YCQS"   //异常签收
-#define ABNORMAL_TYPE_YCTL           @"YCTL"   //异常停留
+#define ABNORMAL_CODE_261           261   //拒绝签收
+#define ABNORMAL_CODE_262           262   //异常签收
+#define ABNORMAL_CODE_263           263   //异常停留
 
 
 

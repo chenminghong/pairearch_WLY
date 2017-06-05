@@ -76,12 +76,12 @@
     
     self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction)];
     
-    if ([self.lxCode isEqualToString:ABNORMAL_TYPE_JJQS]) {
+    if (self.lxCode == ABNORMAL_CODE_261) {
         self.title = @"拒绝签收";
-    } else if ([self.lxCode isEqualToString:ABNORMAL_TYPE_YCQS]) {
+    } else if (self.lxCode == ABNORMAL_CODE_262) {
         self.title = @"异常签收";
     } else {
-        self.title = @"延迟签收";
+        self.title = @"异常停留";
     }
 }
 
@@ -127,7 +127,7 @@
                                @"productCode":@"",
                                @"productName":@"",
                                @"abnormalNum":@"",
-                               @"status":self.lxCode,
+                               @"status":@(self.lxCode),
                                @"dictCode":model.reasonId.length? model.reasonId:@"",
                                @"dictName":model.name.length? model.name:@""};
     NSLog(@"paraDict:%@", paraDict);
@@ -142,7 +142,7 @@
         MBProgressHUD *hud = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         if (resultFlag == 1) {
             [hud setCompletionBlock:^(){
-                if ([weakself.lxCode isEqualToString:ABNORMAL_TYPE_YCQS]) {
+                if (weakself.lxCode == ABNORMAL_CODE_262) {
                     [weakself.navigationController popViewControllerAnimated:YES];
                     if (weakself.signResultBlock) {
                         weakself.signResultBlock(@{@"flag":@(resultFlag)});
