@@ -14,8 +14,8 @@
 /*============================BaseUrl相关=============================*/
 //API前缀定义
 //#define PAIREACH_BASE_URL                @"http://192.168.0.158:8086/itip/client/"    //Leo
-//#define PAIREACH_BASE_URL                @"http://192.168.0.121:8086/itip/client/"    //Bob
-#define PAIREACH_BASE_URL                @"http://106.14.39.65:8285/itip/client/"     //测试线上
+#define PAIREACH_BASE_URL                @"http://192.168.0.121:8086/itip/client/"    //Bob
+//#define PAIREACH_BASE_URL                @"http://106.14.39.65:8285/itip/client/"     //测试线上
 //#define PAIREACH_BASE_URL                @"http://192.168.1.14:8086/itip/client/"     //备用
 //#define PAIREACH_BASE_URL                @"http://dt.paireach.com/itip/client/"       //双至域名
 //#define PAIREACH_BASE_URL                @"http://139.219.188.45/itip/client/"        //双至IP
@@ -115,9 +115,9 @@
 
 
 //异常签收类型编码
-#define ANBORMAL_JJQS           @"JJQS"   //拒绝签收
-#define ANBORMAL_YCQS           @"YCQS"   //异常签收
-#define ANBORMAL_YCTL           @"YCTL"   //异常停留
+#define ABNORMAL_TYPE_JJQS           @"JJQS"   //拒绝签收
+#define ABNORMAL_TYPE_YCQS           @"YCQS"   //异常签收
+#define ABNORMAL_TYPE_YCTL           @"YCTL"   //异常停留
 
 
 

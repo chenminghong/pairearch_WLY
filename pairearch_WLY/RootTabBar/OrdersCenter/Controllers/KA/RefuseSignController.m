@@ -75,6 +75,22 @@
     self.navigationItem.rightBarButtonItem = commitItem;
     
     self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction)];
+    
+    if ([self.lxCode isEqualToString:ABNORMAL_TYPE_JJQS]) {
+        self.title = @"拒绝签收";
+    } else if ([self.lxCode isEqualToString:ABNORMAL_TYPE_YCQS]) {
+        self.title = @"异常签收";
+    } else {
+        self.title = @"延迟签收";
+    }
+}
+
++ (RefuseSignController *)pushToRefuseSignWithController:(UIViewController *)controller signResultBlock:(RefuseSignBlock)signResultBlock {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"RefuseSignController" bundle:[NSBundle mainBundle]];
+    RefuseSignController *refuseVC = [sb instantiateViewControllerWithIdentifier:@"RefuseSignController"];
+    [controller.navigationController pushViewController:refuseVC animated:YES];
+    refuseVC.signResultBlock = signResultBlock;
+    return refuseVC;
 }
 
 - (void)popBackAction {
@@ -111,21 +127,29 @@
                                @"productCode":@"",
                                @"productName":@"",
                                @"abnormalNum":@"",
-                               @"lxCode":self.lxCode,
+                               @"status":self.lxCode,
                                @"dictCode":model.reasonId.length? model.reasonId:@"",
                                @"dictName":model.name.length? model.name:@""};
+    NSLog(@"paraDict:%@", paraDict);
+    __weak typeof(self) weakself = self;
     [NetworkHelper POST:ORDER_REJECT_GET_API parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         for (NSInteger i = 0; i < _selectedPhotos.count; i++) {
             [formData appendPartWithFileData:UIImageJPEGRepresentation(_selectedPhotos[i], 0.5) name:@"file" fileName:[NSString stringWithFormat:@"abnormal_upload%ld.jpg", (long)i] mimeType:@"image/jpeg"];
         }
     } progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSString *msg = responseObject[@"msg"];
-        NSInteger resultFlag = [responseObject[@"status"] integerValue];
+        __block NSInteger resultFlag = [responseObject[@"status"] integerValue];
         MBProgressHUD *hud = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         if (resultFlag == 1) {
-            __weak typeof(self) weakself = self;
             [hud setCompletionBlock:^(){
-                [weakself.navigationController popToRootViewControllerAnimated:YES];
+                if ([weakself.lxCode isEqualToString:ABNORMAL_TYPE_YCQS]) {
+                    [weakself.navigationController popViewControllerAnimated:YES];
+                    if (weakself.signResultBlock) {
+                        weakself.signResultBlock(@{@"flag":@(resultFlag)});
+                    }
+                } else {
+                    [weakself.navigationController popToRootViewControllerAnimated:YES];
+                }
             }];
         }
     } failure:^(NSError *error) {
@@ -407,15 +431,19 @@
 - (void)pushImagePickerController {
     TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:MAX_IMAGE_COUNT columnNumber:4 delegate:self pushPhotoPickerVc:YES];
     imagePickerVc.selectedAssets = _selectedAssets; // 目前已经选中的图片数组
+    [imagePickerVc.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0x666666), NSFontAttributeName:[UIFont systemFontOfSize:18.0]}];
     imagePickerVc.navigationBar.barTintColor = TOP_BOTTOMBAR_COLOR;
+    imagePickerVc.navigationBar.tintColor = UIColorFromRGB(0x666666);
     imagePickerVc.barItemTextFont = [UIFont systemFontOfSize:16.0];
+    imagePickerVc.barItemTextColor = UIColorFromRGB(0x666666);
+    imagePickerVc.navigationBar.barTintColor = TOP_BOTTOMBAR_COLOR;
     imagePickerVc.showSelectBtn = YES;
     imagePickerVc.allowTakePicture = NO;
     imagePickerVc.alwaysEnableDoneBtn = YES;
     imagePickerVc.allowPickingGif = NO;
     imagePickerVc.allowPickingVideo = NO;
     imagePickerVc.allowCrop = NO;
-    imagePickerVc.isSelectOriginalPhoto = NO;  //返回缩略图
+    imagePickerVc.isSelectOriginalPhoto = NO;  //返回原图图
     [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
 

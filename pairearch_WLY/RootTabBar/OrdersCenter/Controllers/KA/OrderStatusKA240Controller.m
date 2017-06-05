@@ -16,6 +16,8 @@
 #import "NestedSelectStateController.h"
 #import "RefuseSignController.h"
 #import "OrderStatusKA245Controller.h"
+#import "RefuseSignController.h"
+
 
 @interface OrderStatusKA240Controller ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -134,40 +136,78 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     __weak typeof(self) weakself = self;
     AbnormalSignCell *cell = [AbnormalSignCell getCellWithTable:tableView indexPath:indexPath abnormalBlock:^(OrderDetailModel *model, UIButton *sender) {
-        NSDictionary *paraDict = @{@"orderCode":model.ORDER_CODE, @"shpmNum":model.SHPM_NUM};
-        [[NetworkHelper shareClient] POST:KA_ABNORMAL_SIGN_API parameters:paraDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-            NSString *msg = responseDict[@"msg"];
-            NSInteger resultFlag = [responseDict[@"status"] integerValue];
-            [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-            if (resultFlag == 1) {
-                model.SHPM_STATUS = @"241";
-                [weakself.tableView reloadData];
-                
-                //判断是否全部异常签收
-                BOOL allAbnormalFlag = YES;
-                for (NSArray *modelArr in weakself.dataListArr) {
-                    for (OrderDetailModel *tempModel in modelArr) {
-                        if ([tempModel.SHPM_STATUS integerValue] != 241) {
-                            allAbnormalFlag = NO;
-                            break;
-                        }
+        [weakself abnormalSignActionWithModel:model];
+    }];
+    cell.detailModel = [weakself.dataListArr[indexPath.section] objectAtIndex:indexPath.row];
+    return cell;
+}
+
+- (void)abnormalSignActionWithModel:(OrderDetailModel *)model {
+    NSDictionary *paraDict = @{@"orderCode":model.ORDER_CODE, @"shpmNum":model.SHPM_NUM};
+    __weak typeof(self) weakself = self;
+    RefuseSignController *refuseVC = [RefuseSignController pushToRefuseSignWithController:self signResultBlock:^(NSDictionary *signResult) {
+        NSInteger resultFlag = [signResult[@"flag"] integerValue];
+        if (resultFlag == 1) {
+            model.SHPM_STATUS = @"241";
+            [weakself.tableView reloadData];
+            
+            //判断是否全部异常签收
+            BOOL allAbnormalFlag = YES;
+            for (NSArray *modelArr in weakself.dataListArr) {
+                for (OrderDetailModel *tempModel in modelArr) {
+                    if ([tempModel.SHPM_STATUS integerValue] != 241) {
+                        allAbnormalFlag = NO;
+                        break;
                     }
                 }
-                if (allAbnormalFlag) {
-                    weakself.footerView.startTransportBtn.backgroundColor = ABNORMAL_THEME_COLOR;
-                    weakself.footerView.startTransportBtn.userInteractionEnabled = NO;
-                } else {
-                    weakself.footerView.startTransportBtn.backgroundColor = MAIN_THEME_COLOR;
-                    weakself.footerView.startTransportBtn.userInteractionEnabled = YES;
-                }
             }
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-        }];
+            if (allAbnormalFlag) {
+                weakself.footerView.startTransportBtn.backgroundColor = ABNORMAL_THEME_COLOR;
+                weakself.footerView.startTransportBtn.userInteractionEnabled = NO;
+            } else {
+                weakself.footerView.startTransportBtn.backgroundColor = MAIN_THEME_COLOR;
+                weakself.footerView.startTransportBtn.userInteractionEnabled = YES;
+            }
+        }
     }];
-    cell.detailModel = [self.dataListArr[indexPath.section] objectAtIndex:indexPath.row];
-    return cell;
+    refuseVC.paraDict = paraDict;
+    refuseVC.lxCode = ABNORMAL_TYPE_YCQS;
+    refuseVC.isBackRoot = NO;
+    return;
+    
+//    __weak typeof(self) weakself = self;
+//    [[NetworkHelper shareClient] POST:KA_ABNORMAL_SIGN_API parameters:paraDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+//        NSString *msg = responseDict[@"msg"];
+//        NSInteger resultFlag = [responseDict[@"status"] integerValue];
+//        [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+//        
+//        
+//        if (resultFlag == 1) {
+//            model.SHPM_STATUS = @"241";
+//            [weakself.tableView reloadData];
+//            
+//            //判断是否全部异常签收
+//            BOOL allAbnormalFlag = YES;
+//            for (NSArray *modelArr in weakself.dataListArr) {
+//                for (OrderDetailModel *tempModel in modelArr) {
+//                    if ([tempModel.SHPM_STATUS integerValue] != 241) {
+//                        allAbnormalFlag = NO;
+//                        break;
+//                    }
+//                }
+//            }
+//            if (allAbnormalFlag) {
+//                weakself.footerView.startTransportBtn.backgroundColor = ABNORMAL_THEME_COLOR;
+//                weakself.footerView.startTransportBtn.userInteractionEnabled = NO;
+//            } else {
+//                weakself.footerView.startTransportBtn.backgroundColor = MAIN_THEME_COLOR;
+//                weakself.footerView.startTransportBtn.userInteractionEnabled = YES;
+//            }
+//        }
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+//    }];
 }
 
 

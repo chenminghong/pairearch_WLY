@@ -267,7 +267,7 @@
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"RefuseSignController" bundle:[NSBundle mainBundle]];
     RefuseSignController *refuseVC = [sb instantiateViewControllerWithIdentifier:@"RefuseSignController"];
     refuseVC.paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"userName":[LoginModel shareLoginModel].name, @"orderCode":detailModel.ORDER_CODE, @"shpmNum":detailModel.SHPM_NUM};;
-    refuseVC.lxCode = ANBORMAL_YCQS;
+    refuseVC.lxCode = ABNORMAL_TYPE_YCQS;
     refuseVC.isBackRoot = NO;
     [self.navigationController pushViewController:refuseVC animated:YES];
 }

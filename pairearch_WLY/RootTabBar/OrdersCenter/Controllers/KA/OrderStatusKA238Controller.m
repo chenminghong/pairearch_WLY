@@ -245,7 +245,7 @@
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"RefuseSignController" bundle:[NSBundle mainBundle]];
     RefuseSignController *refuseVC = [sb instantiateViewControllerWithIdentifier:@"RefuseSignController"];
     refuseVC.paraDict = @{@"orderCode":orderCode, @"shpmNum":orderCodes};
-    refuseVC.lxCode = ANBORMAL_JJQS;
+    refuseVC.lxCode = ABNORMAL_TYPE_JJQS;
     refuseVC.isBackRoot = YES;
     [self.navigationController pushViewController:refuseVC animated:YES];
 }
