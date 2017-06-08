@@ -341,7 +341,10 @@
 - (void)pushImagePickerController {
     TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:MAX_IMAGE_COUNT columnNumber:4 delegate:self pushPhotoPickerVc:YES];
     imagePickerVc.selectedAssets = _selectedAssets; // 目前已经选中的图片数组
+    [imagePickerVc.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0x666666), NSFontAttributeName:[UIFont systemFontOfSize:18.0]}];
     imagePickerVc.navigationBar.barTintColor = TOP_BOTTOMBAR_COLOR;
+    imagePickerVc.navigationBar.tintColor = UIColorFromRGB(0x666666);
+    imagePickerVc.barItemTextColor = UIColorFromRGB(0x666666);
     imagePickerVc.barItemTextFont = [UIFont systemFontOfSize:16.0];
     imagePickerVc.showSelectBtn = YES;
     imagePickerVc.allowTakePicture = NO;
