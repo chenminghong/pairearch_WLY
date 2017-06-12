@@ -10,4 +10,10 @@
 
 @interface EarlyWarningController : BaseViewController
 
+
+/**
+ 更新数据显示角标
+ */
+- (void)getListDataBackground;
+
 @end

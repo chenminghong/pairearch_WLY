@@ -57,12 +57,21 @@
     [MJRefreshUtil begainRefresh:self.tableView];
 }
 
+
+
+/**
+ 请求数据
+ */
 - (void)getListDataFromNet {
     [EarlyWarningListModel getDataWithParameters:@{@"driverTel":[LoginModel shareLoginModel].tel} endBlock:^(id model, NSError *error) {
         if (!error) {
             self.dataListArr = [NSMutableArray arrayWithArray:model];
+            UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:2];
             if (self.dataListArr.count <= 0) {
                 [ProgressHUD bwm_showTitle:@"暂无数据" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+                item.badgeValue = nil;
+            } else {
+                item.badgeValue = [NSString stringWithFormat:@"%ld", self.dataListArr.count];
             }
         } else {
             [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
@@ -70,6 +79,26 @@
         [self.tableView reloadData];
         [MJRefreshUtil endRefresh:self.tableView];
     }];
+}
+
+
+/**
+ 修改角标
+ */
+- (void)getListDataBackground {
+    [[NetworkHelper shareClient] GET:WARNING_LIST_API parameters:@{@"driverTel":[LoginModel shareLoginModel].tel} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        responseObject = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        NSInteger status = [responseObject[@"status"] integerValue];
+        if (status == 1) {
+            UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:2];
+            NSArray *orders = responseObject[@"orders"];
+            if (orders.count > 0) {
+                item.badgeValue = [NSString stringWithFormat:@"%ld", orders.count];
+            } else {
+                item.badgeValue = nil;
+            }
+        }
+    } failure:nil];
 }
 
 #pragma mark -- UITableViewDelegate

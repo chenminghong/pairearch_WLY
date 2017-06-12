@@ -16,6 +16,8 @@
 
 @interface RootTabController ()
 
+@property (nonatomic, strong) NSTimer *timer;
+
 @end
 
 @implementation RootTabController
@@ -54,6 +56,23 @@
         [item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
         [item setTitleTextAttributes:@{NSForegroundColorAttributeName:MAIN_THEME_COLOR} forState:UIControlStateSelected];
     }];
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:warningVC selector:@selector(getListDataBackground) userInfo:nil repeats:YES];
+}
+
+/**
+ 重启定时器
+ */
+- (void)startTimer {
+    [self.timer setFireDate:[NSDate distantPast]];
+}
+
+
+/**
+ 暂停定时器
+ */
+- (void)stopTimer {
+    [self.timer setFireDate:[NSDate distantFuture]];
 }
 
 #pragma mark -- Navigation
