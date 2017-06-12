@@ -10,7 +10,7 @@
 
 #import "HomeViewController.h"
 #import "OrdersCenterController.h"
-#import "NotificationCenterController.h"
+#import "EarlyWarningController.h"
 #import "PersonalCenterViewController.h"
 #import "LoginViewController.h"
 
@@ -35,15 +35,18 @@
     OrdersCenterController *orderVC = [orderSB instantiateViewControllerWithIdentifier:@"OrdersCenterController"];
     NavigationController *orderNC = [self addNavigationItemForViewController:orderVC];
     
+    EarlyWarningController *warningVC = [EarlyWarningController new];
+    NavigationController *warningNC = [self addNavigationItemForViewController:warningVC];
+    
     PersonalCenterViewController *privateVC = [PersonalCenterViewController new];
     NavigationController *privateNC = [self addNavigationItemForViewController:privateVC];
     
     self.tabBar.translucent = NO;
     self.tabBar.barTintColor = TOP_BOTTOMBAR_COLOR;
-    self.viewControllers = @[homeNC, orderNC, privateNC];
+    self.viewControllers = @[homeNC, orderNC, warningNC, privateNC];
     
-    NSArray *titles = @[@"首页", @"运单中心", @"我的"];
-    NSArray *images = @[@"zhuye", @"yundanzhongxin", @"gerenzhongxin"];
+    NSArray *titles = @[@"首页", @"运单中心", @"预警", @"我的"];
+    NSArray *images = @[@"zhuye", @"yundanzhongxin", @"yujingzhongxin", @"gerenzhongxin"];
     [self.tabBar.items enumerateObjectsUsingBlock:^(UITabBarItem *item, NSUInteger idx, BOOL *stop) {
         [item setTitle:titles[idx]];
         [item setImage:[[UIImage imageNamed:images[idx]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];

@@ -8,6 +8,7 @@ pod 'AFNetworking'
 pod 'MJRefresh'
 pod 'MBProgressHUD'
 pod 'UMengAnalytics-NO-IDFA'
+pod 'IQKeyboardManager'
 
 
 pod 'DYLocationConverter', '~> 0.0.4'

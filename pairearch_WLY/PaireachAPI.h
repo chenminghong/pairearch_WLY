@@ -15,7 +15,8 @@
 //API前缀定义
 //#define PAIREACH_BASE_URL                @"http://192.168.0.158:8086/itip/client/"    //Leo
 //#define PAIREACH_BASE_URL                @"http://192.168.0.121:8086/itip/client/"    //Bob
-#define PAIREACH_BASE_URL                @"http://106.14.39.65:8285/itip/client/"     //测试线上
+#define PAIREACH_BASE_URL                @"http://192.168.0.124:8086/itip/client/"
+//#define PAIREACH_BASE_URL                @"http://106.14.39.65:8285/itip/client/"     //测试线上
 //#define PAIREACH_BASE_URL                @"http://192.168.1.14:8086/itip/client/"     //备用
 //#define PAIREACH_BASE_URL                @"http://dt.paireach.com/itip/client/"       //双至域名
 //#define PAIREACH_BASE_URL                @"http://139.219.188.45/itip/client/"        //双至IP
@@ -32,19 +33,6 @@
 
 //安全检查
 #define DAFETY_CHECK_API                  @"isSafeChecked.a"                //get
-
-
-
-/*============================个人中心用户相关=============================*/
-
-//用户登录
-#define USER_LOGIN_API                    @"loginForDriver.a"               //post
-
-//修改密码
-#define CHANGE_PASSWORD_API               @"changeDriverPwd.a"              //post
-
-//异常反馈
-#define ABNORMAL_UPLOAD_API               @"uploadAbnormalPresentationInfo.a"  //post
 
 
 
@@ -100,6 +88,27 @@
 
 //异常原因列表
 #define REJECT_REASON_LIST_API            @"rejectReason.a"                 //post
+
+
+/*============================预警相关=============================*/
+
+//预警列表
+#define WARNING_LIST_API                  @"abnormalList.a"                 //get
+
+//预警提交
+#define WARNING_UPDATE_API                @"updateAbnormalSign.a"           //post
+
+
+/*============================个人中心用户相关=============================*/
+
+//用户登录
+#define USER_LOGIN_API                    @"loginForDriver.a"               //post
+
+//修改密码
+#define CHANGE_PASSWORD_API               @"changeDriverPwd.a"              //post
+
+//异常反馈
+#define ABNORMAL_UPLOAD_API               @"uploadAbnormalPresentationInfo.a"  //post
 
 
 

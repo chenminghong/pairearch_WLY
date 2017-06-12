@@ -10,7 +10,7 @@
 
 @interface RejectSignCell : UITableViewCell<UITextFieldDelegate, UITextViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *selectTf;
+@property (weak, nonatomic) IBOutlet UIButton *selectButton;
 
 @property (weak, nonatomic) IBOutlet UITextView *reasonTV;
 

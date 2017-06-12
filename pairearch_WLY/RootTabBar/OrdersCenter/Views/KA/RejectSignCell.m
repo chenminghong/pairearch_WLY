@@ -28,12 +28,14 @@
     
     self.reasonTV.layer.borderColor = [UIColor grayColor].CGColor;
     self.reasonTV.layer.borderWidth = 1.0;
-    self.selectTf.delegate = self;
-    self.selectTf.text = @"请选择原因";
+    self.selectButton.layer.borderColor= [UIColor blackColor].CGColor;
+    self.selectButton.layer.borderWidth = 1;
     
     self.reasonTV.delegate = self;
     [self.reasonTV addSubview:self.placeHoldLabel];
     self.reasonTV.returnKeyType = UIReturnKeyDone;
+    self.selectButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+    self.selectButton.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
 }
 
 - (UILabel *)placeHoldLabel {
@@ -56,29 +58,25 @@
     _dataListArr = dataListArr;
     if (dataListArr.count > 0) {
         self.selectModel = dataListArr[0];
-        self.selectTf.text = [dataListArr[0] valueForKey:@"name"];
+        [self.selectButton setTitle:[dataListArr[0] valueForKey:@"name"] forState:UIControlStateNormal];
     }
 }
 
 #pragma mark -- UITextFieldDelegate
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    //    NSArray *titleList = @[@"原因1", @"原因2", @"原因3"];
-    //    [CommonPickerView showPickerViewInView:self.view titleList:titleList pickBlock:^(NSString *reasonTitle) {
-    //        self.selectTf.text = reasonTitle;
-    //    }];
+- (IBAction)selectButtonAction:(UIButton *)sender {
     [self endEditing:YES];
     if (self.dataListArr.count <= 0) {
         [ProgressHUD bwm_showTitle:@"暂无可选数据" toView:self hideAfter:HUD_HIDE_TIMEINTERVAL];
-        return NO;
+        return;
     }
     __weak typeof(self) weakSelf;
     [BidPickerView showSelectViewWithTitle:@"请选择原因" dataArr:self.dataListArr selectBlock:^(id model) {
         weakSelf.selectModel = model;
-        weakSelf.selectTf.text = [model valueForKey:@"name"];
+        [weakSelf.selectButton setTitle:[model valueForKey:@"name"] forState:UIControlStateNormal];
     }];
-    return NO;
 }
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];

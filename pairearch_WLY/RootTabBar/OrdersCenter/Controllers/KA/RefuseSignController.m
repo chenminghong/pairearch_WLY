@@ -56,6 +56,11 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
+}
+
+- (void)setLxCode:(NSInteger)lxCode {
+    _lxCode = lxCode;
+    
     //获取异常列表数据
     [self getReasonList];
 }
@@ -81,7 +86,7 @@
     } else if (self.lxCode == ABNORMAL_CODE_262) {
         self.title = @"异常签收";
     } else {
-        self.title = @"异常停留";
+        self.title = @"预警原因";
     }
 }
 
@@ -104,7 +109,7 @@
 
 //获取异常原因列表数据
 - (void)getReasonList {
-    [RejectReasonListModel getDataWithParameters:@{@"type":@"BW_REJECT_REASON"} endBlock:^(id model, NSError *error) {
+    [RejectReasonListModel getDataWithParameters:@{@"type":@(self.lxCode)} endBlock:^(id model, NSError *error) {
         if (!error) {
             self.reasonListArr = [NSArray arrayWithArray:model];
         }
@@ -116,45 +121,96 @@
 - (void)commitButtonAction:(UIButton *)sender {
     [self.view endEditing:YES];
     RejectSignCell *cell = (RejectSignCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    
+    if (cell.reasonTV.text.length <= 0) {
+        [MBProgressHUD bwm_showTitle:@"请输入原因" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        return;
+    }
+    
+    if (_selectedPhotos.count <= 0) {
+        [MBProgressHUD bwm_showTitle:@"请选择照片" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        return;
+    }
+    
     RejectReasonListModel *model = cell.selectModel;
-    NSString *orderCode = [NSString stringWithFormat:@"%@", self.paraDict[@"orderCode"]];
-    NSString *orderNum = [NSString stringWithFormat:@"%@", self.paraDict[@"shpmNum"]];
-    NSDictionary *paraDict = @{@"orderCode":orderCode,
-                               @"orderNum":orderNum,
-                               @"driverName":[LoginModel shareLoginModel].name,
-                               @"driverTel":[LoginModel shareLoginModel].tel,
-                               @"remark":cell.reasonTV.text,
-                               @"productCode":@"",
-                               @"productName":@"",
-                               @"abnormalNum":@"",
-                               @"status":@(self.lxCode),
-                               @"dictCode":model.reasonId.length? model.reasonId:@"",
-                               @"dictName":model.name.length? model.name:@""};
-    NSLog(@"paraDict:%@", paraDict);
-    __weak typeof(self) weakself = self;
-    [NetworkHelper POST:ORDER_REJECT_GET_API parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        for (NSInteger i = 0; i < _selectedPhotos.count; i++) {
-            [formData appendPartWithFileData:UIImageJPEGRepresentation(_selectedPhotos[i], 0.5) name:@"file" fileName:[NSString stringWithFormat:@"abnormal_upload%ld.jpg", (long)i] mimeType:@"image/jpeg"];
-        }
-    } progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSString *msg = responseObject[@"msg"];
-        __block NSInteger resultFlag = [responseObject[@"status"] integerValue];
-        MBProgressHUD *hud = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-        if (resultFlag == 1) {
-            [hud setCompletionBlock:^(){
-                if (weakself.lxCode == ABNORMAL_CODE_262) {
-                    [weakself.navigationController popViewControllerAnimated:YES];
-                    if (weakself.signResultBlock) {
-                        weakself.signResultBlock(@{@"flag":@(resultFlag)});
-                    }
-                } else {
-                    [weakself.navigationController popToRootViewControllerAnimated:YES];
+    switch (self.lxCode) {
+        case ABNORMAL_CODE_261:
+        case ABNORMAL_CODE_262:
+        {
+            NSString *orderCode = [NSString stringWithFormat:@"%@", self.paraDict[@"orderCode"]];
+            NSString *orderNum = [NSString stringWithFormat:@"%@", self.paraDict[@"shpmNum"]];
+            NSDictionary *paraDict = @{@"orderCode":orderCode,
+                                       @"orderNum":orderNum,
+                                       @"driverName":[LoginModel shareLoginModel].name,
+                                       @"driverTel":[LoginModel shareLoginModel].tel,
+                                       @"remark":cell.reasonTV.text,
+                                       @"productCode":@"",
+                                       @"productName":@"",
+                                       @"abnormalNum":@"",
+                                       @"status":@(self.lxCode),
+                                       @"dictCode":model.reasonId.length? model.reasonId:@"",
+                                       @"dictName":model.name.length? model.name:@""};
+            NSLog(@"paraDict:%@", paraDict);
+            __weak typeof(self) weakself = self;
+            [NetworkHelper POST:ORDER_REJECT_GET_API parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                for (NSInteger i = 0; i < _selectedPhotos.count; i++) {
+                    [formData appendPartWithFileData:UIImageJPEGRepresentation(_selectedPhotos[i], 0.5) name:@"file" fileName:[NSString stringWithFormat:@"abnormal_upload%ld.jpg", (long)i] mimeType:@"image/jpeg"];
                 }
+            } progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+                NSString *msg = responseObject[@"msg"];
+                __block NSInteger resultFlag = [responseObject[@"status"] integerValue];
+                MBProgressHUD *hud = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+                if (resultFlag == 1) {
+                    [hud setCompletionBlock:^(){
+                        if (weakself.lxCode == ABNORMAL_CODE_262) {
+                            [weakself.navigationController popViewControllerAnimated:YES];
+                            if (weakself.signResultBlock) {
+                                weakself.signResultBlock(@{@"flag":@(resultFlag)});
+                            }
+                        } else {
+                            [weakself.navigationController popToRootViewControllerAnimated:YES];
+                        }
+                    }];
+                }
+            } failure:^(NSError *error) {
+                [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
             }];
         }
-    } failure:^(NSError *error) {
-        [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-    }];
+            break;
+            
+        case ABNORMAL_CODE_263:
+        {
+            NSString *modelId = [NSString stringWithFormat:@"%@", self.paraDict[@"id"]];
+            NSDictionary *paraDict = @{@"id":modelId,
+                                       @"dictCode":model.reasonId.length? model.reasonId:@"",
+                                       @"dictName":model.name.length? model.name:@"",
+                                       @"remark":cell.reasonTV.text};
+            NSLog(@"paraDict:%@", paraDict);
+            __weak typeof(self) weakself = self;
+            [NetworkHelper POST:WARNING_UPDATE_API parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                for (NSInteger i = 0; i < _selectedPhotos.count; i++) {
+                    NSData *data = UIImageJPEGRepresentation(_selectedPhotos[i], 0.5);
+                    NSLog(@"dataLength:%lu", data.length/1000);
+                    [formData appendPartWithFileData:data name:@"file" fileName:[NSString stringWithFormat:@"abnormal_upload%ld.jpg", (long)i] mimeType:@"image/jpeg"];
+                }
+            } progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+                NSString *msg = responseObject[@"msg"];
+                __block NSInteger resultFlag = [responseObject[@"status"] integerValue];
+                MBProgressHUD *hud = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+                if (resultFlag == 1) {
+                    [hud setCompletionBlock:^(){
+                        [weakself.navigationController popViewControllerAnimated:YES];
+                    }];
+                }
+            } failure:^(NSError *error) {
+                [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            }];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (UICollectionView *)collectionView {
@@ -459,49 +515,6 @@
         [_collectionView reloadData];
     }];
 }
-
-//提交按钮点击事件
-//- (void)commitButtonAction:(UIButton *)sender {
-//    AbnormalReportCell *cell = (AbnormalReportCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-//    
-//    if (cell.loadNumberTf.text.length <= 0) {
-//        [MBProgressHUD bwm_showTitle:@"请输入异常单号！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-//        return;
-//    }
-//    
-//    if (cell.loadNumberTv.text.length <= 0) {
-//        [MBProgressHUD bwm_showTitle:@"请异常原因！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-//        return;
-//    }
-//    
-//    if (_selectedPhotos.count <= 0) {
-//        [MBProgressHUD bwm_showTitle:@"请上传异常图片！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-//        return;
-//    }
-//    
-//    NSDictionary *paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"driverName":[LoginModel shareLoginModel].name, @"orderCode":cell.loadNumberTf.text, @"remark":cell.loadNumberTv.text};
-//    
-//    [NetworkHelper POST:ABNORMAL_UPLOAD_API parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-//        for (NSInteger i = 0; i < _selectedPhotos.count; i++) {
-//            [formData appendPartWithFileData:UIImageJPEGRepresentation(_selectedPhotos[i], 0.8) name:@"file" fileName:[NSString stringWithFormat:@"abnormal_upload%ld.jpg", (long)i] mimeType:@"image/jpeg"];
-//        }
-//    } progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-//        NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-//        __block NSInteger status = [responseDict[@"status"] integerValue];
-//        NSString *msg = responseDict[@"msg"];
-//        NSString *tempMsg = [msg stringByReplacingOccurrencesOfString:@" " withString:@""];
-//        if (tempMsg.length > 0) {
-//            MBProgressHUD *tempHUD = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-//            [tempHUD setCompletionBlock:^{
-//                if (status == 1) {
-//                    [self.navigationController popViewControllerAnimated:YES];
-//                }
-//            }];
-//        }
-//    } failure:^(NSError *error) {
-//        [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-//    }];
-//}
 
 #pragma mark - TZImagePickerControllerDelegate
 

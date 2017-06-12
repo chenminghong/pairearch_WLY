@@ -40,6 +40,9 @@
     //版本更新
     [self checkAppVersion];
     
+    //初始化键盘输入框助手类
+    [self initIQKeyboardManager];
+    
     return YES;
 }
 
@@ -163,6 +166,17 @@
     [MobClick setAppVersion:version];
     [MobClick setLogEnabled:NO];
     [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
+}
+
+/**
+ 初始化输入框助手类
+ */
+- (void)initIQKeyboardManager {
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES;
+    manager.shouldResignOnTouchOutside = YES;
+    manager.shouldToolbarUsesTextFieldTintColor = YES;
+    manager.enableAutoToolbar = YES;
 }
 
 //获取设备的DeviceID

@@ -13,6 +13,10 @@
 		0F4C92631EE0226900546AFF /* RejectReasonListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4C92621EE0226900546AFF /* RejectReasonListModel.m */; };
 		0F4C92671EE02E3A00546AFF /* RejectSignCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4C92651EE02E3A00546AFF /* RejectSignCell.m */; };
 		0F4C92681EE02E3A00546AFF /* RejectSignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F4C92661EE02E3A00546AFF /* RejectSignCell.xib */; };
+		0FAE163C1EEE37E700E5450F /* EarlyWarningController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE163A1EEE37E700E5450F /* EarlyWarningController.m */; };
+		0FAE16411EEE38E200E5450F /* EarlyWarningTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE163F1EEE38E200E5450F /* EarlyWarningTableCell.m */; };
+		0FAE16421EEE38E200E5450F /* EarlyWarningTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FAE16401EEE38E200E5450F /* EarlyWarningTableCell.xib */; };
+		0FAE16451EEE39EF00E5450F /* EarlyWarningListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE16441EEE39EF00E5450F /* EarlyWarningListModel.m */; };
 		0FE9632A1EB9B30200F916DD /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE963291EB9B30200F916DD /* ProgressHUD.m */; };
 		76DA3C9EDAD9C136CDB7CBDB /* libPods-pairearch_WLY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E253EE02D936D5B70824B760 /* libPods-pairearch_WLY.a */; };
 		B307BF471E7238E5005D7979 /* HomePageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B307BF461E7238E5005D7979 /* HomePageModel.m */; };
@@ -53,7 +57,6 @@
 		B35727501E5404EA003F9B2F /* OrdersCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B357274C1E5404EA003F9B2F /* OrdersCenterController.m */; };
 		B357276A1E540E46003F9B2F /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B35727691E540E46003F9B2F /* NavigationController.m */; };
 		B357276E1E543268003F9B2F /* OrdersCenterController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B357276D1E543268003F9B2F /* OrdersCenterController.storyboard */; };
-		B35727701E543277003F9B2F /* NotificationCenterController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B357276F1E543277003F9B2F /* NotificationCenterController.storyboard */; };
 		B357277A1E5435AE003F9B2F /* MyLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B35727791E5435AE003F9B2F /* MyLocationManager.m */; };
 		B35727811E545865003F9B2F /* NetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B35727801E545865003F9B2F /* NetworkHelper.m */; };
 		B35727921E556053003F9B2F /* LocationUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B35727911E556053003F9B2F /* LocationUploadManager.m */; };
@@ -104,7 +107,6 @@
 		B381DADE1E779D2C00D752C1 /* CommonBackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B381DADD1E779D2C00D752C1 /* CommonBackModel.m */; };
 		B381DAE11E77DB6500D752C1 /* CommonPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B381DAE01E77DB6500D752C1 /* CommonPickerView.m */; };
 		B381DAE51E77DB8B00D752C1 /* CommonPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B381DAE41E77DB8B00D752C1 /* CommonPickerView.xib */; };
-		B38410851E5BD4E200F7069F /* NotificationCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B38410841E5BD4E200F7069F /* NotificationCenterController.m */; };
 		B38410881E5BD4F400F7069F /* OrdersCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B38410871E5BD4F400F7069F /* OrdersCollectionCell.m */; };
 		B384108C1E5BD9CA00F7069F /* ListTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B384108A1E5BD9CA00F7069F /* ListTableCell.m */; };
 		B384108D1E5BD9CA00F7069F /* ListTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B384108B1E5BD9CA00F7069F /* ListTableCell.xib */; };
@@ -172,6 +174,13 @@
 		0F4C92641EE02E3A00546AFF /* RejectSignCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RejectSignCell.h; sourceTree = "<group>"; };
 		0F4C92651EE02E3A00546AFF /* RejectSignCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RejectSignCell.m; sourceTree = "<group>"; };
 		0F4C92661EE02E3A00546AFF /* RejectSignCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RejectSignCell.xib; sourceTree = "<group>"; };
+		0FAE16391EEE37E700E5450F /* EarlyWarningController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarlyWarningController.h; sourceTree = "<group>"; };
+		0FAE163A1EEE37E700E5450F /* EarlyWarningController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarlyWarningController.m; sourceTree = "<group>"; };
+		0FAE163E1EEE38E200E5450F /* EarlyWarningTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarlyWarningTableCell.h; sourceTree = "<group>"; };
+		0FAE163F1EEE38E200E5450F /* EarlyWarningTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarlyWarningTableCell.m; sourceTree = "<group>"; };
+		0FAE16401EEE38E200E5450F /* EarlyWarningTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EarlyWarningTableCell.xib; sourceTree = "<group>"; };
+		0FAE16431EEE39EF00E5450F /* EarlyWarningListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarlyWarningListModel.h; sourceTree = "<group>"; };
+		0FAE16441EEE39EF00E5450F /* EarlyWarningListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarlyWarningListModel.m; sourceTree = "<group>"; };
 		0FE963281EB9B30200F916DD /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
 		0FE963291EB9B30200F916DD /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		4B0612EA886C1F63FFF37775 /* Pods-pairearch_WLY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pairearch_WLY.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pairearch_WLY/Pods-pairearch_WLY.debug.xcconfig"; sourceTree = "<group>"; };
@@ -240,7 +249,6 @@
 		B35727681E540E46003F9B2F /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
 		B35727691E540E46003F9B2F /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
 		B357276D1E543268003F9B2F /* OrdersCenterController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrdersCenterController.storyboard; sourceTree = "<group>"; };
-		B357276F1E543277003F9B2F /* NotificationCenterController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NotificationCenterController.storyboard; sourceTree = "<group>"; };
 		B35727781E5435AE003F9B2F /* MyLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLocationManager.h; sourceTree = "<group>"; };
 		B35727791E5435AE003F9B2F /* MyLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocationManager.m; sourceTree = "<group>"; };
 		B357277F1E545865003F9B2F /* NetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkHelper.h; sourceTree = "<group>"; };
@@ -331,8 +339,6 @@
 		B381DADF1E77DB6500D752C1 /* CommonPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonPickerView.h; sourceTree = "<group>"; };
 		B381DAE01E77DB6500D752C1 /* CommonPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonPickerView.m; sourceTree = "<group>"; };
 		B381DAE41E77DB8B00D752C1 /* CommonPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonPickerView.xib; sourceTree = "<group>"; };
-		B38410831E5BD4E200F7069F /* NotificationCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCenterController.h; sourceTree = "<group>"; };
-		B38410841E5BD4E200F7069F /* NotificationCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCenterController.m; sourceTree = "<group>"; };
 		B38410861E5BD4F400F7069F /* OrdersCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersCollectionCell.h; sourceTree = "<group>"; };
 		B38410871E5BD4F400F7069F /* OrdersCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersCollectionCell.m; sourceTree = "<group>"; };
 		B38410891E5BD9CA00F7069F /* ListTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableCell.h; sourceTree = "<group>"; };
@@ -427,6 +433,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FAE16351EEE37CA00E5450F /* EarlyWarning */ = {
+			isa = PBXGroup;
+			children = (
+				0FAE16361EEE37CA00E5450F /* Controllers */,
+				0FAE16371EEE37CA00E5450F /* Models */,
+				0FAE16381EEE37CA00E5450F /* Views */,
+			);
+			path = EarlyWarning;
+			sourceTree = "<group>";
+		};
+		0FAE16361EEE37CA00E5450F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0FAE16391EEE37E700E5450F /* EarlyWarningController.h */,
+				0FAE163A1EEE37E700E5450F /* EarlyWarningController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0FAE16371EEE37CA00E5450F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0FAE16431EEE39EF00E5450F /* EarlyWarningListModel.h */,
+				0FAE16441EEE39EF00E5450F /* EarlyWarningListModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0FAE16381EEE37CA00E5450F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0FAE163E1EEE38E200E5450F /* EarlyWarningTableCell.h */,
+				0FAE163F1EEE38E200E5450F /* EarlyWarningTableCell.m */,
+				0FAE16401EEE38E200E5450F /* EarlyWarningTableCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		0FE963271EB9B2E800F916DD /* ProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,7 +564,7 @@
 				B357272E1E53FC61003F9B2F /* RootTabController.m */,
 				B3D3B28D1E66EA550033EF84 /* Home */,
 				B35727311E5402C4003F9B2F /* OrdersCenter */,
-				B357275A1E540B51003F9B2F /* NotificationCenter */,
+				0FAE16351EEE37CA00E5450F /* EarlyWarning */,
 				B35727321E5402C4003F9B2F /* PrivateCenter */,
 			);
 			path = RootTabBar;
@@ -631,41 +675,6 @@
 				B37BA6D21E8127A9001A74B8 /* LxGridViewFlowLayout.m */,
 				B37BA6D31E8127A9001A74B8 /* TZTestCell.h */,
 				B37BA6D41E8127A9001A74B8 /* TZTestCell.m */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		B357275A1E540B51003F9B2F /* NotificationCenter */ = {
-			isa = PBXGroup;
-			children = (
-				B357275B1E540B51003F9B2F /* Controllers */,
-				B357275C1E540B51003F9B2F /* Models */,
-				B357275D1E540B51003F9B2F /* Views */,
-			);
-			name = NotificationCenter;
-			path = pairearch_WLY/RootTabBar/NotificationCenter;
-			sourceTree = SOURCE_ROOT;
-		};
-		B357275B1E540B51003F9B2F /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				B38410831E5BD4E200F7069F /* NotificationCenterController.h */,
-				B38410841E5BD4E200F7069F /* NotificationCenterController.m */,
-				B357276F1E543277003F9B2F /* NotificationCenterController.storyboard */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		B357275C1E540B51003F9B2F /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		B357275D1E540B51003F9B2F /* Views */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1184,6 +1193,7 @@
 				B3D3B2AB1E66EA550033EF84 /* SaftyCheckCell.xib in Resources */,
 				B307BF951E777F3B005D7979 /* RejectSignController.storyboard in Resources */,
 				0F4C92601EE0103400546AFF /* BidSelectView.xib in Resources */,
+				0FAE16421EEE38E200E5450F /* EarlyWarningTableCell.xib in Resources */,
 				B37BA6D01E80FA29001A74B8 /* AbnormalReportCell.xib in Resources */,
 				B357276E1E543268003F9B2F /* OrdersCenterController.storyboard in Resources */,
 				B307BF901E767DE3005D7979 /* CommonNomalSignCell.xib in Resources */,
@@ -1204,7 +1214,6 @@
 				B37CB2671E6FF08400A1463F /* AbnormalSignCell.xib in Resources */,
 				B307BF811E7592CA005D7979 /* BackConfirationCell.xib in Resources */,
 				B37CB24F1E6FEFCC00A1463F /* RefuseSignController.storyboard in Resources */,
-				B35727701E543277003F9B2F /* NotificationCenterController.storyboard in Resources */,
 				B37CB26F1E6FF08400A1463F /* OrderDetailHeaderView.xib in Resources */,
 				B307BF9A1E77826A005D7979 /* HaveBackOrderCell.xib in Resources */,
 				B384108D1E5BD9CA00F7069F /* ListTableCell.xib in Resources */,
@@ -1305,7 +1314,6 @@
 				B3D3B2A81E66EA550033EF84 /* HomeTableCell.m in Sources */,
 				B38411121E5D875700F7069F /* MJRefreshUtil.m in Sources */,
 				B384113B1E5E832C00F7069F /* AlterPasswordViewController.m in Sources */,
-				B38410851E5BD4E200F7069F /* NotificationCenterController.m in Sources */,
 				B37CB24E1E6FEFCC00A1463F /* RefuseSignController.m in Sources */,
 				B384111C1E5D886000F7069F /* LoginTextField.m in Sources */,
 				B307BF9D1E7786B3005D7979 /* HaveBackOrderController.m in Sources */,
@@ -1327,6 +1335,7 @@
 				B307BF801E7592CA005D7979 /* CommonConfirationCell.m in Sources */,
 				B38410A21E5C3D7D00F7069F /* CWStarRateView.m in Sources */,
 				B307BF701E728C0A005D7979 /* OutFacCheckCell.m in Sources */,
+				0FAE16411EEE38E200E5450F /* EarlyWarningTableCell.m in Sources */,
 				B307BF8F1E767DE3005D7979 /* CommonNomalSignCell.m in Sources */,
 				B381DADE1E779D2C00D752C1 /* CommonBackModel.m in Sources */,
 				B336CC181E88C026000F3928 /* BaseViewController.m in Sources */,
@@ -1347,6 +1356,7 @@
 				B33090211E8BA4EA00CB898F /* SAMKeychainManager.m in Sources */,
 				B37CB2691E6FF08400A1463F /* EvalutionHeaderView.m in Sources */,
 				B37CB26C1E6FF08400A1463F /* OrderDetailCell.m in Sources */,
+				0FAE163C1EEE37E700E5450F /* EarlyWarningController.m in Sources */,
 				B35727921E556053003F9B2F /* LocationUploadManager.m in Sources */,
 				B37CB26E1E6FF08400A1463F /* OrderDetailHeaderView.m in Sources */,
 				B336CC1E1E88C4C6000F3928 /* OrderStatusKABaseController.m in Sources */,
@@ -1373,6 +1383,7 @@
 				B37CB2A71E7032B400A1463F /* OrderStatusBACK212Controller.m in Sources */,
 				B3D3B2A41E66EA550033EF84 /* LatestNoticeInfoViewController.m in Sources */,
 				B37CB2A81E7032B400A1463F /* OrderStatusBACK220Controller.m in Sources */,
+				0FAE16451EEE39EF00E5450F /* EarlyWarningListModel.m in Sources */,
 				B38411241E5E827600F7069F /* PersonalCenterViewController.m in Sources */,
 				B38410B61E5D375600F7069F /* BaseModel.m in Sources */,
 				B37CB2451E6FEFCC00A1463F /* NestedSelectStateController.m in Sources */,

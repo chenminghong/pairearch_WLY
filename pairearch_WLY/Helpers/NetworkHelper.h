@@ -9,10 +9,8 @@
 #import <AFNetworking/AFNetworking.h>
 
 //网络请求超时的时间
-#define REQUEST_TIMEOUT 20.0f
+#define REQUEST_TIMEOUT 10.0f
 
-//baseUrl
-#define BASE_URL  @"http://106.14.39.65:8285/itip/client/"
 
 typedef NS_ENUM(NSUInteger, NetworkReachabilityStatus) {
     NetworkReachabilityStatusUnknown          = -1,

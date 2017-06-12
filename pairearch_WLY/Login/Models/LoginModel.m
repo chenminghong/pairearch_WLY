@@ -50,9 +50,8 @@
     
 }
 
-- (void)setTel:(NSString *)tel {
-    _tel = tel;
-    //开启定位上传
+- (NSString *)tel {
+    return _tel.length>0? _tel:@"";
 }
 
 + (NSURLSessionDataTask *)getDataWithParameters:(NSDictionary *)paramDict endBlock:(void (^)(id, NSError *))endBlock {

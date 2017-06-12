@@ -17,17 +17,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="410" height="327"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fOp-8x-RtI">
-                        <rect key="frame" x="20" y="30" width="370" height="35"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="35" id="ekN-bi-Car"/>
-                        </constraints>
-                        <nil key="textColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </textField>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="23i-jy-9HK">
-                        <rect key="frame" x="20" y="95" width="370" height="125"/>
+                        <rect key="frame" x="20" y="89" width="370" height="125"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="125" id="M2Y-4g-TyQ"/>
@@ -35,19 +26,29 @@
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3al-US-Sto">
+                        <rect key="frame" x="20" y="30" width="370" height="29"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="选择原因">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="selectButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="HXE-Kq-dtH"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="fOp-8x-RtI" secondAttribute="trailing" constant="20" id="33S-95-rnY"/>
-                    <constraint firstItem="23i-jy-9HK" firstAttribute="width" secondItem="fOp-8x-RtI" secondAttribute="width" id="JcS-m4-iRw"/>
-                    <constraint firstItem="fOp-8x-RtI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="T5R-FI-aeM"/>
-                    <constraint firstItem="23i-jy-9HK" firstAttribute="centerX" secondItem="fOp-8x-RtI" secondAttribute="centerX" id="ia5-Oe-cPD"/>
-                    <constraint firstItem="23i-jy-9HK" firstAttribute="top" secondItem="fOp-8x-RtI" secondAttribute="bottom" constant="30" id="m26-NO-GKx"/>
-                    <constraint firstItem="fOp-8x-RtI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="qoF-Ar-bhY"/>
+                    <constraint firstItem="3al-US-Sto" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="4PC-AC-Wgu"/>
+                    <constraint firstItem="23i-jy-9HK" firstAttribute="centerX" secondItem="3al-US-Sto" secondAttribute="centerX" id="4Ru-kL-hbb"/>
+                    <constraint firstItem="3al-US-Sto" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="Ehw-gb-r4y"/>
+                    <constraint firstItem="23i-jy-9HK" firstAttribute="leading" secondItem="3al-US-Sto" secondAttribute="leading" id="QYw-Fa-ZJL"/>
+                    <constraint firstItem="23i-jy-9HK" firstAttribute="top" secondItem="3al-US-Sto" secondAttribute="bottom" constant="30" id="RPu-xK-SOz"/>
+                    <constraint firstItem="3al-US-Sto" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="rLa-8h-shH"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="reasonTV" destination="23i-jy-9HK" id="37d-6i-6VH"/>
-                <outlet property="selectTf" destination="fOp-8x-RtI" id="NfW-2D-J8z"/>
+                <outlet property="selectButton" destination="3al-US-Sto" id="DiP-HO-wsE"/>
             </connections>
             <point key="canvasLocation" x="55" y="110"/>
         </tableViewCell>
