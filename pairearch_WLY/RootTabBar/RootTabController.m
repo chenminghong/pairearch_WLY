@@ -57,7 +57,7 @@
         [item setTitleTextAttributes:@{NSForegroundColorAttributeName:MAIN_THEME_COLOR} forState:UIControlStateSelected];
     }];
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:warningVC selector:@selector(getListDataBackground) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:600 target:warningVC selector:@selector(getListDataBackground) userInfo:nil repeats:YES];
 }
 
 /**
