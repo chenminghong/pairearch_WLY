@@ -29,7 +29,7 @@
             }
         } else {
             NSString *msg = responseObject[@"msg"];
-            NSError *error = [NSError errorWithDomain:PAIREACH_BASE_URL code:status userInfo:@{ERROR_MSG:msg}];
+            NSError *error = [NSError errorWithDomain:PAIREACH_BASE_URL code:status userInfo:@{ERROR_MSG:msg.length>0? msg:@"系统错误"}];
             if (endBlock) {
                 endBlock(nil, error);
             }
