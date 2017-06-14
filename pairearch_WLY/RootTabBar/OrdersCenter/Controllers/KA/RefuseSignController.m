@@ -494,6 +494,7 @@
     imagePickerVc.barItemTextColor = UIColorFromRGB(0x666666);
     imagePickerVc.navigationBar.barTintColor = TOP_BOTTOMBAR_COLOR;
     imagePickerVc.showSelectBtn = YES;
+    imagePickerVc.allowPickingOriginalPhoto = NO;
     imagePickerVc.allowTakePicture = NO;
     imagePickerVc.alwaysEnableDoneBtn = YES;
     imagePickerVc.allowPickingGif = NO;
