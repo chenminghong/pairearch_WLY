@@ -65,12 +65,16 @@
         
         //如果resultFlag是NO，说明用户名和密码不正确，直接return
         if (resultFlag == 0) {
-            endBlock(nil, [NSError errorWithDomain:PAIREACH_BASE_URL code:resultFlag userInfo:@{ERROR_MSG:remark}]);
+            if (endBlock) {
+                endBlock(nil, [NSError errorWithDomain:PAIREACH_BASE_URL code:resultFlag userInfo:@{ERROR_MSG:remark}]);
+            }
         } else {
             NSDictionary *responseEntity = [dataDict objectForKey:@"cpDriver"];
             //将登录成功返回的数据存到model中
             [[LoginModel shareLoginModel] updateUserInfoWithInfoDict:responseEntity];
-            endBlock([LoginModel shareLoginModel], nil);
+            if (endBlock) {
+                endBlock([LoginModel shareLoginModel], nil);
+            }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (endBlock) {

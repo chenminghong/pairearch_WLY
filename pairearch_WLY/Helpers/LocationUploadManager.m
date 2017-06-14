@@ -57,7 +57,7 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     CLLocation *newLocation = [locations lastObject];
     self.latestLocation = newLocation;
-    NSLog(@"经度：%f,纬度：%f,海拔：%f,航向：%f,行走速度：%f", self.latestLocation.coordinate.longitude, self.latestLocation.coordinate.latitude, self.latestLocation.altitude, self.latestLocation.course, self.latestLocation.speed);
+//    NSLog(@"经度：%f,纬度：%f,海拔：%f,航向：%f,行走速度：%f", self.latestLocation.coordinate.longitude, self.latestLocation.coordinate.latitude, self.latestLocation.altitude, self.latestLocation.course, self.latestLocation.speed);
 }
 
 

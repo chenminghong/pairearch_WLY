@@ -347,6 +347,7 @@
     imagePickerVc.barItemTextColor = UIColorFromRGB(0x666666);
     imagePickerVc.barItemTextFont = [UIFont systemFontOfSize:16.0];
     imagePickerVc.showSelectBtn = YES;
+    imagePickerVc.allowPickingOriginalPhoto = NO;
     imagePickerVc.allowTakePicture = NO;
     imagePickerVc.alwaysEnableDoneBtn = YES;
     imagePickerVc.allowPickingGif = NO;
@@ -391,12 +392,13 @@
     
     [NetworkHelper POST:ABNORMAL_UPLOAD_API parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         for (NSInteger i = 0; i < _selectedPhotos.count; i++) {
-            [formData appendPartWithFileData:UIImageJPEGRepresentation(_selectedPhotos[i], 0.8) name:@"file" fileName:[NSString stringWithFormat:@"abnormal_upload%ld.jpg", (long)i] mimeType:@"image/jpeg"];
+            NSData *imageData = UIImageJPEGRepresentation(_selectedPhotos[i], 0.4);
+            NSLog(@"imageData.length:%lu", imageData.length / 1000);
+            [formData appendPartWithFileData:imageData name:@"file" fileName:[NSString stringWithFormat:@"abnormal_upload%ld.jpg", (long)i] mimeType:@"image/jpeg"];
         }
     } progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-        __block NSInteger status = [responseDict[@"status"] integerValue];
-        NSString *msg = responseDict[@"msg"];
+        __block NSInteger status = [responseObject[@"status"] integerValue];
+        NSString *msg = responseObject[@"msg"];
         NSString *tempMsg = [msg stringByReplacingOccurrencesOfString:@" " withString:@""];
         if (tempMsg.length > 0) {
             MBProgressHUD *tempHUD = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];

@@ -39,8 +39,6 @@
 		B307BF8B1E767401005D7979 /* CommonIntoFacCheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B307BF891E767400005D7979 /* CommonIntoFacCheckCell.xib */; };
 		B307BF8F1E767DE3005D7979 /* CommonNomalSignCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B307BF8D1E767DE3005D7979 /* CommonNomalSignCell.m */; };
 		B307BF901E767DE3005D7979 /* CommonNomalSignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B307BF8E1E767DE3005D7979 /* CommonNomalSignCell.xib */; };
-		B307BF931E777D99005D7979 /* RejectSignController.m in Sources */ = {isa = PBXBuildFile; fileRef = B307BF921E777D99005D7979 /* RejectSignController.m */; };
-		B307BF951E777F3B005D7979 /* RejectSignController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B307BF941E777F3B005D7979 /* RejectSignController.storyboard */; };
 		B307BF991E77826A005D7979 /* HaveBackOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B307BF971E77826A005D7979 /* HaveBackOrderCell.m */; };
 		B307BF9A1E77826A005D7979 /* HaveBackOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B307BF981E77826A005D7979 /* HaveBackOrderCell.xib */; };
 		B307BF9D1E7786B3005D7979 /* HaveBackOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = B307BF9C1E7786B3005D7979 /* HaveBackOrderController.m */; };
@@ -218,9 +216,6 @@
 		B307BF8C1E767DE3005D7979 /* CommonNomalSignCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonNomalSignCell.h; sourceTree = "<group>"; };
 		B307BF8D1E767DE3005D7979 /* CommonNomalSignCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonNomalSignCell.m; sourceTree = "<group>"; };
 		B307BF8E1E767DE3005D7979 /* CommonNomalSignCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonNomalSignCell.xib; sourceTree = "<group>"; };
-		B307BF911E777D99005D7979 /* RejectSignController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RejectSignController.h; sourceTree = "<group>"; };
-		B307BF921E777D99005D7979 /* RejectSignController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RejectSignController.m; sourceTree = "<group>"; };
-		B307BF941E777F3B005D7979 /* RejectSignController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RejectSignController.storyboard; sourceTree = "<group>"; };
 		B307BF961E77826A005D7979 /* HaveBackOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HaveBackOrderCell.h; sourceTree = "<group>"; };
 		B307BF971E77826A005D7979 /* HaveBackOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HaveBackOrderCell.m; sourceTree = "<group>"; };
 		B307BF981E77826A005D7979 /* HaveBackOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HaveBackOrderCell.xib; sourceTree = "<group>"; };
@@ -793,9 +788,6 @@
 				B307BF5B1E7284B6005D7979 /* OrderStatusCOMMON230Controller.m */,
 				B307BF9B1E7786B3005D7979 /* HaveBackOrderController.h */,
 				B307BF9C1E7786B3005D7979 /* HaveBackOrderController.m */,
-				B307BF911E777D99005D7979 /* RejectSignController.h */,
-				B307BF921E777D99005D7979 /* RejectSignController.m */,
-				B307BF941E777F3B005D7979 /* RejectSignController.storyboard */,
 			);
 			path = COMMON;
 			sourceTree = "<group>";
@@ -1191,7 +1183,6 @@
 				B37CB26D1E6FF08400A1463F /* OrderDetailCell.xib in Resources */,
 				B381DAE51E77DB8B00D752C1 /* CommonPickerView.xib in Resources */,
 				B3D3B2AB1E66EA550033EF84 /* SaftyCheckCell.xib in Resources */,
-				B307BF951E777F3B005D7979 /* RejectSignController.storyboard in Resources */,
 				0F4C92601EE0103400546AFF /* BidSelectView.xib in Resources */,
 				0FAE16421EEE38E200E5450F /* EarlyWarningTableCell.xib in Resources */,
 				B37BA6D01E80FA29001A74B8 /* AbnormalReportCell.xib in Resources */,
@@ -1318,7 +1309,6 @@
 				B384111C1E5D886000F7069F /* LoginTextField.m in Sources */,
 				B307BF9D1E7786B3005D7979 /* HaveBackOrderController.m in Sources */,
 				B384113A1E5E832C00F7069F /* AboutUsViewController.m in Sources */,
-				B307BF931E777D99005D7979 /* RejectSignController.m in Sources */,
 				B3D3B2A51E66EA550033EF84 /* SafetyCheckController.m in Sources */,
 				B37CB2AB1E7032B400A1463F /* OrderStatusBACK230Controller.m in Sources */,
 				B37CB2801E700CB000A1463F /* BackDetailModel.m in Sources */,

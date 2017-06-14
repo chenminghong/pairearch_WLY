@@ -259,11 +259,6 @@
 
 //异常签收按钮点击事件
 - (void)abnormalSignButtonActionWithDetailModel:(DetailCommonModel *)detailModel {
-//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"RejectSignController" bundle:[NSBundle mainBundle]];
-//    RejectSignController *rsVC = [sb instantiateViewControllerWithIdentifier:@"RejectSignController"];
-//    rsVC.paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"userName":[LoginModel shareLoginModel].name, @"orderCode":detailModel.ORDER_CODE, @"shpmNum":detailModel.SHPM_NUM};
-//    [self.navigationController pushViewController:rsVC animated:YES];
-    
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"RefuseSignController" bundle:[NSBundle mainBundle]];
     RefuseSignController *refuseVC = [sb instantiateViewControllerWithIdentifier:@"RefuseSignController"];
     refuseVC.paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"userName":[LoginModel shareLoginModel].name, @"orderCode":detailModel.ORDER_CODE, @"shpmNum":detailModel.SHPM_NUM};;
