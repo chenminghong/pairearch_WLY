@@ -165,7 +165,7 @@
 #pragma mark -- CollectionView Delegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return _selectedPhotos.count + 1;
+    return _selectedPhotos.count < MAX_IMAGE_COUNT? _selectedPhotos.count + 1:_selectedPhotos.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -361,13 +361,25 @@
     [_selectedPhotos removeObjectAtIndex:sender.tag];
     [_selectedAssets removeObjectAtIndex:sender.tag];
     
-    [_collectionView performBatchUpdates:^{
-        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:sender.tag inSection:0];
-        [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
-    } completion:^(BOOL finished) {
-        [_collectionView reloadData];
-    }];
+    if (_selectedPhotos.count >= MAX_IMAGE_COUNT - 1) {
+        [_collectionView performBatchUpdates:^{
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:sender.tag inSection:0];
+            [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
+            indexPath = [NSIndexPath indexPathForItem:_selectedPhotos.count inSection:0];
+            [_collectionView insertItemsAtIndexPaths:@[indexPath]];
+        } completion:^(BOOL finished) {
+            [_collectionView reloadData];
+        }];
+    } else {
+        [_collectionView performBatchUpdates:^{
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:sender.tag inSection:0];
+            [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
+        } completion:^(BOOL finished) {
+            [_collectionView reloadData];
+        }];
+    }
 }
+
 
 //提交按钮点击事件
 - (void)commitButtonAction:(UIButton *)sender {
