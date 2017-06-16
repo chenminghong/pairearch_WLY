@@ -79,7 +79,7 @@
     UIBarButtonItem *commitItem = [[UIBarButtonItem alloc] initWithCustomView:commitButton];
     self.navigationItem.rightBarButtonItem = commitItem;
     
-    self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction)];
+//    self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction)];
     
     if (self.lxCode == ABNORMAL_CODE_261) {
         self.title = @"拒绝签收";
@@ -98,13 +98,13 @@
     return refuseVC;
 }
 
-- (void)popBackAction {
-    if (self.isBackRoot) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    } else {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
+//- (void)popBackAction {
+//    if (self.isBackRoot) {
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//    } else {
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
+//}
 
 
 //获取异常原因列表数据
@@ -190,7 +190,6 @@
             [NetworkHelper POST:WARNING_UPDATE_API parameters:paraDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                 for (NSInteger i = 0; i < _selectedPhotos.count; i++) {
                     NSData *data = UIImageJPEGRepresentation(_selectedPhotos[i], 0.5);
-                    NSLog(@"dataLength:%lu", data.length/1000);
                     [formData appendPartWithFileData:data name:@"file" fileName:[NSString stringWithFormat:@"abnormal_upload%ld.jpg", (long)i] mimeType:@"image/jpeg"];
                 }
             } progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {

@@ -16,7 +16,6 @@
 #import "NestedSelectStateController.h"
 #import "RefuseSignController.h"
 #import "OrderStatusKA245Controller.h"
-#import "RefuseSignController.h"
 
 
 @interface OrderStatusKA240Controller ()<UITableViewDelegate, UITableViewDataSource>
@@ -172,7 +171,6 @@
     }];
     refuseVC.paraDict = paraDict;
     refuseVC.lxCode = ABNORMAL_CODE_262;
-    refuseVC.isBackRoot = NO;
     return;
     
 //    __weak typeof(self) weakself = self;

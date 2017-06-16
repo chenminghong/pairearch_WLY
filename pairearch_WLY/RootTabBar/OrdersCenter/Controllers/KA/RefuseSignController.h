@@ -18,8 +18,6 @@ typedef void(^RefuseSignBlock)(NSDictionary *signResult);
 
 @property (nonatomic, assign) NSInteger lxCode;  //类型编码:lxCode;(JJQS,YCQS,YCTL) 拒绝签收 异常签收 异常停留
 
-@property (nonatomic, assign) BOOL isBackRoot;
-
 @property (nonatomic, copy) RefuseSignBlock signResultBlock;   //拒绝/异常签收处理结果
 
 

@@ -246,7 +246,6 @@
     RefuseSignController *refuseVC = [sb instantiateViewControllerWithIdentifier:@"RefuseSignController"];
     refuseVC.paraDict = @{@"orderCode":orderCode, @"shpmNum":orderCodes};
     refuseVC.lxCode = ABNORMAL_CODE_261;
-    refuseVC.isBackRoot = YES;
     [self.navigationController pushViewController:refuseVC animated:YES];
 }
 
