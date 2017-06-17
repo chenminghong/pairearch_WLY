@@ -1145,7 +1145,7 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = CB93LUJYU2;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1218,7 +1218,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		0FBBD0AE1EC07D9D0022C25A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -1459,7 +1459,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "1048158e-77de-4152-834b-623adf64cc6d";
+				PROVISIONING_PROFILE = "20820dc5-08ab-4154-bdbf-2a5d2f4ec038";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1504,7 +1504,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "1048158e-77de-4152-834b-623adf64cc6d";
+				ONLY_ACTIVE_ARCH = NO;
+				PROVISIONING_PROFILE = "20820dc5-08ab-4154-bdbf-2a5d2f4ec038";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1548,10 +1549,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/pairearch_WLY/Vender/UMOnlineConfig",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pairearch.baiwei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "6b0a05f2-febb-4a39-bcc6-b2d0edac203f";
+				PROVISIONING_PROFILE_SPECIFIER = baiweiwolaiyun_development;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -1595,10 +1597,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/pairearch_WLY/Vender/UMOnlineConfig",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pairearch.baiwei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "6b0a05f2-febb-4a39-bcc6-b2d0edac203f";
+				PROVISIONING_PROFILE_SPECIFIER = baiweiwolaiyun_development;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
