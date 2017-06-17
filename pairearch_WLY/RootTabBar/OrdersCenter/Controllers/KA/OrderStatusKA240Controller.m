@@ -141,20 +141,30 @@
     return cell;
 }
 
+
+/**
+ 异常签收
+
+ @param model 异常签收的交货单数据源
+ */
 - (void)abnormalSignActionWithModel:(OrderDetailModel *)model {
     NSDictionary *paraDict = @{@"orderCode":model.ORDER_CODE, @"shpmNum":model.SHPM_NUM};
     __weak typeof(self) weakself = self;
-    RefuseSignController *refuseVC = [RefuseSignController pushToRefuseSignWithController:self signResultBlock:^(NSDictionary *signResult) {
+    
+    RefuseSignController *refuseVC = [RefuseSignController pushToRefuseSignWithController:self signResultBlock:^NSDictionary *(NSDictionary *signResult) {
         NSInteger resultFlag = [signResult[@"flag"] integerValue];
+        
+#pragma warning -- Block返回页面跳转参数
+        NSMutableDictionary *tempDict = [NSMutableDictionary dictionaryWithDictionary:@{@"driverTel":[LoginModel shareLoginModel].tel, @"userName":[LoginModel shareLoginModel].name}];
         if (resultFlag == 1) {
             model.SHPM_STATUS = @"241";
             [weakself.tableView reloadData];
-            
+            [tempDict setObject:model.ORDER_CODE forKey:@"orderCode"];
             //判断是否全部异常签收
             BOOL allAbnormalFlag = YES;
             for (NSArray *modelArr in weakself.dataListArr) {
                 for (OrderDetailModel *tempModel in modelArr) {
-                    if ([tempModel.SHPM_STATUS integerValue] != 241) {
+                    if ([tempModel.SHPM_STATUS integerValue] < 241) {
                         allAbnormalFlag = NO;
                         break;
                     }
@@ -163,12 +173,42 @@
             if (allAbnormalFlag) {
                 weakself.footerView.startTransportBtn.backgroundColor = ABNORMAL_THEME_COLOR;
                 weakself.footerView.startTransportBtn.userInteractionEnabled = NO;
+                [tempDict setObject:@"1" forKey:@"toEvaluationPageFlag"];
+                return tempDict;
             } else {
                 weakself.footerView.startTransportBtn.backgroundColor = MAIN_THEME_COLOR;
                 weakself.footerView.startTransportBtn.userInteractionEnabled = YES;
+                [tempDict setObject:@"0" forKey:@"toEvaluationPageFlag"];
+                return tempDict;
             }
         }
+        return nil;
     }];
+//    RefuseSignController *refuseVC = [RefuseSignController pushToRefuseSignWithController:self signResultBlock:^(NSDictionary *signResult) {
+//        NSInteger resultFlag = [signResult[@"flag"] integerValue];
+//        if (resultFlag == 1) {
+//            model.SHPM_STATUS = @"241";
+//            [weakself.tableView reloadData];
+//            
+//            //判断是否全部异常签收
+//            BOOL allAbnormalFlag = YES;
+//            for (NSArray *modelArr in weakself.dataListArr) {
+//                for (OrderDetailModel *tempModel in modelArr) {
+//                    if ([tempModel.SHPM_STATUS integerValue] != 241) {
+//                        allAbnormalFlag = NO;
+//                        break;
+//                    }
+//                }
+//            }
+//            if (allAbnormalFlag) {
+//                weakself.footerView.startTransportBtn.backgroundColor = ABNORMAL_THEME_COLOR;
+//                weakself.footerView.startTransportBtn.userInteractionEnabled = NO;
+//            } else {
+//                weakself.footerView.startTransportBtn.backgroundColor = MAIN_THEME_COLOR;
+//                weakself.footerView.startTransportBtn.userInteractionEnabled = YES;
+//            }
+//        }
+//    }];
     refuseVC.paraDict = paraDict;
     refuseVC.lxCode = ABNORMAL_CODE_262;
     return;

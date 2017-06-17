@@ -126,9 +126,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     EarlyWarningListModel *model = self.dataListArr[indexPath.row];
-    RefuseSignController *refuseVC = [RefuseSignController pushToRefuseSignWithController:self signResultBlock:^(NSDictionary *signResult) {
-        
-    }];
+    RefuseSignController *refuseVC = [RefuseSignController pushToRefuseSignWithController:self signResultBlock:nil];
     refuseVC.paraDict = @{@"id":model.abnormalId};
     refuseVC.lxCode = ABNORMAL_CODE_263;
 }

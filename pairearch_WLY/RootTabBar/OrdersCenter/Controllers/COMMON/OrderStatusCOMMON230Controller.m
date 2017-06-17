@@ -15,6 +15,7 @@
 #import "RejectSignController.h"
 #import "HaveBackOrderController.h"
 #import "RefuseSignController.h"
+#import "OrderStatusKA245Controller.h"
 
 @interface OrderStatusCOMMON230Controller ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -46,26 +47,37 @@
 
 - (void)setDataListArr:(NSMutableArray *)dataListArr {
     _dataListArr = dataListArr;
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+    NSDictionary *statusDict = [self getAllOrdersStatus];
+    NSString *pushFlag = [statusDict objectForKey:@"toEvaluationPageFlag"];
+    if (pushFlag.length > 0 && [pushFlag boolValue]) {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+        OrderStatusKA245Controller *evaluationVC = [OrderStatusKA245Controller new];
+        evaluationVC.paraDict = statusDict;
+        [self.navigationController pushViewController:evaluationVC animated:YES];
+    } else {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
 
-//- (NSArray *)classificationModelWithDetailModelArr:(NSArray *)detailModelArr {
-//    DetailCommonModel *tempModel;
-//    for (DetailCommonModel *detailModel in detailModelArr) {
-//        if ([detailModel.SHPM_STATUS integerValue] != ORDER_STATUS_230 && [detailModel.SHPM_STATUS integerValue] != ORDER_STATUS_241 && [detailModel.SHPM_STATUS integerValue] != ORDER_STATUS_242) {
-//            tempModel = detailModel;
-//            break;
-//        }
-//    }
-//    if (tempModel) {
-//        for (DetailCommonModel *detailModel in detailModelArr) {
-//            if (detailModel != tempModel) {
-//                detailModel.selected = @0;
-//            }
-//        }
-//    }
-//    return detailModelArr;
-//}
+
+
+/**
+ 判断当前负载单的所有交货单的状体看是否已全部签收
+
+ @return 当前负载单信息
+ */
+- (NSDictionary *)getAllOrdersStatus {
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionaryWithDictionary:@{@"driverTel":[LoginModel shareLoginModel].tel, @"userName":[LoginModel shareLoginModel].name}];
+    for (DetailCommonModel *detailModel in self.dataListArr) {
+        [paraDict setObject:detailModel.ORDER_CODE forKey:@"orderCode"];
+        [paraDict setObject:@"1" forKey:@"toEvaluationPageFlag"];
+        if ([detailModel.SHPM_STATUS integerValue] <= ORDER_STATUS_240) {
+            [paraDict setObject:@"0" forKey:@"toEvaluationPageFlag"];
+            break;
+        }
+    }
+    return paraDict;
+}
 
 //获取网络请求参数
 - (NSDictionary *)getParaDictFromModelsWithDetailModel:(DetailCommonModel *)detailModel {
@@ -259,11 +271,31 @@
 
 //异常签收按钮点击事件
 - (void)abnormalSignButtonActionWithDetailModel:(DetailCommonModel *)detailModel {
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"RefuseSignController" bundle:[NSBundle mainBundle]];
-    RefuseSignController *refuseVC = [sb instantiateViewControllerWithIdentifier:@"RefuseSignController"];
-    refuseVC.paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"userName":[LoginModel shareLoginModel].name, @"orderCode":detailModel.ORDER_CODE, @"shpmNum":detailModel.SHPM_NUM};;
+//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"RefuseSignController" bundle:[NSBundle mainBundle]];
+//    RefuseSignController *refuseVC = [sb instantiateViewControllerWithIdentifier:@"RefuseSignController"];
+//    refuseVC.paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"userName":[LoginModel shareLoginModel].name, @"orderCode":detailModel.ORDER_CODE, @"shpmNum":detailModel.SHPM_NUM};
+//    refuseVC.lxCode = ABNORMAL_CODE_262;
+//    [self.navigationController pushViewController:refuseVC animated:YES];
+    
+    
+    NSDictionary *paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel,
+                               @"userName":[LoginModel shareLoginModel].name,
+                               @"orderCode":detailModel.ORDER_CODE,
+                               @"shpmNum":detailModel.SHPM_NUM};
+    __weak typeof(self) weakself = self;
+    RefuseSignController *refuseVC = [RefuseSignController pushToRefuseSignWithController:self signResultBlock:^NSDictionary *(NSDictionary *signResult) {
+        NSInteger resultFlag = [signResult[@"flag"] integerValue];
+        
+        NSMutableDictionary *tempDict = [NSMutableDictionary dictionaryWithDictionary:@{@"driverTel":[LoginModel shareLoginModel].tel, @"userName":[LoginModel shareLoginModel].name, @"orderCode":detailModel.ORDER_CODE, @"toEvaluationPageFlag":@"0"}];
+        if (resultFlag == 1) {
+            detailModel.SHPM_STATUS = @"241";
+            NSDictionary *statusDict = [weakself getAllOrdersStatus];
+            return statusDict;
+        }
+        return tempDict;
+    }];
+    refuseVC.paraDict = paraDict;
     refuseVC.lxCode = ABNORMAL_CODE_262;
-    [self.navigationController pushViewController:refuseVC animated:YES];
 }
 
 //有单回空按钮点击事件

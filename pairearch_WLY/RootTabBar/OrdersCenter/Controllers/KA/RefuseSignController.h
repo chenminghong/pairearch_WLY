@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^RefuseSignBlock)(NSDictionary *signResult);
+typedef NSDictionary *(^RefuseSignBlock)(NSDictionary *signResult);
 
 @interface RefuseSignController : BaseViewController
 

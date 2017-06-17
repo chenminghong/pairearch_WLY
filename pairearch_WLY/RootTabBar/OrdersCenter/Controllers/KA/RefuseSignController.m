@@ -25,6 +25,7 @@
 #import "TZVideoPlayerController.h"
 #import "TZPhotoPreviewController.h"
 #import "TZGifPhotoPreviewController.h"
+#import "OrderStatusKA245Controller.h"
 
 
 #define MAX_IMAGE_COUNT  3   //最大可以选择的照片张数
@@ -163,9 +164,16 @@
                 if (resultFlag == 1) {
                     [hud setCompletionBlock:^(){
                         if (weakself.lxCode == ABNORMAL_CODE_262) {
-                            [weakself.navigationController popViewControllerAnimated:YES];
                             if (weakself.signResultBlock) {
-                                weakself.signResultBlock(@{@"flag":@(resultFlag)});
+                                NSDictionary *flagDict = weakself.signResultBlock(@{@"flag":@(resultFlag)});
+                                NSString *pushFlag = [flagDict objectForKey:@"toEvaluationPageFlag"];
+                                if (pushFlag.length > 0 && [pushFlag boolValue]) {
+                                    OrderStatusKA245Controller *evaluationVC = [OrderStatusKA245Controller new];
+                                    evaluationVC.paraDict = flagDict;
+                                    [self.navigationController pushViewController:evaluationVC animated:YES];
+                                } else {
+                                    [weakself.navigationController popViewControllerAnimated:YES];
+                                }
                             }
                         } else {
                             [weakself.navigationController popToRootViewControllerAnimated:YES];

@@ -20,7 +20,7 @@
 #define ORDER_STATUS_238   238  //收货签到-->入厂-->出厂
 #define ORDER_STATUS_240   240  //收货入厂
 #define ORDER_STATUS_241   241  //异常签收
-#define ORDER_STATUS_242   242  //有单回空（或者无单回空）
+#define ORDER_STATUS_242   242  //收货出厂（或者有单回空）
 #define ORDER_STATUS_245   245  //负载单评价
 #define ORDER_STATUS_248   248  //已（异常）签收
 
