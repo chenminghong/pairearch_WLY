@@ -184,31 +184,6 @@
         }
         return nil;
     }];
-//    RefuseSignController *refuseVC = [RefuseSignController pushToRefuseSignWithController:self signResultBlock:^(NSDictionary *signResult) {
-//        NSInteger resultFlag = [signResult[@"flag"] integerValue];
-//        if (resultFlag == 1) {
-//            model.SHPM_STATUS = @"241";
-//            [weakself.tableView reloadData];
-//            
-//            //判断是否全部异常签收
-//            BOOL allAbnormalFlag = YES;
-//            for (NSArray *modelArr in weakself.dataListArr) {
-//                for (OrderDetailModel *tempModel in modelArr) {
-//                    if ([tempModel.SHPM_STATUS integerValue] != 241) {
-//                        allAbnormalFlag = NO;
-//                        break;
-//                    }
-//                }
-//            }
-//            if (allAbnormalFlag) {
-//                weakself.footerView.startTransportBtn.backgroundColor = ABNORMAL_THEME_COLOR;
-//                weakself.footerView.startTransportBtn.userInteractionEnabled = NO;
-//            } else {
-//                weakself.footerView.startTransportBtn.backgroundColor = MAIN_THEME_COLOR;
-//                weakself.footerView.startTransportBtn.userInteractionEnabled = YES;
-//            }
-//        }
-//    }];
     refuseVC.paraDict = paraDict;
     refuseVC.lxCode = ABNORMAL_CODE_262;
     return;
@@ -327,7 +302,10 @@
             }
         }
     }
-    NSDictionary *paraDict = @{@"driverTel":driverTel, @"orderCode":orderCode, @"shpmNum":orderCodes, @"flag":@"true"};
+    NSDictionary *paraDict = @{@"driverTel":driverTel,
+                               @"orderCode":orderCode,
+                               @"shpmNum":@"",
+                               @"flag":@"true"};
     [self networkWithUrlStr:ORDER_OUT_GETFAC_API paraDict:paraDict];
 }
 

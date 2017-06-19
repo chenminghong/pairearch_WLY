@@ -71,7 +71,7 @@
                 [ProgressHUD bwm_showTitle:@"暂无数据" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
                 item.badgeValue = nil;
             } else {
-                item.badgeValue = [NSString stringWithFormat:@"%ld", self.dataListArr.count];
+                item.badgeValue = [NSString stringWithFormat:@"%ld", (unsigned long)self.dataListArr.count];
             }
         } else {
             [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
@@ -93,10 +93,11 @@
             UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:2];
             NSArray *orders = responseObject[@"orders"];
             if (orders.count > 0) {
-                item.badgeValue = [NSString stringWithFormat:@"%ld", orders.count];
+                item.badgeValue = [NSString stringWithFormat:@"%ld", (unsigned long)orders.count];
             } else {
                 item.badgeValue = nil;
             }
+            NSLog(@"badgeValue变化了:%ld", orders.count);
         }
     } failure:nil];
 }

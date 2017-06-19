@@ -58,6 +58,7 @@
     }];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:600 target:warningVC selector:@selector(getListDataBackground) userInfo:nil repeats:YES];
+    [self startTimer];
 }
 
 /**
