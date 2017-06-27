@@ -11,7 +11,6 @@
 @class DetailCommonModel;
 
 @interface Common212HeaderView : UITableViewHeaderFooterView
-@property (weak, nonatomic) IBOutlet UILabel *getTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *chengLabel;
 @property (weak, nonatomic) IBOutlet UILabel *loadNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *loadAddressLabel;

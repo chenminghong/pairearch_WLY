@@ -201,7 +201,7 @@
 - (void)startTransportAction:(UIButton *)sender {
     NSString *driverTel = [LoginModel shareLoginModel].tel;
     NSString *orderCode = @"";
-    NSString *orderCodes = @"";
+//    NSString *orderCodes = @"";
     for (NSInteger i = 0; i < self.dataListArr.count; i++) {
         NSArray *modelArr = self.dataListArr[i];
         OrderDetailModel *model = modelArr[0];
@@ -210,19 +210,19 @@
         } else {
             orderCode = [orderCode stringByAppendingFormat:@",%@", model.ORDER_CODE];
         }
-        for (NSInteger j = 0; j < modelArr.count; j++) {
-            OrderDetailModel *tempModel = modelArr[j];
-            orderCodes = [orderCodes stringByAppendingFormat:@",%@", tempModel.SHPM_NUM];
-        }
-        //首字母是@","的替换为@""
-        if (orderCodes.length > 0) {
-            NSString *firstStr = [orderCodes substringWithRange:NSMakeRange(0, 1)];
-            if ([firstStr isEqualToString:@","]) {
-                orderCodes = [orderCodes stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
-            }
-        }
+//        for (NSInteger j = 0; j < modelArr.count; j++) {
+//            OrderDetailModel *tempModel = modelArr[j];
+//            orderCodes = [orderCodes stringByAppendingFormat:@",%@", tempModel.SHPM_NUM];
+//        }
+//        //首字母是@","的替换为@""
+//        if (orderCodes.length > 0) {
+//            NSString *firstStr = [orderCodes substringWithRange:NSMakeRange(0, 1)];
+//            if ([firstStr isEqualToString:@","]) {
+//                orderCodes = [orderCodes stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+//            }
+//        }
     }
-    NSDictionary *paraDict = @{@"driverTel":driverTel, @"orderCode":orderCode, @"shpmNum":orderCodes};
+    NSDictionary *paraDict = @{@"driverTel":driverTel, @"orderCode":orderCode, @"orderCodes":@""};
     [self networkWithUrlStr:ORDER_GETLOAD_API paraDict:paraDict];
 }
 

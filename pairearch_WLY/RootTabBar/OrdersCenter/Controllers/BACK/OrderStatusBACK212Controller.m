@@ -116,8 +116,8 @@
     NSString *driverTel = [LoginModel shareLoginModel].tel;
     BackDetailModel *model = self.dataListArr[0];
     NSString *orderCode = model.ORDER_CODE? model.ORDER_CODE:@"";
-    NSString *orderCodes = model.SHPM_NUM? model.SHPM_NUM:@"";
-    NSDictionary *paraDict = @{@"driverTel":driverTel, @"orderCode":orderCode, @"orderCodes":orderCodes, @"type":@"TO"};
+//    NSString *orderCodes = model.SHPM_NUM? model.SHPM_NUM:@"";
+    NSDictionary *paraDict = @{@"driverTel":driverTel, @"orderCode":orderCode, @"orderCodes":@"", @"type":@"TO"};
     [self networkWithUrlStr:ORDER_GETLOAD_API paraDict:paraDict];
 }
 
