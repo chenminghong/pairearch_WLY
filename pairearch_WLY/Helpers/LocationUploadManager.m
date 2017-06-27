@@ -135,8 +135,10 @@
     } else if (message.type == 0x04) {
         BTKPushMessageFenceAlarmContent *content = (BTKPushMessageFenceAlarmContent *)message.content;
         if (content.actionType == BTK_FENCE_MONITORED_OBJECT_ACTION_TYPE_ENTER) {
+            [[self class] registerNotificationWithContent:[NSString stringWithFormat:@"您已进入地理围栏 %@", content.fenceName]];
             NSLog(@"被监控对象 %@ 进入 客户端地理围栏 %@ ", content.monitoredObject, content.fenceName);
         } else if (content.actionType == BTK_FENCE_MONITORED_OBJECT_ACTION_TYPE_EXIT) {
+            [[self class] registerNotificationWithContent:[NSString stringWithFormat:@"您已离开地理围栏 %@", content.fenceName]];
             NSLog(@"被监控对象 %@ 离开 客户端地理围栏 %@ ", content.monitoredObject, content.fenceName);
         }
     }
