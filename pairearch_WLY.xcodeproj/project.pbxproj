@@ -1550,7 +1550,7 @@
 					"$(PROJECT_DIR)/pairearch_WLY/Vender/UMOnlineConfig",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.paireach.baiwei;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pairearch.baiwei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1598,7 +1598,7 @@
 					"$(PROJECT_DIR)/pairearch_WLY/Vender/UMOnlineConfig",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.paireach.baiwei;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pairearch.baiwei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

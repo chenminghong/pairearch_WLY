@@ -52,9 +52,9 @@
 #pragma mark -- Define
 
 //关键字
-#define BAIDU_AK @"NudffmrH77cIxCdxQQtSd1PeNw75zbBR"  //百度地图AK
-#define UMENF_STATISTICS_APPKEY   @"58e71199a40fa354ce001a27"  //友盟统计的APPKRY
+#define BAIDU_AK @"NudffmrH77cIxCdxQQtSd1PeNw75zbBR"  //百度鹰眼SDKAK
 #define SERVICE_ID    133374           //百度鹰眼服务的serverId
+#define UMENF_STATISTICS_APPKEY   @"58e71199a40fa354ce001a27"  //友盟统计的APPKRY
 #define APP_KEY      @"e89d870640"     //百度统计AppKey
 #define LOGIN_STATE  @"login_state"   //登录状态关键字
 #define USER_NUMBER  @"user_number"   //存储电话
