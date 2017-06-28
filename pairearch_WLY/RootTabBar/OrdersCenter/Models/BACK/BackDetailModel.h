@@ -19,7 +19,7 @@
 
 @property (nonatomic, copy) NSString *FRM_SHPG_ADDR;             //发货地址
 
-@property (nonatomic, copy) NSString *PLAN_DELIVER_TIME;         //预约装货时间//
+@property (nonatomic, copy) NSString *PLAN_DELIVER_TIME;         //预约装货时间
 
 @property (nonatomic, copy) NSString *DRIVER_NAME;               //联系人
 
