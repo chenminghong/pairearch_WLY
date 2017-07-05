@@ -113,15 +113,6 @@
     [self.window setRootViewController:rootTab];
 }
 
-//注册本地通知
-- (void)registerLocalNotification {
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
-        if (!error) {
-            NSLog(@"request authorization succeeded!");
-        }
-    }];
-}
 
 //网络变化通知
 - (void)netWorkDidChangeAction {
@@ -138,22 +129,46 @@
     [manager startMonitoring];
 }
 
+//注册本地通知
+- (void)registerLocalNotification {
+    if ([[UIDevice currentDevice].systemVersion doubleValue] >= 10.0) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (!error) {
+                NSLog(@"request authorization succeeded!");
+            }
+        }];
+    } else if ([[UIDevice currentDevice].systemVersion doubleValue] >= 8.0) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
+    
+}
+
 //添加本地通知
 - (void)addNetLocalNotificationWithDesStr:(NSString *)desStr {
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    UNMutableNotificationContent *content = [UNMutableNotificationContent new];
-    content.body = [NSString localizedUserNotificationStringForKey:desStr arguments:nil];
-    content.sound = [UNNotificationSound defaultSound];
-    
-    NSString *requestIdentifier = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
-    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestIdentifier content:content trigger:nil];
-    
-    //添加推送成功后的处理！
-    [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
-        if (!error) {
-            NSLog(@"本地通知添加成功");
-        }
-    }];
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 10.0) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        UNMutableNotificationContent *content = [UNMutableNotificationContent new];
+        content.body = [NSString localizedUserNotificationStringForKey:desStr arguments:nil];
+        content.sound = [UNNotificationSound defaultSound];
+        NSString *requestIdentifier = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
+        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestIdentifier content:content trigger:nil];
+        
+        //添加推送成功后的处理！
+        [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+            if (!error) {
+                NSLog(@"本地通知添加成功");
+            }
+        }];
+    } else if ([UIDevice currentDevice].systemVersion.floatValue >= 9.0) {
+        UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+        localNotif.soundName = UILocalNotificationDefaultSoundName;
+        localNotif.alertBody = [NSString stringWithFormat:@"%@", desStr];
+//        localNotif.hasAction = NO;
+        //注意 ：  这里是立刻弹出通知，其实这里也可以来定时发出通知，或者倒计时发出通知
+        [[UIApplication sharedApplication] presentLocalNotificationNow:localNotif];
+    }
 }
 
 /**
