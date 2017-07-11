@@ -155,11 +155,11 @@
         [[NetworkHelper shareClient] POST:FENCE_MESSAGE_WARNING parameters:paraDict progress:nil success:nil failure:nil];
         
         if (content.actionType == BTK_FENCE_MONITORED_OBJECT_ACTION_TYPE_ENTER) {
-            [[self class] registerNotificationWithContent:[NSString stringWithFormat:@"您已进入地理围栏 %@", content.fenceName]];
-            NSLog(@"被监控对象 %@ 进入服务端地理围栏 %@ ", content.monitoredObject, content.fenceName);
+            [[self class] registerNotificationWithContent:[NSString stringWithFormat:@"您已进入地理围栏 %@", fenceName]];
+            NSLog(@"被监控对象 %@ 进入服务端地理围栏 %@ ", monitoredObject, fenceName);
         } else if (content.actionType == BTK_FENCE_MONITORED_OBJECT_ACTION_TYPE_EXIT) {
-            [[self class] registerNotificationWithContent:[NSString stringWithFormat:@"您已离开地理围栏 %@", content.fenceName]];
-            NSLog(@"被监控对象 %@ 离开 服务端地理围栏 %@ ", content.monitoredObject, content.fenceName);
+            [[self class] registerNotificationWithContent:[NSString stringWithFormat:@"您已离开地理围栏 %@", fenceName]];
+            NSLog(@"被监控对象 %@ 离开 服务端地理围栏 %@ ", monitoredObject, fenceName);
         }
     } else if (message.type == 0x04) {
         if (content.actionType == BTK_FENCE_MONITORED_OBJECT_ACTION_TYPE_ENTER) {
