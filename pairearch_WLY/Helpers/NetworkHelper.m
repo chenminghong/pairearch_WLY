@@ -95,23 +95,36 @@
 - (NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(id)parameters progress:(void (^)(NSProgress * _Nonnull))downloadProgress success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure {
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    NSString *latitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.latitude];
-    NSString *longitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.longitude];
+    NSString *lngStr = [paraDict objectForKey:@"lng"];
+    if (lngStr.length <= 0) {
+        NSString *longitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.longitude];
+        [paraDict setObject:longitude forKey:@"lng"];
+    }
     
-    [paraDict setObject:latitude forKey:@"lat"];
-    [paraDict setObject:longitude forKey:@"lng"];
-    
+    NSString *latStr = [NSString stringWithFormat:@"%@", [paraDict objectForKey:@"lat"]];
+    if (latStr.length <= 0) {
+        NSString *latitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.latitude];
+        [paraDict setObject:latitude forKey:@"lat"];
+        
+    }
     return [super GET:URLString parameters:paraDict progress:downloadProgress success:success failure:failure];
 }
 
 - (NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(id)parameters progress:(void (^)(NSProgress * _Nonnull))uploadProgress success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure {
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    NSString *latitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.latitude];
-    NSString *longitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.longitude];
+    NSString *lngStr = [paraDict objectForKey:@"lng"];
+    if (lngStr.length <= 0) {
+        NSString *longitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.longitude];
+        [paraDict setObject:longitude forKey:@"lng"];
+    }
     
-    [paraDict setObject:latitude forKey:@"lat"];
-    [paraDict setObject:longitude forKey:@"lng"];
+    NSString *latStr = [NSString stringWithFormat:@"%@", [paraDict objectForKey:@"lat"]];
+    if (latStr.length <= 0) {
+        NSString *latitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.latitude];
+        [paraDict setObject:latitude forKey:@"lat"];
+        
+    }
     
     return [super POST:URLString parameters:paraDict progress:uploadProgress success:success failure:failure];
 }
@@ -119,11 +132,18 @@
 - (NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(id)parameters constructingBodyWithBlock:(void (^)(id<AFMultipartFormData> _Nonnull))block progress:(void (^)(NSProgress * _Nonnull))uploadProgress success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure {
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    NSString *latitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.latitude];
-    NSString *longitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.longitude];
+    NSString *lngStr = [paraDict objectForKey:@"lng"];
+    if (lngStr.length <= 0) {
+        NSString *longitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.longitude];
+        [paraDict setObject:longitude forKey:@"lng"];
+    }
     
-    [paraDict setObject:latitude forKey:@"lat"];
-    [paraDict setObject:longitude forKey:@"lng"];
+    NSString *latStr = [NSString stringWithFormat:@"%@", [paraDict objectForKey:@"lat"]];
+    if (latStr.length <= 0) {
+        NSString *latitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.latitude];
+        [paraDict setObject:latitude forKey:@"lat"];
+        
+    }
     
     return [super POST:URLString parameters:paraDict constructingBodyWithBlock:block progress:uploadProgress success:success failure:failure];
 }

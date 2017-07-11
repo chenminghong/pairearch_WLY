@@ -91,6 +91,9 @@
 //异常原因列表
 #define REJECT_REASON_LIST_API            @"rejectReason.a"                 //post
 
+//触发地理围栏报警
+#define FENCE_MESSAGE_WARNING             @"saveFenceAlarmInfo.a"           //post
+
 
 /*============================预警相关=============================*/
 
