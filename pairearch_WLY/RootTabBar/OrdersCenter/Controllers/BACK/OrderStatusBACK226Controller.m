@@ -72,7 +72,7 @@
 #pragma marks -- TableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.dataListArr.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -80,7 +80,18 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return kScreenHeight - 200 - 64;
+    NSString *titleText = [OrderStatusManager getOrderDescriptionWithStatus:self.orderStatus orderType:ORDER_TYPE_BACK];
+    CGFloat titleConstant = 0.0;
+    if (indexPath.row == 0) {
+        titleConstant = [BaseModel heightForTextString:titleText width:(kScreenWidth - 40.0)  fontSize:CELL_LABEL_FONTSIZE];
+    }
+    
+    BackDetailModel *detailModel = self.dataListArr[indexPath.row];
+    CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"装货地址:%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];;
+    CGFloat toAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地址:%@", detailModel.TO_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat height = 30.0 + titleConstant + loadNumberConstant + loadAddressConstant + toAddressConstant;
+    return height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -104,7 +115,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BackListDetailCell *cell = [BackListDetailCell getCellWithTable:tableView];
     cell.detailModel = self.dataListArr[indexPath.row];
-    cell.descriptionLabel.text = [OrderStatusManager getOrderDescriptionWithStatus:self.orderStatus orderType:ORDER_TYPE_BACK];
+    if (indexPath.row == 0) {
+        cell.descriptionLabel.text = [OrderStatusManager getOrderDescriptionWithStatus:self.orderStatus orderType:ORDER_TYPE_BACK];
+    } else {
+        cell.descriptionLabel.text = @"";
+    }
     return cell;
 }
 
