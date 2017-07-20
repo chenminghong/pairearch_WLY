@@ -15,7 +15,13 @@
 
 //加载cell
 + (instancetype)getCellWithCollectionView:(UICollectionView *)collectionView indexPath:(NSIndexPath *)indexPath pushBlock:(PushActionBlock)pushBlock {
-    OrdersCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OrdersCollectionCell" forIndexPath:indexPath];
+//    OrdersCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OrdersCollectionCell" forIndexPath:indexPath];
+//    cell.indexPath = indexPath;
+//    cell.pushBlock = pushBlock;
+    
+    NSString *reuseIdentifier = [NSString stringWithFormat:@"index%ld", (long)indexPath.item];
+    [collectionView registerClass:[OrdersCollectionCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    OrdersCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     cell.indexPath = indexPath;
     cell.pushBlock = pushBlock;
     return cell;
@@ -72,16 +78,6 @@
     } else {
         self.type = @"complete";
     }
-    
-    if (self.indexPath.item == 0) {
-        if (self.listModelArr.count <= 0) {
-            [self.transpotBtn setHidden:YES];
-        } else {
-            [self.transpotBtn setHidden:NO];
-        }
-    } else {
-        [self.transpotBtn setHidden:YES];
-    }
 }
 
 - (void)setListModelArr:(NSMutableArray *)listModelArr {
@@ -93,6 +89,17 @@
             [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
         }
     }
+    
+    if (self.indexPath.item == 0) {
+        if (self.listModelArr.count <= 0) {
+            [self.transpotBtn setHidden:YES];
+        } else {
+            [self.transpotBtn setHidden:NO];
+        }
+    } else {
+        [self.transpotBtn setHidden:YES];
+    }
+
 }
 
 //  请求网络数据
@@ -102,7 +109,7 @@
     [OrderListModel getDataWithParameters:@{@"driverTel":driverTel? driverTel:@"", @"status":self.type? self.type:@""} endBlock:^(id model, NSError *error) {
         if (!error) {
             self.listModelArr = [NSMutableArray arrayWithArray:model];
-            [self.reloadFlags replaceObjectAtIndex:self.indexPath.item withObject:@(0)];
+//            [self.reloadFlags replaceObjectAtIndex:self.indexPath.item withObject:@(0)];
         } else {
             [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.listTableView.superview hideAfter:HUD_HIDE_TIMEINTERVAL];
         }

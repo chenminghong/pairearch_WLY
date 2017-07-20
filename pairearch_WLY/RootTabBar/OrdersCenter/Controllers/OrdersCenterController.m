@@ -38,7 +38,7 @@
 
 @property (nonatomic, strong) UIView *markView; //按钮标记view
 
-@property (nonatomic, strong) NSMutableArray *reloadFlags;  //table刷新标识
+//@property (nonatomic, strong) NSMutableArray *reloadFlags;  //table刷新标识
 
 @property (nonatomic, strong) OrdersCollectionCell *currentCell;  //当前显示的cell
 
@@ -63,7 +63,7 @@
     self.view.backgroundColor = UIColorFromRGB(0xCBC9C7);
     
     //初始化刷新标识
-    self.reloadFlags = [NSMutableArray arrayWithArray:@[@1, @1, @1]];
+//    self.reloadFlags = [NSMutableArray arrayWithArray:@[@1, @1, @1]];
     
     self.collectionView.pagingEnabled = YES;
     [self.selectView addSubview:self.markView];
@@ -83,13 +83,14 @@
     }
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadListData:) name:ORDERSCENTER_RELOAD_NAME object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadListData:) name:ORDERSCENTER_RELOAD_NAME object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.collectionView reloadData];
 }
 
 #pragma mark -- ButtonActions
@@ -113,15 +114,15 @@
 }
 
 //刷新当前的列表
-- (void)reloadListData:(NSNotification *)sender {
-    for (NSInteger i = 0; i < 3; i++) {
-        [self.reloadFlags replaceObjectAtIndex:i withObject:@1];
-    }
-    if (self.currentCell) {
-        [MJRefreshUtil begainRefresh:self.currentCell.listTableView];
-        [self.reloadFlags replaceObjectAtIndex:self.currentCell.indexPath.item withObject:@0];
-    }
-}
+//- (void)reloadListData:(NSNotification *)sender {
+//    for (NSInteger i = 0; i < 3; i++) {
+//        [self.reloadFlags replaceObjectAtIndex:i withObject:@1];
+//    }
+//    if (self.currentCell) {
+//        [MJRefreshUtil begainRefresh:self.currentCell.listTableView];
+//        [self.reloadFlags replaceObjectAtIndex:self.currentCell.indexPath.item withObject:@0];
+//    }
+//}
 
 //KA界面跳转逻辑
 - (void)jumpToKaControllerWithStatus:(NSInteger)status paraDict:(NSDictionary *)paraDict {
@@ -324,8 +325,8 @@
             }
         }
     }];
-    cell.indexPath = indexPath;
-    cell.reloadFlags = self.reloadFlags;
+//    cell.indexPath = indexPath;
+//    cell.reloadFlags = self.reloadFlags;
     [cell addAbnormalReportBlock:^(NSString *loadNumber) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"AbnormalReportController" bundle:[NSBundle mainBundle]];
         AbnormalReportController *abnormalVC = [sb instantiateViewControllerWithIdentifier:@"AbnormalReportController"];
@@ -337,12 +338,12 @@
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0) {
     
-    NSNumber *flag = self.reloadFlags[indexPath.item];
-    if ([flag boolValue]) {
-        OrdersCollectionCell *tempCell = (OrdersCollectionCell *)cell;
-        [MJRefreshUtil begainRefresh:tempCell.listTableView];
-    }
-    self.currentCell = (OrdersCollectionCell *)cell;
+//    NSNumber *flag = self.reloadFlags[indexPath.item];
+//    if ([flag boolValue]) {
+    OrdersCollectionCell *tempCell = (OrdersCollectionCell *)cell;
+    [MJRefreshUtil begainRefresh:tempCell.listTableView];
+//    }
+//    self.currentCell = (OrdersCollectionCell *)cell;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {

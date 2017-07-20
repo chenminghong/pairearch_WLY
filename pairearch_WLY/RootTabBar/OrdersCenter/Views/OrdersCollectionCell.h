@@ -29,7 +29,7 @@ typedef void(^AbnormalReportBlock)(NSString *loadNumber);
 
 @property (nonatomic, strong) NSMutableArray *listModelArr;
 
-@property (nonatomic, strong) NSMutableArray *reloadFlags;  //存储刷新标识(1:需要刷新, 0:不需要刷新)
+//@property (nonatomic, strong) NSMutableArray *reloadFlags;  //存储刷新标识(1:需要刷新, 0:不需要刷新)
 
 @property (nonatomic, strong) AbnormalReportBlock abnormalReportBlock;
 
