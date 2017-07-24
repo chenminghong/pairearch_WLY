@@ -98,17 +98,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == self.dataListArr.count - 1) {
-        return 80.0;
-    }
-    return 0.0;
+    return 80.0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (section == self.dataListArr.count - 1) {
-        return self.footerView;
-    }
-    return nil;
+    return self.footerView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
