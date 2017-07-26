@@ -35,7 +35,6 @@
     
     //添加友盟统计
     [self initUmengClick];
-//    [self getDeviceID];
     
     //版本更新
     [self checkAppVersion];
