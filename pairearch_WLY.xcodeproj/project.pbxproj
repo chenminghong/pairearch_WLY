@@ -13,6 +13,7 @@
 		0F4C92631EE0226900546AFF /* RejectReasonListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4C92621EE0226900546AFF /* RejectReasonListModel.m */; };
 		0F4C92671EE02E3A00546AFF /* RejectSignCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4C92651EE02E3A00546AFF /* RejectSignCell.m */; };
 		0F4C92681EE02E3A00546AFF /* RejectSignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F4C92661EE02E3A00546AFF /* RejectSignCell.xib */; };
+		0F70B8241F2B27C1003758CA /* UIButton+Repeat.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F70B8231F2B27C1003758CA /* UIButton+Repeat.m */; };
 		0FAE163C1EEE37E700E5450F /* EarlyWarningController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE163A1EEE37E700E5450F /* EarlyWarningController.m */; };
 		0FAE16411EEE38E200E5450F /* EarlyWarningTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE163F1EEE38E200E5450F /* EarlyWarningTableCell.m */; };
 		0FAE16421EEE38E200E5450F /* EarlyWarningTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FAE16401EEE38E200E5450F /* EarlyWarningTableCell.xib */; };
@@ -172,6 +173,8 @@
 		0F4C92641EE02E3A00546AFF /* RejectSignCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RejectSignCell.h; sourceTree = "<group>"; };
 		0F4C92651EE02E3A00546AFF /* RejectSignCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RejectSignCell.m; sourceTree = "<group>"; };
 		0F4C92661EE02E3A00546AFF /* RejectSignCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RejectSignCell.xib; sourceTree = "<group>"; };
+		0F70B8221F2B27C1003758CA /* UIButton+Repeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Repeat.h"; sourceTree = "<group>"; };
+		0F70B8231F2B27C1003758CA /* UIButton+Repeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Repeat.m"; sourceTree = "<group>"; };
 		0FAE16391EEE37E700E5450F /* EarlyWarningController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarlyWarningController.h; sourceTree = "<group>"; };
 		0FAE163A1EEE37E700E5450F /* EarlyWarningController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarlyWarningController.m; sourceTree = "<group>"; };
 		0FAE163E1EEE38E200E5450F /* EarlyWarningTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarlyWarningTableCell.h; sourceTree = "<group>"; };
@@ -428,6 +431,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F70B8211F2B276A003758CA /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				0F70B8221F2B27C1003758CA /* UIButton+Repeat.h */,
+				0F70B8231F2B27C1003758CA /* UIButton+Repeat.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		0FAE16351EEE37CA00E5450F /* EarlyWarning */ = {
 			isa = PBXGroup;
 			children = (
@@ -677,6 +689,7 @@
 		B35727631E540D9D003F9B2F /* General */ = {
 			isa = PBXGroup;
 			children = (
+				0F70B8211F2B276A003758CA /* Category */,
 				0FE963271EB9B2E800F916DD /* ProgressHUD */,
 				B336CC151E88C010000F3928 /* BaseViewController */,
 				B37CB2291E6E96F900A1463F /* OrderStatusBaseController */,
@@ -1305,6 +1318,7 @@
 				B3D3B2A81E66EA550033EF84 /* HomeTableCell.m in Sources */,
 				B38411121E5D875700F7069F /* MJRefreshUtil.m in Sources */,
 				B384113B1E5E832C00F7069F /* AlterPasswordViewController.m in Sources */,
+				0F70B8241F2B27C1003758CA /* UIButton+Repeat.m in Sources */,
 				B37CB24E1E6FEFCC00A1463F /* RefuseSignController.m in Sources */,
 				B384111C1E5D886000F7069F /* LoginTextField.m in Sources */,
 				B307BF9D1E7786B3005D7979 /* HaveBackOrderController.m in Sources */,

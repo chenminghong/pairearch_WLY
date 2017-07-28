@@ -41,7 +41,7 @@
                 break;
                 
             case ORDER_STATUS_240:
-                title = @"收货-厂外排队";
+                title = @"收货-收货入厂";
                 break;
                 
             default:
