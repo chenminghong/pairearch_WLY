@@ -15,6 +15,6 @@
  */
 @property (nonatomic, assign) NSTimeInterval eventTimeInterval;
 
-@property (nonatomic, assign) BOOL isRepeat;
+//@property (nonatomic, assign) BOOL isRepeat;
 
 @end

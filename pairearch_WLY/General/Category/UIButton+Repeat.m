@@ -24,7 +24,7 @@
 
 static const char *UIControl_eventTimeInterval = "UIControl_eventTimeInterval";
 static const char *UIControl_enventIsIgnoreEvent = "UIControl_enventIsIgnoreEvent";
-static const char *UIControl_enventIsRepeat = "UIControl_enventIsRepeat";
+//static const char *UIControl_enventIsRepeat = "UIControl_enventIsRepeat";
 
 @implementation UIButton (Repeat)
 
@@ -44,32 +44,32 @@ static const char *UIControl_enventIsRepeat = "UIControl_enventIsRepeat";
     objc_setAssociatedObject(self, UIControl_eventTimeInterval, @(eventTimeInterval), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (void)setIsRepeat:(BOOL)isRepeat {
-    objc_setAssociatedObject(self, UIControl_enventIsRepeat, @(isRepeat), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    if (isRepeat) {
-        // Method Swizzling
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            SEL selA = @selector(sendAction:to:forEvent:);
-            SEL selB = @selector(_wxd_sendAction:to:forEvent:);
-            Method methodA = class_getInstanceMethod([self class], selA);
-            Method methodB = class_getInstanceMethod([self class], selB);
-            
-            BOOL isAdd = class_addMethod([self class], selA, method_getImplementation(methodB), method_getTypeEncoding(methodB));
-            
-            if (isAdd) {
-                class_replaceMethod([self class], selB, method_getImplementation(methodA), method_getTypeEncoding(methodA));
-            } else {
-                //添加失败了 说明本类中有methodB的实现，此时只需要将methodA和methodB的IMP互换一下即可。
-                method_exchangeImplementations(methodA, methodB);
-            }
-        });
-    }
-}
-
-- (BOOL)isRepeat {
-    return [objc_getAssociatedObject(self, UIControl_enventIsRepeat) boolValue];
-}
+//- (void)setIsRepeat:(BOOL)isRepeat {
+//    objc_setAssociatedObject(self, UIControl_enventIsRepeat, @(isRepeat), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+//    if (isRepeat) {
+//        // Method Swizzling
+//        static dispatch_once_t onceToken;
+//        dispatch_once(&onceToken, ^{
+//            SEL selA = @selector(sendAction:to:forEvent:);
+//            SEL selB = @selector(_wxd_sendAction:to:forEvent:);
+//            Method methodA = class_getInstanceMethod([self class], selA);
+//            Method methodB = class_getInstanceMethod([self class], selB);
+//            
+//            BOOL isAdd = class_addMethod([self class], selA, method_getImplementation(methodB), method_getTypeEncoding(methodB));
+//            
+//            if (isAdd) {
+//                class_replaceMethod([self class], selB, method_getImplementation(methodA), method_getTypeEncoding(methodA));
+//            } else {
+//                //添加失败了 说明本类中有methodB的实现，此时只需要将methodA和methodB的IMP互换一下即可。
+//                method_exchangeImplementations(methodA, methodB);
+//            }
+//        });
+//    }
+//}
+//
+//- (BOOL)isRepeat {
+//    return [objc_getAssociatedObject(self, UIControl_enventIsRepeat) boolValue];
+//}
 
 + (void)load {
     // Method Swizzling
