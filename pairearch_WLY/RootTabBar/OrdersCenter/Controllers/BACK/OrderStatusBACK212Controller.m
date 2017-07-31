@@ -120,10 +120,14 @@
 
 #pragma mark -- 按钮响应事件
 
-//接收运单按钮响应时间
+//接收运单按钮响应事件
 - (void)startTransportAction:(UIButton *)sender {
     NSString *driverTel = [LoginModel shareLoginModel].tel;
     BackDetailModel *model = self.dataListArr[0];
+    if (model.SHPM_STATUS.integerValue != ORDER_STATUS_212) {
+        [ProgressHUD bwm_showTitle:@"订单已接收" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        return;
+    }
     NSString *orderCode = model.ORDER_CODE? model.ORDER_CODE:@"";
 //    NSString *orderCodes = model.SHPM_NUM? model.SHPM_NUM:@"";
     NSDictionary *paraDict = @{@"driverTel":driverTel, @"orderCode":orderCode, @"orderCodes":@"", @"type":@"TO"};

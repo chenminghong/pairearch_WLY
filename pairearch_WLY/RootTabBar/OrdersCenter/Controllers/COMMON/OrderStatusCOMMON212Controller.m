@@ -183,6 +183,10 @@
     NSString *orderCodes = @"";
     for (NSInteger i = 0; i < self.dataListArr.count; i++) {
         DetailCommonModel *model = self.dataListArr[i];
+        if (model.SHPM_STATUS.integerValue != ORDER_STATUS_212) {
+            [ProgressHUD bwm_showTitle:@"订单已接收" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            return;
+        }
         if (i == 0) {
             orderCode = model.ORDER_CODE;
         }
