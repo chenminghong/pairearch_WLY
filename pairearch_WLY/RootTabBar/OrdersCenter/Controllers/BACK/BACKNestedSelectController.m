@@ -133,9 +133,15 @@
 
 //添加子视图控制器
 - (void)addChildController:(UIViewController *)viewController {
+    if (self.childViewControllers.count > 0) {
+        [self.view.subviews[0] removeFromSuperview];
+        [self.childViewControllers[0] removeFromParentViewController];
+        
+    }
     [self addChildViewController:viewController];
     viewController.view.frame = self.view.bounds;
     [self.view insertSubview:viewController.view atIndex:0];
+
 }
 
 #pragma mark -- ButtonAction

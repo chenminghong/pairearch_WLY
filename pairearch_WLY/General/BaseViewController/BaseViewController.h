@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^NextStepBlock)(NSDictionary *paraDict);
+
 @interface BaseViewController : UIViewController
+
+@property (nonatomic, copy) NextStepBlock nextBlock;
+
 
 @end

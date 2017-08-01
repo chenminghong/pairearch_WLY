@@ -34,7 +34,6 @@
     self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction:)];
     
     [self.view addSubview:self.tableView];
-    self.orderType = ORDER_TYPE_KA;
 }
 
 - (void)setParaDict:(NSDictionary *)paraDict {
@@ -42,11 +41,6 @@
     [self loadDetailDataFromNet];
 }
 
-
-- (void)setOrderStatus:(NSInteger)orderStatus {
-    _orderStatus = orderStatus;
-    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:orderStatus orderType:ORDER_TYPE_COMMON];
-}
 
 #pragma mark -- Lazy Loading
 
@@ -99,12 +93,12 @@
     CGFloat appointmentLoadConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预约交货时间：%@", detailModel.APPOINTMENT_END_TIME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat contactPersonConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_NAME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat contactPhoneConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_MOBILE] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat height = 75.0+loadNumberConstant+loadNameConstant+loadAddressConstant+appointmentLoadConstant+contactPersonConstant+contactPhoneConstant;
+    CGFloat height = 55.0+loadNumberConstant+loadNameConstant+loadAddressConstant+appointmentLoadConstant+contactPersonConstant+contactPhoneConstant;
     return height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    NSString *desStr = [OrderStatusManager getOrderDescriptionWithStatus:self.orderStatus orderType:ORDER_TYPE_COMMON];
+    NSString *desStr = [OrderStatusManager getOrderDescriptionWithStatus:ORDER_STATUS_220 orderType:ORDER_TYPE_COMMON];
     CGFloat height = [BaseModel heightForTextString:desStr width:(kScreenWidth - 40.0)  fontSize:CELL_LABEL_FONTSIZE];
     return height + 20.0;
 }
@@ -124,7 +118,7 @@
     }];
     label.numberOfLines = 0;
     label.font = [UIFont systemFontOfSize:13.0];
-    label.text = [OrderStatusManager getOrderDescriptionWithStatus:self.orderStatus orderType:ORDER_TYPE_COMMON];
+    label.text = [OrderStatusManager getOrderDescriptionWithStatus:ORDER_STATUS_220 orderType:ORDER_TYPE_COMMON];
     return header;
 }
 
@@ -166,7 +160,7 @@
 //                checkVC.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:self.orderStatus orderType:self.orderType];
 //                [weakself.navigationController pushViewController:checkVC animated:YES];
                 
-                NSInteger orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:weakself.orderStatus orderType:weakself.orderType];
+                NSInteger orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:ORDER_STATUS_220 orderType:ORDER_TYPE_COMMON];
                 if (weakself.nextBlock) {
                     weakself.nextBlock(@{@"currentStatus":@(orderStatus)});
                 }

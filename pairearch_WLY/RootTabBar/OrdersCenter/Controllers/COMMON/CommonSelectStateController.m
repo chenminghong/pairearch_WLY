@@ -68,9 +68,7 @@
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                if (paraDict) {
-                    [self loadDetailDataFromNet];
-                }
+                [self pushToNextWithParaDict:self.paraDict];
             };
         }
             break;
@@ -81,9 +79,7 @@
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                if (paraDict) {
-                    [self loadDetailDataFromNet];
-                }
+                [self pushToNextWithParaDict:self.paraDict];
             };
         }
             break;
@@ -94,9 +90,7 @@
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                if (paraDict) {
-                    [self loadDetailDataFromNet];
-                }
+                [self pushToNextWithParaDict:self.paraDict];
             };
         }
             break;
@@ -107,10 +101,7 @@
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                if (paraDict) {
-                    [self loadDetailDataFromNet];
-                }
-            };
+                [self pushToNextWithParaDict:self.paraDict];            };
         }
             break;
             
@@ -123,9 +114,7 @@
             childVC.dataListArr = self.dataListArr;
             [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                if (paraDict) {
-                    [self loadDetailDataFromNet];
-                }
+                [self pushToNextWithParaDict:self.paraDict];
             };
         }
             break;
@@ -144,9 +133,17 @@
     }
 }
 
+//跳转到下一个界面
+- (void)pushToNextWithParaDict:(NSDictionary *)paraDict {
+    CommonSelectStateController *nextVC = [CommonSelectStateController new];
+    nextVC.paraDict = self.paraDict;
+    [self.navigationController pushViewController:nextVC animated:YES];
+}
+
 
 //添加子视图控制器
 - (void)addChildController:(UIViewController *)viewController {
+    /*
     if (self.childViewControllers.count > 0) {
         if ([[self.childViewControllers[0] class] isSubclassOfClass:[viewController class]]) {
             return;
@@ -166,6 +163,16 @@
             [self.view insertSubview:viewController.view atIndex:0];
         } completion:nil];
     }
+    */
+    
+    if (self.childViewControllers.count > 0) {
+        [self.view.subviews[0] removeFromSuperview];
+        [self.childViewControllers[0] removeFromParentViewController];
+        
+    }
+    [self addChildViewController:viewController];
+    viewController.view.frame = self.view.bounds;
+    [self.view insertSubview:viewController.view atIndex:0];
 }
 
 //返回按钮点击事件

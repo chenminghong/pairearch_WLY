@@ -123,7 +123,6 @@
     NestedSelectStateController *nestedVC = [NestedSelectStateController new];
     [self.navigationController pushViewController:nestedVC animated:YES];
     nestedVC.paraDict = paraDict;
-    nestedVC.orderStatus = status;
 }
 
 //BACK界面跳转逻辑

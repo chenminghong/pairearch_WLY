@@ -8,10 +8,7 @@
 
 #import "BaseViewController.h"
 
-typedef void(^NextStepBlock)(NSDictionary *paraDict);
-
 @interface OrderStatusKABaseController : BaseViewController
 
-@property (nonatomic, copy) NextStepBlock nextBlock;
 
 @end

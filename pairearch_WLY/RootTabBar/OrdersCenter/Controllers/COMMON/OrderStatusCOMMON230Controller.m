@@ -40,11 +40,6 @@
     [self loadDetailDataFromNet];
 }
 
-//- (void)setOrderStatus:(NSInteger)orderStatus {
-//    _orderStatus = orderStatus;
-//    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:orderStatus orderType:ORDER_TYPE_COMMON];
-//}
-
 - (void)setDataListArr:(NSMutableArray *)dataListArr {
     _dataListArr = dataListArr;
     NSDictionary *statusDict = [self getAllOrdersStatus];

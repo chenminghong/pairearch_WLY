@@ -68,10 +68,7 @@
             
             //根据加载的数据判断跳转界面
             OrderDetailModel *model = [self.dataListArr[0] firstObject];
-            if (self.orderStatus >= ORDER_STATUS_230 && self.orderStatus < ORDER_STATUS_245) {
-                self.orderStatus = [model.SHPM_STATUS integerValue];
-            }
-            [self judgeJumpToDetailControllerWithOrderStatus:self.orderStatus];
+            [self judgeJumpToDetailControllerWithOrderStatus:model.SHPM_STATUS.integerValue];
         } else {
             if (self.view.subviews.count > 0) {
                 [self.view.subviews[0] removeFromSuperview];
@@ -91,11 +88,7 @@
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                if (paraDict) {
-                    NSInteger tempOrderStatus = [paraDict[@"currentStatus"] integerValue];
-                    self.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:tempOrderStatus orderType:ORDER_TYPE_KA];
-                    [self loadDetailDataFromNet];
-                }
+                [self pushToNextWithParaDict:self.paraDict];
             };
         }
             break;
@@ -106,11 +99,7 @@
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                if (paraDict) {
-                    NSInteger tempOrderStatus = [paraDict[@"currentStatus"] integerValue];
-                    self.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:tempOrderStatus orderType:ORDER_TYPE_KA];
-                    [self loadDetailDataFromNet];
-                }
+                [self pushToNextWithParaDict:self.paraDict];
             };
         }
             break;
@@ -121,11 +110,7 @@
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                if (paraDict) {
-                    NSInteger tempOrderStatus = [paraDict[@"currentStatus"] integerValue];
-                    self.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:tempOrderStatus orderType:ORDER_TYPE_KA];
-                    [self loadDetailDataFromNet];
-                }
+                [self pushToNextWithParaDict:self.paraDict];
             };
         }
             break;
@@ -136,11 +121,7 @@
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                if (paraDict) {
-                    NSInteger tempOrderStatus = [paraDict[@"currentStatus"] integerValue];
-                    self.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:tempOrderStatus orderType:ORDER_TYPE_KA];
-                    [self loadDetailDataFromNet];
-                }
+                [self pushToNextWithParaDict:self.paraDict];
             };
         }
             break;
@@ -152,11 +133,7 @@
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                if (paraDict) {
-                    NSInteger tempOrderStatus = [paraDict[@"currentStatus"] integerValue];
-                    self.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:tempOrderStatus orderType:ORDER_TYPE_KA];
-                    [self loadDetailDataFromNet];
-                }
+                [self pushToNextWithParaDict:self.paraDict];
             };
         }
             break;
@@ -167,11 +144,7 @@
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                if (paraDict) {
-                    NSInteger tempOrderStatus = [paraDict[@"currentStatus"] integerValue];
-                    self.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:tempOrderStatus orderType:ORDER_TYPE_KA];
-                    [self loadDetailDataFromNet];
-                }
+                [self pushToNextWithParaDict:self.paraDict];
             };
         }
             break;
@@ -184,11 +157,7 @@
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                if (paraDict) {
-                    NSInteger tempOrderStatus = [paraDict[@"currentStatus"] integerValue];
-                    self.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:tempOrderStatus orderType:ORDER_TYPE_KA];
-                    [self loadDetailDataFromNet];
-                }
+                [self pushToNextWithParaDict:self.paraDict];
             };
         }
             break;
@@ -208,27 +177,43 @@
     
 }
 
+//跳转到下一个界面
+- (void)pushToNextWithParaDict:(NSDictionary *)paraDict {
+    NestedSelectStateController *nextVC = [NestedSelectStateController new];
+    nextVC.paraDict = self.paraDict;
+    [self.navigationController pushViewController:nextVC animated:YES];
+}
+
 //添加子视图控制器
 - (void)addChildController:(UIViewController *)viewController {
+//    if (self.childViewControllers.count > 0) {
+//        if ([[self.childViewControllers[0] class] isSubclassOfClass:[viewController class]]) {
+//            return;
+//        }        
+//        [self addChildViewController:viewController];
+//        viewController.view.frame = self.view.bounds;
+//        
+//        [UIView transitionFromView:self.view.subviews[0] toView:viewController.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
+//            if (finished) {
+//                [self.childViewControllers[0] removeFromParentViewController];
+//            }
+//        }];
+//    } else {
+//        [self addChildViewController:viewController];
+//        [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+//            viewController.view.frame = self.view.bounds;
+//            [self.view insertSubview:viewController.view atIndex:0];
+//        } completion:nil];
+//    }
+    
     if (self.childViewControllers.count > 0) {
-        if ([[self.childViewControllers[0] class] isSubclassOfClass:[viewController class]]) {
-            return;
-        }        
-        [self addChildViewController:viewController];
-        viewController.view.frame = self.view.bounds;
-        
-        [UIView transitionFromView:self.view.subviews[0] toView:viewController.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
-            if (finished) {
-                [self.childViewControllers[0] removeFromParentViewController];
-            }
-        }];
-    } else {
-        [self addChildViewController:viewController];
-        [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            viewController.view.frame = self.view.bounds;
-            [self.view insertSubview:viewController.view atIndex:0];
-        } completion:nil];
+        [self.view.subviews[0] removeFromSuperview];
+        [self.childViewControllers[0] removeFromParentViewController];
+
     }
+    [self addChildViewController:viewController];
+    viewController.view.frame = self.view.bounds;
+    [self.view insertSubview:viewController.view atIndex:0];
 }
 
 #pragma mark -- ButtonAction
