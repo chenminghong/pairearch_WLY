@@ -157,10 +157,15 @@
         if (status == 1) {
             __weak typeof(self) weakself = self;
             [hud setCompletionBlock:^(){
-                OrderStatusCOMMON228Controller *checkVC = [OrderStatusCOMMON228Controller new];
-                checkVC.paraDict = self.paraDict;
-                checkVC.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:self.orderStatus orderType:self.orderType];
-                [weakself.navigationController pushViewController:checkVC animated:YES];
+//                OrderStatusCOMMON228Controller *checkVC = [OrderStatusCOMMON228Controller new];
+//                checkVC.paraDict = self.paraDict;
+//                checkVC.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:self.orderStatus orderType:self.orderType];
+//                [weakself.navigationController pushViewController:checkVC animated:YES];
+                
+                NSInteger orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:weakself.orderStatus orderType:weakself.orderType];
+                if (weakself.nextBlock) {
+                    weakself.nextBlock(@{@"currentStatus":@(orderStatus)});
+                }
             }];
         }
     } failure:^(NSError *error) {

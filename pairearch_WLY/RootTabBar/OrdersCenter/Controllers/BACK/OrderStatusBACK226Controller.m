@@ -34,11 +34,6 @@
     [self.tableView reloadData];
 }
 
-- (void)setOrderStatus:(NSInteger)orderStatus {
-    _orderStatus = orderStatus;
-    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:orderStatus orderType:self.orderType];
-}
-
 #pragma mark -- Lazy Loading
 
 - (UITableView *)tableView {
@@ -80,7 +75,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *titleText = [OrderStatusManager getOrderDescriptionWithStatus:self.orderStatus orderType:ORDER_TYPE_BACK];
+    NSString *titleText = [OrderStatusManager getOrderDescriptionWithStatus:ORDER_STATUS_226 orderType:ORDER_TYPE_BACK];
     CGFloat titleConstant = 0.0;
     if (indexPath.row == 0) {
         titleConstant = [BaseModel heightForTextString:titleText width:(kScreenWidth - 40.0)  fontSize:CELL_LABEL_FONTSIZE];
@@ -110,7 +105,7 @@
     BackListDetailCell *cell = [BackListDetailCell getCellWithTable:tableView];
     cell.detailModel = self.dataListArr[indexPath.row];
     if (indexPath.row == 0) {
-        cell.descriptionLabel.text = [OrderStatusManager getOrderDescriptionWithStatus:self.orderStatus orderType:ORDER_TYPE_BACK];
+        cell.descriptionLabel.text = [OrderStatusManager getOrderDescriptionWithStatus:ORDER_STATUS_226 orderType:ORDER_TYPE_BACK];
     } else {
         cell.descriptionLabel.text = @"";
     }
@@ -139,7 +134,6 @@
             [hud setCompletionBlock:^(){
                 BACKNestedSelectController *nestedVC = [BACKNestedSelectController new];
                 nestedVC.paraDict = paraDict;
-                nestedVC.orderStatus = status;
                 [weakself.navigationController pushViewController:nestedVC animated:YES];
             }];
         }

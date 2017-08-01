@@ -12,7 +12,6 @@
 #import "OrderDetailHeaderView.h"
 #import "StartTransportFooterView.h"
 #import "OrderDetailModel.h"
-#import "OrderStatusKA220Controller.h"
 
 @interface OrderStatusKA212Controller ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -28,30 +27,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction:)];
-    
-    [self.view addSubview:self.tableView];
-    self.orderType = ORDER_TYPE_KA;
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+//    self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction:)];
+//    
+//    [self.view addSubview:self.tableView];
+//    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:ORDER_STATUS_212 orderType:ORDER_TYPE_KA];
 }
 
-- (void)setParaDict:(NSDictionary *)paraDict {
-    _paraDict = paraDict;
-    [self loadDetailDataFromNet];
-}
-
-
-- (void)setOrderStatus:(NSInteger)orderStatus {
-    _orderStatus = orderStatus;
-    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:orderStatus orderType:ORDER_TYPE_KA];
+- (void)setDataListArr:(NSMutableArray *)dataListArr {
+    _dataListArr = dataListArr;
+    [self.tableView reloadData];
 }
 
 #pragma mark -- Lazy Loading
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+        self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
         [self.view addSubview:self.tableView];
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
@@ -135,37 +128,6 @@
 
 #pragma mark -- ButtonAction
 
-//网络请求数据
-- (void)loadDetailDataFromNet {
-    [OrderDetailModel getDataWithParameters:self.paraDict endBlock:^(id model, NSError *error) {
-        if (model) {
-            //对model数据进行分类
-            NSArray *dataListArr = [NSMutableArray arrayWithArray:model];
-            NSMutableDictionary *orderCodeDict = [NSMutableDictionary dictionary];
-            for (OrderDetailModel *detailModel in dataListArr) {
-                [orderCodeDict setObject:detailModel forKey:detailModel.ORDER_CODE];
-            }
-            
-            NSArray *orderCodeArr = [orderCodeDict allKeys];  //获取所有的orderCode
-            self.dataListArr = [NSMutableArray array];
-            for (NSString *orderCode in orderCodeArr) {
-                NSMutableArray *modelArr = [NSMutableArray array];
-                for (OrderDetailModel *model in dataListArr) {
-                    if ([orderCode isEqualToString:model.ORDER_CODE]) {
-                        [modelArr addObject:model];
-                    }
-                }
-                [self.dataListArr addObject:modelArr];
-            }
-            
-            [self.tableView reloadData];
-            
-        } else {
-            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-        }
-    }];
-}
-
 - (void)networkWithUrlStr:(NSString *)urlStr paraDict:(NSDictionary *)paraDict {
     [NetworkHelper POST:urlStr parameters:paraDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSInteger status = [responseObject[@"status"] integerValue];
@@ -175,10 +137,9 @@
             __weak typeof(self) weakself = self;
             [hud setCompletionBlock:^(){
                 if (weakself.dataListArr.count == 1) {
-                    OrderStatusKA220Controller *checkVC = [OrderStatusKA220Controller new];
-                    checkVC.paraDict = weakself.paraDict;
-                    checkVC.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:weakself.orderStatus orderType:weakself.orderType];
-                    [weakself.navigationController pushViewController:checkVC animated:YES];
+                    if (weakself.nextBlock) {
+                        weakself.nextBlock(@{@"currentStatus":@(ORDER_STATUS_212)});
+                    }
                 } else {
                     [weakself.navigationController popToRootViewControllerAnimated:YES];
                 }
@@ -192,41 +153,35 @@
 
 #pragma mark -- 按钮点击操作
 
-//返回按钮点击事件
-- (void)popBackAction:(UIButton *)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
 //开始运输按钮点击事件
 - (void)startTransportAction:(UIButton *)sender {
     NSString *driverTel = [LoginModel shareLoginModel].tel;
     NSString *orderCode = @"";
-//    NSString *orderCodes = @"";
+    NSString *orderCodes = @"";
     for (NSInteger i = 0; i < self.dataListArr.count; i++) {
         NSArray *modelArr = self.dataListArr[i];
         OrderDetailModel *model = modelArr[0];
-        if (model.SHPM_STATUS.integerValue != ORDER_STATUS_212) {
-            [ProgressHUD bwm_showTitle:@"订单已接收" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-            return;
-        }
         if (i == 0) {
             orderCode = [orderCode stringByAppendingFormat:@"%@", model.ORDER_CODE];
         } else {
             orderCode = [orderCode stringByAppendingFormat:@",%@", model.ORDER_CODE];
         }
-//        for (NSInteger j = 0; j < modelArr.count; j++) {
-//            OrderDetailModel *tempModel = modelArr[j];
-//            orderCodes = [orderCodes stringByAppendingFormat:@",%@", tempModel.SHPM_NUM];
-//        }
-//        //首字母是@","的替换为@""
-//        if (orderCodes.length > 0) {
-//            NSString *firstStr = [orderCodes substringWithRange:NSMakeRange(0, 1)];
-//            if ([firstStr isEqualToString:@","]) {
-//                orderCodes = [orderCodes stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
-//            }
-//        }
+        for (NSInteger j = 0; j < modelArr.count; j++) {
+            OrderDetailModel *tempModel = modelArr[j];
+            orderCodes = [orderCodes stringByAppendingFormat:@",%@", tempModel.SHPM_NUM];
+        }
+        //首字母是@","的替换为@""
+        if (orderCodes.length > 0) {
+            NSString *firstStr = [orderCodes substringWithRange:NSMakeRange(0, 1)];
+            if ([firstStr isEqualToString:@","]) {
+                orderCodes = [orderCodes stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+            }
+        }
     }
-    NSDictionary *paraDict = @{@"driverTel":driverTel, @"orderCode":orderCode, @"orderCodes":@""};
+    NSDictionary *paraDict = @{@"driverTel":driverTel,
+                               @"orderCode":orderCode,
+                               @"shpmNum":orderCodes,
+                               @"isAgree":@"1"};
     [self networkWithUrlStr:ORDER_GETLOAD_API paraDict:paraDict];
 }
 

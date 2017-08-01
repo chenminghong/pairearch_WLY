@@ -61,14 +61,12 @@
 - (void)judgeJumpToDetailController {
     BackDetailModel *model = self.dataListArr[0];
     NSInteger status = [model.SHPM_STATUS integerValue];
-    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:status orderType:ORDER_TYPE_KA];
+    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:status orderType:ORDER_TYPE_BACK];
     switch (status) {
         case ORDER_STATUS_212:
         {
             OrderStatusBACK212Controller *childVC = [OrderStatusBACK212Controller new];
             childVC.dataListArr = self.dataListArr;
-            childVC.orderType = ORDER_TYPE_BACK;
-            childVC.orderStatus = status;
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
         }
@@ -78,8 +76,6 @@
         {
             OrderStatusBACK220Controller *childVC = [OrderStatusBACK220Controller new];
             childVC.dataListArr = self.dataListArr;
-            childVC.orderType = ORDER_TYPE_BACK;
-            childVC.orderStatus = status;
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
         }
@@ -89,8 +85,6 @@
         {
             OrderStatusBACK226Controller *childVC = [OrderStatusBACK226Controller new];
             childVC.dataListArr = self.dataListArr;
-            childVC.orderType = ORDER_TYPE_BACK;
-            childVC.orderStatus = status;
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
         }
@@ -100,8 +94,6 @@
         {
             OrderStatusBACK228Controller *childVC = [OrderStatusBACK228Controller new];
             childVC.dataListArr = self.dataListArr;
-            childVC.orderType = ORDER_TYPE_BACK;
-            childVC.orderStatus = status;
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
         }
@@ -111,8 +103,6 @@
         {
             OrderStatusBACK230Controller *childVC = [OrderStatusBACK230Controller new];
             childVC.dataListArr = self.dataListArr;
-            childVC.orderType = ORDER_TYPE_BACK;
-            childVC.orderStatus = status;
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
         }
@@ -122,8 +112,6 @@
         {
             OrderStatusBACK238Controller *childVC = [OrderStatusBACK238Controller new];
             childVC.dataListArr = self.dataListArr;
-            childVC.orderType = ORDER_TYPE_BACK;
-            childVC.orderStatus = status;
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
         }
@@ -133,8 +121,6 @@
         {
             OrderStatusBACK240Controller *childVC = [OrderStatusBACK240Controller new];
             childVC.dataListArr = self.dataListArr;
-            childVC.orderType = ORDER_TYPE_BACK;
-            childVC.orderStatus = status;
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
         }

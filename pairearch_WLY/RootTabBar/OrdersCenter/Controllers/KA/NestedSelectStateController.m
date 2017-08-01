@@ -15,6 +15,11 @@
 #import "OrderStatusKA240Controller.h"
 #import "OrderStatusKA245Controller.h"
 
+#import "OrderStatusKA212Controller.h"
+#import "OrderStatusKA220Controller.h"
+#import "OrderStatusKA226Controller.h"
+#import "OrderStatusKA228Controller.h"
+
 
 @interface NestedSelectStateController ()
 
@@ -35,7 +40,6 @@
 
 - (void)setParaDict:(NSDictionary *)paraDict {
     _paraDict = paraDict;
-    
     [self loadDetailDataFromNet];
 }
 
@@ -63,36 +67,112 @@
             }
             
             //根据加载的数据判断跳转界面
-            [self judgeJumpToDetailController];
+            OrderDetailModel *model = [self.dataListArr[0] firstObject];
+            if (self.orderStatus >= ORDER_STATUS_230 && self.orderStatus < ORDER_STATUS_245) {
+                self.orderStatus = [model.SHPM_STATUS integerValue];
+            }
+            [self judgeJumpToDetailControllerWithOrderStatus:self.orderStatus];
         } else {
+            if (self.view.subviews.count > 0) {
+                [self.view.subviews[0] removeFromSuperview];
+            }
             [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         }
     }];
 }
 
 //根据加载的数据判断跳转界面
-- (void)judgeJumpToDetailController {
-    OrderDetailModel *model = [self.dataListArr[0] firstObject];
-    NSInteger status = [model.SHPM_STATUS integerValue];
-    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:status orderType:ORDER_TYPE_KA];
-    switch (status) {
+- (void)judgeJumpToDetailControllerWithOrderStatus:(NSInteger)orderStatus {
+    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:orderStatus orderType:ORDER_TYPE_KA];
+    switch (orderStatus) {
+        case ORDER_STATUS_212:
+        {
+            OrderStatusKA212Controller *childVC = [OrderStatusKA212Controller new];
+            [self addChildController:childVC];
+            childVC.dataListArr = self.dataListArr;
+            childVC.nextBlock = ^(NSDictionary *paraDict) {
+                if (paraDict) {
+                    NSInteger tempOrderStatus = [paraDict[@"currentStatus"] integerValue];
+                    self.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:tempOrderStatus orderType:ORDER_TYPE_KA];
+                    [self loadDetailDataFromNet];
+                }
+            };
+        }
+            break;
+            
+        case ORDER_STATUS_220:
+        {
+            OrderStatusKA220Controller *childVC = [OrderStatusKA220Controller new];
+            [self addChildController:childVC];
+            childVC.dataListArr = self.dataListArr;
+            childVC.nextBlock = ^(NSDictionary *paraDict) {
+                if (paraDict) {
+                    NSInteger tempOrderStatus = [paraDict[@"currentStatus"] integerValue];
+                    self.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:tempOrderStatus orderType:ORDER_TYPE_KA];
+                    [self loadDetailDataFromNet];
+                }
+            };
+        }
+            break;
+            
+        case ORDER_STATUS_226:
+        {
+            OrderStatusKA226Controller *childVC = [OrderStatusKA226Controller new];
+            [self addChildController:childVC];
+            childVC.dataListArr = self.dataListArr;
+            childVC.nextBlock = ^(NSDictionary *paraDict) {
+                if (paraDict) {
+                    NSInteger tempOrderStatus = [paraDict[@"currentStatus"] integerValue];
+                    self.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:tempOrderStatus orderType:ORDER_TYPE_KA];
+                    [self loadDetailDataFromNet];
+                }
+            };
+        }
+            break;
+            
+        case ORDER_STATUS_228:
+        {
+            OrderStatusKA228Controller *childVC = [OrderStatusKA228Controller new];
+            [self addChildController:childVC];
+            childVC.dataListArr = self.dataListArr;
+            childVC.nextBlock = ^(NSDictionary *paraDict) {
+                if (paraDict) {
+                    NSInteger tempOrderStatus = [paraDict[@"currentStatus"] integerValue];
+                    self.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:tempOrderStatus orderType:ORDER_TYPE_KA];
+                    [self loadDetailDataFromNet];
+                }
+            };
+        }
+            break;
+            
+            
         case ORDER_STATUS_230:
         {
             OrderStatusKA230Controller *childVC = [OrderStatusKA230Controller new];
-            childVC.paraDict = self.paraDict;
-            childVC.orderStatus = status;
-            childVC.dataListArr = self.dataListArr;
             [self addChildController:childVC];
+            childVC.dataListArr = self.dataListArr;
+            childVC.nextBlock = ^(NSDictionary *paraDict) {
+                if (paraDict) {
+                    NSInteger tempOrderStatus = [paraDict[@"currentStatus"] integerValue];
+                    self.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:tempOrderStatus orderType:ORDER_TYPE_KA];
+                    [self loadDetailDataFromNet];
+                }
+            };
         }
             break;
             
         case ORDER_STATUS_238:
         {
             OrderStatusKA238Controller *childVC = [OrderStatusKA238Controller new];
-            childVC.paraDict = self.paraDict;
-            childVC.orderStatus = status;
-            childVC.dataListArr = self.dataListArr;
             [self addChildController:childVC];
+            childVC.dataListArr = self.dataListArr;
+            childVC.nextBlock = ^(NSDictionary *paraDict) {
+                if (paraDict) {
+                    NSInteger tempOrderStatus = [paraDict[@"currentStatus"] integerValue];
+                    self.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:tempOrderStatus orderType:ORDER_TYPE_KA];
+                    [self loadDetailDataFromNet];
+                }
+            };
         }
             break;
             
@@ -101,10 +181,15 @@
             
         {
             OrderStatusKA240Controller *childVC = [OrderStatusKA240Controller new];
-            childVC.paraDict = self.paraDict;
-            childVC.orderStatus = status;
-            childVC.dataListArr = self.dataListArr;
             [self addChildController:childVC];
+            childVC.dataListArr = self.dataListArr;
+            childVC.nextBlock = ^(NSDictionary *paraDict) {
+                if (paraDict) {
+                    NSInteger tempOrderStatus = [paraDict[@"currentStatus"] integerValue];
+                    self.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:tempOrderStatus orderType:ORDER_TYPE_KA];
+                    [self loadDetailDataFromNet];
+                }
+            };
         }
             break;
             
@@ -119,13 +204,31 @@
         default:
             break;
     }
+    
+    
 }
 
 //添加子视图控制器
 - (void)addChildController:(UIViewController *)viewController {
-    [self addChildViewController:viewController];
-    viewController.view.frame = self.view.bounds;
-    [self.view insertSubview:viewController.view atIndex:0];
+    if (self.childViewControllers.count > 0) {
+        if ([[self.childViewControllers[0] class] isSubclassOfClass:[viewController class]]) {
+            return;
+        }        
+        [self addChildViewController:viewController];
+        viewController.view.frame = self.view.bounds;
+        
+        [UIView transitionFromView:self.view.subviews[0] toView:viewController.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
+            if (finished) {
+                [self.childViewControllers[0] removeFromParentViewController];
+            }
+        }];
+    } else {
+        [self addChildViewController:viewController];
+        [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            viewController.view.frame = self.view.bounds;
+            [self.view insertSubview:viewController.view atIndex:0];
+        } completion:nil];
+    }
 }
 
 #pragma mark -- ButtonAction

@@ -101,14 +101,14 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     DetailCommonModel *detailModel = self.dataListArr[section];
 
-//    CGFloat getTimeConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"提货日期：%@", detailModel.APPOINTMENT_END_TIME] width:(kScreenWidth - 40.0)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat getTimeConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"提货日期：%@", detailModel.APPOINTMENT_END_TIME] width:(kScreenWidth - 40.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"交货单号：%@", detailModel.ORDER_CODE] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地址：%@", detailModel.TO_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];;
     CGFloat heavierTonConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"货物吨重：%@", detailModel.BW_WGT] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat contactNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_MOBILE] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat contactPersonConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_NAME] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     
-    CGFloat height = 45.0+loadNumberConstant+loadAddressConstant+heavierTonConstant+contactNumberConstant+contactPersonConstant;
+    CGFloat height = 45.0 + getTimeConstant + loadNumberConstant + loadAddressConstant + heavierTonConstant +contactNumberConstant + contactPersonConstant;
     return height;
 }
 
@@ -157,10 +157,15 @@
         if (status == 1) {
             __weak typeof(self) weakself = self;
             [hud setCompletionBlock:^(){
-                OrderStatusCOMMON220Controller *checkVC = [OrderStatusCOMMON220Controller new];
-                checkVC.paraDict = self.paraDict;
-                checkVC.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:self.orderStatus orderType:self.orderType];
-                [weakself.navigationController pushViewController:checkVC animated:YES];
+//                OrderStatusCOMMON220Controller *checkVC = [OrderStatusCOMMON220Controller new];
+//                checkVC.paraDict = self.paraDict;
+//                checkVC.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:self.orderStatus orderType:self.orderType];
+//                [weakself.navigationController pushViewController:checkVC animated:YES];
+                
+                NSInteger orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:weakself.orderStatus orderType:weakself.orderType];
+                if (weakself.nextBlock) {
+                    weakself.nextBlock(@{@"currentStatus":@(orderStatus)});
+                }
             }];
             [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
         }
@@ -183,10 +188,6 @@
     NSString *orderCodes = @"";
     for (NSInteger i = 0; i < self.dataListArr.count; i++) {
         DetailCommonModel *model = self.dataListArr[i];
-        if (model.SHPM_STATUS.integerValue != ORDER_STATUS_212) {
-            [ProgressHUD bwm_showTitle:@"订单已接收" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-            return;
-        }
         if (i == 0) {
             orderCode = model.ORDER_CODE;
         }
@@ -199,7 +200,7 @@
             }
         }
     }
-    NSDictionary *paraDict = @{@"driverTel":driverTel, @"orderCode":orderCode, @"orderCodes":@""};
+    NSDictionary *paraDict = @{@"driverTel":driverTel, @"orderCode":orderCode, @"shpmNum":orderCodes};
     [self networkWithUrlStr:ORDER_GETLOAD_API paraDict:paraDict];
 }
 

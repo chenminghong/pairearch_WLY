@@ -80,7 +80,7 @@
     UIBarButtonItem *commitItem = [[UIBarButtonItem alloc] initWithCustomView:commitButton];
     self.navigationItem.rightBarButtonItem = commitItem;
     
-//    self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction)];
+
     
     if (self.lxCode == ABNORMAL_CODE_261) {
         self.title = @"拒绝签收";
@@ -98,14 +98,6 @@
     refuseVC.signResultBlock = signResultBlock;
     return refuseVC;
 }
-
-//- (void)popBackAction {
-//    if (self.isBackRoot) {
-//        [self.navigationController popToRootViewControllerAnimated:YES];
-//    } else {
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }
-//}
 
 
 //获取异常原因列表数据

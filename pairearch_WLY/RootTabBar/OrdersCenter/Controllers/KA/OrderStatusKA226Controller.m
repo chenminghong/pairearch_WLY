@@ -28,37 +28,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction:)];
-    
-    [self.view addSubview:self.tableView];
-    self.orderType = ORDER_TYPE_KA;
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    //界面消失刷新首页面
-    [[NSNotificationCenter defaultCenter] postNotificationName:ORDERSCENTER_RELOAD_NAME object:nil];
-}
-
-- (void)setParaDict:(NSDictionary *)paraDict {
-    _paraDict = paraDict;
-    [self loadDetailDataFromNet];
-}
-
-
-- (void)setOrderStatus:(NSInteger)orderStatus {
-    _orderStatus = orderStatus;
-    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:orderStatus orderType:ORDER_TYPE_KA];
+- (void)setDataListArr:(NSMutableArray *)dataListArr {
+    _dataListArr = dataListArr;
+    [self.tableView reloadData];
 }
 
 #pragma mark -- Lazy Loading
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+        self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
         [self.view addSubview:self.tableView];
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
@@ -143,35 +125,35 @@
 #pragma mark -- ButtonAction
 
 //网络请求数据
-- (void)loadDetailDataFromNet {
-    [OrderDetailModel getDataWithParameters:self.paraDict endBlock:^(id model, NSError *error) {
-        if (model) {
-            //对model数据进行分类
-            NSArray *dataListArr = [NSMutableArray arrayWithArray:model];
-            NSMutableDictionary *orderCodeDict = [NSMutableDictionary dictionary];
-            for (OrderDetailModel *detailModel in dataListArr) {
-                [orderCodeDict setObject:detailModel forKey:detailModel.ORDER_CODE];
-            }
-            
-            NSArray *orderCodeArr = [orderCodeDict allKeys];  //获取所有的orderCode
-            self.dataListArr = [NSMutableArray array];
-            for (NSString *orderCode in orderCodeArr) {
-                NSMutableArray *modelArr = [NSMutableArray array];
-                for (OrderDetailModel *model in dataListArr) {
-                    if ([orderCode isEqualToString:model.ORDER_CODE]) {
-                        [modelArr addObject:model];
-                    }
-                }
-                [self.dataListArr addObject:modelArr];
-            }
-            
-            [self.tableView reloadData];
-            
-        } else {
-            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-        }
-    }];
-}
+//- (void)loadDetailDataFromNet {
+//    [OrderDetailModel getDataWithParameters:self.paraDict endBlock:^(id model, NSError *error) {
+//        if (model) {
+//            //对model数据进行分类
+//            NSArray *dataListArr = [NSMutableArray arrayWithArray:model];
+//            NSMutableDictionary *orderCodeDict = [NSMutableDictionary dictionary];
+//            for (OrderDetailModel *detailModel in dataListArr) {
+//                [orderCodeDict setObject:detailModel forKey:detailModel.ORDER_CODE];
+//            }
+//            
+//            NSArray *orderCodeArr = [orderCodeDict allKeys];  //获取所有的orderCode
+//            self.dataListArr = [NSMutableArray array];
+//            for (NSString *orderCode in orderCodeArr) {
+//                NSMutableArray *modelArr = [NSMutableArray array];
+//                for (OrderDetailModel *model in dataListArr) {
+//                    if ([orderCode isEqualToString:model.ORDER_CODE]) {
+//                        [modelArr addObject:model];
+//                    }
+//                }
+//                [self.dataListArr addObject:modelArr];
+//            }
+//            
+//            [self.tableView reloadData];
+//            
+//        } else {
+//            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+//        }
+//    }];
+//}
 
 
 //入厂确认按钮
@@ -183,10 +165,10 @@
         if (status == 1) {
             __weak typeof(self) weakself = self;
             [hud setCompletionBlock:^(){
-                OrderStatusKA228Controller *outVC = [OrderStatusKA228Controller new];
-                outVC.paraDict = self.paraDict;
-                outVC.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:self.orderStatus orderType:self.orderType];
-                [weakself.navigationController pushViewController:outVC animated:YES];
+//                NSInteger orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:weakself.orderStatus orderType:weakself.orderType];
+                if (weakself.nextBlock) {
+                    weakself.nextBlock(@{@"currentStatus":@(ORDER_STATUS_226)});
+                }
             }];
         }
     } failure:^(NSError *error) {

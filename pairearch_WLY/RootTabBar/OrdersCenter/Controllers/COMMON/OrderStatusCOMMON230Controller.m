@@ -31,7 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.orderType = ORDER_TYPE_COMMON;
+//    self.orderType = ORDER_TYPE_COMMON;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -40,10 +40,10 @@
     [self loadDetailDataFromNet];
 }
 
-- (void)setOrderStatus:(NSInteger)orderStatus {
-    _orderStatus = orderStatus;
-    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:orderStatus orderType:ORDER_TYPE_COMMON];
-}
+//- (void)setOrderStatus:(NSInteger)orderStatus {
+//    _orderStatus = orderStatus;
+//    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:orderStatus orderType:ORDER_TYPE_COMMON];
+//}
 
 - (void)setDataListArr:(NSMutableArray *)dataListArr {
     _dataListArr = dataListArr;
@@ -51,9 +51,9 @@
     NSString *pushFlag = [statusDict objectForKey:@"toEvaluationPageFlag"];
     if (pushFlag.length > 0 && [pushFlag boolValue]) {
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
-        OrderStatusKA245Controller *evaluationVC = [OrderStatusKA245Controller new];
-        evaluationVC.paraDict = statusDict;
-        [self.navigationController pushViewController:evaluationVC animated:YES];
+        if (self.nextBlock) {
+            self.nextBlock(@{@"currentStatus":@(ORDER_STATUS_245)});
+        }
     } else {
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
     }

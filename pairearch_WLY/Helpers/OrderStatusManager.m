@@ -33,7 +33,7 @@
                 break;
                 
             case ORDER_STATUS_230:
-                title = @"货在途中";
+                title = @"送货在途";
                 break;
                 
             case ORDER_STATUS_238:

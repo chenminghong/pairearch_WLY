@@ -32,18 +32,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.orderType = ORDER_TYPE_KA;
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
-- (void)setParaDict:(NSDictionary *)paraDict {
-    _paraDict = paraDict;
-    [self loadDetailDataFromNet];
-}
-
-- (void)setOrderStatus:(NSInteger)orderStatus {
-    _orderStatus = orderStatus;
-    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:orderStatus orderType:ORDER_TYPE_KA];
-}
 
 - (void)setDataListArr:(NSMutableArray *)dataListArr {
     _dataListArr = dataListArr;
@@ -54,7 +45,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+        self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
         [self.view addSubview:self.tableView];
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
@@ -187,73 +178,39 @@
     refuseVC.paraDict = paraDict;
     refuseVC.lxCode = ABNORMAL_CODE_262;
     return;
-    
-//    __weak typeof(self) weakself = self;
-//    [[NetworkHelper shareClient] POST:KA_ABNORMAL_SIGN_API parameters:paraDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-//        NSString *msg = responseDict[@"msg"];
-//        NSInteger resultFlag = [responseDict[@"status"] integerValue];
-//        [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-//        
-//        
-//        if (resultFlag == 1) {
-//            model.SHPM_STATUS = @"241";
-//            [weakself.tableView reloadData];
-//            
-//            //判断是否全部异常签收
-//            BOOL allAbnormalFlag = YES;
-//            for (NSArray *modelArr in weakself.dataListArr) {
-//                for (OrderDetailModel *tempModel in modelArr) {
-//                    if ([tempModel.SHPM_STATUS integerValue] != 241) {
-//                        allAbnormalFlag = NO;
-//                        break;
-//                    }
-//                }
-//            }
-//            if (allAbnormalFlag) {
-//                weakself.footerView.startTransportBtn.backgroundColor = ABNORMAL_THEME_COLOR;
-//                weakself.footerView.startTransportBtn.userInteractionEnabled = NO;
-//            } else {
-//                weakself.footerView.startTransportBtn.backgroundColor = MAIN_THEME_COLOR;
-//                weakself.footerView.startTransportBtn.userInteractionEnabled = YES;
-//            }
-//        }
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-//    }];
 }
 
 
 #pragma mark -- ButtonAction
 
 //网络请求数据
-- (void)loadDetailDataFromNet {
-    [OrderDetailModel getDataWithParameters:self.paraDict endBlock:^(id model, NSError *error) {
-        if (model) {
-            //对model数据进行分类
-            NSArray *dataListArr = [NSMutableArray arrayWithArray:model];
-            NSMutableDictionary *orderCodeDict = [NSMutableDictionary dictionary];
-            for (OrderDetailModel *detailModel in dataListArr) {
-                [orderCodeDict setObject:detailModel forKey:detailModel.ORDER_CODE];
-            }
-            
-            NSArray *orderCodeArr = [orderCodeDict allKeys];  //获取所有的orderCode
-            self.dataListArr = [NSMutableArray array];
-            for (NSString *orderCode in orderCodeArr) {
-                NSMutableArray *modelArr = [NSMutableArray array];
-                for (OrderDetailModel *model in dataListArr) {
-                    if ([orderCode isEqualToString:model.ORDER_CODE]) {
-                        [modelArr addObject:model];
-                    }
-                }
-                [self.dataListArr addObject:modelArr];
-            }
-            [self.tableView reloadData];
-        } else {
-            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-        }
-    }];
-}
+//- (void)loadDetailDataFromNet {
+//    [OrderDetailModel getDataWithParameters:self.paraDict endBlock:^(id model, NSError *error) {
+//        if (model) {
+//            //对model数据进行分类
+//            NSArray *dataListArr = [NSMutableArray arrayWithArray:model];
+//            NSMutableDictionary *orderCodeDict = [NSMutableDictionary dictionary];
+//            for (OrderDetailModel *detailModel in dataListArr) {
+//                [orderCodeDict setObject:detailModel forKey:detailModel.ORDER_CODE];
+//            }
+//            
+//            NSArray *orderCodeArr = [orderCodeDict allKeys];  //获取所有的orderCode
+//            self.dataListArr = [NSMutableArray array];
+//            for (NSString *orderCode in orderCodeArr) {
+//                NSMutableArray *modelArr = [NSMutableArray array];
+//                for (OrderDetailModel *model in dataListArr) {
+//                    if ([orderCode isEqualToString:model.ORDER_CODE]) {
+//                        [modelArr addObject:model];
+//                    }
+//                }
+//                [self.dataListArr addObject:modelArr];
+//            }
+//            [self.tableView reloadData];
+//        } else {
+//            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+//        }
+//    }];
+//}
 
 - (void)networkWithUrlStr:(NSString *)urlStr paraDict:(NSDictionary *)paraDict {
     [NetworkHelper POST:urlStr parameters:paraDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -263,9 +220,10 @@
         if (status == 1) {
             __weak typeof (self) weakself = self;
             [hud setCompletionBlock:^(){
-                OrderStatusKA245Controller *evaluationVC = [OrderStatusKA245Controller new];
-                evaluationVC.paraDict = paraDict;
-                [weakself.navigationController pushViewController:evaluationVC animated:YES];
+//                NSInteger orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:weakself.orderStatus orderType:weakself.orderType];
+                if (weakself.nextBlock) {
+                    weakself.nextBlock(@{@"currentStatus":@(ORDER_STATUS_240)});
+                }
             }];
         }
     } failure:^(NSError *error) {

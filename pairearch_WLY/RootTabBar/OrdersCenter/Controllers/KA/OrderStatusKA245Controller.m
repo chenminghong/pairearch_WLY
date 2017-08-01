@@ -79,15 +79,15 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction:)];
-    [self.view addSubview:self.tableView];
     
     self.modelsArr = [EvaluationTableModel getModelArray];
+    [self.view addSubview:self.tableView];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBar.hidden = NO;
 }
 
 #pragma mark -- Delegate

@@ -272,151 +272,24 @@
 
 //KA界面跳转逻辑
 - (void)jumpToKaControllerWithStatus:(NSInteger)status paraDict:(NSDictionary *)paraDict {
-    switch (status) {
-        case ORDER_STATUS_212:
-        {
-            OrderStatusKA212Controller *orderDetailVC = [OrderStatusKA212Controller new];
-            orderDetailVC.orderStatus = status;
-            orderDetailVC.paraDict = paraDict;
-            [self.navigationController pushViewController:orderDetailVC animated:YES];
-        }
-            break;
-            
-        case ORDER_STATUS_220:
-        {
-            OrderStatusKA220Controller *checkVC = [OrderStatusKA220Controller new];
-            checkVC.paraDict = paraDict;
-            checkVC.orderStatus = status;
-            [self.navigationController pushViewController:checkVC animated:YES];
-        }
-            break;
-            
-        case ORDER_STATUS_226:
-        {
-            OrderStatusKA226Controller *enterCheckVC = [OrderStatusKA226Controller new];
-            enterCheckVC.paraDict = paraDict;
-            enterCheckVC.orderStatus = status;
-            [self.navigationController pushViewController:enterCheckVC animated:YES];
-        }
-            break;
-            
-        case ORDER_STATUS_228:
-        {
-            OrderStatusKA228Controller *outVC = [OrderStatusKA228Controller new];
-            outVC.paraDict = paraDict;
-            outVC.orderStatus = status;
-            [self.navigationController pushViewController:outVC animated:YES];
-        }
-            break;
-            
-        case ORDER_STATUS_230:
-        case ORDER_STATUS_238:
-        case ORDER_STATUS_240:
-        {
-            NestedSelectStateController *nestedVC = [NestedSelectStateController new];
-            nestedVC.paraDict = paraDict;
-            nestedVC.orderStatus = status;
-            [self.navigationController pushViewController:nestedVC animated:YES];
-        }
-            break;
-            
-        case ORDER_STATUS_245:
-        {
-            OrderStatusKA245Controller *evaluationVC = [OrderStatusKA245Controller new];
-            evaluationVC.paraDict = paraDict;
-            [self.navigationController pushViewController:evaluationVC animated:YES];
-        }
-            break;
-            
-        default:
-        {
-            OrderStatusKA212Controller *orderDetailVC = [OrderStatusKA212Controller new];
-            orderDetailVC.orderStatus = status;
-            orderDetailVC.paraDict = paraDict;
-            [self.navigationController pushViewController:orderDetailVC animated:YES];
-        }
-            break;
-    }
+    NestedSelectStateController *nestedVC = [NestedSelectStateController new];
+    [self.navigationController pushViewController:nestedVC animated:YES];
+    nestedVC.paraDict = paraDict;
+    nestedVC.orderStatus = status;
 }
 
 //BACK界面跳转逻辑
 - (void)jumpToBackControllerWithStatus:(NSInteger)status paraDict:(NSDictionary *)paraDict{
     BACKNestedSelectController *backVC = [BACKNestedSelectController new];
-    backVC.orderStatus = status;
     backVC.paraDict = paraDict;
     [self.navigationController pushViewController:backVC animated:YES];
 }
 
 //COMMON界面跳转逻辑
 - (void)jumpToCommonControllerWithStatus:(NSInteger)status paraDict:(NSDictionary *)paraDict{
-    switch (status) {
-        case ORDER_STATUS_212:
-        {
-            OrderStatusCOMMON212Controller *orderDetailVC = [OrderStatusCOMMON212Controller new];
-            orderDetailVC.orderStatus = status;
-            orderDetailVC.paraDict = paraDict;
-            [self.navigationController pushViewController:orderDetailVC animated:YES];
-        }
-            break;
-            
-        case ORDER_STATUS_220:
-        {
-            OrderStatusCOMMON220Controller *checkVC = [OrderStatusCOMMON220Controller new];
-            checkVC.paraDict = paraDict;
-            checkVC.orderStatus = status;
-            [self.navigationController pushViewController:checkVC animated:YES];
-        }
-            break;
-            
-        case ORDER_STATUS_226:
-        {
-            OrderStatusCOMMON226Controller *enterCheckVC = [OrderStatusCOMMON226Controller new];
-            enterCheckVC.paraDict = paraDict;
-            enterCheckVC.orderStatus = status;
-            [self.navigationController pushViewController:enterCheckVC animated:YES];
-        }
-            break;
-            
-        case ORDER_STATUS_228:
-        {
-            OrderStatusCOMMON228Controller *outVC = [OrderStatusCOMMON228Controller new];
-            outVC.paraDict = paraDict;
-            outVC.orderStatus = status;
-            [self.navigationController pushViewController:outVC animated:YES];
-        }
-            break;
-            
-        case ORDER_STATUS_230:
-        case ORDER_STATUS_238:
-        case ORDER_STATUS_240:
-        {
-            CommonSelectStateController *nestedVC = [CommonSelectStateController new];
-            nestedVC.paraDict = paraDict;
-            nestedVC.orderStatus = status;
-            [self.navigationController pushViewController:nestedVC animated:YES];
-        }
-            break;
-            
-            
-        case ORDER_STATUS_245:
-        {
-            OrderStatusKA245Controller *evaluationVC = [OrderStatusKA245Controller new];
-            evaluationVC.paraDict = paraDict;
-            [self.navigationController pushViewController:evaluationVC animated:YES];
-        }
-            break;
-            
-            
-            
-        default:
-        {
-            CommonSelectStateController *nestedVC = [CommonSelectStateController new];
-            nestedVC.paraDict = paraDict;
-            nestedVC.orderStatus = status;
-            [self.navigationController pushViewController:nestedVC animated:YES];
-        }
-            break;
-    }
+    CommonSelectStateController *nestedVC = [CommonSelectStateController new];
+    [self.navigationController pushViewController:nestedVC animated:YES];
+    nestedVC.paraDict = paraDict;
 }
 
 
