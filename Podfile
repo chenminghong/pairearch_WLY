@@ -16,6 +16,7 @@ pod 'MBProgressHUD+BWMExtension', '~> 1.0.1'
 pod 'Masonry', '~> 1.0.2'
 pod 'TZImagePickerController', '~> 1.7.8'
 pod 'SAMKeychain', '~> 1.5.2'
+pod 'JPush', '~> 3.0.2'
 
 #pod 'JZLocationConverter', '~> 1.0.0'
 #pod 'SDWebImage'

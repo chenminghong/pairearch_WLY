@@ -97,7 +97,7 @@
             } else {
                 item.badgeValue = nil;
             }
-            NSLog(@"badgeValue变化了:%ld", orders.count);
+            NSLog(@"badgeValue变化了:%ld", (unsigned long)orders.count);
         }
     } failure:nil];
 }

@@ -12,7 +12,7 @@
 #import "RootTabController.h"
 
 
-@interface AppDelegate ()<UNUserNotificationCenterDelegate>
+@interface AppDelegate ()<UNUserNotificationCenterDelegate, JPUSHRegisterDelegate>
 
 @end
 
@@ -41,6 +41,9 @@
     
     //初始化键盘输入框助手类
     [self initIQKeyboardManager];
+    
+    //初始化JPush
+    [self registerJpushWithOptions:launchOptions];
     
     return YES;
 }
@@ -223,9 +226,95 @@
 //}
 
 
+
+/**
+ 注册JPush通知
+ 
+ @param launchOptions 登录参数
+ */
+- (void)registerJpushWithOptions:(NSDictionary *)launchOptions {
+    
+    NSLog(@"%s\n%@", __func__, launchOptions);
+    [MBProgressHUD bwm_showTitle:NSStringFromClass([launchOptions class]) toView:self.window hideAfter:2.0];
+    //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
+    JPUSHRegisterEntity *entity = [[JPUSHRegisterEntity alloc] init];
+    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+    [JPUSHService setupWithOption:launchOptions appKey:JPUSH_APPKEY channel:@"APP Store" apsForProduction:0 advertisingIdentifier:nil];
+}
+
+#pragma mark -- JPushDelegate
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Required - 注册 DeviceToken
+    [JPUSHService registerDeviceToken:deviceToken];
+}
+
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+}
+
+
+//iOS 10 support
+
+/**
+ 程序在前台收到消息调用函数
+ 
+ @param center 通知中心
+ @param notification 前台通知对象
+ @param completionHandler 完成回调
+ */
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger options))completionHandler {
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+    }
+    completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
+    NSLog(@"%s\n%@", __func__, userInfo);
+}
+
+/**
+ 点击通知进入程序调用方法
+ 
+ @param center 通知中心
+ @param response 通知响应对象
+ @param completionHandler 完成回调
+ */
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler {
+    // Required
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+    }
+    completionHandler(UNNotificationPresentationOptionAlert);  //系统要求执行这个方法
+    NSLog(@"%s\n%@", __func__, userInfo);
+}
+
+
+//iOS 7 Remote Notification
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    [JPUSHService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+    NSLog(@"%s\n%@", __func__, userInfo);
+}
+
+// iOS6 及以下
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    [JPUSHService handleRemoteNotification:userInfo];
+    NSLog(@"%s\n%@", __func__, userInfo);
+}
+
+
+
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];//apple自己的接口，变更应用本地（icon）的badge值；
 }
 
 

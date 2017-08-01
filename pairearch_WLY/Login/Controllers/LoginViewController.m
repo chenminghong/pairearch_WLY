@@ -193,10 +193,14 @@
         if (completeBlock) {
             completeBlock();
         }
+        //停止定位上传功能
         [[LocationUploadManager shareManager] stopService];
         
         //友盟账号退出登录
         [MobClick profileSignOff];
+        
+        //取消别名设置
+        [JPUSHService setTags:nil aliasInbackground:@""];
     }];
 }
 
@@ -262,6 +266,9 @@
             
             //友盟统计账号登录
             [MobClick profileSignInWithPUID:name];
+            
+            //在后台给JPush设置别名
+            [JPUSHService setTags:nil aliasInbackground:[LoginModel shareLoginModel].tel];
             
             [hud setCompletionBlock:^(){
                 [self hideLoginPage];
