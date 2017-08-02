@@ -120,7 +120,7 @@
     NSString *driverTel = [LoginModel shareLoginModel].tel;
     BackDetailModel *model = self.dataListArr[0];
     if (model.SHPM_STATUS.integerValue != ORDER_STATUS_212) {
-        [ProgressHUD bwm_showTitle:@"订单已接收" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        [ProgressHUD bwm_showTitle:@"当前状态不能接单" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         return;
     }
     NSString *orderCode = model.ORDER_CODE? model.ORDER_CODE:@"";

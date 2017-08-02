@@ -14,7 +14,7 @@
 /*============================BaseUrl相关=============================*/
 //API前缀定义
 //#define PAIREACH_BASE_URL                @"http://192.168.0.158:8086/itip/client/"    //Leo
-//#define PAIREACH_BASE_URL                @"http://192.168.0.121:8086/itip/client/"    //Bob
+//#define PAIREACH_BASE_URL                @"http://192.168.0.116:8086/itip/client/"    //Bob
 //#define PAIREACH_BASE_URL                @"http://192.168.0.124:8086/itip/client/"
 //#define PAIREACH_BASE_URL                @"http://192.168.0.116:8086/itip/client/"
 

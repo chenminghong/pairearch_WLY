@@ -161,6 +161,10 @@
     for (NSInteger i = 0; i < self.dataListArr.count; i++) {
         NSArray *modelArr = self.dataListArr[i];
         OrderDetailModel *model = modelArr[0];
+        if (model.SHPM_STATUS.integerValue != ORDER_STATUS_212) {
+            [ProgressHUD bwm_showTitle:@"当前状态不能接单" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            return;
+        }
         if (i == 0) {
             orderCode = [orderCode stringByAppendingFormat:@"%@", model.ORDER_CODE];
         } else {
