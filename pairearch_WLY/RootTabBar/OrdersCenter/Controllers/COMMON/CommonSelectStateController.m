@@ -51,7 +51,10 @@
             self.dataListArr = [NSMutableArray arrayWithArray:model];
             [self judgeJumpToDetailController];
         } else {
-            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            MBProgressHUD *hud = [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            [hud setCompletionBlock:^(){
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }];
         }
     }];
 }
