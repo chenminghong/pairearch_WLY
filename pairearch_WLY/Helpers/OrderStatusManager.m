@@ -44,6 +44,10 @@
                 title = @"收货-收货入厂";
                 break;
                 
+            case ORDER_STATUS_245:
+                title = @"服务评价";
+                break;
+                
             default:
                 break;
         }
@@ -77,6 +81,10 @@
                 title = @"卸货中";
                 break;
                 
+            case ORDER_STATUS_245:
+                title = @"服务评价";
+                break;
+                
             default:
                 break;
         }
@@ -108,6 +116,10 @@
                 
             case ORDER_STATUS_240:
                 title = @"送货在途";
+                break;
+                
+            case ORDER_STATUS_245:
+                title = @"服务评价";
                 break;
                 
             default:

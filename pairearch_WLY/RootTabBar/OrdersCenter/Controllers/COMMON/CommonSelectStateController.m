@@ -59,11 +59,33 @@
     }];
 }
 
+/**
+ 获取状态码最小的数据模型
+ 
+ @param modelList 当前负载单中交货单列表
+ @return 最小状态码所对应的交货单数据模型
+ */
+- (DetailCommonModel *)getMinStatusWithModels:(NSArray<DetailCommonModel *>*)modelList {
+    DetailCommonModel *model = nil;
+    NSInteger minStatus = 1000;
+    for (DetailCommonModel *tempModel in modelList) {
+        if (tempModel.SHPM_STATUS.integerValue < minStatus) {
+            model = tempModel;
+            minStatus = tempModel.SHPM_STATUS.integerValue;
+        }
+    }
+    return model;
+}
+
 //根据加载的数据判断跳转界面
 - (void)judgeJumpToDetailController {
-    DetailCommonModel *model = self.dataListArr[0];
+    DetailCommonModel *model = [self getMinStatusWithModels:self.dataListArr];
     NSInteger orderStatus = [model.SHPM_STATUS integerValue];
+    if (orderStatus > ORDER_STATUS_240) {
+        orderStatus = ORDER_STATUS_245;
+    }
     self.title = [OrderStatusManager getStatusTitleWithOrderStatus:orderStatus orderType:ORDER_TYPE_KA];
+    
     switch (orderStatus) {
         case ORDER_STATUS_212:
         {
@@ -71,7 +93,7 @@
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                [self pushToNextWithParaDict:self.paraDict];
+                [self loadDetailDataFromNet];
             };
         }
             break;
@@ -82,7 +104,7 @@
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                [self pushToNextWithParaDict:self.paraDict];
+                [self loadDetailDataFromNet];
             };
         }
             break;
@@ -93,7 +115,7 @@
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                [self pushToNextWithParaDict:self.paraDict];
+                [self loadDetailDataFromNet];
             };
         }
             break;
@@ -104,7 +126,8 @@
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                [self pushToNextWithParaDict:self.paraDict];            };
+                [self loadDetailDataFromNet];
+            };
         }
             break;
             
@@ -117,7 +140,7 @@
             childVC.dataListArr = self.dataListArr;
             [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                [self pushToNextWithParaDict:self.paraDict];
+                [self loadDetailDataFromNet];
             };
         }
             break;
@@ -146,7 +169,6 @@
 
 //添加子视图控制器
 - (void)addChildController:(UIViewController *)viewController {
-    /*
     if (self.childViewControllers.count > 0) {
         if ([[self.childViewControllers[0] class] isSubclassOfClass:[viewController class]]) {
             return;
@@ -166,8 +188,8 @@
             [self.view insertSubview:viewController.view atIndex:0];
         } completion:nil];
     }
-    */
     
+    /*
     if (self.childViewControllers.count > 0) {
         [self.view.subviews[0] removeFromSuperview];
         [self.childViewControllers[0] removeFromParentViewController];
@@ -176,6 +198,20 @@
     [self addChildViewController:viewController];
     viewController.view.frame = self.view.bounds;
     [self.view insertSubview:viewController.view atIndex:0];
+     */
+}
+
+//移除子视图控制器
+- (void)removeChildController:(UIViewController *)viewController {
+    if (viewController) {
+        [viewController removeFromParentViewController];
+        [viewController.view removeFromSuperview];
+    } else {
+        for (UIViewController *childController in self.childViewControllers) {
+            [childController.view removeFromSuperview];
+            [childController removeFromParentViewController];
+        }
+    }
 }
 
 //返回按钮点击事件

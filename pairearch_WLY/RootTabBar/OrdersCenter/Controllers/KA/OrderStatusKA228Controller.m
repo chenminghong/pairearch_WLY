@@ -34,7 +34,8 @@
 
 - (void)setDataListArr:(NSMutableArray *)dataListArr {
     _dataListArr = dataListArr;
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, dataListArr.count)] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 #pragma mark -- Lazy Loading

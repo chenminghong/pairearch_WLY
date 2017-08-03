@@ -48,8 +48,11 @@
         if (model) {
             //对model数据进行分类
             self.dataListArr = [NSMutableArray arrayWithArray:model];
-            BackDetailModel *model = self.dataListArr[0];
+            BackDetailModel *model = [self getMinStatusWithModels:self.dataListArr];
             NSInteger status = [model.SHPM_STATUS integerValue];
+            if (status > ORDER_STATUS_240) {
+                status = ORDER_STATUS_245;
+            }
             //根据加载的数据判断跳转界面
             [self judgeJumpToDetailControllerWithStatus:status];
         } else {
@@ -63,8 +66,27 @@
 
 
 /**
+ 获取状态码最小的数据模型
+
+ @param modelList 当前负载单中交货单列表
+ @return 最小状态码所对应的交货单数据模型
+ */
+- (BackDetailModel *)getMinStatusWithModels:(NSArray<BackDetailModel *>*)modelList {
+    BackDetailModel *model = nil;
+    NSInteger minStatus = 1000;
+    for (BackDetailModel *tempModel in modelList) {
+        if (tempModel.SHPM_STATUS.integerValue < minStatus) {
+            model = tempModel;
+            minStatus = tempModel.SHPM_STATUS.integerValue;
+        }
+    }
+    return model;
+}
+
+/**
  获取订单状态
  */
+/*
 - (void)getOrderStatus {
     [NetworkHelper GET:ORDER_STATUS_API parameters:self.paraDict progress:nil success:^(NSURLSessionDataTask *task, MBProgressHUD *hud, id responseObject) {
         [hud hide:NO];
@@ -86,6 +108,7 @@
         [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
     }];
 }
+*/
 
 //根据加载的数据判断跳转界面
 - (void)judgeJumpToDetailControllerWithStatus:(NSInteger)status {
@@ -98,7 +121,7 @@
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
             [childVC setNextBlock:^(NSDictionary *paraDict){
-                [self getOrderStatus];
+                [self loadDetailDataFromNet];
             }];
         }
             break;
@@ -110,7 +133,7 @@
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
             [childVC setNextBlock:^(NSDictionary *paraDict){
-                [self getOrderStatus];
+                [self loadDetailDataFromNet];
             }];
         }
             break;
@@ -122,7 +145,7 @@
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
             [childVC setNextBlock:^(NSDictionary *paraDict){
-                [self getOrderStatus];
+                [self loadDetailDataFromNet];
             }];
         }
             break;
@@ -134,7 +157,7 @@
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
             [childVC setNextBlock:^(NSDictionary *paraDict){
-                [self getOrderStatus];
+                [self loadDetailDataFromNet];
             }];
         }
             break;
@@ -146,7 +169,7 @@
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
             [childVC setNextBlock:^(NSDictionary *paraDict){
-                [self getOrderStatus];
+                [self loadDetailDataFromNet];
             }];
         }
             break;
@@ -158,7 +181,7 @@
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
             [childVC setNextBlock:^(NSDictionary *paraDict){
-                [self getOrderStatus];
+                [self loadDetailDataFromNet];
             }];
         }
             break;

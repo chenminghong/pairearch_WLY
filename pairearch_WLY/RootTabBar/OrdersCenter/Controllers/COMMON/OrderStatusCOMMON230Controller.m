@@ -37,7 +37,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self loadDetailDataFromNet];
+//    [self loadDetailDataFromNet];
 }
 
 - (void)setDataListArr:(NSMutableArray *)dataListArr {
@@ -45,7 +45,7 @@
     NSDictionary *statusDict = [self getAllOrdersStatus];
     NSString *pushFlag = [statusDict objectForKey:@"toEvaluationPageFlag"];
     if (pushFlag.length > 0 && [pushFlag boolValue]) {
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+//        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
         if (self.nextBlock) {
             self.nextBlock(@{@"currentStatus":@(ORDER_STATUS_245)});
         }
@@ -63,15 +63,41 @@
  */
 - (NSDictionary *)getAllOrdersStatus {
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionaryWithDictionary:@{@"driverTel":[LoginModel shareLoginModel].tel, @"userName":[LoginModel shareLoginModel].name}];
-    for (DetailCommonModel *detailModel in self.dataListArr) {
-        [paraDict setObject:detailModel.ORDER_CODE forKey:@"orderCode"];
+    
+    DetailCommonModel *model = [self getMinStatusWithModels:self.dataListArr];
+    [paraDict setObject:model.ORDER_CODE forKey:@"orderCode"];
+    if (model.SHPM_STATUS.integerValue > ORDER_STATUS_240) {
         [paraDict setObject:@"1" forKey:@"toEvaluationPageFlag"];
-        if ([detailModel.SHPM_STATUS integerValue] <= ORDER_STATUS_240) {
-            [paraDict setObject:@"0" forKey:@"toEvaluationPageFlag"];
-            break;
+    } else {
+        [paraDict setObject:@"0" forKey:@"toEvaluationPageFlag"];
+    }
+//    for (DetailCommonModel *detailModel in self.dataListArr) {
+//        [paraDict setObject:detailModel.ORDER_CODE forKey:@"orderCode"];
+//        [paraDict setObject:@"1" forKey:@"toEvaluationPageFlag"];
+//        if ([detailModel.SHPM_STATUS integerValue] <= ORDER_STATUS_240) {
+//            [paraDict setObject:@"0" forKey:@"toEvaluationPageFlag"];
+//            break;
+//        }
+//    }
+    return paraDict;
+}
+
+/**
+ 获取状态码最小的数据模型
+ 
+ @param modelList 当前负载单中交货单列表
+ @return 最小状态码所对应的交货单数据模型
+ */
+- (DetailCommonModel *)getMinStatusWithModels:(NSArray<DetailCommonModel *>*)modelList {
+    DetailCommonModel *model = nil;
+    NSInteger minStatus = 1000;
+    for (DetailCommonModel *tempModel in modelList) {
+        if (tempModel.SHPM_STATUS.integerValue < minStatus) {
+            model = tempModel;
+            minStatus = tempModel.SHPM_STATUS.integerValue;
         }
     }
-    return paraDict;
+    return model;
 }
 
 //获取网络请求参数
@@ -266,13 +292,6 @@
 
 //异常签收按钮点击事件
 - (void)abnormalSignButtonActionWithDetailModel:(DetailCommonModel *)detailModel {
-//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"RefuseSignController" bundle:[NSBundle mainBundle]];
-//    RefuseSignController *refuseVC = [sb instantiateViewControllerWithIdentifier:@"RefuseSignController"];
-//    refuseVC.paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"userName":[LoginModel shareLoginModel].name, @"orderCode":detailModel.ORDER_CODE, @"shpmNum":detailModel.SHPM_NUM};
-//    refuseVC.lxCode = ABNORMAL_CODE_262;
-//    [self.navigationController pushViewController:refuseVC animated:YES];
-    
-    
     NSDictionary *paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel,
                                @"userName":[LoginModel shareLoginModel].name,
                                @"orderCode":detailModel.ORDER_CODE,

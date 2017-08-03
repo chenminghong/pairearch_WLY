@@ -38,7 +38,8 @@
 
 - (void)setDataListArr:(NSMutableArray *)dataListArr {
     _dataListArr = dataListArr;
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, dataListArr.count)] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 #pragma mark -- Lazy Loading
@@ -151,6 +152,21 @@
             model.SHPM_STATUS = @"241";
             [weakself.tableView reloadData];
             [tempDict setObject:model.ORDER_CODE forKey:@"orderCode"];
+            
+            OrderDetailModel *model = [self getMinStatusWithModels:weakself.dataListArr];
+            if (model.SHPM_STATUS.integerValue > ORDER_STATUS_240) {
+                weakself.footerView.startTransportBtn.backgroundColor = ABNORMAL_THEME_COLOR;
+                weakself.footerView.startTransportBtn.userInteractionEnabled = NO;
+                [tempDict setObject:@"1" forKey:@"toEvaluationPageFlag"];
+                return tempDict;
+            } else {
+                weakself.footerView.startTransportBtn.backgroundColor = MAIN_THEME_COLOR;
+                weakself.footerView.startTransportBtn.userInteractionEnabled = YES;
+                [tempDict setObject:@"0" forKey:@"toEvaluationPageFlag"];
+                return tempDict;
+            }
+            
+            /*
             //判断是否全部异常签收
             BOOL allAbnormalFlag = YES;
             for (NSArray *modelArr in weakself.dataListArr) {
@@ -172,12 +188,31 @@
                 [tempDict setObject:@"0" forKey:@"toEvaluationPageFlag"];
                 return tempDict;
             }
+             */
         }
         return nil;
     }];
     refuseVC.paraDict = paraDict;
     refuseVC.lxCode = ABNORMAL_CODE_262;
     return;
+}
+
+/**
+ 获取状态码最小的数据模型
+ 
+ @param modelList 当前负载单中交货单列表
+ @return 最小状态码所对应的交货单数据模型
+ */
+- (OrderDetailModel *)getMinStatusWithModels:(NSArray<OrderDetailModel *>*)modelList {
+    OrderDetailModel *model = nil;
+    NSInteger minStatus = 1000;
+    for (OrderDetailModel *tempModel in modelList) {
+        if (tempModel.SHPM_STATUS.integerValue < minStatus) {
+            model = tempModel;
+            minStatus = tempModel.SHPM_STATUS.integerValue;
+        }
+    }
+    return model;
 }
 
 
@@ -220,7 +255,6 @@
         if (status == 1) {
             __weak typeof (self) weakself = self;
             [hud setCompletionBlock:^(){
-//                NSInteger orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:weakself.orderStatus orderType:weakself.orderType];
                 if (weakself.nextBlock) {
                     weakself.nextBlock(@{@"currentStatus":@(ORDER_STATUS_240)});
                 }

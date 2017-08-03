@@ -67,8 +67,12 @@
             }
             
             //根据加载的数据判断跳转界面
-            OrderDetailModel *model = [self.dataListArr[0] firstObject];
-            [self judgeJumpToDetailControllerWithOrderStatus:model.SHPM_STATUS.integerValue];
+            OrderDetailModel *model = [self getMinStatusWithModels:self.dataListArr[0]];
+            NSInteger status = model.SHPM_STATUS.integerValue;
+            if (status > ORDER_STATUS_240) {
+                status = ORDER_STATUS_245;
+            }
+            [self judgeJumpToDetailControllerWithOrderStatus:status];
         } else {
             if (self.view.subviews.count > 0) {
                 [self.view.subviews[0] removeFromSuperview];
@@ -76,6 +80,24 @@
             [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         }
     }];
+}
+
+/**
+ 获取状态码最小的数据模型
+ 
+ @param modelList 当前负载单中交货单列表
+ @return 最小状态码所对应的交货单数据模型
+ */
+- (OrderDetailModel *)getMinStatusWithModels:(NSArray<OrderDetailModel *>*)modelList {
+    OrderDetailModel *model = nil;
+    NSInteger minStatus = 1000;
+    for (OrderDetailModel *tempModel in modelList) {
+        if (tempModel.SHPM_STATUS.integerValue < minStatus) {
+            model = tempModel;
+            minStatus = tempModel.SHPM_STATUS.integerValue;
+        }
+    }
+    return model;
 }
 
 //根据加载的数据判断跳转界面
@@ -88,7 +110,7 @@
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                [self pushToNextWithParaDict:self.paraDict];
+                [self loadDetailDataFromNet];
             };
         }
             break;
@@ -99,7 +121,7 @@
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                [self pushToNextWithParaDict:self.paraDict];
+                [self loadDetailDataFromNet];
             };
         }
             break;
@@ -110,7 +132,7 @@
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                [self pushToNextWithParaDict:self.paraDict];
+                [self loadDetailDataFromNet];
             };
         }
             break;
@@ -121,7 +143,7 @@
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                [self pushToNextWithParaDict:self.paraDict];
+                [self loadDetailDataFromNet];
             };
         }
             break;
@@ -133,7 +155,7 @@
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                [self pushToNextWithParaDict:self.paraDict];
+                [self loadDetailDataFromNet];
             };
         }
             break;
@@ -144,7 +166,7 @@
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                [self pushToNextWithParaDict:self.paraDict];
+                [self loadDetailDataFromNet];
             };
         }
             break;
@@ -157,7 +179,7 @@
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
-                [self pushToNextWithParaDict:self.paraDict];
+                [self loadDetailDataFromNet];
             };
         }
             break;
@@ -186,34 +208,34 @@
 
 //添加子视图控制器
 - (void)addChildController:(UIViewController *)viewController {
-//    if (self.childViewControllers.count > 0) {
-//        if ([[self.childViewControllers[0] class] isSubclassOfClass:[viewController class]]) {
-//            return;
-//        }        
-//        [self addChildViewController:viewController];
-//        viewController.view.frame = self.view.bounds;
-//        
-//        [UIView transitionFromView:self.view.subviews[0] toView:viewController.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
-//            if (finished) {
-//                [self.childViewControllers[0] removeFromParentViewController];
-//            }
-//        }];
-//    } else {
-//        [self addChildViewController:viewController];
-//        [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-//            viewController.view.frame = self.view.bounds;
-//            [self.view insertSubview:viewController.view atIndex:0];
-//        } completion:nil];
-//    }
-    
     if (self.childViewControllers.count > 0) {
-        [self.view.subviews[0] removeFromSuperview];
-        [self.childViewControllers[0] removeFromParentViewController];
-
+        if ([[self.childViewControllers[0] class] isSubclassOfClass:[viewController class]]) {
+            return;
+        }        
+        [self addChildViewController:viewController];
+        viewController.view.frame = self.view.bounds;
+        
+        [UIView transitionFromView:self.view.subviews[0] toView:viewController.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
+            if (finished) {
+                [self.childViewControllers[0] removeFromParentViewController];
+            }
+        }];
+    } else {
+        [self addChildViewController:viewController];
+        [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            viewController.view.frame = self.view.bounds;
+            [self.view insertSubview:viewController.view atIndex:0];
+        } completion:nil];
     }
-    [self addChildViewController:viewController];
-    viewController.view.frame = self.view.bounds;
-    [self.view insertSubview:viewController.view atIndex:0];
+    
+//    if (self.childViewControllers.count > 0) {
+//        [self.view.subviews[0] removeFromSuperview];
+//        [self.childViewControllers[0] removeFromParentViewController];
+//
+//    }
+//    [self addChildViewController:viewController];
+//    viewController.view.frame = self.view.bounds;
+//    [self.view insertSubview:viewController.view atIndex:0];
 }
 
 #pragma mark -- ButtonAction
