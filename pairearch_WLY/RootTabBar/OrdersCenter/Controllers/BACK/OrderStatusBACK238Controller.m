@@ -131,9 +131,9 @@
         if (status == 1) {
             __weak typeof(self) weakself = self;
             [hud setCompletionBlock:^(){
-                BACKNestedSelectController *nestedVC = [BACKNestedSelectController new];
-                nestedVC.paraDict = paraDict;
-                [weakself.navigationController pushViewController:nestedVC animated:YES];
+                if (weakself.nextBlock) {
+                    weakself.nextBlock(nil);
+                }
             }];
         }
         

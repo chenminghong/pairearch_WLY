@@ -27,6 +27,9 @@
 
 /*============================首页相关=============================*/
 
+//获取订单状态
+#define ORDER_STATUS_API                  @"orderStatus.a"                  //get
+
 //首页数据显示
 #define HOME_PAGE_DATA_API                @"homePageDisplay.a"              //get
 

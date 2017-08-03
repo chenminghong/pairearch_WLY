@@ -48,9 +48,10 @@
         if (model) {
             //对model数据进行分类
             self.dataListArr = [NSMutableArray arrayWithArray:model];
-            
+            BackDetailModel *model = self.dataListArr[0];
+            NSInteger status = [model.SHPM_STATUS integerValue];
             //根据加载的数据判断跳转界面
-            [self judgeJumpToDetailController];
+            [self judgeJumpToDetailControllerWithStatus:status];
         } else {
             MBProgressHUD *hud = [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
             [hud setCompletionBlock:^(){
@@ -60,10 +61,34 @@
     }];
 }
 
+
+/**
+ 获取订单状态
+ */
+- (void)getOrderStatus {
+    [NetworkHelper GET:ORDER_STATUS_API parameters:self.paraDict progress:nil success:^(NSURLSessionDataTask *task, MBProgressHUD *hud, id responseObject) {
+        [hud hide:NO];
+        NSLog(@"%@", responseObject);
+        NSString *result = responseObject[@"result"];
+        if (result.integerValue == 1) {
+            NSInteger status = [responseObject[@"status"] integerValue];
+            if (status < ORDER_STATUS_230) {
+                [self judgeJumpToDetailControllerWithStatus:status];
+            } else {
+                
+            }
+        } else {
+            [self removeChildController:nil];
+            [ProgressHUD bwm_showTitle:@"" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        }
+    } failure:^(NSError *error) {
+        [self removeChildController:nil];
+        [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+    }];
+}
+
 //根据加载的数据判断跳转界面
-- (void)judgeJumpToDetailController {
-    BackDetailModel *model = self.dataListArr[0];
-    NSInteger status = [model.SHPM_STATUS integerValue];
+- (void)judgeJumpToDetailControllerWithStatus:(NSInteger)status {
     self.title = [OrderStatusManager getStatusTitleWithOrderStatus:status orderType:ORDER_TYPE_BACK];
     switch (status) {
         case ORDER_STATUS_212:
@@ -72,6 +97,9 @@
             childVC.dataListArr = self.dataListArr;
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
+            [childVC setNextBlock:^(NSDictionary *paraDict){
+                [self getOrderStatus];
+            }];
         }
             break;
             
@@ -81,6 +109,9 @@
             childVC.dataListArr = self.dataListArr;
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
+            [childVC setNextBlock:^(NSDictionary *paraDict){
+                [self getOrderStatus];
+            }];
         }
             break;
             
@@ -90,6 +121,9 @@
             childVC.dataListArr = self.dataListArr;
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
+            [childVC setNextBlock:^(NSDictionary *paraDict){
+                [self getOrderStatus];
+            }];
         }
             break;
             
@@ -99,6 +133,9 @@
             childVC.dataListArr = self.dataListArr;
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
+            [childVC setNextBlock:^(NSDictionary *paraDict){
+                [self getOrderStatus];
+            }];
         }
             break;
             
@@ -108,6 +145,9 @@
             childVC.dataListArr = self.dataListArr;
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
+            [childVC setNextBlock:^(NSDictionary *paraDict){
+                [self getOrderStatus];
+            }];
         }
             break;
             
@@ -117,6 +157,9 @@
             childVC.dataListArr = self.dataListArr;
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
+            [childVC setNextBlock:^(NSDictionary *paraDict){
+                [self getOrderStatus];
+            }];
         }
             break;
             
@@ -126,6 +169,9 @@
             childVC.dataListArr = self.dataListArr;
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
+            [childVC setNextBlock:^(NSDictionary *paraDict){
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }];
         }
             break;
             
@@ -144,7 +190,19 @@
     [self addChildViewController:viewController];
     viewController.view.frame = self.view.bounds;
     [self.view insertSubview:viewController.view atIndex:0];
+}
 
+//移除子视图控制器
+- (void)removeChildController:(UIViewController *)viewController {
+    if (viewController) {
+        [viewController removeFromParentViewController];
+        [viewController.view removeFromSuperview];
+    } else {
+        for (UIViewController *childController in self.childViewControllers) {
+            [childController.view removeFromSuperview];
+            [childController removeFromParentViewController];
+        }
+    }
 }
 
 #pragma mark -- ButtonAction
@@ -154,6 +212,15 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+
+/**
+ 跳转到下一个界面
+ */
+- (void)pushToNextVC {
+    BACKNestedSelectController *nestedVC = [BACKNestedSelectController new];
+    nestedVC.paraDict = self.paraDict;
+    [self.navigationController pushViewController:nestedVC animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

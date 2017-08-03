@@ -132,7 +132,9 @@
         if (status == 1) {
             __weak typeof(self) weakself = self;
             [hud setCompletionBlock:^(){
-                [weakself.navigationController popToRootViewControllerAnimated:YES];
+                if (weakself.nextBlock) {
+                    weakself.nextBlock(nil);
+                }
             }];
         }
     } failure:^(NSError *error) {
