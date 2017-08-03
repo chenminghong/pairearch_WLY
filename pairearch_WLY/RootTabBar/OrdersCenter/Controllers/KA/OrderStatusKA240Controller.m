@@ -204,13 +204,15 @@
  @param modelList 当前负载单中交货单列表
  @return 最小状态码所对应的交货单数据模型
  */
-- (OrderDetailModel *)getMinStatusWithModels:(NSArray<OrderDetailModel *>*)modelList {
+- (OrderDetailModel *)getMinStatusWithModels:(NSArray<NSArray *>*)modelList {
     OrderDetailModel *model = nil;
     NSInteger minStatus = 1000;
-    for (OrderDetailModel *tempModel in modelList) {
-        if (tempModel.SHPM_STATUS.integerValue < minStatus) {
-            model = tempModel;
-            minStatus = tempModel.SHPM_STATUS.integerValue;
+    for (NSArray *modelArr in modelList) {
+        for (OrderDetailModel *tempModel in modelArr) {
+            if (tempModel.SHPM_STATUS.integerValue < minStatus) {
+                model = tempModel;
+                minStatus = tempModel.SHPM_STATUS.integerValue;
+            }
         }
     }
     return model;

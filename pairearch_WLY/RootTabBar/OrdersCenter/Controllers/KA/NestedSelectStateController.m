@@ -67,7 +67,7 @@
             }
             
             //根据加载的数据判断跳转界面
-            OrderDetailModel *model = [self getMinStatusWithModels:self.dataListArr[0]];
+            OrderDetailModel *model = [self getMinStatusWithModels:self.dataListArr];
             NSInteger status = model.SHPM_STATUS.integerValue;
             if (status > ORDER_STATUS_240) {
                 status = ORDER_STATUS_245;
@@ -88,13 +88,15 @@
  @param modelList 当前负载单中交货单列表
  @return 最小状态码所对应的交货单数据模型
  */
-- (OrderDetailModel *)getMinStatusWithModels:(NSArray<OrderDetailModel *>*)modelList {
+- (OrderDetailModel *)getMinStatusWithModels:(NSArray<NSArray *>*)modelList {
     OrderDetailModel *model = nil;
     NSInteger minStatus = 1000;
-    for (OrderDetailModel *tempModel in modelList) {
-        if (tempModel.SHPM_STATUS.integerValue < minStatus) {
-            model = tempModel;
-            minStatus = tempModel.SHPM_STATUS.integerValue;
+    for (NSArray *modelArr in modelList) {
+        for (OrderDetailModel *tempModel in modelArr) {
+            if (tempModel.SHPM_STATUS.integerValue < minStatus) {
+                model = tempModel;
+                minStatus = tempModel.SHPM_STATUS.integerValue;
+            }
         }
     }
     return model;

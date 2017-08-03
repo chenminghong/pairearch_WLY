@@ -49,7 +49,12 @@
         if (model) {
             //对model数据进行分类
             self.dataListArr = [NSMutableArray arrayWithArray:model];
-            [self judgeJumpToDetailController];
+            DetailCommonModel *model = [self getMinStatusWithModels:self.dataListArr];
+            NSInteger orderStatus = [model.SHPM_STATUS integerValue];
+            if (orderStatus > ORDER_STATUS_240) {
+                orderStatus = ORDER_STATUS_245;
+            }
+            [self judgeJumpToDetailControllerWith:orderStatus];
         } else {
             MBProgressHUD *hud = [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
             [hud setCompletionBlock:^(){
@@ -78,15 +83,9 @@
 }
 
 //根据加载的数据判断跳转界面
-- (void)judgeJumpToDetailController {
-    DetailCommonModel *model = [self getMinStatusWithModels:self.dataListArr];
-    NSInteger orderStatus = [model.SHPM_STATUS integerValue];
-    if (orderStatus > ORDER_STATUS_240) {
-        orderStatus = ORDER_STATUS_245;
-    }
-    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:orderStatus orderType:ORDER_TYPE_KA];
-    
-    switch (orderStatus) {
+- (void)judgeJumpToDetailControllerWith:(NSInteger)status {
+    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:status orderType:ORDER_TYPE_KA];
+    switch (status) {
         case ORDER_STATUS_212:
         {
             OrderStatusCOMMON212Controller *childVC = [OrderStatusCOMMON212Controller new];
