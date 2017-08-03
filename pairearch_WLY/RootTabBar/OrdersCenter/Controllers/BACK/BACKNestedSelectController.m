@@ -205,6 +205,7 @@
 
 //添加子视图控制器
 - (void)addChildController:(UIViewController *)viewController {
+    /*
     if (self.childViewControllers.count > 0) {
         [self.view.subviews[0] removeFromSuperview];
         [self.childViewControllers[0] removeFromParentViewController];
@@ -213,6 +214,27 @@
     [self addChildViewController:viewController];
     viewController.view.frame = self.view.bounds;
     [self.view insertSubview:viewController.view atIndex:0];
+     */
+    
+    if (self.childViewControllers.count > 0) {
+        if ([[self.childViewControllers[0] class] isSubclassOfClass:[viewController class]]) {
+            return;
+        }
+        [self addChildViewController:viewController];
+        viewController.view.frame = self.view.bounds;
+        
+        [UIView transitionFromView:self.view.subviews[0] toView:viewController.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
+            if (finished) {
+                [self.childViewControllers[0] removeFromParentViewController];
+            }
+        }];
+    } else {
+        [self addChildViewController:viewController];
+        [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            viewController.view.frame = self.view.bounds;
+            [self.view insertSubview:viewController.view atIndex:0];
+        } completion:nil];
+    }
 }
 
 //移除子视图控制器
