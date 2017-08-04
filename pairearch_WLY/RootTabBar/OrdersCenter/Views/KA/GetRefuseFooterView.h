@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface GetRefuseFooterView : UIView
-@property (weak, nonatomic) IBOutlet UIButton *checkBtuton;  //确认按钮
-@property (weak, nonatomic) IBOutlet UIButton *refuseButton; //拒绝按钮
+@property (weak, nonatomic) IBOutlet MyCustomButton *checkBtuton;  //确认按钮
+@property (weak, nonatomic) IBOutlet MyCustomButton *refuseButton; //拒绝按钮
 
 
 //初始化

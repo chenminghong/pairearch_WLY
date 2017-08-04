@@ -29,7 +29,6 @@
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"OrderDetailHeaderView" owner:self options:nil] firstObject];
     }
-    cell.contentView.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 

@@ -10,7 +10,7 @@
 
 @interface StartTransportFooterView : UIView
 
-@property (weak, nonatomic) IBOutlet UIButton *startTransportBtn;
+@property (weak, nonatomic) IBOutlet MyCustomButton *startTransportBtn;
 
 //初始化
 + (StartTransportFooterView *)getFooterView;

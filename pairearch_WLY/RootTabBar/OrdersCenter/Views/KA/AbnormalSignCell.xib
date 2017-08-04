@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,50 +14,47 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="165"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="164"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="165"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交货单:jh0000002a" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8b-nW-MBb">
-                        <rect key="frame" x="55" y="10" width="225" height="18"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="18" id="gGT-MV-X90"/>
-                        </constraints>
+                        <rect key="frame" x="55" y="10" width="225" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货方:******2" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptK-jl-3f4">
-                        <rect key="frame" x="55" y="28" width="225" height="16"/>
+                        <rect key="frame" x="55" y="26" width="225" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货方地址:上海某区某路某号" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A30-lj-QAs">
-                        <rect key="frame" x="55" y="44" width="225" height="16"/>
+                        <rect key="frame" x="55" y="42" width="225" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预计到货时间:YY-MM-DD  HH:MM" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSz-pg-EBd">
-                        <rect key="frame" x="55" y="60" width="225" height="16"/>
+                        <rect key="frame" x="55" y="58" width="225" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系人:王**" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DaZ-Lv-SFh">
-                        <rect key="frame" x="55" y="76" width="225" height="16"/>
+                        <rect key="frame" x="55" y="74" width="225" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电话:400-00000000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOh-iB-cft">
-                        <rect key="frame" x="55" y="92" width="225" height="16"/>
+                        <rect key="frame" x="55" y="90" width="225" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H55-oy-DM7">
-                        <rect key="frame" x="55" y="113" width="70" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H55-oy-DM7" customClass="MyCustomButton">
+                        <rect key="frame" x="55" y="111" width="70" height="30"/>
                         <color key="backgroundColor" red="0.93705266710000001" green="0.39020347599999999" blue="0.1872715056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="Lix-4w-fhx"/>
@@ -92,9 +89,7 @@
                     <constraint firstItem="w8b-nW-MBb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="YqS-Dz-nFu"/>
                     <constraint firstAttribute="trailing" secondItem="w8b-nW-MBb" secondAttribute="trailing" constant="40" id="Zwt-qz-4T2"/>
                     <constraint firstItem="ptK-jl-3f4" firstAttribute="top" secondItem="w8b-nW-MBb" secondAttribute="bottom" id="a6p-Hf-7Fv"/>
-                    <constraint firstItem="DaZ-Lv-SFh" firstAttribute="height" secondItem="XSz-pg-EBd" secondAttribute="height" id="ef9-Uh-TlJ"/>
                     <constraint firstItem="xOh-iB-cft" firstAttribute="trailing" secondItem="DaZ-Lv-SFh" secondAttribute="trailing" id="g6e-uY-TU0"/>
-                    <constraint firstItem="xOh-iB-cft" firstAttribute="height" secondItem="DaZ-Lv-SFh" secondAttribute="height" id="i1Z-1t-UFn"/>
                     <constraint firstItem="DaZ-Lv-SFh" firstAttribute="leading" secondItem="XSz-pg-EBd" secondAttribute="leading" id="kgc-lf-5k5"/>
                     <constraint firstItem="A30-lj-QAs" firstAttribute="top" secondItem="ptK-jl-3f4" secondAttribute="bottom" id="oji-Nx-hnq"/>
                     <constraint firstItem="A30-lj-QAs" firstAttribute="leading" secondItem="ptK-jl-3f4" secondAttribute="leading" id="qoW-Uh-3sO"/>

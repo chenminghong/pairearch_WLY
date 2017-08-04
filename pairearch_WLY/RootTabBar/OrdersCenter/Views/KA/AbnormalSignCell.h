@@ -26,7 +26,7 @@ typedef void(^AbnormalBlock)(OrderDetailModel *model, UIButton *sender);
 @property (weak, nonatomic) IBOutlet UILabel *contactNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contactNumberLabel;
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
-@property (weak, nonatomic) IBOutlet UIButton *abnormalSignBtn;
+@property (weak, nonatomic) IBOutlet MyCustomButton *abnormalSignBtn;
 @property (nonatomic, copy) AbnormalBlock abnormalBlock;  //异常签收按钮点击事件
 
 @property (nonatomic, strong) OrderDetailModel *detailModel;  //model数据

@@ -17,8 +17,8 @@ typedef void(^ButtonActionBlock)(NSInteger index, DetailCommonModel *model);
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 @property (weak, nonatomic) IBOutlet UILabel *signNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *signAddressLabel;
-@property (weak, nonatomic) IBOutlet UIButton *nomalSignButton;
-@property (weak, nonatomic) IBOutlet UIButton *abbormalSignButton;
+@property (weak, nonatomic) IBOutlet MyCustomButton *nomalSignButton;
+@property (weak, nonatomic) IBOutlet MyCustomButton *abbormalSignButton;
 
 @property (nonatomic, strong) DetailCommonModel *detailModel;  //数据源
 

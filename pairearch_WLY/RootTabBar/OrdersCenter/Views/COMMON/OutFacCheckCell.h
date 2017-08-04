@@ -17,7 +17,7 @@ typedef void(^ButtonActionBlock)(NSInteger index, DetailCommonModel *model);
 @property (weak, nonatomic) IBOutlet UILabel *signNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *signAddressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *stateDesLabel;
-@property (weak, nonatomic) IBOutlet UIButton *checkButton;
+@property (weak, nonatomic) IBOutlet MyCustomButton *checkButton;
 
 @property (nonatomic, strong) DetailCommonModel *detailModel;  //数据源
 

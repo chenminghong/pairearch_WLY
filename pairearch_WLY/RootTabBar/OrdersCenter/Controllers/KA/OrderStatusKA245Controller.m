@@ -56,7 +56,7 @@
 - (UIView *)footerView {
     if (!_footerView) {
         self.footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150)];
-        UIButton *commitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        MyCustomButton *commitBtn = [MyCustomButton buttonWithType:UIButtonTypeCustom];
         commitBtn.backgroundColor = MAIN_THEME_COLOR;
         [commitBtn setTitle:@"提交评价" forState:UIControlStateNormal];
         [self.footerView addSubview:commitBtn];
