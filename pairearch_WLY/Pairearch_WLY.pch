@@ -47,6 +47,7 @@
 #import "SAMKeychainManager.h"
 #import "ProgressHUD.h"
 #import "MyCustomButton.h"
+#import "NetFailView.h"
 
 
 
