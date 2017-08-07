@@ -44,6 +44,12 @@
 
 //网络请求数据
 - (void)loadDetailDataFromNet {
+    if (self.childViewControllers.count > 0) {
+        for (UIViewController *childVC in self.childViewControllers) {
+            [childVC.view removeFromSuperview];
+            [childVC removeFromParentViewController];
+        }
+    }
     [BackDetailModel getDataWithParameters:self.paraDict endBlock:^(id model, NSError *error) {
         if (model) {
             //对model数据进行分类
@@ -56,10 +62,12 @@
             //根据加载的数据判断跳转界面
             [self judgeJumpToDetailControllerWithStatus:status];
         } else {
-            MBProgressHUD *hud = [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-            [hud setCompletionBlock:^(){
-                [self.navigationController popToRootViewControllerAnimated:YES];
+            //添加请求失败视图
+            [NetFailView showFailViewInView:self.view repeatBlock:^{
+                [self loadDetailDataFromNet];
             }];
+            
+            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         }
     }];
 }
@@ -193,7 +201,11 @@
             childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
             [childVC setNextBlock:^(NSDictionary *paraDict){
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                if ([paraDict[@"pop"] boolValue]) {
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                } else {
+                    [self loadDetailDataFromNet];
+                }
             }];
         }
             break;

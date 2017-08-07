@@ -10,8 +10,6 @@
 
 @interface OrderStatusCOMMON212Controller : OrderStatusKABaseController
 
-@property (nonatomic, strong) NSDictionary *paraDict;  //参数
-
 @property (nonatomic, strong) NSMutableArray *dataListArr;  //数据源
 
 @end

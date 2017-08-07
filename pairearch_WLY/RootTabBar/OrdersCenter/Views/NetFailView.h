@@ -16,6 +16,8 @@ typedef void(^RepeatActionBlock)();
 
 @property (nonatomic, copy) RepeatActionBlock repeatBlock;
 
+@property (nonatomic, strong) NSInvocation *invocation;
+
 
 
 /**
@@ -25,6 +27,18 @@ typedef void(^RepeatActionBlock)();
  @param block 点击屏幕事件
  @return 返回当前的视图
  */
-+ (NetFailView *)getFailViewWithSuperview:(UIView *)view repeatBlock:(RepeatActionBlock)block;
++ (NetFailView *)showFailViewInView:(UIView *)view repeatBlock:(RepeatActionBlock)block;
+
+
+/**
+ 请求失败，点击重试
+
+ @param view 失败视图需要加载的界面
+ @param target 方法实现所在的类
+ @param action 需要重新执行的方法
+ @param arguments 执行方法需要的参数
+ @return 返回当前创建的视图
+ */
++ (NetFailView *)showFailViewInView:(UIView *)view target:(id)target action:(SEL)action arguments:(NSArray *)arguments;
 
 @end

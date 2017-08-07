@@ -134,11 +134,18 @@
             __weak typeof(self) weakself = self;
             [hud setCompletionBlock:^(){
                 if (weakself.nextBlock) {
-                    weakself.nextBlock(nil);
+                    weakself.nextBlock(@{@"pop":@1});
                 }
             }];
         }
     } failure:^(NSError *error) {
+        //添加请求失败视图
+        __weak typeof(self) weakself = self;
+        [NetFailView showFailViewInView:self.view repeatBlock:^{
+            if (weakself.nextBlock) {
+                weakself.nextBlock(@{@"pop":@0});
+            }
+        }];
         [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
     }];
 }

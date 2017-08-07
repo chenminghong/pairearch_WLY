@@ -29,6 +29,9 @@
 
 @implementation NestedSelectStateController
 
+
+#pragma mark -- LazyLoading
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -45,6 +48,13 @@
 
 //网络请求数据
 - (void)loadDetailDataFromNet {
+    if (self.childViewControllers.count > 0) {
+        for (UIViewController *childVC in self.childViewControllers) {
+            [childVC.view removeFromSuperview];
+            [childVC removeFromParentViewController];
+        }
+    }
+    
     [OrderDetailModel getDataWithParameters:self.paraDict endBlock:^(id model, NSError *error) {
         if (model) {
             //对model数据进行分类
@@ -74,9 +84,11 @@
             }
             [self judgeJumpToDetailControllerWithOrderStatus:status];
         } else {
-            if (self.view.subviews.count > 0) {
-                [self.view.subviews[0] removeFromSuperview];
-            }
+            //添加请求失败视图
+            [NetFailView showFailViewInView:self.view repeatBlock:^{
+                [self loadDetailDataFromNet];
+            }];
+            
             [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         }
     }];

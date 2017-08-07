@@ -45,6 +45,12 @@
 
 //网络请求数据
 - (void)loadDetailDataFromNet {
+    if (self.childViewControllers.count > 0) {
+        for (UIViewController *childVC in self.childViewControllers) {
+            [childVC.view removeFromSuperview];
+            [childVC removeFromParentViewController];
+        }
+    }
     [DetailCommonModel getDataWithParameters:self.paraDict endBlock:^(id model, NSError *error) {
         if (model) {
             //对model数据进行分类
@@ -56,10 +62,13 @@
             }
             [self judgeJumpToDetailControllerWith:orderStatus];
         } else {
-            MBProgressHUD *hud = [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-            [hud setCompletionBlock:^(){
-                [self.navigationController popToRootViewControllerAnimated:YES];
+            
+            //添加请求失败视图
+            [NetFailView showFailViewInView:self.view repeatBlock:^{
+                [self loadDetailDataFromNet];
             }];
+            
+            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         }
     }];
 }
@@ -89,7 +98,7 @@
         case ORDER_STATUS_212:
         {
             OrderStatusCOMMON212Controller *childVC = [OrderStatusCOMMON212Controller new];
-            childVC.paraDict = self.paraDict;
+            childVC.dataListArr = self.dataListArr;
             [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
@@ -100,8 +109,9 @@
         case ORDER_STATUS_220:
         {
             OrderStatusCOMMON220Controller *childVC = [OrderStatusCOMMON220Controller new];
-            childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
+            childVC.dataListArr = self.dataListArr;
+            childVC.paraDict = self.paraDict;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
             };
@@ -111,8 +121,8 @@
         case ORDER_STATUS_226:
         {
             OrderStatusCOMMON226Controller *childVC = [OrderStatusCOMMON226Controller new];
-            childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
+            childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
             };
@@ -122,8 +132,8 @@
         case ORDER_STATUS_228:
         {
             OrderStatusCOMMON228Controller *childVC = [OrderStatusCOMMON228Controller new];
-            childVC.paraDict = self.paraDict;
             [self addChildController:childVC];
+            childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
             };

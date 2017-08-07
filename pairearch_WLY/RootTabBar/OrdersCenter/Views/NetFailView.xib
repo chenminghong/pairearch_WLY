@@ -17,13 +17,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qingqiushibai" translatesAutoresizingMaskIntoConstraints="NO" id="4fb-pC-X5c">
-                    <rect key="frame" x="150" y="263" width="74" height="70"/>
+                    <rect key="frame" x="167" y="285.5" width="40" height="38"/>
                     <constraints>
+                        <constraint firstAttribute="width" constant="40" id="As7-Qd-CUb"/>
                         <constraint firstAttribute="width" secondItem="4fb-pC-X5c" secondAttribute="height" multiplier="51:48" id="Fqd-kj-mik"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击屏幕，重新加载" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uA5-7y-Hg3">
-                    <rect key="frame" x="113.5" y="353" width="147" height="19.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请点击屏幕，刷新重试" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uA5-7y-Hg3">
+                    <rect key="frame" x="105.5" y="343.5" width="163.5" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" red="0.83180861398963735" green="0.83180861398963735" blue="0.83180861398963735" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -33,8 +34,7 @@
             <constraints>
                 <constraint firstItem="uA5-7y-Hg3" firstAttribute="centerX" secondItem="4fb-pC-X5c" secondAttribute="centerX" id="0yn-aw-IxT"/>
                 <constraint firstItem="uA5-7y-Hg3" firstAttribute="top" secondItem="4fb-pC-X5c" secondAttribute="bottom" constant="20" id="Bfw-ei-jNl"/>
-                <constraint firstItem="4fb-pC-X5c" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="centerY" id="EAG-yv-eHa"/>
-                <constraint firstItem="4fb-pC-X5c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="150" id="l8R-Ad-kPY"/>
+                <constraint firstItem="4fb-pC-X5c" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-10" id="EAG-yv-eHa"/>
                 <constraint firstItem="4fb-pC-X5c" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="pzC-Rb-VSS"/>
             </constraints>
             <connections>

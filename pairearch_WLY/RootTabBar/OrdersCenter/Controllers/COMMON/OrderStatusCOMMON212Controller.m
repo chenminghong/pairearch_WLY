@@ -35,11 +35,6 @@
     [self.view addSubview:self.tableView];
 }
 
-- (void)setParaDict:(NSDictionary *)paraDict {
-    _paraDict = paraDict;
-    [self loadDetailDataFromNet];
-}
-
 #pragma mark -- Lazy Loading
 
 - (UITableView *)tableView {
@@ -128,20 +123,6 @@
 
 #pragma mark -- ButtonAction
 
-//网络请求数据
-- (void)loadDetailDataFromNet {
-    [DetailCommonModel getDataWithParameters:self.paraDict endBlock:^(id model, NSError *error) {
-        if (model) {
-            //对model数据进行分类
-            self.dataListArr = [NSMutableArray arrayWithArray:model];
-        } else {
-            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-        }
-//        [self.tableView reloadData];
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-    }];
-}
-
 - (void)networkWithUrlStr:(NSString *)urlStr paraDict:(NSDictionary *)paraDict {
     [NetworkHelper POST:urlStr parameters:paraDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSInteger status = [responseObject[@"status"] integerValue];
@@ -150,11 +131,6 @@
         if (status == 1) {
             __weak typeof(self) weakself = self;
             [hud setCompletionBlock:^(){
-//                OrderStatusCOMMON220Controller *checkVC = [OrderStatusCOMMON220Controller new];
-//                checkVC.paraDict = self.paraDict;
-//                checkVC.orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:self.orderStatus orderType:self.orderType];
-//                [weakself.navigationController pushViewController:checkVC animated:YES];
-                
                 NSInteger orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:ORDER_STATUS_212 orderType:ORDER_TYPE_COMMON];
                 if (weakself.nextBlock) {
                     weakself.nextBlock(@{@"currentStatus":@(orderStatus)});
@@ -163,6 +139,12 @@
             [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
         }
     } failure:^(NSError *error) {
+        //添加请求失败视图
+        [NetFailView showFailViewInView:self.view repeatBlock:^{
+            if (self.nextBlock) {
+                self.nextBlock(@{@"currentStatus":@(ORDER_STATUS_212)});
+            }
+        }];
         [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
     }];
 }

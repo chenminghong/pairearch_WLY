@@ -33,7 +33,7 @@
             endBlock(nil, error);
         }
     } failure:^(NSError *error) {
-        
+        endBlock(nil, error);
     }];
 }
 

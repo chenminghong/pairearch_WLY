@@ -13,11 +13,14 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.failTipsLabel.textColor = UIColorFromRGB(0x979797);
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     [self addGestureRecognizer:tap];
 }
 
-+ (NetFailView *)getFailViewWithSuperview:(UIView *)view repeatBlock:(RepeatActionBlock)block {
++ (NetFailView *)showFailViewInView:(UIView *)view repeatBlock:(RepeatActionBlock)block {
     NetFailView *failView = [[[NSBundle mainBundle] loadNibNamed:@"NetFailView" owner:self options:nil] firstObject];
     failView.frame = view.bounds;
     [view addSubview:failView];
@@ -25,8 +28,28 @@
     return failView;
 }
 
++ (NetFailView *)showFailViewInView:(UIView *)view target:(id)target action:(SEL)action arguments:(NSArray *)arguments {
+    NetFailView *failView = [[[NSBundle mainBundle] loadNibNamed:@"NetFailView" owner:self options:nil] firstObject];
+    failView.frame = view.bounds;
+    [view addSubview:failView];
+    
+    NSMethodSignature *signature = [failView methodSignatureForSelector:action];
+    failView.invocation = [NSInvocation invocationWithMethodSignature:signature];
+    failView.invocation.target = target;
+    failView.invocation.selector = action;
+    for (NSInteger i = 0; i < arguments.count; i++) {
+        id para = arguments[i];
+        [failView.invocation setArgument:&para atIndex:i];
+    }
+    return failView;
+}
+
 - (void)tapAction:(UITapGestureRecognizer *)sender {
     [self removeFromSuperview];
+    if (self.invocation) {
+        [self.invocation invoke];
+    }
+    
     if (self.repeatBlock) {
         self.repeatBlock();
     }

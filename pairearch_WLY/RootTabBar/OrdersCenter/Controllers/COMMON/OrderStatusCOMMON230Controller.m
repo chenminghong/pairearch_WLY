@@ -31,23 +31,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    self.orderType = ORDER_TYPE_COMMON;
+    [self.view addSubview:self.tableView];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-//    [self loadDetailDataFromNet];
-}
 
 - (void)setDataListArr:(NSMutableArray *)dataListArr {
     _dataListArr = dataListArr;
     NSDictionary *statusDict = [self getAllOrdersStatus];
     NSString *pushFlag = [statusDict objectForKey:@"toEvaluationPageFlag"];
     if (pushFlag.length > 0 && [pushFlag boolValue]) {
-//        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
         if (self.nextBlock) {
-            self.nextBlock(@{@"currentStatus":@(ORDER_STATUS_245)});
+            self.nextBlock(@{@"currentStatus":@(ORDER_STATUS_240)});
         }
     } else {
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
@@ -65,20 +59,12 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionaryWithDictionary:@{@"driverTel":[LoginModel shareLoginModel].tel, @"userName":[LoginModel shareLoginModel].name}];
     
     DetailCommonModel *model = [self getMinStatusWithModels:self.dataListArr];
-    [paraDict setObject:model.ORDER_CODE forKey:@"orderCode"];
+    [paraDict setObject:model.ORDER_CODE.length>0?model.ORDER_CODE:@"" forKey:@"orderCode"];
     if (model.SHPM_STATUS.integerValue > ORDER_STATUS_240) {
         [paraDict setObject:@"1" forKey:@"toEvaluationPageFlag"];
     } else {
         [paraDict setObject:@"0" forKey:@"toEvaluationPageFlag"];
     }
-//    for (DetailCommonModel *detailModel in self.dataListArr) {
-//        [paraDict setObject:detailModel.ORDER_CODE forKey:@"orderCode"];
-//        [paraDict setObject:@"1" forKey:@"toEvaluationPageFlag"];
-//        if ([detailModel.SHPM_STATUS integerValue] <= ORDER_STATUS_240) {
-//            [paraDict setObject:@"0" forKey:@"toEvaluationPageFlag"];
-//            break;
-//        }
-//    }
     return paraDict;
 }
 
@@ -115,6 +101,13 @@
             //对model数据进行分类
             self.dataListArr = [NSMutableArray arrayWithArray:model];
         } else {
+            //添加请求失败视图
+            __weak typeof(self) weakself = self;
+            [NetFailView showFailViewInView:self.view repeatBlock:^{
+                if (weakself.nextBlock) {
+                    weakself.nextBlock(nil);
+                }
+            }];
             [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         }
     }];
@@ -135,6 +128,13 @@
             }];
         }
     } failure:^(NSError *error) {
+        //添加请求失败视图
+        __weak typeof(self) weakself = self;
+        [NetFailView showFailViewInView:self.view repeatBlock:^{
+            if (weakself.nextBlock) {
+                weakself.nextBlock(nil);
+            }
+        }];
         [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
     }];
 }
@@ -142,33 +142,37 @@
 
 //获取heder显示文字描述
 - (NSString *)getHeaderTitle {
-    NSMutableArray *models = [NSMutableArray array];
-    DetailCommonModel *tempModel = nil;
-    for (DetailCommonModel *model in self.dataListArr) {
-        if ([model.SHPM_STATUS integerValue] > ORDER_STATUS_240) {
-            [models addObject:model];
-        }
-        if ([model.SHPM_NUM integerValue] == ORDER_STATUS_238 || [model.SHPM_NUM integerValue] == ORDER_STATUS_240) {
-            tempModel = model;
-        }
-    }
-    if (models.count > 0) {
-        NSString *codeStr = @"";
-        for (NSInteger i = 0; i < models.count; i++) {
-            DetailCommonModel *model = models[i];
-            if (i == 0) {
-                codeStr = model.SHPM_NUM;
-            } else {
-                codeStr = [codeStr stringByAppendingFormat:@"，%@", model.SHPM_NUM];
+    if (self.dataListArr.count > 0) {
+        
+        NSMutableArray *models = [NSMutableArray array];
+        DetailCommonModel *tempModel = nil;
+        for (DetailCommonModel *model in self.dataListArr) {
+            if ([model.SHPM_STATUS integerValue] > ORDER_STATUS_240) {
+                [models addObject:model];
+            }
+            if ([model.SHPM_NUM integerValue] == ORDER_STATUS_238 || [model.SHPM_NUM integerValue] == ORDER_STATUS_240) {
+                tempModel = model;
             }
         }
-        return [NSString stringWithFormat:@"交货单%@已卸货完成！", codeStr];
+        if (models.count > 0) {
+            NSString *codeStr = @"";
+            for (NSInteger i = 0; i < models.count; i++) {
+                DetailCommonModel *model = models[i];
+                if (i == 0) {
+                    codeStr = model.SHPM_NUM;
+                } else {
+                    codeStr = [codeStr stringByAppendingFormat:@"，%@", model.SHPM_NUM];
+                }
+            }
+            return [NSString stringWithFormat:@"交货单%@已卸货完成！", codeStr];
+        }
+        if (!tempModel) {
+            tempModel = [self.dataListArr objectAtIndex:0];
+        }
+        
+        return [OrderStatusManager getOrderDescriptionWithStatus:[tempModel.SHPM_STATUS integerValue] orderType:ORDER_TYPE_COMMON];
     }
-    if (!tempModel) {
-        tempModel = [self.dataListArr objectAtIndex:0];
-    }
-    
-    return [OrderStatusManager getOrderDescriptionWithStatus:[tempModel.SHPM_STATUS integerValue] orderType:ORDER_TYPE_COMMON];
+    return @"";
     
 }
 
