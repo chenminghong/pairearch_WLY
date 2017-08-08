@@ -61,7 +61,7 @@
             make.bottom.equalTo(self.mas_bottom).with.offset(-20);
             make.size.mas_equalTo(CGSizeMake(90, 35));
         }];
-        self.transpotBtn.titleLabel.font = [UIFont systemFontOfSize:13.0];
+        self.transpotBtn.titleLabel.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
         self.transpotBtn.backgroundColor = MAIN_THEME_COLOR;
         [self.transpotBtn setTitle:@"接收运单" forState:UIControlStateNormal];
         [self.transpotBtn addTarget:self action:@selector(pushButtonAction:) forControlEvents:UIControlEventTouchUpInside];

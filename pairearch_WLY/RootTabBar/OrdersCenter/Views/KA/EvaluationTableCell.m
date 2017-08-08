@@ -20,7 +20,7 @@
 - (UILabel *)contentLabel {
     if (!_contentLabel) {
         self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(30.0, 0, kScreenWidth - 60.0, 30)];
-        self.contentLabel.font = [UIFont systemFontOfSize:13.0];
+        self.contentLabel.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
         self.contentLabel.text = @"1.工厂处理效率满意度";
     }
     return _contentLabel;

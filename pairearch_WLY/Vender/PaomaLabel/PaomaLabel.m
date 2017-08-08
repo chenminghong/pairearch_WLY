@@ -5,7 +5,7 @@
 //  Created by ych on 13-11-15.
 //  Copyright (c) 2013年 ych. All rights reserved.
 //
-#define kTextFont [UIFont boldSystemFontOfSize:13]
+#define kTextFont [UIFont boldSystemFontOfSize:CELL_LABEL_FONTSIZE]
 #define kTextColor [UIColor colorWithRed:(32 / 255.0) green:(32 / 255.0) blue:(32 / 255.0) alpha:1]
 #define PaomaLabelTimerInterval 0.1
 

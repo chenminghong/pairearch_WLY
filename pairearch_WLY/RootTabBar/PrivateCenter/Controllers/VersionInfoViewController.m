@@ -51,7 +51,7 @@
     UILabel *copyrightL = [[UILabel alloc] init];
     copyrightL.textAlignment = NSTextAlignmentCenter;
     copyrightL.textColor = [UIColor lightGrayColor];
-    copyrightL.font = [UIFont systemFontOfSize:13.0];
+    copyrightL.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
     copyrightL.textColor = UIColorFromRGB(0x666666);
     copyrightL.text = kCopyrightInfo;
     [self.view addSubview:copyrightL];

@@ -236,7 +236,7 @@
         make.right.mas_equalTo(header.mas_right).with.offset(-20.0);
     }];
     label.numberOfLines = 0;
-    label.font = [UIFont systemFontOfSize:13.0];
+    label.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
     label.text = [self getHeaderTitle];
     return header;
 }

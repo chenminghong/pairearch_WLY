@@ -74,7 +74,7 @@
     self.reserveShiptimeLabel.text = [NSString stringWithFormat:@"预约发货时间：%@", orderModel.PLAN_DELIVER_TIME];
     self.kaLabel.text = [OrderStatusManager getOrderTypeDesStringWithOrderTyoe:orderModel.TRANSPORT_CODE];
     self.stateLabel.text = [NSString stringWithFormat:@"%@", orderModel.STATUS_NAME];
-    self.tonheavierLabel.text = [NSString stringWithFormat:@"货物吨重：%@", orderModel.TOTAL_WEIGHT];
+    self.tonheavierLabel.text = [NSString stringWithFormat:@"货物重量：%@kg", orderModel.TOTAL_WEIGHT];
     self.getNameLabel.text = [NSString stringWithFormat:@"收货地名称：%@", orderModel.DC_NAME];
     self.getAddressLabel.text = [NSString stringWithFormat:@"收货地址：%@", orderModel.DC_ADDRESS];
     self.reserveGettimeLabel.text = [NSString stringWithFormat:@"预计到货时间：%@", orderModel.PLAN_ACHIEVE_TIME];

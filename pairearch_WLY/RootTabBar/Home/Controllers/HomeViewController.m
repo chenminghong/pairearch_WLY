@@ -245,7 +245,7 @@
     HomePageModel *model = self.dataModelArr[indexPath.row];
     CGFloat loadNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"负载单号：%@", model.CODE] width:(kScreenWidth - 85.0)  fontSize:16.0];
     CGFloat toAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地址：%@", model.DC_ADDRESS] width:(kScreenWidth - 85.0)  fontSize:16.0];
-    CGFloat planTimeConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预约装货时间：%@", model.PLAN_DELIVER_TIME] width:(kScreenWidth - 85.0)  fontSize:13.0];
+    CGFloat planTimeConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预约装货时间：%@", model.PLAN_DELIVER_TIME] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat height = loadNameConstant + toAddressConstant + planTimeConstant + 45.0;
     return height;
 }

@@ -38,7 +38,7 @@
             make.top.equalTo(self.loadNumberTv).with.offset(6);
             make.size.mas_equalTo(CGSizeMake(250, 20));
         }];
-        self.placeHoldLabel.font = [UIFont systemFontOfSize:13.0];
+        self.placeHoldLabel.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
         self.placeHoldLabel.textColor = [UIColor grayColor];
         self.placeHoldLabel.text = @"请填写原因，最多可以输入70个字！";
     }

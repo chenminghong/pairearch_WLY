@@ -65,7 +65,7 @@
 
 @property (nonatomic, copy) NSString *PLAN_DELIVER_TIME;   //预约发货时间
 
-@property (nonatomic, copy) NSString *TOTAL_WEIGHT;        //货物吨重
+@property (nonatomic, copy) NSString *TOTAL_WEIGHT;        //货物重量（kg）
 
 @property (nonatomic, copy) NSString *TRANSPORT_CODE;      //订单类型
 

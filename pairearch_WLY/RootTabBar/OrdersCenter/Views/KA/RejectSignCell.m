@@ -47,7 +47,7 @@
             make.top.equalTo(self.reasonTV).with.offset(6);
             make.size.mas_equalTo(CGSizeMake(200, 20));
         }];
-        self.placeHoldLabel.font = [UIFont systemFontOfSize:13.0];
+        self.placeHoldLabel.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
         self.placeHoldLabel.textColor = [UIColor grayColor];
         self.placeHoldLabel.text = @"其他原因";
     }

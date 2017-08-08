@@ -109,7 +109,7 @@
     if (!_bottomLabel) {
         self.bottomLabel = [UILabel new];
         [self.view addSubview:self.bottomLabel];
-        self.bottomLabel.font = [UIFont systemFontOfSize:13.0];
+        self.bottomLabel.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
         self.bottomLabel.textColor = UIColorFromRGB(0x666666);
 //        self.bottomLabel.backgroundColor = UIColorFromRGB(0xF1D6D8);
         self.bottomLabel.backgroundColor = TOP_BOTTOMBAR_COLOR;
