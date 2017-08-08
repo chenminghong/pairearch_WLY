@@ -122,7 +122,12 @@
 - (void)commitButtonAction:(UIButton *)sender {
     NSMutableDictionary *evaluaDict = [NSMutableDictionary dictionaryWithDictionary:self.paraDict];
     for (EvaluationTableModel *model in self.modelsArr) {
-        [evaluaDict setObject:model.score forKey:model.key];
+        if (model.score.integerValue <= 0) {
+            [MBProgressHUD bwm_showTitle:@"评分不能低于一颗星！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            return;
+        } else {
+            [evaluaDict setObject:model.score forKey:model.key];
+        }
     }
     
     [NetworkHelper POST:ORDER_EVALUATION_API parameters:evaluaDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {

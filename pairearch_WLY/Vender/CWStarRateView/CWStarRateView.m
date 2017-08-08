@@ -54,7 +54,7 @@
 
 
 - (void)buildDataAndUI {
-    self.scorePercent = 0.0;//默认为1
+    _scorePercent = 0.0;//默认为1
     self.hasAnimation = NO;//默认为NO
     self.allowIncompleteStar = NO;//默认为NO
 
@@ -131,8 +131,8 @@
         return;
     }
     
-    if (scroePercent < 0) {
-        _scorePercent = 0;
+    if (scroePercent < 0.2) {
+        _scorePercent = 0.2;
     } else if (scroePercent > 1) {
         _scorePercent = 1;
     } else {
@@ -140,7 +140,7 @@
     }
     
     if ([self.delegate respondsToSelector:@selector(starRateView:scroePercentDidChange:)]) {
-        [self.delegate starRateView:self scroePercentDidChange:scroePercent];
+        [self.delegate starRateView:self scroePercentDidChange:_scorePercent];
     }
     
     [self layOutStars];
