@@ -53,12 +53,12 @@
 
 
 /**
- 检查是否开启位置服务
+ 检查是否开启位置服务功能
 
  @return 返回是否开启位置服务
  */
-- (BOOL)isLocationServiceOpen {
-    if ([ CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+- (BOOL)isLocationAuthorizationOpen {
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
         return NO;
     } else
         return YES;
@@ -66,11 +66,29 @@
 
 
 /**
+ 获取是否打开位置服务权限
+
+ @return 返回是否打开位置服务权限
+ */
+- (BOOL)locationServicesEnabled {
+    if ([CLLocationManager locationServicesEnabled]) {
+        NSLog(@"手机gps定位已经开启");
+        return YES;
+    } else {
+        NSLog(@"手机gps定位未开启");
+        return NO;
+    }
+}
+
+
+/**
  提醒用户开启位置服务
  */
 - (void)notificationUserOpenLocationServer {
-    if (![self isLocationServiceOpen]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"位置权限已关闭，是否现在开启？" preferredStyle:UIAlertControllerStyleAlert];
+    if ([self locationServicesEnabled] && ![self isLocationAuthorizationOpen]) {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"位置服务权限已关闭，是否现在去开启？" preferredStyle:UIAlertControllerStyleAlert];
+        
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         }];
         
@@ -87,8 +105,12 @@
         
         [alertController addAction:sure];
         [alertController addAction:cancel];
-        NSLog(@"%@", self.window.rootViewController);
-        [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
     }
 }
 

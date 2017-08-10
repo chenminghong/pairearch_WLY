@@ -66,6 +66,18 @@
     return [[CLLocation alloc] initWithCoordinate:coordinate altitude:_latestLocation.altitude horizontalAccuracy:_latestLocation.horizontalAccuracy verticalAccuracy:_latestLocation.verticalAccuracy course:_latestLocation.course speed:_latestLocation.speed timestamp:_latestLocation.timestamp];
 }
 
++ (BOOL)locationServicesEnabled {
+    if ([CLLocationManager locationServicesEnabled] &&
+        [CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+        
+        NSLog(@"手机gps定位已经开启");
+        return YES;
+    } else {
+        NSLog(@"手机gps定位未开启");
+        return NO;
+    }
+}
+
 
 #pragma mark - service轨迹服务 请求
 
