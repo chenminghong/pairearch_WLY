@@ -45,8 +45,53 @@
     //初始化JPush
     [self registerJpushWithOptions:launchOptions];
     
+    //提醒用户开启定位服务
+    [self notificationUserOpenLocationServer];
+    
     return YES;
 }
+
+
+/**
+ 检查是否开启位置服务
+
+ @return 返回是否开启位置服务
+ */
+- (BOOL)isLocationServiceOpen {
+    if ([ CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+        return NO;
+    } else
+        return YES;
+}
+
+
+/**
+ 提醒用户开启位置服务
+ */
+- (void)notificationUserOpenLocationServer {
+    if (![self isLocationServiceOpen]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"位置权限已关闭，是否现在开启？" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        
+        UIAlertAction *sure = [UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if ([UIDevice currentDevice].systemVersion.floatValue > 8.0) {
+                NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                    [[UIApplication sharedApplication] openURL:url];
+                }
+            } else {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=LOCATION_SERVICES"]];
+            }
+        }];
+        
+        [alertController addAction:sure];
+        [alertController addAction:cancel];
+        NSLog(@"%@", self.window.rootViewController);
+        [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
+    }
+}
+
 
 //检查App版本信息
 - (void)checkAppVersion {

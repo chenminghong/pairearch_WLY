@@ -140,10 +140,7 @@
             }];
         }
     } failure:^(NSError *error) {
-        MBProgressHUD *hud = [ProgressHUD bwm_showTitle:@"评价提交失败！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-        [hud setCompletionBlock:^(){
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }];
+        [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
     }];
     
 }
