@@ -20,7 +20,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="90" id="07c-MW-XQj"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <state key="normal" title="开始运输">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>

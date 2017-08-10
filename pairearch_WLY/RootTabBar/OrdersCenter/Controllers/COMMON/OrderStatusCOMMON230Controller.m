@@ -308,6 +308,7 @@
         if (resultFlag == 1) {
             detailModel.SHPM_STATUS = @"241";
             NSDictionary *statusDict = [weakself getAllOrdersStatus];
+            [weakself.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
             return statusDict;
         }
         return tempDict;

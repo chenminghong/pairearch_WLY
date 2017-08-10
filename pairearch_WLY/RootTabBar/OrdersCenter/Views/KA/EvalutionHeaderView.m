@@ -15,7 +15,7 @@
 - (UILabel *)labelOne {
     if (!_labelOne) {
         self.labelOne = [[UILabel alloc] initWithFrame:CGRectMake(30, 10, kScreenWidth - 60, (CGRectGetHeight(self.bounds) - 20) / 2)];
-        self.labelOne.font = [UIFont systemFontOfSize:14.0];
+        self.labelOne.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
         self.labelOne.text = @"您好，你已送货完成，祝您一路平安！";
     }
     return _labelOne;
@@ -24,7 +24,7 @@
 - (UILabel *)labelTwo {
     if (!_labelTwo) {
         self.labelTwo = [[UILabel alloc] initWithFrame:CGRectMake(30, CGRectGetMaxY(self.labelOne.frame), CGRectGetWidth(self.labelOne.bounds), (CGRectGetHeight(self.bounds) - 20) / 2)];
-        self.labelTwo.font = [UIFont systemFontOfSize:14.0];
+        self.labelTwo.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
         self.labelTwo.text = @"请您对工厂的服务做出评价：";
     }
     return _labelTwo;
