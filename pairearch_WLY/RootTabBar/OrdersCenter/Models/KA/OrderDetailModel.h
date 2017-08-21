@@ -10,6 +10,10 @@
 
 @interface OrderDetailModel : BaseModel
 
+@property (nonatomic, copy) NSString *STATUS_NAME;               //负载单状态
+
+@property (nonatomic, copy) NSString *STATUS;                    //负载单状态码
+
 //装货
 @property (nonatomic, copy) NSString *SHPM_STATUS;               //交货单状态
 

@@ -49,7 +49,11 @@
     self.contactNameLabel.text = [NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_NAME];
     self.contactNumberLabel.text = [NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_MOBILE];
     self.kaLabel.text = [OrderStatusManager getOrderTypeDesStringWithOrderTyoe:detailModel.TRANSPORT_CODE];
-    self.stateLabel.text = detailModel.SHPM_STATUS_NAME;
+    if (detailModel.SHPM_STATUS.integerValue > ORDER_STATUS_230) {
+        self.stateLabel.text = detailModel.SHPM_STATUS_NAME;
+    } else {
+        self.stateLabel.text = detailModel.STATUS_NAME;
+    }
     
     self.telephoneBtn.hidden = YES;
 }

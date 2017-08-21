@@ -106,7 +106,17 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     OrderDetailHeaderView *header = [OrderDetailHeaderView getHeaderWithTable:tableView];
-    header.detailModel = [self.dataListArr[section] objectAtIndex:0];
+    NSInteger minStatus = 1000;
+    OrderDetailModel *model = nil;
+    for (OrderDetailModel *tempModel in self.dataListArr[section]) {
+        if (tempModel.SHPM_STATUS.integerValue < minStatus) {
+            model = tempModel;
+            minStatus = tempModel.SHPM_STATUS.integerValue;
+        }
+    }
+    if (model) {
+        header.detailModel = model;
+    }
     return header;
 }
 

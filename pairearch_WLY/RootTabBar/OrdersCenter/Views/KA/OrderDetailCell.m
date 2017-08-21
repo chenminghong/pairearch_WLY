@@ -38,11 +38,6 @@
     self.planGetTimeLabel.text = [NSString stringWithFormat:@"预计到货时间：%@", detailModel.APPOINTMENT_END_TIME];
     self.contactNameLabel.text = [NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_NAME];
     self.contactNumberLabel.text = [NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_MOBILE];
-    
-//    self.getOrderNameStraint.constant = [BaseModel heightForTextString:self.getOrderNameLabel.text width:(kScreenWidth - 95.0)  fontSize:self.getOrderNameLabel.font.pointSize];
-//    self.getOrderAddressStraint.constant = [BaseModel heightForTextString:self.getOrderAddLabel.text width:(kScreenWidth - 95.0)  fontSize:self.getOrderAddLabel.font.pointSize];
-//    self.planGetTimeStraint.constant = [BaseModel heightForTextString:self.planGetTimeLabel.text width:(kScreenWidth - 95.0)  fontSize:self.planGetTimeLabel.font.pointSize];
-//    [self setNeedsLayout];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -28,11 +28,6 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-//    [self.navigationController setNavigationBarHidden:NO animated:YES];
-//    self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction:)];
-//    
-//    [self.view addSubview:self.tableView];
-//    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:ORDER_STATUS_212 orderType:ORDER_TYPE_KA];
 }
 
 - (void)setDataListArr:(NSMutableArray *)dataListArr {
@@ -111,7 +106,17 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     OrderDetailHeaderView *header = [OrderDetailHeaderView getHeaderWithTable:tableView];
-    header.detailModel = [self.dataListArr[section] objectAtIndex:0];
+    NSInteger minStatus = 1000;
+    OrderDetailModel *model = nil;
+    for (OrderDetailModel *tempModel in self.dataListArr[section]) {
+        if (tempModel.SHPM_STATUS.integerValue < minStatus) {
+            model = tempModel;
+            minStatus = tempModel.SHPM_STATUS.integerValue;
+        }
+    }
+    if (model) {
+        header.detailModel = model;
+    }
     return header;
 }
 
@@ -171,7 +176,7 @@
     for (NSInteger i = 0; i < self.dataListArr.count; i++) {
         NSArray *modelArr = self.dataListArr[i];
         OrderDetailModel *model = modelArr[0];
-        if (model.SHPM_STATUS.integerValue != ORDER_STATUS_212) {
+        if (model.STATUS.integerValue != ORDER_STATUS_212) {
             [ProgressHUD bwm_showTitle:@"当前状态不能接单" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
             return;
         }
