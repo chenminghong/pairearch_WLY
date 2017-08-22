@@ -45,6 +45,9 @@
     //初始化JPush
     [self registerJpushWithOptions:launchOptions];
     
+    //注册自定义消息
+    [self registerCustomerMessage];
+    
     //提醒用户开启定位服务
     [self notificationUserOpenLocationServer];
     
@@ -211,7 +214,6 @@
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     }
-    
 }
 
 //添加本地通知
@@ -292,7 +294,32 @@
 //    [statTracker startWithAppId:APP_KEY];
 //}
 
+/**
+ 注册监听自定义消息
+ */
+- (void)registerCustomerMessage {
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
+}
 
+/**
+ 收到自定义消息执行的通知方法
+ 
+ @param notification 收到的消息对象
+ */
+- (void)networkDidReceiveMessage:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSString *content = [userInfo valueForKey:@"content"];
+    [self addNetLocalNotificationWithDesStr:content.length>0? content:@""];
+//    NSDictionary *extras = [userInfo valueForKey:@"extras"];
+//    if (extras) {
+//        NSString *jsonStr = [extras valueForKey:@"params"]; //服务端传递的Extras附加字段，key是自己定义的
+//        NSData *jsonData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+//        if (jsonData) {
+//            NSDictionary *paraDict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+//        }
+//    }
+}
 
 /**
  注册JPush通知

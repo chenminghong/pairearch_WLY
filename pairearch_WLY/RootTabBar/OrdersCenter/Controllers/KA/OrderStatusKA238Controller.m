@@ -65,7 +65,7 @@
         self.footerView.frame = CGRectMake(0, 0, kScreenWidth, 80);
         self.footerView.backgroundColor = [UIColor whiteColor];
         self.footerView.checkBtuton.backgroundColor = MAIN_THEME_COLOR;
-        [self.footerView.checkBtuton setTitle:@"入厂确认" forState:UIControlStateNormal];
+        [self.footerView.checkBtuton setTitle:@"开始卸货" forState:UIControlStateNormal];
         self.footerView.refuseButton.backgroundColor = MAIN_THEME_COLOR;
         [self.footerView.refuseButton setTitle:@"拒绝签收" forState:UIControlStateNormal];
         [self.footerView.checkBtuton addTarget:self action:@selector(startTransportAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -89,7 +89,7 @@
     
     CGFloat getOrderNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地：%@", detailModel.TO_SHPG_LOC_NAME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat getOrderAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地址：%@", detailModel.TO_SHPG_ADDR] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat planGetTimeConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预计到货时间：%@", detailModel.APPOINTMENT_END_TIME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat planGetTimeConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预计送达日期：%@", detailModel.APPOINTMENT_END_TIME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat height = 21.0+CELL_LABEL_HEIGHT*3+getOrderNameConstant+getOrderAddressConstant+planGetTimeConstant;
     return height;
 }
@@ -100,7 +100,7 @@
     CGFloat fromLocalNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"发货地名称：%@", detailModel.FRM_SHPG_LOC_NAME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat fromLocAddConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"发货地址：%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];;
     CGFloat reserveUpTimeConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预约装货时间：%@", detailModel.APPOINTMENT_START_TIME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat height = 56.0+CELL_LABEL_HEIGHT*3+fromLocalNameConstant+fromLocAddConstant+reserveUpTimeConstant;
+    CGFloat height = 26.0+CELL_LABEL_HEIGHT*3+fromLocalNameConstant+fromLocAddConstant+reserveUpTimeConstant;
     return height;
 }
 

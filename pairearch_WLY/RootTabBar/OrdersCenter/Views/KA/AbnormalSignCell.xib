@@ -54,14 +54,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H55-oy-DM7" customClass="MyCustomButton">
-                        <rect key="frame" x="55" y="151" width="70" height="30"/>
+                        <rect key="frame" x="55" y="151" width="142" height="30"/>
                         <color key="backgroundColor" red="0.93705266710000001" green="0.39020347599999999" blue="0.1872715056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="Lix-4w-fhx"/>
-                            <constraint firstAttribute="width" constant="70" id="fvp-fd-55S"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <state key="normal" title="异常签收">
+                        <state key="normal" title="破损/拒收/退货上报">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>

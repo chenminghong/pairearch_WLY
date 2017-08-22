@@ -14,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="207"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="成" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PR2-Ia-vmt">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PR2-Ia-vmt">
                     <rect key="frame" x="10" y="10" width="35" height="35"/>
                     <color key="backgroundColor" red="0.93705266710000001" green="0.39020347599999999" blue="0.1872715056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -69,7 +69,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKq-Fc-DYG">
-                    <rect key="frame" x="10" y="127" width="35" height="35"/>
+                    <rect key="frame" x="10" y="97" width="35" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="LCX-U4-KOS"/>
                         <constraint firstAttribute="width" constant="35" id="gqU-Fc-fIm"/>
@@ -119,7 +119,6 @@
                 <constraint firstItem="SS1-Nc-cWX" firstAttribute="top" secondItem="0Nk-gu-iZ8" secondAttribute="bottom" id="dmj-hv-2Ir"/>
                 <constraint firstAttribute="trailing" secondItem="YmM-Ai-Bfg" secondAttribute="trailing" priority="999" constant="30" id="hGA-Gv-WcG"/>
                 <constraint firstItem="0Nk-gu-iZ8" firstAttribute="leading" secondItem="EmQ-w1-1GW" secondAttribute="leading" id="iNM-8R-QtV"/>
-                <constraint firstItem="iKq-Fc-DYG" firstAttribute="bottom" secondItem="w6M-dj-BPo" secondAttribute="bottom" id="npm-ny-b7t"/>
                 <constraint firstItem="SS1-Nc-cWX" firstAttribute="leading" secondItem="0Nk-gu-iZ8" secondAttribute="leading" id="pUJ-nS-fmf"/>
                 <constraint firstItem="iKq-Fc-DYG" firstAttribute="centerX" secondItem="PR2-Ia-vmt" secondAttribute="centerX" id="pp8-3O-MpB"/>
                 <constraint firstItem="PR2-Ia-vmt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="999" constant="10" id="pq7-BB-bt5"/>
@@ -130,6 +129,7 @@
                 <constraint firstItem="Z8L-Ez-SlY" firstAttribute="top" secondItem="B01-qe-dik" secondAttribute="bottom" id="wBY-3C-izX"/>
                 <constraint firstItem="9UV-di-Yti" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="yN2-s2-KuZ"/>
                 <constraint firstItem="YmM-Ai-Bfg" firstAttribute="leading" secondItem="PR2-Ia-vmt" secondAttribute="trailing" constant="10" id="zec-UD-Rt7"/>
+                <constraint firstItem="iKq-Fc-DYG" firstAttribute="bottom" secondItem="Z8L-Ez-SlY" secondAttribute="bottom" id="zfI-el-DQ2"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

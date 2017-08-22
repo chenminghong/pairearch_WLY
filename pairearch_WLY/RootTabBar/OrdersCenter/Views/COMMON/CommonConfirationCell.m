@@ -20,6 +20,8 @@
     self.chengLabel.backgroundColor = MAIN_THEME_COLOR;
     self.chengLabel.layer.masksToBounds = YES;
     self.chengLabel.layer.cornerRadius = CGRectGetWidth(self.chengLabel.bounds) / 2.0;
+    
+    self.chengLabel.hidden = YES;
 }
 
 + (instancetype)getCellWithTable:(UITableView *)table {
@@ -35,9 +37,9 @@
     _detailModel = detailModel;
     
     self.loadNumberLabel.text = [NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM];
-    self.loadNameLabel.text = [NSString stringWithFormat:@"发货地名称：%@", detailModel.FRM_SHPG_LOC_NAME];
-    self.loadAddressLabel.text = [NSString stringWithFormat:@"发货地址：%@", detailModel.FRM_SHPG_ADDR];
-    self.appointmentLoadLabel.text = [NSString stringWithFormat:@"预约交货时间：%@", detailModel.APPOINTMENT_END_TIME];
+    self.loadNameLabel.text = [NSString stringWithFormat:@"收货地名称：%@", detailModel.TO_SHPG_LOC_NAME];
+    self.loadAddressLabel.text = [NSString stringWithFormat:@"收货地址：%@", detailModel.TO_SHPG_ADDR];
+    self.appointmentLoadLabel.text = [NSString stringWithFormat:@"预约送达日期：%@", detailModel.APPOINTMENT_END_TIME];
     self.contactPersonLabel.text = [NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_NAME];
     self.contactPhoneLabel.text = [NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_MOBILE];
     self.statusLabel.text = detailModel.SHPM_STATUS_NAME;

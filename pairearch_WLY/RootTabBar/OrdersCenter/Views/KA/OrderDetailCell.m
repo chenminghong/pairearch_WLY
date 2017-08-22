@@ -35,7 +35,7 @@
     self.deliveryCodeLabel.text = [NSString stringWithFormat:@"交货单：%@", detailModel.SHPM_NUM];
     self.getOrderNameLabel.text = [NSString stringWithFormat:@"收货地：%@", detailModel.TO_SHPG_LOC_NAME];
     self.getOrderAddLabel.text = [NSString stringWithFormat:@"收货地址：%@", detailModel.TO_SHPG_ADDR];
-    self.planGetTimeLabel.text = [NSString stringWithFormat:@"预计到货时间：%@", detailModel.APPOINTMENT_END_TIME];
+    self.planGetTimeLabel.text = [NSString stringWithFormat:@"预计送达日期：%@", detailModel.APPOINTMENT_END_TIME];
     self.contactNameLabel.text = [NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_NAME];
     self.contactNumberLabel.text = [NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_MOBILE];
 }

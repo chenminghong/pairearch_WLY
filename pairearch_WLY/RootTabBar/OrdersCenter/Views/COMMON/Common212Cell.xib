@@ -74,7 +74,7 @@
                 <outlet property="signAddressLabel" destination="VBC-sl-kso" id="9ej-pT-idD"/>
                 <outlet property="signNumberLabel" destination="w0S-Q8-IU9" id="vVx-TK-EZs"/>
             </connections>
-            <point key="canvasLocation" x="20.5" y="63"/>
+            <point key="canvasLocation" x="13" y="62"/>
         </tableViewCell>
     </objects>
 </document>

@@ -21,6 +21,8 @@
     self.chengLabel.backgroundColor = MAIN_THEME_COLOR;
     self.kaLabel.backgroundColor = MAIN_THEME_COLOR;
     self.stateLabel.backgroundColor = MAIN_THEME_COLOR;
+    self.kaLabel.hidden = YES;
+    self.stateLabel.hidden = YES;
 }
 
 //加载cell

@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *contactPersonLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contactNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) IBOutlet UIView *separatorView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *separatorViewHeight;
 
 @property (nonatomic, strong) DetailCommonModel *detailModel;
 

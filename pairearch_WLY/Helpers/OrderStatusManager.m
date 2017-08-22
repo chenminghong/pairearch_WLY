@@ -17,11 +17,11 @@
     if ([orderType isEqualToString:ORDER_TYPE_KA]) {
         switch (orderStatus) {
             case ORDER_STATUS_212:
-                title = @"待开始";
+                title = @"运单未接收";
                 break;
                 
             case ORDER_STATUS_220:
-                title = @"装货在途";
+                title = @"司机已接单";
                 break;
                 
             case ORDER_STATUS_226:
@@ -54,11 +54,11 @@
     } else if ([orderType isEqualToString:ORDER_TYPE_BACK]) {
         switch (orderStatus) {
             case ORDER_STATUS_212:
-                title = @"待开始";
+                title = @"运单未接收";
                 break;
                 
             case ORDER_STATUS_220:
-                title = @"装货在途";
+                title = @"司机已接单";
                 break;
                 
             case ORDER_STATUS_226:
@@ -91,11 +91,11 @@
     } else if ([orderType isEqualToString:ORDER_TYPE_COMMON]) {
         switch (orderStatus) {
             case ORDER_STATUS_212:
-                title = @"待开始";
+                title = @"运单未接收";
                 break;
                 
             case ORDER_STATUS_220:
-                title = @"装货在途";
+                title = @"司机已接单";
                 break;
                 
             case ORDER_STATUS_226:

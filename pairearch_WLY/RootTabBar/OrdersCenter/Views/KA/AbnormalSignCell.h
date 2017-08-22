@@ -18,11 +18,8 @@ typedef void(^AbnormalBlock)(OrderDetailModel *model, UIButton *sender);
 
 @property (weak, nonatomic) IBOutlet UILabel *deliveryCodeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *getOrderNameLabel;
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *getOrderNameStraint;
 @property (weak, nonatomic) IBOutlet UILabel *getOrderAddLabel;
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *getOrderAddStraint;
 @property (weak, nonatomic) IBOutlet UILabel *planGetTimeLabel;
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *planGetTimeStraint;
 @property (weak, nonatomic) IBOutlet UILabel *contactNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contactNumberLabel;
 @property (weak, nonatomic) IBOutlet UIView *separatorView;

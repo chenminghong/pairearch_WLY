@@ -32,8 +32,8 @@
 
 - (void)setDataListArr:(NSMutableArray *)dataListArr {
     _dataListArr = dataListArr;
-//    [self.tableView reloadData];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, dataListArr.count)] withRowAnimation:UITableViewRowAnimationFade];
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark -- Lazy Loading
@@ -61,7 +61,7 @@
         self.footerView.frame = CGRectMake(0, 0, kScreenWidth, 80);
         self.footerView.backgroundColor = [UIColor whiteColor];
         self.footerView.startTransportBtn.backgroundColor = MAIN_THEME_COLOR;
-        [self.footerView.startTransportBtn setTitle:@"开始运输" forState:UIControlStateNormal];
+        [self.footerView.startTransportBtn setTitle:@"确认接单" forState:UIControlStateNormal];
         [self.footerView.startTransportBtn addTarget:self action:@selector(startTransportAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _footerView;
@@ -93,7 +93,7 @@
     CGFloat fromLocalNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"发货地名称：%@", detailModel.FRM_SHPG_LOC_NAME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat fromLocAddConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"发货地址：%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];;
     CGFloat reserveUpTimeConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预约装货时间：%@", detailModel.APPOINTMENT_START_TIME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat height = 56.0+CELL_LABEL_HEIGHT*3+fromLocalNameConstant+fromLocAddConstant+reserveUpTimeConstant;
+    CGFloat height = 26.0+CELL_LABEL_HEIGHT*3+fromLocalNameConstant+fromLocAddConstant+reserveUpTimeConstant;
     return height;
 }
 
@@ -176,7 +176,7 @@
     for (NSInteger i = 0; i < self.dataListArr.count; i++) {
         NSArray *modelArr = self.dataListArr[i];
         OrderDetailModel *model = modelArr[0];
-        if (model.STATUS.integerValue != ORDER_STATUS_212) {
+        if (model.STATUS && model.STATUS.integerValue != ORDER_STATUS_212) {
             [ProgressHUD bwm_showTitle:@"当前状态不能接单" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
             return;
         }

@@ -85,7 +85,7 @@
     if (self.lxCode == ABNORMAL_CODE_261) {
         self.title = @"拒绝签收";
     } else if (self.lxCode == ABNORMAL_CODE_262) {
-        self.title = @"异常签收";
+        self.title = @"破损/拒收/退货上报";
     } else {
         self.title = @"预警原因";
     }

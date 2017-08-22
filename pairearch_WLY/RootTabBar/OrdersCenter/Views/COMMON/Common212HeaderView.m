@@ -27,6 +27,8 @@
     self.chengLabel.layer.cornerRadius = CGRectGetWidth(self.chengLabel.bounds) / 2.0;
     self.chengLabel.backgroundColor = MAIN_THEME_COLOR;
     self.statusLabel.backgroundColor = MAIN_THEME_COLOR;
+    self.separatorView.backgroundColor = TABLE_SEPARATOR_COLOR;
+    self.separatorViewHeight.constant = 0.5;
 }
 
 - (void)setDetailModel:(DetailCommonModel *)detailModel {

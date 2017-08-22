@@ -59,7 +59,7 @@
         self.footerView.frame = CGRectMake(0, 0, kScreenWidth, 80);
         self.footerView.backgroundColor = [UIColor whiteColor];
         self.footerView.startTransportBtn.backgroundColor = MAIN_THEME_COLOR;
-        [self.footerView.startTransportBtn setTitle:@"开始运输" forState:UIControlStateNormal];
+        [self.footerView.startTransportBtn setTitle:@"确认接单" forState:UIControlStateNormal];
         [self.footerView.startTransportBtn addTarget:self action:@selector(startTransportAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _footerView;

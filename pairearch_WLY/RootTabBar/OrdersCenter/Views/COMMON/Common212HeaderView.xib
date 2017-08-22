@@ -66,12 +66,21 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8uK-db-4RZ">
+                    <rect key="frame" x="65" y="149" width="464" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="7gN-yZ-T64"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="JQP-93-svy" firstAttribute="trailing" secondItem="Jye-Qd-eAC" secondAttribute="trailing" id="1yf-6l-bT7"/>
                 <constraint firstItem="590-fN-9YP" firstAttribute="leading" secondItem="Qkc-vz-1dT" secondAttribute="leading" id="2ZP-8P-v7a"/>
                 <constraint firstItem="JQP-93-svy" firstAttribute="leading" secondItem="Jye-Qd-eAC" secondAttribute="leading" id="2si-VV-S49"/>
+                <constraint firstAttribute="trailing" secondItem="8uK-db-4RZ" secondAttribute="trailing" id="4Yx-kv-VeP"/>
+                <constraint firstAttribute="bottom" secondItem="8uK-db-4RZ" secondAttribute="bottom" id="Bfa-dn-pXt"/>
                 <constraint firstItem="Qkc-vz-1dT" firstAttribute="leading" secondItem="JQP-93-svy" secondAttribute="leading" id="Fvz-OJ-IKN"/>
                 <constraint firstItem="Jye-Qd-eAC" firstAttribute="top" secondItem="3Ph-JH-Sup" secondAttribute="top" id="GBT-3s-1AB"/>
                 <constraint firstItem="3Ph-JH-Sup" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Gvl-Sh-phK"/>
@@ -87,6 +96,7 @@
                 <constraint firstItem="2HM-TW-NoH" firstAttribute="top" secondItem="bYK-5b-dpY" secondAttribute="bottom" constant="5" id="nZ6-eB-O69"/>
                 <constraint firstItem="3Ph-JH-Sup" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="q1t-Zz-3in"/>
                 <constraint firstItem="Qkc-vz-1dT" firstAttribute="top" secondItem="JQP-93-svy" secondAttribute="bottom" id="rP4-46-8Zt"/>
+                <constraint firstItem="8uK-db-4RZ" firstAttribute="leading" secondItem="bYK-5b-dpY" secondAttribute="leading" id="rvu-ZO-7jx"/>
                 <constraint firstItem="590-fN-9YP" firstAttribute="top" secondItem="Qkc-vz-1dT" secondAttribute="bottom" id="waa-kY-cll"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -97,6 +107,8 @@
                 <outlet property="heavierTonLabel" destination="Qkc-vz-1dT" id="DgE-FH-ZCz"/>
                 <outlet property="loadAddressLabel" destination="JQP-93-svy" id="nJz-Gx-FCc"/>
                 <outlet property="loadNumberLabel" destination="Jye-Qd-eAC" id="rNM-Ll-2uO"/>
+                <outlet property="separatorView" destination="8uK-db-4RZ" id="dae-ID-mwJ"/>
+                <outlet property="separatorViewHeight" destination="7gN-yZ-T64" id="4gU-OP-1rV"/>
                 <outlet property="statusLabel" destination="2HM-TW-NoH" id="put-w3-2gr"/>
             </connections>
             <point key="canvasLocation" x="73.5" y="129"/>

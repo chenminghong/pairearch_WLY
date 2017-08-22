@@ -89,7 +89,7 @@
     
     CGFloat getOrderNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地：%@", detailModel.TO_SHPG_LOC_NAME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat getOrderAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地址：%@", detailModel.TO_SHPG_ADDR] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat planGetTimeConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预计到货时间：%@", detailModel.APPOINTMENT_END_TIME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat planGetTimeConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预计送达日期：%@", detailModel.APPOINTMENT_END_TIME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat height = 21.0+CELL_LABEL_HEIGHT*3+getOrderNameConstant+getOrderAddressConstant+planGetTimeConstant+37.0;
     return height;
 }
@@ -100,7 +100,7 @@
     CGFloat fromLocalNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"发货地名称：%@", detailModel.FRM_SHPG_LOC_NAME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat fromLocAddConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"发货地址：%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];;
     CGFloat reserveUpTimeConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预约装货时间：%@", detailModel.APPOINTMENT_START_TIME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat height = 56.0+CELL_LABEL_HEIGHT*3+fromLocalNameConstant+fromLocAddConstant+reserveUpTimeConstant;
+    CGFloat height = 26.0+CELL_LABEL_HEIGHT*3+fromLocalNameConstant+fromLocAddConstant+reserveUpTimeConstant;
     return height;
 }
 
@@ -176,30 +176,6 @@
                 [tempDict setObject:@"0" forKey:@"toEvaluationPageFlag"];
                 return tempDict;
             }
-            
-            /*
-            //判断是否全部异常签收
-            BOOL allAbnormalFlag = YES;
-            for (NSArray *modelArr in weakself.dataListArr) {
-                for (OrderDetailModel *tempModel in modelArr) {
-                    if ([tempModel.SHPM_STATUS integerValue] < 241) {
-                        allAbnormalFlag = NO;
-                        break;
-                    }
-                }
-            }
-            if (allAbnormalFlag) {
-                weakself.footerView.startTransportBtn.backgroundColor = ABNORMAL_THEME_COLOR;
-                weakself.footerView.startTransportBtn.userInteractionEnabled = NO;
-                [tempDict setObject:@"1" forKey:@"toEvaluationPageFlag"];
-                return tempDict;
-            } else {
-                weakself.footerView.startTransportBtn.backgroundColor = MAIN_THEME_COLOR;
-                weakself.footerView.startTransportBtn.userInteractionEnabled = YES;
-                [tempDict setObject:@"0" forKey:@"toEvaluationPageFlag"];
-                return tempDict;
-            }
-             */
         }
         return nil;
     }];
