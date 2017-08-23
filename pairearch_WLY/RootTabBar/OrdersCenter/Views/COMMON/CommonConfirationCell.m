@@ -41,7 +41,7 @@
     self.loadNumberLabel.text = [NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM];
     self.loadNameLabel.text = [NSString stringWithFormat:@"收货地名称：%@", detailModel.TO_SHPG_LOC_NAME];
     self.loadAddressLabel.text = [NSString stringWithFormat:@"收货地址：%@", detailModel.TO_SHPG_ADDR];
-    self.appointmentLoadLabel.text = [NSString stringWithFormat:@"预约送达日期：%@", detailModel.APPOINTMENT_END_TIME];
+    self.appointmentLoadLabel.text = [NSString stringWithFormat:@"预计送达日期：%@ %@-%@",detailModel.TO_DLVY_DTT, detailModel.FRM_DPND_CMTD_STRT_DTT, detailModel.FRM_DPND_CMTD_END_DTT];
     self.contactPersonLabel.text = [NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_NAME];
     self.contactPhoneLabel.text = [NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_MOBILE];
     self.statusLabel.text = detailModel.SHPM_STATUS_NAME;

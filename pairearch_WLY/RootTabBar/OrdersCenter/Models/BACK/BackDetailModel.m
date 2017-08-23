@@ -43,4 +43,8 @@
     }];
 }
 
+- (void)setTO_DLVY_DTT:(NSString *)TO_DLVY_DTT {
+    _TO_DLVY_DTT = [TO_DLVY_DTT substringToIndex:10];
+}
+
 @end

@@ -37,4 +37,9 @@
     }];
 }
 
+- (void)setFRM_PKUP_DTT:(NSString *)FRM_PKUP_DTT {
+    _FRM_PKUP_DTT = [FRM_PKUP_DTT substringToIndex:10];
+}
+
+
 @end

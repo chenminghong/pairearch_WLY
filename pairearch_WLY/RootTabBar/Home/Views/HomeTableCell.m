@@ -46,7 +46,6 @@
     
     self.loadNumberLabel.text = [NSString stringWithFormat:@"负载单号：%@", homeModel.CODE];
     self.loadAddressLabel.text = [NSString stringWithFormat:@"收货地址：%@", homeModel.DC_ADDRESS];
-    self.reservationTimeLabel.text = [NSString stringWithFormat:@"预约装货时间：%@", homeModel.PLAN_DELIVER_TIME];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *assortLabel;
 @property (weak, nonatomic) IBOutlet UILabel *loadNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *loadAddressLabel;
-@property (weak, nonatomic) IBOutlet UILabel *reservationTimeLabel;
 
 @property (nonatomic, strong) HomePageModel *homeModel;  //主页数据
 

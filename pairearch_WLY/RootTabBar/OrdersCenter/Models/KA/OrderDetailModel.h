@@ -14,6 +14,12 @@
 
 @property (nonatomic, copy) NSString *STATUS;                    //负载单状态码
 
+@property (nonatomic, copy) NSString *FRM_PKUP_DTT;              //预计送达日期
+
+@property (nonatomic, copy) NSString *FRM_DPND_CMTD_STRT_DTT;    //开始时间点
+
+@property (nonatomic, copy) NSString *FRM_DPND_CMTD_END_DTT;     //结束时间点
+
 //装货
 @property (nonatomic, copy) NSString *SHPM_STATUS;               //交货单状态
 

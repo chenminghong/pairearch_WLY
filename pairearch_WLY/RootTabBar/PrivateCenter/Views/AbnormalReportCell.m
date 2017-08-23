@@ -34,10 +34,11 @@
         self.placeHoldLabel = [UILabel new];
         [self.loadNumberTv addSubview:self.placeHoldLabel];
         [self.placeHoldLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.loadNumberTv).with.offset(5);
             make.top.equalTo(self.loadNumberTv).with.offset(6);
-            make.size.mas_equalTo(CGSizeMake(250, 20));
+            make.left.equalTo(self.loadNumberTv).with.offset(5);
+            make.right.equalTo(self.loadNumberTv).with.offset(-5);
         }];
+        self.placeHoldLabel.numberOfLines = 0;
         self.placeHoldLabel.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
         self.placeHoldLabel.textColor = [UIColor grayColor];
         self.placeHoldLabel.text = @"请填写原因，最多可以输入70个字！";

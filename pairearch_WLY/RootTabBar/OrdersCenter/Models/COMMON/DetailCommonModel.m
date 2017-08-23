@@ -11,13 +11,6 @@
 
 @implementation DetailCommonModel
 
-- (instancetype)initWithDict:(NSDictionary *)dict {
-    self = [super initWithDict:dict];
-    if (self) {
-//        self.selected = @1;
-    }
-    return self;
-}
 
 + (NSURLSessionDataTask *)getDataWithParameters:(NSDictionary *)paramDict endBlock:(void (^)(id, NSError *))endBlock {
     return [NetworkHelper GET:ORDER_DETAIL_API parameters:paramDict progress:nil success:^(NSURLSessionDataTask *task, MBProgressHUD *hud, id responseObject) {
@@ -39,6 +32,10 @@
 
 - (NSString *)BW_WGT {
     return [NSString stringWithFormat:@"%.3f", ([_BW_WGT integerValue] / 1000.0)];
+}
+
+- (void)setTO_DLVY_DTT:(NSString *)TO_DLVY_DTT {
+    _TO_DLVY_DTT = [TO_DLVY_DTT substringToIndex:10];
 }
 
 @end

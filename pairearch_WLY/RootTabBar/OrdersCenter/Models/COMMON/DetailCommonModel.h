@@ -29,7 +29,13 @@
 
 @property (nonatomic, copy) NSString *SHPM_STATUS_NAME;          //运单状态
 
-@property (nonatomic, copy) NSString *TOTAL_WEIGHT;        //货物重量（kg）
+@property (nonatomic, copy) NSString *TOTAL_WEIGHT;              //货物重量（kg）
+
+@property (nonatomic, copy) NSString *TO_DLVY_DTT;               //预计送达日期
+
+@property (nonatomic, copy) NSString *FRM_DPND_CMTD_STRT_DTT;    //开始时间点
+
+@property (nonatomic, copy) NSString *FRM_DPND_CMTD_END_DTT;     //结束时间点
 
 
 //交货
