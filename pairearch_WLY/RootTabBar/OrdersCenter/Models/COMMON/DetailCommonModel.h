@@ -29,6 +29,8 @@
 
 @property (nonatomic, copy) NSString *SHPM_STATUS_NAME;          //运单状态
 
+@property (nonatomic, copy) NSString *TOTAL_WEIGHT;        //货物重量（kg）
+
 
 //交货
 

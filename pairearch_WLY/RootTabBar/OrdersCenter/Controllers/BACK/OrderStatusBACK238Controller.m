@@ -48,6 +48,19 @@
         self.tableView.tableFooterView = [UIView new];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.tableView.backgroundColor = [UIColor whiteColor];
+        
+        NSString *titleText = [OrderStatusManager getOrderDescriptionWithStatus:ORDER_STATUS_230 orderType:ORDER_TYPE_BACK];
+        if (titleText.length >= 0.0) {
+            CGFloat titleConstant = [BaseModel heightForTextString:titleText width:(kScreenWidth - 40.0)  fontSize:CELL_LABEL_FONTSIZE];
+            UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 10.0, kScreenWidth - 40.0, titleConstant)];
+            headerLabel.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
+            headerLabel.text = titleText;
+            headerLabel.numberOfLines = 0;
+            
+            UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, titleConstant + 10.0)];
+            [headerView addSubview:headerLabel];
+            self.tableView.tableHeaderView = headerView;
+        }
     }
     return _tableView;
 }
@@ -58,7 +71,7 @@
         self.footerView.frame = CGRectMake(0, 0, kScreenWidth, 80);
         self.footerView.backgroundColor = [UIColor whiteColor];
         self.footerView.startTransportBtn.backgroundColor = THEME_COLOR_BACK;
-        [self.footerView.startTransportBtn setTitle:@"入厂确认" forState:UIControlStateNormal];
+        [self.footerView.startTransportBtn setTitle:@"开始卸货" forState:UIControlStateNormal];
         [self.footerView.startTransportBtn addTarget:self action:@selector(startTransportAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _footerView;
@@ -75,17 +88,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *titleText = [OrderStatusManager getOrderDescriptionWithStatus:ORDER_STATUS_238 orderType:ORDER_TYPE_BACK];
-    CGFloat titleConstant = 0.0;
-    if (indexPath.row == 0) {
-        titleConstant = [BaseModel heightForTextString:titleText width:(kScreenWidth - 40.0)  fontSize:CELL_LABEL_FONTSIZE];
-    }
-    
     BackDetailModel *detailModel = self.dataListArr[indexPath.row];
     CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"装货地址:%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];;
+    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"装货地址:%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat toNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地名称:%@", detailModel.TO_SHPG_LOC_NAME] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat toAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地址:%@", detailModel.TO_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat height = 30.0 + titleConstant + loadNumberConstant + loadAddressConstant + toAddressConstant;
+    CGFloat height = 20.0 + loadNumberConstant + loadAddressConstant + toNameConstant + toAddressConstant;
     return height;
 }
 
@@ -104,11 +112,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BackListDetailCell *cell = [BackListDetailCell getCellWithTable:tableView];
     cell.detailModel = self.dataListArr[indexPath.row];
-    if (indexPath.row == 0) {
-        cell.descriptionLabel.text = [OrderStatusManager getOrderDescriptionWithStatus:ORDER_STATUS_238 orderType:ORDER_TYPE_BACK];
-    } else {
-        cell.descriptionLabel.text = @"";
-    }
     return cell;
 }
 

@@ -27,7 +27,8 @@
     _detailModel = detailModel;
     
     self.signNumberLabel.text = [NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM];
-    self.signAddressLabel.text = [NSString stringWithFormat:@"收货地址：%@", detailModel.TO_SHPG_ADDR];
+    self.signNameLabel.text = [NSString stringWithFormat:@"收货地名称：%@", detailModel.TO_SHPG_LOC_NAME];
+    self.signAddressLabel.text = [NSString stringWithFormat:@"收货方地址：%@", detailModel.TO_SHPG_ADDR];
     
     if ([detailModel.enable isEqualToString:@"N"]) {
         self.checkButton.backgroundColor = ABNORMAL_THEME_COLOR;

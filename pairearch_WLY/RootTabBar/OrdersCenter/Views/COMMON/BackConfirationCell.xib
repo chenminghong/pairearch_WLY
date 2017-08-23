@@ -11,11 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommonConfirationCell" rowHeight="165" id="KGk-i7-Jjw" customClass="CommonConfirationCell">
-            <rect key="frame" x="0.0" y="0.0" width="387" height="165"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommonConfirationCell" rowHeight="199" id="KGk-i7-Jjw" customClass="CommonConfirationCell">
+            <rect key="frame" x="0.0" y="0.0" width="387" height="199"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="387" height="164.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="387" height="199"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="成" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TUS-ly-Hxm">
@@ -75,6 +75,13 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pGx-SC-Mgr">
+                        <rect key="frame" x="65" y="197.5" width="322" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="ZbF-r4-huh"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="cPS-QJ-ke2" firstAttribute="leading" secondItem="3Ue-eh-zjz" secondAttribute="leading" id="4hI-lI-bAn"/>
@@ -90,13 +97,16 @@
                     <constraint firstItem="cPS-QJ-ke2" firstAttribute="trailing" secondItem="3Ue-eh-zjz" secondAttribute="trailing" id="Re3-PK-qDx"/>
                     <constraint firstItem="MCI-qD-vDb" firstAttribute="top" secondItem="6Yb-cI-2zE" secondAttribute="bottom" constant="5" id="RqF-O0-A8M"/>
                     <constraint firstItem="qwe-Zo-HWm" firstAttribute="trailing" secondItem="MCI-qD-vDb" secondAttribute="trailing" id="Slh-rJ-lHC"/>
+                    <constraint firstAttribute="bottom" secondItem="pGx-SC-Mgr" secondAttribute="bottom" id="U50-ag-avb"/>
                     <constraint firstItem="3Ue-eh-zjz" firstAttribute="top" secondItem="bY2-yJ-4PZ" secondAttribute="bottom" id="XLr-VI-dZX"/>
                     <constraint firstItem="qwe-Zo-HWm" firstAttribute="leading" secondItem="MCI-qD-vDb" secondAttribute="leading" id="bCP-KL-M0a"/>
                     <constraint firstItem="TUS-ly-Hxm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="bZw-a8-0za"/>
                     <constraint firstItem="3Ue-eh-zjz" firstAttribute="trailing" secondItem="bY2-yJ-4PZ" secondAttribute="trailing" id="bfG-nN-OdW"/>
+                    <constraint firstAttribute="trailing" secondItem="pGx-SC-Mgr" secondAttribute="trailing" id="iOT-IS-R6C"/>
                     <constraint firstItem="cPS-QJ-ke2" firstAttribute="top" secondItem="3Ue-eh-zjz" secondAttribute="bottom" id="pfb-9j-ad0"/>
                     <constraint firstItem="TUS-ly-Hxm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="q6I-wY-ADO"/>
                     <constraint firstItem="bY2-yJ-4PZ" firstAttribute="leading" secondItem="TUS-ly-Hxm" secondAttribute="trailing" constant="10" id="t2m-LX-XPf"/>
+                    <constraint firstItem="pGx-SC-Mgr" firstAttribute="leading" secondItem="qwe-Zo-HWm" secondAttribute="leading" id="wjn-fm-72X"/>
                     <constraint firstItem="ACo-j6-TNi" firstAttribute="leading" secondItem="qwe-Zo-HWm" secondAttribute="leading" id="wrQ-gF-h9Q"/>
                     <constraint firstItem="qwe-Zo-HWm" firstAttribute="top" secondItem="MCI-qD-vDb" secondAttribute="bottom" id="yuv-5N-jIA"/>
                 </constraints>
@@ -109,9 +119,10 @@
                 <outlet property="loadAddressLabel" destination="cPS-QJ-ke2" id="s3V-hS-fnG"/>
                 <outlet property="loadNameLabel" destination="3Ue-eh-zjz" id="X4R-90-Zth"/>
                 <outlet property="loadNumberLabel" destination="bY2-yJ-4PZ" id="foK-OR-E0J"/>
+                <outlet property="separatorView" destination="pGx-SC-Mgr" id="wva-T1-KeC"/>
                 <outlet property="statusLabel" destination="ACo-j6-TNi" id="a31-mj-6Me"/>
             </connections>
-            <point key="canvasLocation" x="67.5" y="114.5"/>
+            <point key="canvasLocation" x="67.5" y="131.5"/>
         </tableViewCell>
     </objects>
 </document>

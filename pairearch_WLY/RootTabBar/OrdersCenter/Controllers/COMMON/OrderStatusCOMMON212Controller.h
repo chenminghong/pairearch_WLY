@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSMutableArray *dataListArr;  //数据源
 
+@property (nonatomic, strong) NSDictionary *paraDict;  //参数
+
 @end

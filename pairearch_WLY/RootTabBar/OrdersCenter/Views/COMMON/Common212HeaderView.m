@@ -28,15 +28,16 @@
     self.chengLabel.backgroundColor = MAIN_THEME_COLOR;
     self.statusLabel.backgroundColor = MAIN_THEME_COLOR;
     self.separatorView.backgroundColor = TABLE_SEPARATOR_COLOR;
-    self.separatorViewHeight.constant = 0.5;
+    self.separatorViewHeight.constant = 1.0;
+    self.statusLabel.hidden = YES;
 }
 
 - (void)setDetailModel:(DetailCommonModel *)detailModel {
     _detailModel = detailModel;
     
     self.loadNumberLabel.text = [NSString stringWithFormat:@"负载单号：%@", detailModel.ORDER_CODE];
-    self.loadAddressLabel.text = [NSString stringWithFormat:@"收货地址：%@", detailModel.TO_SHPG_ADDR];
-    self.heavierTonLabel.text = [NSString stringWithFormat:@"货物重量：%@kg", detailModel.BW_WGT];
+    self.loadAddressLabel.text = [NSString stringWithFormat:@"装货地址：%@", detailModel.FRM_SHPG_ADDR];
+    self.heavierTonLabel.text = [NSString stringWithFormat:@"货物重量：%@kg", detailModel.TOTAL_WEIGHT];
     self.contactNumberLabel.text = [NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_MOBILE];
     self.contactPersonLabel.text = [NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_NAME];
     self.statusLabel.text = [NSString stringWithFormat:@"%@", detailModel.SHPM_STATUS_NAME];

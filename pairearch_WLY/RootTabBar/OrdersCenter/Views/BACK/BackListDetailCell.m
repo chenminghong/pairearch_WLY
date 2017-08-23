@@ -35,6 +35,7 @@
     _detailModel = detailModel;
     self.loadNumberLabel.text = [NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM];
     self.loadAddressLabel.text = [NSString stringWithFormat:@"装货地址:%@", detailModel.FRM_SHPG_ADDR];
+    self.toNameLabel.text = [NSString stringWithFormat:@"收货地名称:%@", detailModel.TO_SHPG_LOC_NAME];
     self.toAddressLabel.text = [NSString stringWithFormat:@"收货地址:%@", detailModel.TO_SHPG_ADDR];
 }
 

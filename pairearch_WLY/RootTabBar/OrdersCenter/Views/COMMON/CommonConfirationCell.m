@@ -22,6 +22,8 @@
     self.chengLabel.layer.cornerRadius = CGRectGetWidth(self.chengLabel.bounds) / 2.0;
     
     self.chengLabel.hidden = YES;
+    self.statusLabel.hidden = YES;
+    self.separatorView.backgroundColor = TABLE_SEPARATOR_COLOR;
 }
 
 + (instancetype)getCellWithTable:(UITableView *)table {

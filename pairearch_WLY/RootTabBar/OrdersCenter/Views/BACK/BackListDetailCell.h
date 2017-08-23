@@ -11,11 +11,11 @@
 @class BackDetailModel;
 
 @interface BackListDetailCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *assortLabel;
 @property (weak, nonatomic) IBOutlet UILabel *loadNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *loadAddressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *toAddressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *toNameLabel;
 
 @property (nonatomic, strong) BackDetailModel *detailModel;
 

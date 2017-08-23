@@ -56,9 +56,6 @@
     
     self.view.backgroundColor = UIColorFromRGB(0xCBC9C7);
     
-    //初始化刷新标识
-//    self.reloadFlags = [NSMutableArray arrayWithArray:@[@1, @1, @1]];
-    
     self.collectionView.pagingEnabled = YES;
     [self.selectView addSubview:self.markView];
     
@@ -75,9 +72,6 @@
             btn.selected = NO;
         }
     }
-    
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadListData:) name:ORDERSCENTER_RELOAD_NAME object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -107,17 +101,6 @@
         self.markView.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(self.selectView.bounds) * index / 3, 0.0);
     }];
 }
-
-//刷新当前的列表
-//- (void)reloadListData:(NSNotification *)sender {
-//    for (NSInteger i = 0; i < 3; i++) {
-//        [self.reloadFlags replaceObjectAtIndex:i withObject:@1];
-//    }
-//    if (self.currentCell) {
-//        [MJRefreshUtil begainRefresh:self.currentCell.listTableView];
-//        [self.reloadFlags replaceObjectAtIndex:self.currentCell.indexPath.item withObject:@0];
-//    }
-//}
 
 //KA界面跳转逻辑
 - (void)jumpToKaControllerWithStatus:(NSInteger)status paraDict:(NSDictionary *)paraDict {
@@ -182,7 +165,7 @@
             OrderListModel *listModel = selectModelArr[0];
             NSInteger status = [listModel.STATUS integerValue];
             NSString *transportCode = listModel.TRANSPORT_CODE;
-            NSDictionary *paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"orderCode":codeStr, @"userName":[LoginModel shareLoginModel].name};
+            NSDictionary *paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"orderCode":codeStr, @"userName":[LoginModel shareLoginModel].name, @"totalWeight":listModel.TOTAL_WEIGHT};
             if (indexPath.item != 2) {
                 if ([transportCode isEqualToString:ORDER_TYPE_KA]) {
                     [self jumpToKaControllerWithStatus:status paraDict:paraDict];
@@ -194,8 +177,6 @@
             }
         }
     }];
-//    cell.indexPath = indexPath;
-//    cell.reloadFlags = self.reloadFlags;
     [cell addAbnormalReportBlock:^(NSString *loadNumber) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"AbnormalReportController" bundle:[NSBundle mainBundle]];
         AbnormalReportController *abnormalVC = [sb instantiateViewControllerWithIdentifier:@"AbnormalReportController"];
@@ -207,12 +188,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0) {
     
-//    NSNumber *flag = self.reloadFlags[indexPath.item];
-//    if ([flag boolValue]) {
     OrdersCollectionCell *tempCell = (OrdersCollectionCell *)cell;
     [MJRefreshUtil begainRefresh:tempCell.listTableView];
-//    }
-//    self.currentCell = (OrdersCollectionCell *)cell;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {

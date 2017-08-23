@@ -98,8 +98,9 @@
         case ORDER_STATUS_212:
         {
             OrderStatusCOMMON212Controller *childVC = [OrderStatusCOMMON212Controller new];
-            childVC.dataListArr = self.dataListArr;
             [self addChildController:childVC];
+            childVC.paraDict = self.paraDict;
+            childVC.dataListArr = self.dataListArr;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
             };
@@ -123,6 +124,7 @@
             OrderStatusCOMMON226Controller *childVC = [OrderStatusCOMMON226Controller new];
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
+            childVC.paraDict = self.paraDict;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
             };
@@ -134,6 +136,7 @@
             OrderStatusCOMMON228Controller *childVC = [OrderStatusCOMMON228Controller new];
             [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
+            childVC.paraDict = self.paraDict;
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
             };

@@ -114,18 +114,13 @@
 - (void)commitButtonAction:(UIButton *)sender {
     [self.view endEditing:YES];
     RejectSignCell *cell = (RejectSignCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    
-    if (cell.reasonTV.text.length <= 0) {
-        [MBProgressHUD bwm_showTitle:@"请输入原因" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-        return;
-    }
-    
-    if (_selectedPhotos.count <= 0) {
-        [MBProgressHUD bwm_showTitle:@"请选择照片" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-        return;
-    }
-    
     RejectReasonListModel *model = cell.selectModel;
+    
+    if ([model.name isEqualToString:@"其他"] && cell.reasonTV.text.length <= 0) {
+        [MBProgressHUD bwm_showTitle:@"请输入其他原因" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        return;
+    }
+    
     switch (self.lxCode) {
         case ABNORMAL_CODE_261:
         case ABNORMAL_CODE_262:

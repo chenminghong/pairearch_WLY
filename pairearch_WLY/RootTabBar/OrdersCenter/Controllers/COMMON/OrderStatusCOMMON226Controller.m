@@ -91,14 +91,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     DetailCommonModel *detailModel = self.dataListArr[indexPath.row];
-    
-    CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat loadNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"发货地名称：%@", detailModel.FRM_SHPG_LOC_NAME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"发货地址：%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat appointmentLoadConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预约送达日期：%@", detailModel.APPOINTMENT_END_TIME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat contactPersonConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"%@", detailModel.DRIVER_MOBILE] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat contactPhoneConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_MOBILE] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat height = 55.0+loadNumberConstant+loadNameConstant+loadAddressConstant+appointmentLoadConstant+contactPersonConstant+contactPhoneConstant;
+    CGFloat labelWidth = kScreenWidth - 85.0;
+    CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM] width:labelWidth  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat loadNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地名称：%@", detailModel.TO_SHPG_LOC_NAME] width:labelWidth  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地址：%@", detailModel.TO_SHPG_ADDR] width:labelWidth  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat appointmentLoadConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预约送达日期：%@", detailModel.APPOINTMENT_END_TIME] width:labelWidth  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat contactPersonConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_NAME] width:labelWidth  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat contactPhoneConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_MOBILE] width:labelWidth  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat height = 25.0+loadNumberConstant+loadNameConstant+loadAddressConstant+appointmentLoadConstant+contactPersonConstant+contactPhoneConstant;
     return height;
 }
 
@@ -111,7 +111,7 @@
     CGFloat contactNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_MOBILE] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat contactPersonConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_NAME] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     
-    CGFloat height = 45.0 + loadNumberConstant + loadAddressConstant + heavierTonConstant +contactNumberConstant + contactPersonConstant;
+    CGFloat height = 20.0 + loadNumberConstant + loadAddressConstant + heavierTonConstant +contactNumberConstant + contactPersonConstant;
     return height;
 }
 
@@ -122,6 +122,8 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     Common212HeaderView *header = [Common212HeaderView getHeaderViewWithTable:tableView];
     if (self.dataListArr.count) {
+        DetailCommonModel *model = self.dataListArr[0];
+        model.TOTAL_WEIGHT = self.paraDict[@"totalWeight"];
         header.detailModel = self.dataListArr[0];
     }
     return header;

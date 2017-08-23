@@ -70,10 +70,9 @@
         [ProgressHUD bwm_showTitle:@"暂无可选数据" toView:self hideAfter:HUD_HIDE_TIMEINTERVAL];
         return;
     }
-    __weak typeof(self) weakSelf;
     [BidPickerView showSelectViewWithTitle:@"请选择原因" dataArr:self.dataListArr selectBlock:^(id model) {
-        weakSelf.selectModel = model;
-        [weakSelf.selectButton setTitle:[model valueForKey:@"name"] forState:UIControlStateNormal];
+        self.selectModel = model;
+        [self.selectButton setTitle:[model valueForKey:@"name"] forState:UIControlStateNormal];
     }];
 }
 

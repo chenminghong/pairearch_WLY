@@ -33,7 +33,7 @@
 //交货
 @property (nonatomic, copy) NSString *SHPM_NUM;                  //交货单
 
-@property (nonatomic, copy) NSString *TO_SHPG_LOC_NAME;          //收货方
+@property (nonatomic, copy) NSString *TO_SHPG_LOC_NAME;          //收货方名称
 
 @property (nonatomic, copy) NSString *TO_SHPG_ADDR;              //收货方地址
 

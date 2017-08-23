@@ -16,12 +16,11 @@
 #import "HaveBackOrderController.h"
 #import "RefuseSignController.h"
 #import "OrderStatusKA245Controller.h"
+#import "Common212HeaderView.h"
 
 @interface OrderStatusCOMMON230Controller ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
-
-//@property (nonatomic, strong) DetailCommonModel *currentModel;
 
 @end
 
@@ -143,7 +142,6 @@
 //获取heder显示文字描述
 - (NSString *)getHeaderTitle {
     if (self.dataListArr.count > 0) {
-        
         NSMutableArray *models = [NSMutableArray array];
         DetailCommonModel *tempModel = nil;
         for (DetailCommonModel *model in self.dataListArr) {
@@ -189,6 +187,21 @@
         self.tableView.dataSource = self;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.tableView.backgroundColor = [UIColor whiteColor];
+        
+//        NSString *headerStr = [OrderStatusManager getOrderDescriptionWithStatus:ORDER_STATUS_220 orderType:ORDER_TYPE_COMMON];
+//        CGFloat desHeight = [BaseModel heightForTextString:headerStr width:(kScreenWidth - 40.0)  fontSize:CELL_LABEL_FONTSIZE];
+//        UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, desHeight + 20)];
+//        UILabel *label = [UILabel new];
+//        [header addSubview:label];
+//        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(header.mas_top).with.offset(10.0);
+//            make.left.mas_equalTo(header.mas_left).with.offset(20.0);
+//            make.right.mas_equalTo(header.mas_right).with.offset(-20.0);
+//        }];
+//        label.numberOfLines = 0;
+//        label.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
+//        label.text = headerStr;
+//        self.tableView.tableHeaderView = header;
     }
     return _tableView;
 }
@@ -207,37 +220,45 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     DetailCommonModel *detailModel = self.dataListArr[indexPath.row];
     
-    CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM] width:(kScreenWidth - 100.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"交货地址：%@", detailModel.TO_SHPG_ADDR] width:(kScreenWidth - 100.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat height = 70.0+loadNumberConstant+loadAddressConstant;
+    CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat loadNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地名称：%@", detailModel.TO_SHPG_LOC_NAME] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货方货地址：%@", detailModel.TO_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat height = 70.0+loadNumberConstant+loadNameConstant+loadAddressConstant;
     if ([detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_241 || [detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_242 || [detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_245 || [detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_248) {
-        CGFloat labelHeight = [BaseModel heightForTextString:@"已正常签收(或者异常签收)" width:((kScreenWidth - 100.0)) fontSize:CELL_LABEL_FONTSIZE];
+        CGFloat labelHeight = [BaseModel heightForTextString:@"已正常签收(或者异常签收)" width:((kScreenWidth - 85.0)) fontSize:CELL_LABEL_FONTSIZE];
         height += (labelHeight + 10.0);
     }
     return height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    NSString *desStr = [self getHeaderTitle];
-    if (desStr.length == 0) {
-        return 0.0;
-    }
-    CGFloat height = [BaseModel heightForTextString:desStr width:(kScreenWidth - 40.0)  fontSize:CELL_LABEL_FONTSIZE];
-    return height + 20.0;
+//    NSString *desStr = [self getHeaderTitle];
+//    if (desStr.length == 0) {
+//        return 0.0;
+//    }
+//    CGFloat height = [BaseModel heightForTextString:desStr width:(kScreenWidth - 40.0)  fontSize:CELL_LABEL_FONTSIZE];
+//    return height + 20.0;
+    
+    DetailCommonModel *detailModel = self.dataListArr[section];
+    
+    CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"交货单号：%@", detailModel.ORDER_CODE] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货方地址：%@", detailModel.TO_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];;
+    CGFloat heavierTonConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"货物重量：%@kg", detailModel.BW_WGT] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat contactNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_MOBILE] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat contactPersonConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_NAME] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
+    
+    CGFloat height = 20.0 + loadNumberConstant + loadAddressConstant + heavierTonConstant +contactNumberConstant + contactPersonConstant;
+    return height;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
-    UILabel *label = [UILabel new];
-    [header addSubview:label];
-    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(header.mas_top).with.offset(10.0);
-        make.left.mas_equalTo(header.mas_left).with.offset(20.0);
-        make.right.mas_equalTo(header.mas_right).with.offset(-20.0);
-    }];
-    label.numberOfLines = 0;
-    label.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
-    label.text = [self getHeaderTitle];
+    Common212HeaderView *header = [Common212HeaderView getHeaderViewWithTable:tableView];
+    if (self.dataListArr.count) {
+        DetailCommonModel *model = self.dataListArr[0];
+        model.TOTAL_WEIGHT = self.paraDict[@"totalWeight"];
+        header.detailModel = self.dataListArr[0];
+    }
+    header.separatorView.hidden = YES;
     return header;
 }
 
@@ -254,7 +275,7 @@
         CommonIntoFacCheckCell *cell = [CommonIntoFacCheckCell getCellWithTable:tableView buttonBlock:^(NSInteger index, DetailCommonModel *model) {
             [self intoFacCheckButtonActionWithDetailModel:detailModel];
         }];
-        [cell.checkButton setTitle:@"入厂确认" forState:UIControlStateNormal];
+        [cell.checkButton setTitle:@"开始卸货" forState:UIControlStateNormal];
         cell.detailModel = detailModel;
         return cell;
     } else if ([detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_240) {  //正常|异常签收
