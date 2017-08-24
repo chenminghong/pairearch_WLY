@@ -35,6 +35,8 @@
 
 @property (nonatomic, copy) NSString *FRM_DPND_CMTD_END_DTT;     //结束时间点
 
+@property (nonatomic, copy) NSString *STATUS;                    //负载单状态码
+
 
 //交货
 @property (nonatomic, copy) NSString *SHPM_NUM;                  //交货单

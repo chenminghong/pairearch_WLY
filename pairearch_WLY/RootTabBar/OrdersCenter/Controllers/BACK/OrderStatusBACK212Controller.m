@@ -124,7 +124,7 @@
 - (void)startTransportAction:(UIButton *)sender {
     NSString *driverTel = [LoginModel shareLoginModel].tel;
     BackDetailModel *model = self.dataListArr[0];
-    if (model.SHPM_STATUS.integerValue != ORDER_STATUS_212) {
+    if (model.STATUS && model.STATUS.integerValue != ORDER_STATUS_212) {
         [ProgressHUD bwm_showTitle:@"当前状态不能接单" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         return;
     }

@@ -185,32 +185,16 @@
         if ([[self.childViewControllers[0] class] isSubclassOfClass:[viewController class]]) {
             return;
         }
+        [self.childViewControllers[0] removeFromParentViewController];
         [self addChildViewController:viewController];
         viewController.view.frame = self.view.bounds;
+        [self.view addSubview:viewController.view];
         
-        [UIView transitionFromView:self.view.subviews[0] toView:viewController.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
-            if (finished) {
-                [self.childViewControllers[0] removeFromParentViewController];
-            }
-        }];
     } else {
         [self addChildViewController:viewController];
-        [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            viewController.view.frame = self.view.bounds;
-            [self.view insertSubview:viewController.view atIndex:0];
-        } completion:nil];
+        viewController.view.frame = self.view.bounds;
+        [self.view addSubview:viewController.view];
     }
-    
-    /*
-    if (self.childViewControllers.count > 0) {
-        [self.view.subviews[0] removeFromSuperview];
-        [self.childViewControllers[0] removeFromParentViewController];
-        
-    }
-    [self addChildViewController:viewController];
-    viewController.view.frame = self.view.bounds;
-    [self.view insertSubview:viewController.view atIndex:0];
-     */
 }
 
 //移除子视图控制器

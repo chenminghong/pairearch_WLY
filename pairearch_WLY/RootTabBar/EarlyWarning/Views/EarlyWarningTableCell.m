@@ -32,6 +32,8 @@
     [formatter setDateFormat:@"M月dd日 HH:mm"];
     NSString *startTimeStr = [formatter stringFromDate:date];
     
+    self.loadNumberLabel.text = [NSString stringWithFormat:@"负载单号：%@", model.orderCode];
+    self.stateNameLabel.text = model.statusName;
     self.stayTimeLabel.text = startTimeStr;
     self.statementLabel.text = [NSString stringWithFormat:@"在%@停留超过%@分钟", model.regions, model.stopTime];
 }

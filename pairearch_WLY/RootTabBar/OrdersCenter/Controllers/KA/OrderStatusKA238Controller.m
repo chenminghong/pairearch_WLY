@@ -87,20 +87,20 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     OrderDetailModel *detailModel = [self.dataListArr[indexPath.section] objectAtIndex:indexPath.row];
     
-    CGFloat getOrderNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地：%@", detailModel.TO_SHPG_LOC_NAME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat getOrderAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地址：%@", detailModel.TO_SHPG_ADDR] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat planGetTimeConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预计送达日期：%@ %@-%@", detailModel.FRM_PKUP_DTT, detailModel.FRM_DPND_CMTD_STRT_DTT, detailModel.FRM_DPND_CMTD_END_DTT] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat height = 21.0+CELL_LABEL_HEIGHT*3+getOrderNameConstant+getOrderAddressConstant+planGetTimeConstant;
+    CGFloat getOrderNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地：%@", detailModel.TO_SHPG_LOC_NAME] width:(kScreenWidth - 75)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat getOrderAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地址：%@", detailModel.TO_SHPG_ADDR] width:(kScreenWidth - 75)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat planGetTimeConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预计送达日期：%@ %@-%@", detailModel.FRM_PKUP_DTT, detailModel.FRM_DPND_CMTD_STRT_DTT, detailModel.FRM_DPND_CMTD_END_DTT] width:(kScreenWidth - 75)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat height = 20.0+CELL_LABEL_HEIGHT*3+getOrderNameConstant+getOrderAddressConstant+planGetTimeConstant;
     return height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     OrderDetailModel *detailModel = [self.dataListArr[section] objectAtIndex:0];
     
-    CGFloat fromLocalNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"发货地名称：%@", detailModel.FRM_SHPG_LOC_NAME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat fromLocAddConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"发货地址：%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];;
-    CGFloat reserveUpTimeConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预约装货时间：%@", detailModel.APPOINTMENT_START_TIME] width:(kScreenWidth - 95.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat height = 26.0+CELL_LABEL_HEIGHT*3+fromLocalNameConstant+fromLocAddConstant+reserveUpTimeConstant;
+    CGFloat fromLocalNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"发货地名称：%@", detailModel.FRM_SHPG_LOC_NAME] width:(kScreenWidth - 75)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat fromLocAddConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"发货地址：%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 75)  fontSize:CELL_LABEL_FONTSIZE];;
+    CGFloat reserveUpTimeConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"预约装货时间：%@", detailModel.APPOINTMENT_START_TIME] width:(kScreenWidth - 75)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat height = 25.0+CELL_LABEL_HEIGHT*3+fromLocalNameConstant+fromLocAddConstant+reserveUpTimeConstant;
     return height;
 }
 
@@ -142,37 +142,6 @@
 }
 
 #pragma mark -- ButtonAction
-
-//网络请求数据
-//- (void)loadDetailDataFromNet {
-//    [OrderDetailModel getDataWithParameters:self.paraDict endBlock:^(id model, NSError *error) {
-//        if (model) {
-//            //对model数据进行分类
-//            NSArray *dataListArr = [NSMutableArray arrayWithArray:model];
-//            NSMutableDictionary *orderCodeDict = [NSMutableDictionary dictionary];
-//            for (OrderDetailModel *detailModel in dataListArr) {
-//                [orderCodeDict setObject:detailModel forKey:detailModel.ORDER_CODE];
-//            }
-//            
-//            NSArray *orderCodeArr = [orderCodeDict allKeys];  //获取所有的orderCode
-//            self.dataListArr = [NSMutableArray array];
-//            for (NSString *orderCode in orderCodeArr) {
-//                NSMutableArray *modelArr = [NSMutableArray array];
-//                for (OrderDetailModel *model in dataListArr) {
-//                    if ([orderCode isEqualToString:model.ORDER_CODE]) {
-//                        [modelArr addObject:model];
-//                    }
-//                }
-//                [self.dataListArr addObject:modelArr];
-//            }
-//            
-//            [self.tableView reloadData];
-//            
-//        } else {
-//            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-//        }
-//    }];
-//}
 
 - (void)networkWithUrlStr:(NSString *)urlStr paraDict:(NSDictionary *)paraDict {
     [NetworkHelper POST:urlStr parameters:paraDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {

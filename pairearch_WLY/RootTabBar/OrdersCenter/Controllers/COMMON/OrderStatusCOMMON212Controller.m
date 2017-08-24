@@ -32,8 +32,11 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction:)];
-    
-    [self.view addSubview:self.tableView];
+}
+
+- (void)setDataListArr:(NSMutableArray *)dataListArr {
+    _dataListArr = dataListArr;
+    [self.tableView reloadData];
 }
 
 #pragma mark -- Lazy Loading
@@ -169,7 +172,7 @@
     NSString *orderCodes = @"";
     for (NSInteger i = 0; i < self.dataListArr.count; i++) {
         DetailCommonModel *model = self.dataListArr[i];
-        if (model.SHPM_STATUS.integerValue != ORDER_STATUS_212) {
+        if (model.STATUS && model.STATUS.integerValue != ORDER_STATUS_212) {
             [ProgressHUD bwm_showTitle:@"当前状态不能接单" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
             return;
         }

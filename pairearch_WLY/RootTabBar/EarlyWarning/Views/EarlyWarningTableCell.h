@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *statementLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
+@property (weak, nonatomic) IBOutlet UILabel *loadNumberLabel;
 
 @property (nonatomic, strong) EarlyWarningListModel *model;
 

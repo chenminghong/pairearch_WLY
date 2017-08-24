@@ -310,7 +310,7 @@
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
     NSDictionary *userInfo = [notification userInfo];
     NSString *content = [userInfo valueForKey:@"content"];
-    [self addNetLocalNotificationWithDesStr:content.length>0? content:@""];
+//    [self addNetLocalNotificationWithDesStr:content.length>0? content:@""];
 //    NSDictionary *extras = [userInfo valueForKey:@"extras"];
 //    if (extras) {
 //        NSString *jsonStr = [extras valueForKey:@"params"]; //服务端传递的Extras附加字段，key是自己定义的

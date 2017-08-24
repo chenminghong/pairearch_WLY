@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交货单:jh0000002a" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HpC-dJ-PpR">
-                        <rect key="frame" x="55" y="10" width="225" height="18"/>
+                        <rect key="frame" x="55" y="10" width="245" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="PnR-4l-hA8"/>
                         </constraints>
@@ -27,25 +27,25 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货方:******2" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhU-6b-gcL">
-                        <rect key="frame" x="55" y="28" width="225" height="19.5"/>
+                        <rect key="frame" x="55" y="28" width="245" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货方地址:上海某区某路某号" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4E-QM-HuU">
-                        <rect key="frame" x="55" y="47.5" width="225" height="19.5"/>
+                        <rect key="frame" x="55" y="47.5" width="245" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预计送达日期:YY-MM-DD  HH:MM" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EN8-7d-qGt">
-                        <rect key="frame" x="55" y="67" width="225" height="38.5"/>
+                        <rect key="frame" x="55" y="67" width="245" height="38.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系人:王**" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ywo-so-aVI">
-                        <rect key="frame" x="55" y="105.5" width="225" height="18"/>
+                        <rect key="frame" x="55" y="105.5" width="245" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="NFc-Hy-pYu"/>
                         </constraints>
@@ -54,7 +54,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电话:400-00000000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JV5-o3-WYE">
-                        <rect key="frame" x="55" y="123.5" width="225" height="18"/>
+                        <rect key="frame" x="55" y="123.5" width="245" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -81,7 +81,7 @@
                     <constraint firstItem="e4E-QM-HuU" firstAttribute="trailing" secondItem="DhU-6b-gcL" secondAttribute="trailing" id="RNT-VI-Ofs"/>
                     <constraint firstItem="Ywo-so-aVI" firstAttribute="top" secondItem="EN8-7d-qGt" secondAttribute="bottom" id="bLd-ca-rvb"/>
                     <constraint firstItem="JV5-o3-WYE" firstAttribute="leading" secondItem="Ywo-so-aVI" secondAttribute="leading" id="iMW-16-fMh"/>
-                    <constraint firstAttribute="trailing" secondItem="HpC-dJ-PpR" secondAttribute="trailing" constant="40" id="jjH-Np-hx7"/>
+                    <constraint firstAttribute="trailing" secondItem="HpC-dJ-PpR" secondAttribute="trailing" constant="20" id="jjH-Np-hx7"/>
                     <constraint firstAttribute="trailing" secondItem="4fk-dd-oWF" secondAttribute="trailing" constant="55" id="jsX-re-2de"/>
                     <constraint firstItem="e4E-QM-HuU" firstAttribute="top" secondItem="DhU-6b-gcL" secondAttribute="bottom" id="kGf-IY-NKk"/>
                     <constraint firstAttribute="bottom" secondItem="4fk-dd-oWF" secondAttribute="bottom" id="kro-5K-Uvj"/>

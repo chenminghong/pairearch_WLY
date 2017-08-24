@@ -91,9 +91,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     BackDetailModel *detailModel = self.dataListArr[indexPath.row];
     CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"装货地址:%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];;
+    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"装货地址:%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat toNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地名称:%@", detailModel.TO_SHPG_LOC_NAME] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat toAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地址:%@", detailModel.TO_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat height = 20.0 + loadNumberConstant + loadAddressConstant + toAddressConstant;
+    CGFloat height = 20.0 + loadNumberConstant + loadAddressConstant + toNameConstant + toAddressConstant;
     return height;
 }
 

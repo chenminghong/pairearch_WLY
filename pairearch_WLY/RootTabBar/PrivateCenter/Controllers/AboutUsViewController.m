@@ -70,6 +70,7 @@
     [aboutShangHaiPaireachContent sizeToFit];
     aboutShangHaiPaireachContent.font = [UIFont systemFontOfSize:15];
     [self.view addSubview:aboutShangHaiPaireachContent];
+    aboutShangHaiPaireachContent.editable = NO;
     [aboutShangHaiPaireachContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(aboutShangHaiPaireach.mas_bottom).with.offset(10 * kHeightProportion);
         make.left.equalTo(weakSelf.view.mas_left).with.offset(10);

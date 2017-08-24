@@ -114,9 +114,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     EarlyWarningListModel *model = self.dataListArr[indexPath.row];
+    CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"负载单号：%@", model.orderCode] width:(kScreenWidth - 40.0) fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat statusNameConstant = [BaseModel heightForTextString:model.statusName width:(kScreenWidth - 40.0) fontSize:CELL_LABEL_FONTSIZE];
     NSString *text = [NSString stringWithFormat:@"在%@停留超过%@分钟", model.regions, model.stopTime];
     CGFloat addressConstant = [BaseModel heightForTextString:text width:(kScreenWidth - 140.0) fontSize:CELL_LABEL_FONTSIZE];
-    return 40.0 + addressConstant;
+    return 20.0 + loadNumberConstant + statusNameConstant + addressConstant;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

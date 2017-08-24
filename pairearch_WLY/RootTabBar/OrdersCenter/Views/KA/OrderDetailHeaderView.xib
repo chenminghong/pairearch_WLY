@@ -26,37 +26,37 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="负载单号:17021001" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YmM-Ai-Bfg">
-                    <rect key="frame" x="55" y="10" width="290" height="19.5"/>
+                    <rect key="frame" x="55" y="10" width="300" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发货方名称:上海***" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EmQ-w1-1GW">
-                    <rect key="frame" x="55" y="29.5" width="290" height="19.5"/>
+                    <rect key="frame" x="55" y="29.5" width="300" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发货方地址:上海吴泾川路通海路" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Nk-gu-iZ8">
-                    <rect key="frame" x="55" y="49" width="290" height="19.5"/>
+                    <rect key="frame" x="55" y="49" width="300" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预约装货时间:----" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SS1-Nc-cWX">
-                    <rect key="frame" x="55" y="68.5" width="290" height="19.5"/>
+                    <rect key="frame" x="55" y="68.5" width="300" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系人:王**" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B01-qe-dik">
-                    <rect key="frame" x="55" y="93" width="290" height="19.5"/>
+                    <rect key="frame" x="55" y="93" width="300" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电话:13700000001" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8L-Ez-SlY">
-                    <rect key="frame" x="55" y="112.5" width="290" height="19.5"/>
+                    <rect key="frame" x="55" y="112.5" width="300" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -117,7 +117,7 @@
                 <constraint firstItem="B01-qe-dik" firstAttribute="top" secondItem="SS1-Nc-cWX" secondAttribute="bottom" constant="5" id="aFI-Hn-xbQ"/>
                 <constraint firstItem="PR2-Ia-vmt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="999" constant="10" id="cID-OS-Sr3"/>
                 <constraint firstItem="SS1-Nc-cWX" firstAttribute="top" secondItem="0Nk-gu-iZ8" secondAttribute="bottom" id="dmj-hv-2Ir"/>
-                <constraint firstAttribute="trailing" secondItem="YmM-Ai-Bfg" secondAttribute="trailing" priority="999" constant="30" id="hGA-Gv-WcG"/>
+                <constraint firstAttribute="trailing" secondItem="YmM-Ai-Bfg" secondAttribute="trailing" priority="999" constant="20" id="hGA-Gv-WcG"/>
                 <constraint firstItem="0Nk-gu-iZ8" firstAttribute="leading" secondItem="EmQ-w1-1GW" secondAttribute="leading" id="iNM-8R-QtV"/>
                 <constraint firstItem="SS1-Nc-cWX" firstAttribute="leading" secondItem="0Nk-gu-iZ8" secondAttribute="leading" id="pUJ-nS-fmf"/>
                 <constraint firstItem="iKq-Fc-DYG" firstAttribute="centerX" secondItem="PR2-Ia-vmt" secondAttribute="centerX" id="pp8-3O-MpB"/>

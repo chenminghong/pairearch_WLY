@@ -48,12 +48,12 @@
 
 //网络请求数据
 - (void)loadDetailDataFromNet {
-    if (self.childViewControllers.count > 0) {
-        for (UIViewController *childVC in self.childViewControllers) {
-            [childVC.view removeFromSuperview];
-            [childVC removeFromParentViewController];
-        }
-    }
+//    if (self.childViewControllers.count > 0) {
+//        for (UIViewController *childVC in self.childViewControllers) {
+//            [childVC.view removeFromSuperview];
+//            [childVC removeFromParentViewController];
+//        }
+//    }
     
     [OrderDetailModel getDataWithParameters:self.paraDict endBlock:^(id model, NSError *error) {
         if (model) {
@@ -154,8 +154,8 @@
         case ORDER_STATUS_228:
         {
             OrderStatusKA228Controller *childVC = [OrderStatusKA228Controller new];
-            [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
+            [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
             };
@@ -166,8 +166,8 @@
         case ORDER_STATUS_230:
         {
             OrderStatusKA230Controller *childVC = [OrderStatusKA230Controller new];
-            [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
+            [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
             };
@@ -177,8 +177,8 @@
         case ORDER_STATUS_238:
         {
             OrderStatusKA238Controller *childVC = [OrderStatusKA238Controller new];
-            [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
+            [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
             };
@@ -190,8 +190,8 @@
             
         {
             OrderStatusKA240Controller *childVC = [OrderStatusKA240Controller new];
-            [self addChildController:childVC];
             childVC.dataListArr = self.dataListArr;
+            [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
             };
@@ -226,30 +226,16 @@
         if ([[self.childViewControllers[0] class] isSubclassOfClass:[viewController class]]) {
             return;
         }        
+        [self.childViewControllers[0] removeFromParentViewController];
         [self addChildViewController:viewController];
         viewController.view.frame = self.view.bounds;
+        [self.view addSubview:viewController.view];
         
-        [UIView transitionFromView:self.view.subviews[0] toView:viewController.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
-            if (finished) {
-                [self.childViewControllers[0] removeFromParentViewController];
-            }
-        }];
     } else {
         [self addChildViewController:viewController];
-        [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            viewController.view.frame = self.view.bounds;
-            [self.view insertSubview:viewController.view atIndex:0];
-        } completion:nil];
+        viewController.view.frame = self.view.bounds;
+        [self.view addSubview:viewController.view];
     }
-    
-//    if (self.childViewControllers.count > 0) {
-//        [self.view.subviews[0] removeFromSuperview];
-//        [self.childViewControllers[0] removeFromParentViewController];
-//
-//    }
-//    [self addChildViewController:viewController];
-//    viewController.view.frame = self.view.bounds;
-//    [self.view insertSubview:viewController.view atIndex:0];
 }
 
 #pragma mark -- ButtonAction
