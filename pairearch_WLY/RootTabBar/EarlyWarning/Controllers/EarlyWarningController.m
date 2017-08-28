@@ -134,9 +134,6 @@
     refuseVC.lxCode = ABNORMAL_CODE_263;
 }
 
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

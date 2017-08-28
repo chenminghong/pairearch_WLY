@@ -308,8 +308,8 @@
  @param notification 收到的消息对象
  */
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
-    NSDictionary *userInfo = [notification userInfo];
-    NSString *content = [userInfo valueForKey:@"content"];
+//    NSDictionary *userInfo = [notification userInfo];
+//    NSString *content = [userInfo valueForKey:@"content"];
 //    [self addNetLocalNotificationWithDesStr:content.length>0? content:@""];
 //    NSDictionary *extras = [userInfo valueForKey:@"extras"];
 //    if (extras) {

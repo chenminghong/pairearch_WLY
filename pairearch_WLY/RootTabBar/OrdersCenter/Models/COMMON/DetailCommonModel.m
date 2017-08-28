@@ -38,4 +38,22 @@
     _TO_DLVY_DTT = [TO_DLVY_DTT substringToIndex:10];
 }
 
+- (void)setFRM_DPND_CMTD_STRT_DTT:(NSString *)FRM_DPND_CMTD_STRT_DTT {
+    NSInteger length = FRM_DPND_CMTD_STRT_DTT.length;
+    if (length >= 9) {
+        _FRM_DPND_CMTD_STRT_DTT = [FRM_DPND_CMTD_STRT_DTT substringFromIndex:length-8];
+    } else {
+        _FRM_DPND_CMTD_STRT_DTT = FRM_DPND_CMTD_STRT_DTT;
+    }
+}
+
+- (void)setFRM_DPND_CMTD_END_DTT:(NSString *)FRM_DPND_CMTD_END_DTT {
+    NSInteger length = FRM_DPND_CMTD_END_DTT.length;
+    if (length >= 9) {
+        _FRM_DPND_CMTD_END_DTT = [FRM_DPND_CMTD_END_DTT substringFromIndex:length-8];
+    } else {
+        _FRM_DPND_CMTD_END_DTT = FRM_DPND_CMTD_END_DTT;
+    }
+}
+
 @end
