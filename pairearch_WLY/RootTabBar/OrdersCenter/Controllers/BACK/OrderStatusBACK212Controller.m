@@ -128,7 +128,6 @@
         return;
     }
     NSString *orderCode = model.ORDER_CODE? model.ORDER_CODE:@"";
-//    NSString *orderCodes = model.SHPM_NUM? model.SHPM_NUM:@"";
     NSDictionary *paraDict = @{@"driverTel":driverTel, @"orderCode":orderCode, @"orderCodes":@"", @"type":@"TO"};
     [self networkWithUrlStr:ORDER_GETLOAD_API paraDict:paraDict];
 }
@@ -149,6 +148,7 @@
             [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
         }
     } failure:^(NSError *error) {
+        self.dataListArr = [NSMutableArray array];
         //添加请求失败视图
         __weak typeof(self) weakself = self;
         [NetFailView showFailViewInView:self.view repeatBlock:^{

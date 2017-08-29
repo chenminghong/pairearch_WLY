@@ -43,21 +43,6 @@
 
 #pragma mark -- Lazy Loading
 
-//- (UITableView *)tableView {
-//    if (!_tableView) {
-//        self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-//        [self.view addSubview:self.tableView];
-//        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
-//        }];
-//        self.tableView.delegate = self;
-//        self.tableView.dataSource = self;
-//        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        self.tableView.backgroundColor = [UIColor whiteColor];
-//    }
-//    return _tableView;
-//}
-
 - (UITableView *)tableView {
     if (!_tableView) {
         self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
@@ -100,6 +85,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.dataListArr.count <= 0) {
+        return 0.0;
+    }
     DetailCommonModel *detailModel = self.dataListArr[indexPath.row];
     CGFloat labelWidth = kScreenWidth - 85.0;
     CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM] width:labelWidth  fontSize:CELL_LABEL_FONTSIZE];
@@ -113,6 +101,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (self.dataListArr.count <= 0) {
+        return 0.0;
+    }
     DetailCommonModel *detailModel = self.dataListArr[section];
 
     CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"负载单号：%@", detailModel.ORDER_CODE] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
@@ -169,6 +160,7 @@
             [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
         }
     } failure:^(NSError *error) {
+        self.dataListArr = [NSMutableArray array];
         //添加请求失败视图
         [NetFailView showFailViewInView:self.view repeatBlock:^{
             if (self.nextBlock) {

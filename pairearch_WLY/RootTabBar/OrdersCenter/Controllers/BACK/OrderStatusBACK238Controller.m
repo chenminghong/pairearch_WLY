@@ -141,6 +141,7 @@
         }
         
     } failure:^(NSError *error) {
+        self.dataListArr = [NSMutableArray array];
         //添加请求失败视图
         __weak typeof(self) weakself = self;
         [NetFailView showFailViewInView:self.view repeatBlock:^{

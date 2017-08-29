@@ -137,37 +137,6 @@
 
 #pragma mark -- ButtonAction
 
-//网络请求数据
-//- (void)loadDetailDataFromNet {
-//    [OrderDetailModel getDataWithParameters:self.paraDict endBlock:^(id model, NSError *error) {
-//        if (model) {
-//            //对model数据进行分类
-//            NSArray *dataListArr = [NSMutableArray arrayWithArray:model];
-//            NSMutableDictionary *orderCodeDict = [NSMutableDictionary dictionary];
-//            for (OrderDetailModel *detailModel in dataListArr) {
-//                [orderCodeDict setObject:detailModel forKey:detailModel.ORDER_CODE];
-//            }
-//            
-//            NSArray *orderCodeArr = [orderCodeDict allKeys];  //获取所有的orderCode
-//            self.dataListArr = [NSMutableArray array];
-//            for (NSString *orderCode in orderCodeArr) {
-//                NSMutableArray *modelArr = [NSMutableArray array];
-//                for (OrderDetailModel *model in dataListArr) {
-//                    if ([orderCode isEqualToString:model.ORDER_CODE]) {
-//                        [modelArr addObject:model];
-//                    }
-//                }
-//                [self.dataListArr addObject:modelArr];
-//            }
-//            
-//            [self.tableView reloadData];
-//            
-//        } else {
-//            [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-//        }
-//    }];
-//}
-
 - (void)networkWithUrlStr:(NSString *)urlStr paraDict:(NSDictionary *)paraDict {
     [NetworkHelper POST:urlStr parameters:paraDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSInteger status = [responseObject[@"status"] integerValue];
@@ -182,6 +151,7 @@
             }];
         }
     } failure:^(NSError *error) {
+        self.dataListArr = [NSMutableArray array];
         //添加请求失败视图
         __weak typeof(self) weakself = self;
         [NetFailView showFailViewInView:self.view repeatBlock:^{

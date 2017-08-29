@@ -126,6 +126,7 @@
             }];
         }
     } failure:^(NSError *error) {
+        self.dataListArr = [NSMutableArray array];
         //添加请求失败视图
         __weak typeof(self) weakself = self;
         [NetFailView showFailViewInView:self.view repeatBlock:^{
@@ -202,6 +203,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.dataListArr.count <= 0) {
+        return 0.0;
+    }
     DetailCommonModel *detailModel = self.dataListArr[indexPath.row];
     
     CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
@@ -223,6 +227,9 @@
 //    CGFloat height = [BaseModel heightForTextString:desStr width:(kScreenWidth - 40.0)  fontSize:CELL_LABEL_FONTSIZE];
 //    return height + 20.0;
     
+    if (self.dataListArr.count <= 0) {
+        return 0.0;
+    }
     DetailCommonModel *detailModel = self.dataListArr[section];
     
     CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"负载单号：%@", detailModel.ORDER_CODE] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];

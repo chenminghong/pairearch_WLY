@@ -133,14 +133,17 @@
     [NetworkHelper POST:ORDER_EVALUATION_API parameters:evaluaDict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSInteger status = [responseObject[@"status"] integerValue];
         NSString *msg = [NSString stringWithFormat:@"%@", responseObject[@"msg"]];
-        MBProgressHUD *hud= [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        MBProgressHUD *hud = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
         if (status) {
             [hud setCompletionBlock:^(){
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }];
         }
     } failure:^(NSError *error) {
-        [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        MBProgressHUD *hud = [ProgressHUD bwm_showTitle:error.userInfo[ERROR_MSG] toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+        [hud setCompletionBlock:^(){
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
     }];
     
 }

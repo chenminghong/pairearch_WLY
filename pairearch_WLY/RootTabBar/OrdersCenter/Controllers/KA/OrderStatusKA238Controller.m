@@ -35,8 +35,7 @@
 
 - (void)setDataListArr:(NSMutableArray *)dataListArr {
     _dataListArr = dataListArr;
-//    [self.tableView reloadData];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, dataListArr.count)] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView reloadData];
 }
 
 #pragma mark -- Lazy Loading
@@ -151,7 +150,6 @@
         if (status == 1) {
             __weak typeof (self) weakself = self;
             [hud setCompletionBlock:^(){
-//                NSInteger orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:weakself.orderStatus orderType:weakself.orderType];
                 if (weakself.nextBlock) {
                     weakself.nextBlock(@{@"currentStatus":@(ORDER_STATUS_238)});
                 }
@@ -159,6 +157,7 @@
         }
         
     } failure:^(NSError *error) {
+        self.dataListArr = [NSMutableArray array];
         //添加请求失败视图
         __weak typeof(self) weakself = self;
         [NetFailView showFailViewInView:self.view repeatBlock:^{

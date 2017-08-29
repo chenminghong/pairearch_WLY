@@ -177,13 +177,13 @@
         if (status == 1) {
             __weak typeof(self) weakself = self;
             [hud setCompletionBlock:^(){
-//                NSInteger orderStatus = [OrderStatusManager getNextProcessWithCurrentStatus:weakself.orderStatus orderType:weakself.orderType];
                 if (weakself.nextBlock) {
                     weakself.nextBlock(@{@"currentStatus":@(ORDER_STATUS_226)});
                 }
             }];
         }
     } failure:^(NSError *error) {
+        self.dataListArr = [NSMutableArray array];
         //添加请求失败视图
         __weak typeof(self) weakself = self;
         [NetFailView showFailViewInView:self.view repeatBlock:^{
