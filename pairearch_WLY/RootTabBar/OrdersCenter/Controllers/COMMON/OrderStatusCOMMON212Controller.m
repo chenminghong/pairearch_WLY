@@ -32,6 +32,8 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction:)];
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)setDataListArr:(NSMutableArray *)dataListArr {
@@ -40,6 +42,21 @@
 }
 
 #pragma mark -- Lazy Loading
+
+//- (UITableView *)tableView {
+//    if (!_tableView) {
+//        self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+//        [self.view addSubview:self.tableView];
+//        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
+//        }];
+//        self.tableView.delegate = self;
+//        self.tableView.dataSource = self;
+//        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        self.tableView.backgroundColor = [UIColor whiteColor];
+//    }
+//    return _tableView;
+//}
 
 - (UITableView *)tableView {
     if (!_tableView) {
@@ -52,10 +69,13 @@
         self.tableView.dataSource = self;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.tableView.backgroundColor = [UIColor whiteColor];
-        [self.tableView registerClass:[Common212HeaderView class] forHeaderFooterViewReuseIdentifier:@"OrderDetailHeaderView"];
+//        self.tableView.backgroundColor = [UIColor cyanColor];
     }
     return _tableView;
 }
+/*
+
+*/
 
 - (UIView *)footerView {
     if (!_footerView) {
@@ -116,6 +136,7 @@
         model.TOTAL_WEIGHT = self.paraDict[@"totalWeight"];
         header.detailModel = self.dataListArr[0];
     }
+//    header.contentView.backgroundColor = [UIColor redColor];
     return header;
 }
 

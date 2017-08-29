@@ -43,10 +43,9 @@
             self.nextBlock(@{@"currentStatus":@(ORDER_STATUS_240)});
         }
     } else {
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView reloadData];
     }
 }
-
 
 
 /**
@@ -187,21 +186,6 @@
         self.tableView.dataSource = self;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.tableView.backgroundColor = [UIColor whiteColor];
-        
-//        NSString *headerStr = [OrderStatusManager getOrderDescriptionWithStatus:ORDER_STATUS_220 orderType:ORDER_TYPE_COMMON];
-//        CGFloat desHeight = [BaseModel heightForTextString:headerStr width:(kScreenWidth - 40.0)  fontSize:CELL_LABEL_FONTSIZE];
-//        UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, desHeight + 20)];
-//        UILabel *label = [UILabel new];
-//        [header addSubview:label];
-//        [label mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.mas_equalTo(header.mas_top).with.offset(10.0);
-//            make.left.mas_equalTo(header.mas_left).with.offset(20.0);
-//            make.right.mas_equalTo(header.mas_right).with.offset(-20.0);
-//        }];
-//        label.numberOfLines = 0;
-//        label.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
-//        label.text = headerStr;
-//        self.tableView.tableHeaderView = header;
     }
     return _tableView;
 }

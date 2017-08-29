@@ -230,6 +230,7 @@
         [self addChildViewController:viewController];
         viewController.view.frame = self.view.bounds;
         [self.view addSubview:viewController.view];
+        [UIView transitionFromView:self.view.subviews[0] toView:viewController.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
         
     } else {
         [self addChildViewController:viewController];

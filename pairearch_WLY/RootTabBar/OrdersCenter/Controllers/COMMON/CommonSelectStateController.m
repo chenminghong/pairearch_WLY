@@ -45,12 +45,12 @@
 
 //网络请求数据
 - (void)loadDetailDataFromNet {
-    if (self.childViewControllers.count > 0) {
-        for (UIViewController *childVC in self.childViewControllers) {
-            [childVC.view removeFromSuperview];
-            [childVC removeFromParentViewController];
-        }
-    }
+//    if (self.childViewControllers.count > 0) {
+//        for (UIViewController *childVC in self.childViewControllers) {
+//            [childVC.view removeFromSuperview];
+//            [childVC removeFromParentViewController];
+//        }
+//    }
     [DetailCommonModel getDataWithParameters:self.paraDict endBlock:^(id model, NSError *error) {
         if (model) {
             //对model数据进行分类
@@ -189,6 +189,7 @@
         [self addChildViewController:viewController];
         viewController.view.frame = self.view.bounds;
         [self.view addSubview:viewController.view];
+        [UIView transitionFromView:self.view.subviews[0] toView:viewController.view duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
         
     } else {
         [self addChildViewController:viewController];
