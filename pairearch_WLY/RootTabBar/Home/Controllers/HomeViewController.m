@@ -204,7 +204,7 @@
                 self.headLabel.text = @"新单提示";
                 [[LocationUploadManager shareManager] stopService];
             } else if ([model.type isEqualToString:@"distribution"]) {
-                self.headLabel.text = @"装货在途";
+                self.headLabel.text = @"配送中";
                 [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
             } else {
                 self.headLabel.text = @"";
