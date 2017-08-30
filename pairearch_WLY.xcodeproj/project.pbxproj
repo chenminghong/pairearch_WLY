@@ -25,6 +25,8 @@
 		0FAE16411EEE38E200E5450F /* EarlyWarningTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE163F1EEE38E200E5450F /* EarlyWarningTableCell.m */; };
 		0FAE16421EEE38E200E5450F /* EarlyWarningTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FAE16401EEE38E200E5450F /* EarlyWarningTableCell.xib */; };
 		0FAE16451EEE39EF00E5450F /* EarlyWarningListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE16441EEE39EF00E5450F /* EarlyWarningListModel.m */; };
+		0FE7AD9E1F569EE20046EF12 /* CommonHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE7AD9C1F569EE20046EF12 /* CommonHeaderCell.m */; };
+		0FE7AD9F1F569EE20046EF12 /* CommonHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FE7AD9D1F569EE20046EF12 /* CommonHeaderCell.xib */; };
 		0FE9632A1EB9B30200F916DD /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE963291EB9B30200F916DD /* ProgressHUD.m */; };
 		76DA3C9EDAD9C136CDB7CBDB /* libPods-pairearch_WLY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E253EE02D936D5B70824B760 /* libPods-pairearch_WLY.a */; };
 		B307BF471E7238E5005D7979 /* HomePageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B307BF461E7238E5005D7979 /* HomePageModel.m */; };
@@ -203,6 +205,9 @@
 		0FAE16401EEE38E200E5450F /* EarlyWarningTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EarlyWarningTableCell.xib; sourceTree = "<group>"; };
 		0FAE16431EEE39EF00E5450F /* EarlyWarningListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarlyWarningListModel.h; sourceTree = "<group>"; };
 		0FAE16441EEE39EF00E5450F /* EarlyWarningListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarlyWarningListModel.m; sourceTree = "<group>"; };
+		0FE7AD9B1F569EE20046EF12 /* CommonHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHeaderCell.h; sourceTree = "<group>"; };
+		0FE7AD9C1F569EE20046EF12 /* CommonHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonHeaderCell.m; sourceTree = "<group>"; };
+		0FE7AD9D1F569EE20046EF12 /* CommonHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonHeaderCell.xib; sourceTree = "<group>"; };
 		0FE963281EB9B30200F916DD /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
 		0FE963291EB9B30200F916DD /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		4B0612EA886C1F63FFF37775 /* Pods-pairearch_WLY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pairearch_WLY.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pairearch_WLY/Pods-pairearch_WLY.debug.xcconfig"; sourceTree = "<group>"; };
@@ -907,6 +912,9 @@
 				B307BF631E728561005D7979 /* Common212HeaderView.h */,
 				B307BF641E728561005D7979 /* Common212HeaderView.m */,
 				B307BF661E72856B005D7979 /* Common212HeaderView.xib */,
+				0FE7AD9B1F569EE20046EF12 /* CommonHeaderCell.h */,
+				0FE7AD9C1F569EE20046EF12 /* CommonHeaderCell.m */,
+				0FE7AD9D1F569EE20046EF12 /* CommonHeaderCell.xib */,
 				B307BF681E728821005D7979 /* Common212Cell.h */,
 				B307BF691E728821005D7979 /* Common212Cell.m */,
 				B307BF6A1E728821005D7979 /* Common212Cell.xib */,
@@ -1278,6 +1286,7 @@
 				B3D3B2A91E66EA550033EF84 /* HomeTableCell.xib in Resources */,
 				B307BF6C1E728822005D7979 /* Common212Cell.xib in Resources */,
 				B3D3B2A31E66EA550033EF84 /* HomeViewController.storyboard in Resources */,
+				0FE7AD9F1F569EE20046EF12 /* CommonHeaderCell.xib in Resources */,
 				B37CB2671E6FF08400A1463F /* AbnormalSignCell.xib in Resources */,
 				B307BF811E7592CA005D7979 /* BackConfirationCell.xib in Resources */,
 				B37CB24F1E6FEFCC00A1463F /* RefuseSignController.storyboard in Resources */,
@@ -1372,6 +1381,7 @@
 				0F3E1B2D1F34537D00FD045F /* MBTextViewWithFontAdapter.m in Sources */,
 				B384111B1E5D886000F7069F /* LoginViewController.m in Sources */,
 				B381DAE11E77DB6500D752C1 /* CommonPickerView.m in Sources */,
+				0FE7AD9E1F569EE20046EF12 /* CommonHeaderCell.m in Sources */,
 				B37CB2A91E7032B400A1463F /* OrderStatusBACK226Controller.m in Sources */,
 				0F4C925E1EE0103400546AFF /* BidPickerView.m in Sources */,
 				B38411101E5D875700F7069F /* FuctionUtil.m in Sources */,
