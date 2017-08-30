@@ -36,7 +36,7 @@
     _detailModel = detailModel;
     
     self.loadNumberLabel.text = [NSString stringWithFormat:@"负载单号：%@", detailModel.ORDER_CODE];
-    self.loadAddressLabel.text = [NSString stringWithFormat:@"装货地址：%@", detailModel.FRM_SHPG_ADDR];
+    self.loadAddressLabel.text = [NSString stringWithFormat:@"发货地址：%@", detailModel.FRM_SHPG_ADDR];
     self.heavierTonLabel.text = [NSString stringWithFormat:@"货物重量：%@kg", detailModel.TOTAL_WEIGHT];
     self.contactNumberLabel.text = [NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_MOBILE];
     self.contactPersonLabel.text = [NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_NAME];

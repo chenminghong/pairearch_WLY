@@ -58,9 +58,6 @@
     }
     return _tableView;
 }
-/*
-
-*/
 
 - (UIView *)footerView {
     if (!_footerView) {
@@ -107,7 +104,7 @@
     DetailCommonModel *detailModel = self.dataListArr[section];
 
     CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"负载单号：%@", detailModel.ORDER_CODE] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"装货地址：%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];;
+    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"发货地址：%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];;
     CGFloat heavierTonConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"货物重量：%@kg", detailModel.TOTAL_WEIGHT] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat contactNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_MOBILE] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat contactPersonConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_NAME] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];

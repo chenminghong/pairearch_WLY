@@ -52,7 +52,7 @@
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.tableView.backgroundColor = [UIColor whiteColor];
         
-        NSString *headerStr = [OrderStatusManager getOrderDescriptionWithStatus:ORDER_STATUS_220 orderType:ORDER_TYPE_COMMON];
+        NSString *headerStr = [OrderStatusManager getOrderDescriptionWithStatus:ORDER_STATUS_226 orderType:ORDER_TYPE_COMMON];
         CGFloat desHeight = [BaseModel heightForTextString:headerStr width:(kScreenWidth - 40.0)  fontSize:CELL_LABEL_FONTSIZE];
         UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, desHeight + 20)];
         UILabel *label = [UILabel new];
@@ -115,7 +115,7 @@
     DetailCommonModel *detailModel = self.dataListArr[section];
     
     CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"负载单号：%@", detailModel.ORDER_CODE] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地址：%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];;
+    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"发货地址：%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];;
     CGFloat heavierTonConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"货物重量：%@kg", detailModel.TOTAL_WEIGHT] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat contactNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_MOBILE] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat contactPersonConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_NAME] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];

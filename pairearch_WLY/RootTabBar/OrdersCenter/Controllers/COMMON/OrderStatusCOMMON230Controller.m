@@ -187,6 +187,21 @@
         self.tableView.dataSource = self;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.tableView.backgroundColor = [UIColor whiteColor];
+        
+        NSString *headerStr = [OrderStatusManager getOrderDescriptionWithStatus:ORDER_STATUS_230 orderType:ORDER_TYPE_COMMON];
+        CGFloat desHeight = [BaseModel heightForTextString:headerStr width:(kScreenWidth - 40.0)  fontSize:CELL_LABEL_FONTSIZE];
+        UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, desHeight + 20)];
+        UILabel *label = [UILabel new];
+        [header addSubview:label];
+        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(header.mas_top).with.offset(10.0);
+            make.left.mas_equalTo(header.mas_left).with.offset(20.0);
+            make.right.mas_equalTo(header.mas_right).with.offset(-20.0);
+        }];
+        label.numberOfLines = 0;
+        label.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
+        label.text = headerStr;
+        self.tableView.tableHeaderView = header;
     }
     return _tableView;
 }
@@ -233,7 +248,7 @@
     DetailCommonModel *detailModel = self.dataListArr[section];
     
     CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"负载单号：%@", detailModel.ORDER_CODE] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"装货地址：%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];;
+    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"发货地址：%@", detailModel.FRM_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];;
     CGFloat heavierTonConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"货物重量：%@kg", detailModel.TOTAL_WEIGHT] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat contactNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"联系人：%@", detailModel.DRIVER_MOBILE] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat contactPersonConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_NAME] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];

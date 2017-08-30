@@ -98,7 +98,7 @@
     [self getIsSafetyCheck];
     
     //获取首页Data数据
-    [self getHomePageData];
+    [MJRefreshUtil begainRefresh:self.tableView];
     
 }
 

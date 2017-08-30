@@ -181,11 +181,11 @@
                 break;
                 
             case ORDER_STATUS_228:
-                decStr = @"请您入厂正在装货，请在装货完成出厂后点击如下按钮！";
+                decStr = @"您已开始装货，请在装货完成出厂后点击如下按钮！";
                 break;
                 
             case ORDER_STATUS_230:
-                decStr = @"您已装货完成出厂，请您安全驾驶，请在到达收货地后点击“收货签到”！";
+                decStr = @"您已装货完成出厂，请您安全驾驶，请在到达收货地后点击“签到确认”！";
                 break;
                 
             case ORDER_STATUS_238:
