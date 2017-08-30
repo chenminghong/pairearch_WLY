@@ -259,7 +259,7 @@
     HomePageModel *homeModel = self.dataModelArr[indexPath.row];
     NSInteger status = [homeModel.STATUS integerValue];
     NSString *transportCode = homeModel.TRANSPORT_CODE;
-    NSDictionary *paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"orderCode":homeModel.CODE, @"userName":[LoginModel shareLoginModel].name};
+    NSDictionary *paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"orderCode":homeModel.CODE, @"userName":[LoginModel shareLoginModel].name, @"totalWeight":homeModel.TOTAL_WEIGHT};
     if ([transportCode isEqualToString:ORDER_TYPE_KA]) {
         [self jumpToKaControllerWithStatus:status paraDict:paraDict];
     } else if ([transportCode isEqualToString:ORDER_TYPE_BACK]) {

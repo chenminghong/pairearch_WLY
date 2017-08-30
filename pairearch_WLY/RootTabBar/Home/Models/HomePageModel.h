@@ -24,4 +24,6 @@
 
 @property (nonatomic, copy) NSString *STATUS;               //运单状态
 
+@property (nonatomic, copy) NSString *TOTAL_WEIGHT;        //货物重量（kg）
+
 @end
