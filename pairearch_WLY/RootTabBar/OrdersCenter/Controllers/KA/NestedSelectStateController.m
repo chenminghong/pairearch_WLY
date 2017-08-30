@@ -223,9 +223,6 @@
 //添加子视图控制器
 - (void)addChildController:(UIViewController *)viewController {
     if (self.childViewControllers.count > 0) {
-//        if ([[[self.childViewControllers lastObject] class] isSubclassOfClass:[viewController class]]) {
-//            return;
-//        }
         [[self.childViewControllers lastObject] removeFromParentViewController];
         [self addChildViewController:viewController];
         viewController.view.frame = self.view.bounds;
