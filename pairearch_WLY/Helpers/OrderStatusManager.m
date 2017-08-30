@@ -25,7 +25,7 @@
                 break;
                 
             case ORDER_STATUS_226:
-                title = @"厂外排队";
+                title = @"待入厂";
                 break;
                 
             case ORDER_STATUS_228:
@@ -37,11 +37,11 @@
                 break;
                 
             case ORDER_STATUS_238:
-                title = @"收货-厂外排队";
+                title = @"已到达卸货地";
                 break;
                 
             case ORDER_STATUS_240:
-                title = @"收货-收货入厂";
+                title = @"卸货中";
                 break;
                 
             case ORDER_STATUS_245:
@@ -74,7 +74,7 @@
                 break;
                 
             case ORDER_STATUS_238:
-                title = @"待卸货";
+                title = @"已到达卸货地";
                 break;
                 
             case ORDER_STATUS_240:
@@ -111,11 +111,11 @@
                 break;
                 
             case ORDER_STATUS_238:
-                title = @"送货在途";
+                title = @"已到达卸货地";
                 break;
                 
             case ORDER_STATUS_240:
-                title = @"送货在途";
+                title = @"卸货中";
                 break;
                 
             case ORDER_STATUS_245:
@@ -140,15 +140,15 @@
                 break;
                 
             case ORDER_STATUS_220:
-                decStr = @"您已开始运输，请在到达装货地址点击下方按钮！";
+                decStr = @"您已开始运输，请在到达装货地后点击下方按钮！";
                 break;
                 
             case ORDER_STATUS_226:
-                decStr = @"您已到达装货地，请在入厂装货时点击下方按钮！";
+                decStr = @"您已达到装货地，请在入厂装货时点击下方按钮！";
                 break;
                 
             case ORDER_STATUS_228:
-                decStr = @"请您进厂装货，请装货完成后点击下方按钮！";
+                decStr = @"请您进厂装货，请在装货完成后点击下方按钮！";
                 break;
                 
             case ORDER_STATUS_230:
@@ -156,11 +156,11 @@
                 break;
                 
             case ORDER_STATUS_238:
-                decStr = @"您好，您已到达卸货地址，请在入厂卸货时点击下方按钮！";
+                decStr = @"您已到达卸货地址，请在入厂卸货时点击如下按钮！";
                 break;
                 
             case ORDER_STATUS_240:
-                decStr = @"您已开始卸货中，请在卸货完成后点击下方按钮！";
+                decStr = @"您已开始卸货，请在卸货完成后点击下方按钮！";
                 break;
                 
             default:

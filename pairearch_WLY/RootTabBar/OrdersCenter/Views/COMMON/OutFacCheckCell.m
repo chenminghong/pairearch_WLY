@@ -32,12 +32,6 @@
     [self.checkButton setTitle:@"已签收" forState:UIControlStateNormal];
     self.checkButton.userInteractionEnabled = NO;
     self.checkButton.backgroundColor = ABNORMAL_THEME_COLOR;
-//    if ([detailModel.isEmpty integerValue] == 0) {
-//    } else {
-//        [self.checkButton setTitle:@"有单回空" forState:UIControlStateNormal];
-//        self.checkButton.userInteractionEnabled = YES;
-//        self.checkButton.backgroundColor = THEME_COLOR_BACK;
-//    }
 }
 
 - (void)awakeFromNib {

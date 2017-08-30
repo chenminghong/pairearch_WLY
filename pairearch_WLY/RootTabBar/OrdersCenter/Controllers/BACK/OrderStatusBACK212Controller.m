@@ -48,20 +48,7 @@
         self.tableView.tableFooterView = [UIView new];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.tableView.backgroundColor = [UIColor whiteColor];
-        
-        NSString *titleText = [OrderStatusManager getOrderDescriptionWithStatus:ORDER_STATUS_230 orderType:ORDER_TYPE_BACK];
-        if (titleText.length >= 0.0) {
-            CGFloat titleConstant = [BaseModel heightForTextString:titleText width:(kScreenWidth - 40.0)  fontSize:CELL_LABEL_FONTSIZE];
-            UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 10.0, kScreenWidth - 40.0, titleConstant)];
-            headerLabel.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
-            headerLabel.text = titleText;
-            headerLabel.numberOfLines = 0;
-            
-            UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, titleConstant + 10.0)];
-            [headerView addSubview:headerLabel];
-            self.tableView.tableHeaderView = headerView;
-        }
-        
+        self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, CGFLOAT_MIN)];
     }
     return _tableView;
 }

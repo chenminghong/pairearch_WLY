@@ -45,12 +45,6 @@
 
 //网络请求数据
 - (void)loadDetailDataFromNet {
-//    if (self.childViewControllers.count > 0) {
-//        for (UIViewController *childVC in self.childViewControllers) {
-//            [childVC.view removeFromSuperview];
-//            [childVC removeFromParentViewController];
-//        }
-//    }
     [DetailCommonModel getDataWithParameters:self.paraDict endBlock:^(id model, NSError *error) {
         if (model) {
             //对model数据进行分类
@@ -93,7 +87,21 @@
 
 //根据加载的数据判断跳转界面
 - (void)judgeJumpToDetailControllerWith:(NSInteger)status {
-    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:status orderType:ORDER_TYPE_KA];
+    if (status < ORDER_STATUS_230 || status > ORDER_STATUS_240) {
+        self.title = [OrderStatusManager getStatusTitleWithOrderStatus:ORDER_STATUS_238 orderType:ORDER_TYPE_KA];
+    } else {
+        BOOL isBreak = NO;
+        for (DetailCommonModel *model in self.dataListArr) {
+            if (model.SHPM_STATUS.integerValue > ORDER_STATUS_230 && model.SHPM_STATUS.integerValue <= ORDER_STATUS_240) {
+                self.title = [OrderStatusManager getStatusTitleWithOrderStatus:ORDER_STATUS_238 orderType:ORDER_TYPE_KA];
+                isBreak = YES;
+                break;
+            }
+        }
+        if (!isBreak) {
+            self.title = [OrderStatusManager getStatusTitleWithOrderStatus:ORDER_STATUS_230 orderType:ORDER_TYPE_KA];
+        }
+    }
     switch (status) {
         case ORDER_STATUS_212:
         {

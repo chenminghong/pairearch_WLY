@@ -17,6 +17,7 @@
     if (!header) {
         header = [[[NSBundle mainBundle] loadNibNamed:@"CommonHeaderCell" owner:self options:nil] firstObject];
     }
+    header.selectionStyle = UITableViewCellSelectionStyleNone;
     return header;
 }
 

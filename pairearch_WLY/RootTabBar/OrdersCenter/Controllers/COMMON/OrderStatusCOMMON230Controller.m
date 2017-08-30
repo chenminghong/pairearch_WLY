@@ -30,8 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [self.view addSubview:self.tableView];
+
 }
 
 
@@ -123,7 +122,9 @@
             __weak typeof(self) weakself = self;
             [hud setCompletionBlock:^(){
                 //重新获取数据并且刷新
-                [weakself loadDetailDataFromNet];
+                if (weakself.nextBlock) {
+                    weakself.nextBlock(@{@"currentStatus":@(ORDER_STATUS_230)});
+                }
             }];
         }
     } failure:^(NSError *error) {
@@ -217,13 +218,14 @@
         CGFloat contactPersonConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"电话：%@", detailModel.DRIVER_NAME] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
         
         CGFloat height = 20.0 + loadNumberConstant + loadAddressConstant + heavierTonConstant +contactNumberConstant + contactPersonConstant;
+        NSLog(@"%.2f", height);
         return height;
     }
     DetailCommonModel *detailModel = self.dataListArr[indexPath.row - 1];
     
     CGFloat loadNumberConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"交货单号：%@", detailModel.SHPM_NUM] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat loadNameConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货地名称：%@", detailModel.TO_SHPG_LOC_NAME] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
-    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货方货地址：%@", detailModel.TO_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
+    CGFloat loadAddressConstant = [BaseModel heightForTextString:[NSString stringWithFormat:@"收货方地址：%@", detailModel.TO_SHPG_ADDR] width:(kScreenWidth - 85.0)  fontSize:CELL_LABEL_FONTSIZE];
     CGFloat height = 70.0+loadNumberConstant+loadNameConstant+loadAddressConstant;
     if ([detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_241 || [detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_242 || [detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_245 || [detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_248) {
         CGFloat labelHeight = [BaseModel heightForTextString:@"已正常签收(或者异常签收)" width:((kScreenWidth - 85.0)) fontSize:CELL_LABEL_FONTSIZE];
@@ -336,7 +338,10 @@
         if (resultFlag == 1) {
             detailModel.SHPM_STATUS = @"241";
             NSDictionary *statusDict = [weakself getAllOrdersStatus];
-            [weakself.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+            //重新获取数据并且刷新
+            if (weakself.nextBlock) {
+                weakself.nextBlock(@{@"currentStatus":@(ORDER_STATUS_230)});
+            }
             return statusDict;
         }
         return tempDict;

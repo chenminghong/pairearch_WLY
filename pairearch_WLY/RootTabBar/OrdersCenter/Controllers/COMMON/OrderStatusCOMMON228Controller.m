@@ -33,8 +33,6 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction:)];
-    
-//    [self.view addSubview:self.tableView];
 }
 
 - (void)setDataListArr:(NSMutableArray *)dataListArr {
