@@ -224,11 +224,18 @@
             }
         }
     }
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"RefuseSignController" bundle:[NSBundle mainBundle]];
-    RefuseSignController *refuseVC = [sb instantiateViewControllerWithIdentifier:@"RefuseSignController"];
+    RefuseSignController *refuseVC = [RefuseSignController pushToRefuseSignWithController:self signResultBlock:^NSDictionary *(NSDictionary *signResult) {
+        NSInteger resultFlag = [signResult[@"flag"] integerValue];
+        typeof(self) weakself = self;
+        OrderDetailModel *model = [weakself.dataListArr[0] objectAtIndex:0];
+        NSMutableDictionary *tempDict = [NSMutableDictionary dictionaryWithDictionary:@{@"driverTel":[LoginModel shareLoginModel].tel, @"userName":[LoginModel shareLoginModel].name, @"orderCode":model.ORDER_CODE, @"toEvaluationPageFlag":@"0"}];
+        if (resultFlag == 1) {
+            [tempDict setObject:@"1" forKey:@"toEvaluationPageFlag"];
+        }
+        return tempDict;
+    }];
     refuseVC.paraDict = @{@"orderCode":orderCode, @"shpmNum":orderCodes};
     refuseVC.lxCode = ABNORMAL_CODE_261;
-    [self.navigationController pushViewController:refuseVC animated:YES];
 }
 
 

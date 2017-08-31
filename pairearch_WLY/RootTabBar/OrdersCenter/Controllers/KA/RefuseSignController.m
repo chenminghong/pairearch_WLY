@@ -150,16 +150,18 @@
                 MBProgressHUD *hud = [ProgressHUD bwm_showTitle:msg toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
                 if (resultFlag == 1) {
                     [hud setCompletionBlock:^(){
-                        if (weakself.lxCode == ABNORMAL_CODE_262) {
+                        if (weakself.lxCode == ABNORMAL_CODE_262 || weakself.lxCode == ABNORMAL_CODE_261) {
                             if (weakself.signResultBlock) {
                                 NSDictionary *flagDict = weakself.signResultBlock(@{@"flag":@(resultFlag)});
-                                NSString *pushFlag = [flagDict objectForKey:@"toEvaluationPageFlag"];
-                                if (pushFlag.length > 0 && [pushFlag boolValue]) {
-                                    OrderStatusKA245Controller *evaluationVC = [OrderStatusKA245Controller new];
-                                    evaluationVC.paraDict = flagDict;
-                                    [self.navigationController pushViewController:evaluationVC animated:YES];
-                                } else {
-                                    [weakself.navigationController popViewControllerAnimated:YES];
+                                if (flagDict) {
+                                    NSString *pushFlag = [flagDict objectForKey:@"toEvaluationPageFlag"];
+                                    if (pushFlag.length > 0 && [pushFlag boolValue]) {
+                                        OrderStatusKA245Controller *evaluationVC = [OrderStatusKA245Controller new];
+                                        evaluationVC.paraDict = flagDict;
+                                        [self.navigationController pushViewController:evaluationVC animated:YES];
+                                    } else {
+                                        [weakself.navigationController popViewControllerAnimated:YES];
+                                    }
                                 }
                             }
                         } else {
