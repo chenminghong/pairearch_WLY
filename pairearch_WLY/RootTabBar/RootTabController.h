@@ -10,4 +10,6 @@
 
 @interface RootTabController : UITabBarController
 
+@property (nonatomic, strong) NSDictionary *userInfo;
+
 @end

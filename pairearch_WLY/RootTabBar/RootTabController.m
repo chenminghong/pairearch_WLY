@@ -13,6 +13,9 @@
 #import "EarlyWarningController.h"
 #import "PersonalCenterViewController.h"
 #import "LoginViewController.h"
+#import "NestedSelectStateController.h"
+#import "BACKNestedSelectController.h"
+#import "CommonSelectStateController.h"
 
 @interface RootTabController ()
 
@@ -61,6 +64,33 @@
     [self startTimer];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (self.navigationController.viewControllers.count >= 2) {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+    }
+}
+
+- (void)setUserInfo:(NSDictionary *)userInfo {
+    _userInfo = userInfo;
+    if (userInfo) {
+        NSString *orderType = userInfo[@"transportCode"];
+        if ([orderType isEqualToString:ORDER_TYPE_KA]) {
+            [self jumpToKaControllerWithParaDict:userInfo];
+        } else if ([orderType isEqualToString:ORDER_TYPE_COMMON]) {
+            [self jumpToCommonControllerWithParaDict:userInfo];
+        } else {
+            [self jumpToBackControllerWithParaDict:userInfo];
+        }
+    }
+}
+
 /**
  重启定时器
  */
@@ -82,8 +112,28 @@
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:viewController];
     navigationController.hidesBottomBarWhenPushed = YES;
     navigationController.interactivePopGestureRecognizer.enabled = NO;
-//    navigationController.interactivePopGestureRecognizer.delegate = self;
     return navigationController;
+}
+
+//KA界面跳转逻辑
+- (void)jumpToKaControllerWithParaDict:(NSDictionary *)paraDict {
+    NestedSelectStateController *nestedVC = [NestedSelectStateController new];
+    [self.navigationController pushViewController:nestedVC animated:YES];
+    nestedVC.paraDict = paraDict;
+}
+
+//BACK界面跳转逻辑
+- (void)jumpToBackControllerWithParaDict:(NSDictionary *)paraDict{
+    BACKNestedSelectController *backVC = [BACKNestedSelectController new];
+    backVC.paraDict = paraDict;
+    [self.navigationController pushViewController:backVC animated:YES];
+}
+
+//COMMON界面跳转逻辑
+- (void)jumpToCommonControllerWithParaDict:(NSDictionary *)paraDict{
+    CommonSelectStateController *nestedVC = [CommonSelectStateController new];
+    [self.navigationController pushViewController:nestedVC animated:YES];
+    nestedVC.paraDict = paraDict;
 }
 
 

@@ -266,12 +266,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         CommonHeaderCell *cell = [CommonHeaderCell getCellWithTable:tableView];
-        DetailCommonModel *model = self.dataListArr[0];
-        model.TOTAL_WEIGHT = self.paraDict[@"totalWeight"];
-        cell.detailModel = model;
+        if (self.dataListArr.count > 0) {
+            DetailCommonModel *model = self.dataListArr[0];
+//            model.TOTAL_WEIGHT = self.paraDict[@"totalWeight"];
+            cell.detailModel = model;
+        }
         cell.separatorView.hidden = YES;
         return cell;
     }
+    
     DetailCommonModel *detailModel = self.dataListArr[indexPath.row - 1];
     if ([detailModel.SHPM_STATUS integerValue] == ORDER_STATUS_230) {   //签到确认
         CommonIntoFacCheckCell *cell = [CommonIntoFacCheckCell getCellWithTable:tableView buttonBlock:^(NSInteger index, DetailCommonModel *model) {

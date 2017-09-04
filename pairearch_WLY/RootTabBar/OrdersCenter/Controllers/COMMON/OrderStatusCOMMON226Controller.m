@@ -149,7 +149,7 @@
     if (indexPath.row == 0) {
         CommonHeaderCell *cell = [CommonHeaderCell getCellWithTable:tableView];
         DetailCommonModel *model = self.dataListArr[0];
-        model.TOTAL_WEIGHT = self.paraDict[@"totalWeight"];
+//        model.TOTAL_WEIGHT = self.paraDict[@"totalWeight"];
         cell.detailModel = model;
         return cell;
     }

@@ -38,6 +38,9 @@
     self.separatorView.backgroundColor = TABLE_SEPARATOR_COLOR;
     self.nomalSignButton.backgroundColor = MAIN_THEME_COLOR;
     self.abbormalSignButton.backgroundColor = MAIN_THEME_COLOR;
+    self.nomalSignButton.titleLabel.numberOfLines = 0;
+    self.abbormalSignButton.titleLabel.numberOfLines = 0;
+    self.abbormalSignButton.titleLabel.textAlignment = NSTextAlignmentCenter;
 }
 - (IBAction)buttonAction:(UIButton *)sender {
     self.buttonBlock((sender.tag - 100), self.detailModel);

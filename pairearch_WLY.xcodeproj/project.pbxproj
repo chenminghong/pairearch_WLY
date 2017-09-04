@@ -21,6 +21,8 @@
 		0F4C92631EE0226900546AFF /* RejectReasonListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4C92621EE0226900546AFF /* RejectReasonListModel.m */; };
 		0F4C92671EE02E3A00546AFF /* RejectSignCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4C92651EE02E3A00546AFF /* RejectSignCell.m */; };
 		0F4C92681EE02E3A00546AFF /* RejectSignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F4C92661EE02E3A00546AFF /* RejectSignCell.xib */; };
+		0F61988C1F5CEF0C00A1C9D6 /* OrderNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F61988A1F5CEF0C00A1C9D6 /* OrderNotificationController.m */; };
+		0F61988D1F5CEF0C00A1C9D6 /* OrderNotificationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F61988B1F5CEF0C00A1C9D6 /* OrderNotificationController.xib */; };
 		0FAE163C1EEE37E700E5450F /* EarlyWarningController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE163A1EEE37E700E5450F /* EarlyWarningController.m */; };
 		0FAE16411EEE38E200E5450F /* EarlyWarningTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE163F1EEE38E200E5450F /* EarlyWarningTableCell.m */; };
 		0FAE16421EEE38E200E5450F /* EarlyWarningTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FAE16401EEE38E200E5450F /* EarlyWarningTableCell.xib */; };
@@ -198,6 +200,9 @@
 		0F4C92641EE02E3A00546AFF /* RejectSignCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RejectSignCell.h; sourceTree = "<group>"; };
 		0F4C92651EE02E3A00546AFF /* RejectSignCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RejectSignCell.m; sourceTree = "<group>"; };
 		0F4C92661EE02E3A00546AFF /* RejectSignCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RejectSignCell.xib; sourceTree = "<group>"; };
+		0F6198891F5CEF0C00A1C9D6 /* OrderNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderNotificationController.h; sourceTree = "<group>"; };
+		0F61988A1F5CEF0C00A1C9D6 /* OrderNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderNotificationController.m; sourceTree = "<group>"; };
+		0F61988B1F5CEF0C00A1C9D6 /* OrderNotificationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderNotificationController.xib; sourceTree = "<group>"; };
 		0FAE16391EEE37E700E5450F /* EarlyWarningController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarlyWarningController.h; sourceTree = "<group>"; };
 		0FAE163A1EEE37E700E5450F /* EarlyWarningController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarlyWarningController.m; sourceTree = "<group>"; };
 		0FAE163E1EEE38E200E5450F /* EarlyWarningTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarlyWarningTableCell.h; sourceTree = "<group>"; };
@@ -629,6 +634,9 @@
 			children = (
 				B357272D1E53FC61003F9B2F /* RootTabController.h */,
 				B357272E1E53FC61003F9B2F /* RootTabController.m */,
+				0F6198891F5CEF0C00A1C9D6 /* OrderNotificationController.h */,
+				0F61988A1F5CEF0C00A1C9D6 /* OrderNotificationController.m */,
+				0F61988B1F5CEF0C00A1C9D6 /* OrderNotificationController.xib */,
 				B3D3B28D1E66EA550033EF84 /* Home */,
 				B35727311E5402C4003F9B2F /* OrdersCenter */,
 				0FAE16351EEE37CA00E5450F /* EarlyWarning */,
@@ -1270,6 +1278,7 @@
 				0FAE16421EEE38E200E5450F /* EarlyWarningTableCell.xib in Resources */,
 				B37BA6D01E80FA29001A74B8 /* AbnormalReportCell.xib in Resources */,
 				B357276E1E543268003F9B2F /* OrdersCenterController.storyboard in Resources */,
+				0F61988D1F5CEF0C00A1C9D6 /* OrderNotificationController.xib in Resources */,
 				B307BF901E767DE3005D7979 /* CommonNomalSignCell.xib in Resources */,
 				0F3E1B331F34784700FD045F /* NetFailView.xib in Resources */,
 				B37BA6CB1E80D300001A74B8 /* AbnormalReportController.storyboard in Resources */,
@@ -1385,6 +1394,7 @@
 				B37CB2A91E7032B400A1463F /* OrderStatusBACK226Controller.m in Sources */,
 				0F4C925E1EE0103400546AFF /* BidPickerView.m in Sources */,
 				B38411101E5D875700F7069F /* FuctionUtil.m in Sources */,
+				0F61988C1F5CEF0C00A1C9D6 /* OrderNotificationController.m in Sources */,
 				B356DC011E63CD5100FCDB33 /* OrderListModel.m in Sources */,
 				B37CB2AD1E7032B400A1463F /* OrderStatusBACK240Controller.m in Sources */,
 				0F3E1B2B1F34537D00FD045F /* MBLabelWithFontAdapter.m in Sources */,

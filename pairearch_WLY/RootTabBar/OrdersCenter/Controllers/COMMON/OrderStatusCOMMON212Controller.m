@@ -121,7 +121,7 @@
     Common212HeaderView *header = [Common212HeaderView getHeaderViewWithTable:tableView];
     if (self.dataListArr.count) {
         DetailCommonModel *model = self.dataListArr[0];
-        model.TOTAL_WEIGHT = self.paraDict[@"totalWeight"];
+//        model.TOTAL_WEIGHT = self.paraDict[@"totalWeight"];
         header.detailModel = self.dataListArr[0];
     }
 //    header.contentView.backgroundColor = [UIColor redColor];

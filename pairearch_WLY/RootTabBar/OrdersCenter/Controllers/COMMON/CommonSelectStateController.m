@@ -88,18 +88,18 @@
 //根据加载的数据判断跳转界面
 - (void)judgeJumpToDetailControllerWith:(NSInteger)status {
     if (status < ORDER_STATUS_230 || status > ORDER_STATUS_240) {
-        self.title = [OrderStatusManager getStatusTitleWithOrderStatus:ORDER_STATUS_238 orderType:ORDER_TYPE_KA];
+        self.title = [OrderStatusManager getStatusTitleWithOrderStatus:status orderType:ORDER_TYPE_COMMON];
     } else {
         BOOL isBreak = NO;
         for (DetailCommonModel *model in self.dataListArr) {
             if (model.SHPM_STATUS.integerValue > ORDER_STATUS_230 && model.SHPM_STATUS.integerValue <= ORDER_STATUS_240) {
-                self.title = [OrderStatusManager getStatusTitleWithOrderStatus:ORDER_STATUS_238 orderType:ORDER_TYPE_KA];
+                self.title = [OrderStatusManager getStatusTitleWithOrderStatus:model.SHPM_STATUS.integerValue orderType:ORDER_TYPE_COMMON];
                 isBreak = YES;
                 break;
             }
         }
         if (!isBreak) {
-            self.title = [OrderStatusManager getStatusTitleWithOrderStatus:ORDER_STATUS_230 orderType:ORDER_TYPE_KA];
+            self.title = [OrderStatusManager getStatusTitleWithOrderStatus:ORDER_STATUS_230 orderType:ORDER_TYPE_COMMON];
         }
     }
     switch (status) {

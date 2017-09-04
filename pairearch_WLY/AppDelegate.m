@@ -182,7 +182,8 @@
 //切换回首页
 - (void)mainAppPage {
     RootTabController *rootTab = [RootTabController new];
-    [self.window setRootViewController:rootTab];
+    NavigationController *rootNavi = [[NavigationController alloc] initWithRootViewController:rootTab];
+    [self.window setRootViewController:rootNavi];
 }
 
 
@@ -192,7 +193,7 @@
     [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         if (status == AFNetworkReachabilityStatusNotReachable) {
             if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
-                [self addNetLocalNotificationWithDesStr:@"网络连接已断开，请检查网络！"];
+                [self addNetLocalNotificationWithDesStr:@"网络连接已断开，请检查网络！" userInfo:nil];
             } else {
                 [MBProgressHUD bwm_showTitle:@"网络连接已断开，请检查网络！" toView:self.window hideAfter:HUD_HIDE_TIMEINTERVAL];
             }
@@ -217,12 +218,15 @@
 }
 
 //添加本地通知
-- (void)addNetLocalNotificationWithDesStr:(NSString *)desStr {
+- (void)addNetLocalNotificationWithDesStr:(NSString *)desStr userInfo:(NSDictionary *)userInfo {
     if ([UIDevice currentDevice].systemVersion.floatValue >= 10.0) {
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
         UNMutableNotificationContent *content = [UNMutableNotificationContent new];
         content.body = [NSString localizedUserNotificationStringForKey:desStr arguments:nil];
         content.sound = [UNNotificationSound defaultSound];
+        if (userInfo) {
+            content.userInfo = userInfo;
+        }
         NSString *requestIdentifier = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
         UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestIdentifier content:content trigger:nil];
         
@@ -236,6 +240,7 @@
         UILocalNotification *localNotif = [[UILocalNotification alloc] init];
         localNotif.soundName = UILocalNotificationDefaultSoundName;
         localNotif.alertBody = [NSString stringWithFormat:@"%@", desStr];
+        localNotif.userInfo = userInfo;
 //        localNotif.hasAction = NO;
         //注意 ：  这里是立刻弹出通知，其实这里也可以来定时发出通知，或者倒计时发出通知
         [[UIApplication sharedApplication] presentLocalNotificationNow:localNotif];
@@ -310,15 +315,25 @@
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
     NSDictionary *userInfo = [notification userInfo];
     NSString *content = [userInfo valueForKey:@"content"];
-    [self addNetLocalNotificationWithDesStr:content.length>0? content:@""];
-//    NSDictionary *extras = [userInfo valueForKey:@"extras"];
-//    if (extras) {
-//        NSString *jsonStr = [extras valueForKey:@"params"]; //服务端传递的Extras附加字段，key是自己定义的
-//        NSData *jsonData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
-//        if (jsonData) {
-//            NSDictionary *paraDict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-//        }
-//    }
+    NSDictionary *extras = [userInfo valueForKey:@"extras"];
+    if (extras) {
+        NSString *jsonStr = [extras valueForKey:@"params"]; //服务端传递的Extras附加字段，key是自己定义的
+        if (jsonStr) {
+            NSData *jsonData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *paraDict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+            NSString *type = [paraDict objectForKey:@"type"];
+            [self addNetLocalNotificationWithDesStr:content.length>0? content:@"" userInfo:paraDict];
+//            if ([type isEqualToString:@"newOrder"]) {
+//                [self addNetLocalNotificationWithDesStr:content.length>0? content:@"" userInfo:paraDict];
+//            } else {
+//                [self addNetLocalNotificationWithDesStr:content.length>0? content:@"" userInfo:nil];
+//            }
+        } else {
+            [self addNetLocalNotificationWithDesStr:content.length>0? content:@"" userInfo:nil];
+        }
+    } else {
+        [self addNetLocalNotificationWithDesStr:content.length>0? content:@"" userInfo:nil];
+    }
 }
 
 /**
@@ -360,7 +375,7 @@
  @param completionHandler 完成回调
  */
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger options))completionHandler {
-    NSDictionary * userInfo = notification.request.content.userInfo;
+    NSDictionary *userInfo = notification.request.content.userInfo;
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
     }
@@ -377,12 +392,26 @@
  */
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler {
     // Required
-    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    NSDictionary *userInfo = response.notification.request.content.userInfo;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
     }
     completionHandler(UNNotificationPresentationOptionAlert);  //系统要求执行这个方法
     NSLog(@"%s\n%@", __func__, userInfo);
+    
+    if (userInfo.count) {
+        NSString *orderCode = userInfo[@"orderCode"];
+        NSString *transportCode = userInfo[@"transportCode"];
+        if (orderCode && transportCode) {
+            NSDictionary *paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"orderCode":orderCode, @"userName":[LoginModel shareLoginModel].name, @"transportCode":transportCode};
+            NavigationController *rootNC = (NavigationController *)self.window.rootViewController;
+            if (rootNC.viewControllers.count > 0) {
+                RootTabController *rootVC = rootNC.viewControllers[0];
+                rootVC.userInfo = paraDict;
+            }
+        }
+        
+    }
 }
 
 
