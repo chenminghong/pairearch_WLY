@@ -168,7 +168,11 @@
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LOGIN_STATE];
     [[NSUserDefaults standardUserDefaults] setObject:self.userNameTF.text forKey:USER_NUMBER];
     [[NSUserDefaults standardUserDefaults] setObject:self.passwordTF.text forKey:USER_ACCOUNT];
-    if ([[delegate.window.rootViewController class] isSubclassOfClass:[UITabBarController class]]) {
+    NavigationController *naviNC = (NavigationController *)delegate.window.rootViewController;
+    if (naviNC.viewControllers.count <= 0) {
+        return;
+    }
+    if ([[naviNC.viewControllers[0] class] isSubclassOfClass:[UITabBarController class]]) {
         [self dismissViewControllerAnimated:YES completion:^{
             if (!isChangeNumber) {
                 [delegate mainAppPage];

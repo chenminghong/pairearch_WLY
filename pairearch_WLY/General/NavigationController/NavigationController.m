@@ -56,8 +56,13 @@
         viewController.hidesBottomBarWhenPushed = YES;
         [viewController.navigationController setNavigationBarHidden:NO animated:YES];
     }
+    [UIApplication sharedApplication].statusBarHidden = NO;
     [super pushViewController:viewController animated:animated];
+    
 }
+
+
+
 
 
 //获取返回按钮

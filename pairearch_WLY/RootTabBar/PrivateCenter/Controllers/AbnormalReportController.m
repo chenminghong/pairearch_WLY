@@ -283,7 +283,7 @@
  @param picker imagepickerVC对象
  @param info 拍照获取的资源
  */
-- (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:nil];
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
     if ([type isEqualToString:@"public.image"]) {
@@ -309,6 +309,7 @@
             }
         }];
     }
+    
 }
 
 
@@ -428,7 +429,7 @@
 
 /// 用户点击了取消
 - (void)tz_imagePickerControllerDidCancel:(TZImagePickerController *)picker {
-    // NSLog(@"cancel");
+     NSLog(@"cancel");
 }
 
 // 这个照片选择器会自己dismiss，当选择器dismiss的时候，会执行下面的代理方法
