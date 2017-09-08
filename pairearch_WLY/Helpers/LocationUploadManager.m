@@ -163,6 +163,7 @@
                                    @"pre_lat":pre_lat,
                                    @"pre_time":[NSString stringWithFormat:@"%llu", content.previousPoint.loctime],
                                    @"pre_radius":pre_radius,
+                                   @"driverTel":[LoginModel shareLoginModel].tel
                                    };
         [[NetworkHelper shareClient] POST:FENCE_MESSAGE_WARNING parameters:paraDict progress:nil success:nil failure:nil];
         

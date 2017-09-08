@@ -322,12 +322,11 @@
             NSData *jsonData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
             NSDictionary *paraDict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
             NSString *type = [paraDict objectForKey:@"type"];
-            [self addNetLocalNotificationWithDesStr:content.length>0? content:@"" userInfo:paraDict];
-//            if ([type isEqualToString:@"newOrder"]) {
-//                [self addNetLocalNotificationWithDesStr:content.length>0? content:@"" userInfo:paraDict];
-//            } else {
-//                [self addNetLocalNotificationWithDesStr:content.length>0? content:@"" userInfo:nil];
-//            }
+            if ([type isEqualToString:@"newOrder"]) {
+                [self addNetLocalNotificationWithDesStr:content.length>0? content:@"" userInfo:paraDict];
+            } else {
+                [self addNetLocalNotificationWithDesStr:content.length>0? content:@"" userInfo:nil];
+            }
         } else {
             [self addNetLocalNotificationWithDesStr:content.length>0? content:@"" userInfo:nil];
         }

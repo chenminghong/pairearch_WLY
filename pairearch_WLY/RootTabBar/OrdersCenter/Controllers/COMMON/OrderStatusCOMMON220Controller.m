@@ -78,7 +78,7 @@
 #pragma marks -- TableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return self.dataListArr.count > 0? 1:0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -154,9 +154,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         CommonHeaderCell *cell = [CommonHeaderCell getCellWithTable:tableView];
-        DetailCommonModel *model = self.dataListArr[0];
+//        DetailCommonModel *model = self.dataListArr[0];
 //        model.TOTAL_WEIGHT = self.paraDict[@"totalWeight"];
-        cell.detailModel = model;
+        cell.detailModel = self.dataListArr[0];
         return cell;
     }
     CommonConfirationCell *cell = [CommonConfirationCell getCellWithTable:tableView];

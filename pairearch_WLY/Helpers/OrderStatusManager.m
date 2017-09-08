@@ -111,7 +111,7 @@
                 break;
                 
             case ORDER_STATUS_238:
-                title = @"已到达卸货地";
+                title = @"已到达送货地";
                 break;
                 
             case ORDER_STATUS_240:

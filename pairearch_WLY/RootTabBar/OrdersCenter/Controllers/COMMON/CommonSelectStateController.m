@@ -106,9 +106,9 @@
         case ORDER_STATUS_212:
         {
             OrderStatusCOMMON212Controller *childVC = [OrderStatusCOMMON212Controller new];
-            [self addChildController:childVC];
             childVC.paraDict = self.paraDict;
             childVC.dataListArr = self.dataListArr;
+            [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
             };
@@ -118,9 +118,9 @@
         case ORDER_STATUS_220:
         {
             OrderStatusCOMMON220Controller *childVC = [OrderStatusCOMMON220Controller new];
-            [self addChildController:childVC];
             childVC.paraDict = self.paraDict;
             childVC.dataListArr = self.dataListArr;
+            [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
             };
@@ -130,9 +130,9 @@
         case ORDER_STATUS_226:
         {
             OrderStatusCOMMON226Controller *childVC = [OrderStatusCOMMON226Controller new];
-            [self addChildController:childVC];
             childVC.paraDict = self.paraDict;
             childVC.dataListArr = self.dataListArr;
+            [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
             };
@@ -142,9 +142,9 @@
         case ORDER_STATUS_228:
         {
             OrderStatusCOMMON228Controller *childVC = [OrderStatusCOMMON228Controller new];
-            [self addChildController:childVC];
             childVC.paraDict = self.paraDict;
             childVC.dataListArr = self.dataListArr;
+            [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
             };
@@ -156,9 +156,9 @@
         case ORDER_STATUS_240:
         {
             OrderStatusCOMMON230Controller *childVC = [OrderStatusCOMMON230Controller new];
-            [self addChildController:childVC];
             childVC.paraDict = self.paraDict;
             childVC.dataListArr = self.dataListArr;
+            [self addChildController:childVC];
             childVC.nextBlock = ^(NSDictionary *paraDict) {
                 [self loadDetailDataFromNet];
             };
