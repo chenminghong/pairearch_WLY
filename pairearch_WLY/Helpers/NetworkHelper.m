@@ -101,7 +101,7 @@
         [paraDict setObject:longitude forKey:@"lng"];
     }
     
-    NSString *latStr = [NSString stringWithFormat:@"%@", [paraDict objectForKey:@"lat"]];
+    NSString *latStr = [paraDict objectForKey:@"lat"];
     if (latStr.length <= 0) {
         NSString *latitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.latitude];
         [paraDict setObject:latitude forKey:@"lat"];
@@ -119,7 +119,7 @@
         [paraDict setObject:longitude forKey:@"lng"];
     }
     
-    NSString *latStr = [NSString stringWithFormat:@"%@", [paraDict objectForKey:@"lat"]];
+    NSString *latStr = [paraDict objectForKey:@"lat"];
     if (latStr.length <= 0) {
         NSString *latitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.latitude];
         [paraDict setObject:latitude forKey:@"lat"];
@@ -138,7 +138,7 @@
         [paraDict setObject:longitude forKey:@"lng"];
     }
     
-    NSString *latStr = [NSString stringWithFormat:@"%@", [paraDict objectForKey:@"lat"]];
+    NSString *latStr = [paraDict objectForKey:@"lat"];
     if (latStr.length <= 0) {
         NSString *latitude = [NSString stringWithFormat:@"%f", [LocationUploadManager shareManager].latestLocation.coordinate.latitude];
         [paraDict setObject:latitude forKey:@"lat"];

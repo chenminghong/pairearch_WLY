@@ -191,7 +191,10 @@
             }
         }
     }
-    NSDictionary *paraDict = @{@"driverTel":driverTel, @"orderCode":orderCode, @"shpmNum":orderCodes, @"type":@"TO"};
+    NSDictionary *paraDict = @{@"driverTel":driverTel,
+                               @"orderCode":orderCode,
+                               @"shpmNum":orderCodes,
+                               @"type":@"TO"};
     [self networkWithUrlStr:ORDER_GETFAC_CHECK_API paraDict:paraDict];
 }
 

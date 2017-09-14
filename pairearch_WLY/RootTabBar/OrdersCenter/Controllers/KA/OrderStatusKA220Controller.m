@@ -192,7 +192,10 @@
                 orderCodes = [orderCodes stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
             }
         }    }
-    NSDictionary *paraDict = @{@"driverTel":driverTel, @"orderCode":orderCode, @"shpmNum":orderCodes, @"type":@"FRM"};
+    NSDictionary *paraDict = @{@"driverTel":driverTel,
+                               @"orderCode":orderCode,
+                               @"shpmNum":orderCodes,
+                               @"type":@"FRM"};
     [self networkWithUrlStr:ORDER_CHECK_API paraDict:paraDict];
 }
 
