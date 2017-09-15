@@ -180,6 +180,7 @@
             NSString *modelId = [NSString stringWithFormat:@"%@", self.paraDict[@"id"]];
             NSDictionary *paraDict = @{@"id":modelId,
                                        @"dictCode":model.reasonId.length? model.reasonId:@"",
+                                       @"driverName":[LoginModel shareLoginModel].name,
                                        @"dictName":model.name.length? model.name:@"",
                                        @"remark":cell.reasonTV.text};
             NSLog(@"paraDict:%@", paraDict);
