@@ -37,8 +37,7 @@
 }
 
 - (void)setParaDict:(NSDictionary *)paraDict {
-    _paraDict = paraDict;
-    
+    _paraDict = [NSMutableDictionary dictionaryWithDictionary:paraDict];
     [self loadDetailDataFromNet];
 }
 
@@ -52,7 +51,7 @@
             DetailCommonModel *model = [self getMinStatusWithModels:self.dataListArr];
             NSInteger orderStatus = [model.SHPM_STATUS integerValue];
             if (orderStatus > ORDER_STATUS_240) {
-                orderStatus = ORDER_STATUS_245;
+                orderStatus = model.STATUS.integerValue;
             }
             [self judgeJumpToDetailControllerWith:orderStatus];
         } else {
@@ -87,21 +86,28 @@
 
 //根据加载的数据判断跳转界面
 - (void)judgeJumpToDetailControllerWith:(NSInteger)status {
-    if (status < ORDER_STATUS_230 || status > ORDER_STATUS_240) {
-        self.title = [OrderStatusManager getStatusTitleWithOrderStatus:status orderType:ORDER_TYPE_COMMON];
+    NSString *title = self.paraDict[@"title"];
+    if (title.length > 0) {
+        self.title = title;
+        [self.paraDict removeObjectForKey:@"title"];
     } else {
-        BOOL isBreak = NO;
-        for (DetailCommonModel *model in self.dataListArr) {
-            if (model.SHPM_STATUS.integerValue > ORDER_STATUS_230 && model.SHPM_STATUS.integerValue <= ORDER_STATUS_240) {
-                self.title = [OrderStatusManager getStatusTitleWithOrderStatus:model.SHPM_STATUS.integerValue orderType:ORDER_TYPE_COMMON];
-                isBreak = YES;
-                break;
+        if (status < ORDER_STATUS_230 || status > ORDER_STATUS_240) {
+            self.title = [OrderStatusManager getStatusTitleWithOrderStatus:status orderType:ORDER_TYPE_COMMON];
+        } else {
+            BOOL isBreak = NO;
+            for (DetailCommonModel *model in self.dataListArr) {
+                if (model.SHPM_STATUS.integerValue > ORDER_STATUS_230 && model.SHPM_STATUS.integerValue <= ORDER_STATUS_240) {
+                    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:model.SHPM_STATUS.integerValue orderType:ORDER_TYPE_COMMON];
+                    isBreak = YES;
+                    break;
+                }
+            }
+            if (!isBreak) {
+                self.title = [OrderStatusManager getStatusTitleWithOrderStatus:ORDER_STATUS_230 orderType:ORDER_TYPE_COMMON];
             }
         }
-        if (!isBreak) {
-            self.title = [OrderStatusManager getStatusTitleWithOrderStatus:ORDER_STATUS_230 orderType:ORDER_TYPE_COMMON];
-        }
     }
+    
     switch (status) {
         case ORDER_STATUS_212:
         {
@@ -165,7 +171,7 @@
         }
             break;
             
-        case ORDER_STATUS_245:
+            case ORDER_STATUS_245:
         {
             self.title = @"服务评价";
             OrderStatusKA245Controller *evaluationVC = [OrderStatusKA245Controller new];
@@ -175,6 +181,11 @@
             break;
             
         default:
+        {
+            if (status > ORDER_STATUS_245) {
+                [ProgressHUD bwm_showTitle:@"该订单已结束！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL / 2.0];
+            }
+        }
             break;
     }
 }

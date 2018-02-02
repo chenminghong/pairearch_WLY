@@ -132,6 +132,12 @@
                     weakself.nextBlock(nil);
                 }
             }];
+            //移除通知中心已经存在的通知
+            NSString *orderCodes = paraDict[@"orderCode"];
+            NSArray *orderCodeArr = [orderCodes componentsSeparatedByString:@","];
+            for (NSString *orderCode in orderCodeArr) {
+                [AppDelegate removePendingLocalNotificationWithIdentifier:orderCode];
+            }
             [[LocationUploadManager shareManager] startServiceWithEntityName:[NSString stringWithFormat:@"%@_%@", [LoginModel shareLoginModel].name, [LoginModel shareLoginModel].tel]];
         }
     } failure:^(NSError *error) {

@@ -224,7 +224,7 @@
     
     [self.view endEditing:YES];
     
-    if ([NetworkHelper getNetworkStatus] == NetworkStatusNone) {
+    if ([NetworkHelper localizedNetworkReachabilityStatus] == NetworkReachabilityStatusNotReachable) {
         [MBProgressHUD bwm_showTitle:@"网络连接错误，请检查网络！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
     }
     

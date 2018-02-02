@@ -19,5 +19,17 @@
 //切换回首页
 - (void)mainAppPage;
 
+/**
+ 移除相应的通知
+ 
+ @param identifier 需要移除的通知的唯一标识
+ */
++ (void)removePendingLocalNotificationWithIdentifier:(NSString *)identifier;
+
+/**
+ 移除所有的通知
+ */
++ (void)removeAllPendingLocalNotification;
+
 @end
 

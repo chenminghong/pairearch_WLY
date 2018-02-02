@@ -10,7 +10,7 @@
 
 @interface BACKNestedSelectController : OrderStatusKABaseController
 
-@property (nonatomic, strong) NSDictionary *paraDict;  //参数
+@property (nonatomic, strong) NSMutableDictionary *paraDict;  //参数
 
 @property (nonatomic, copy) NSString *orderType; //订单类型
 

@@ -106,13 +106,13 @@
 - (void)jumpToKaControllerWithStatus:(NSInteger)status paraDict:(NSDictionary *)paraDict {
     NestedSelectStateController *nestedVC = [NestedSelectStateController new];
     [self.navigationController pushViewController:nestedVC animated:YES];
-    nestedVC.paraDict = paraDict;
+    nestedVC.paraDict = [NSMutableDictionary dictionaryWithDictionary:paraDict];
 }
 
 //BACK界面跳转逻辑
 - (void)jumpToBackControllerWithStatus:(NSInteger)status paraDict:(NSDictionary *)paraDict{
     BACKNestedSelectController *backVC = [BACKNestedSelectController new];
-    backVC.paraDict = paraDict;
+    backVC.paraDict = [NSMutableDictionary dictionaryWithDictionary:paraDict];
     [self.navigationController pushViewController:backVC animated:YES];
 }
 
@@ -120,7 +120,7 @@
 - (void)jumpToCommonControllerWithStatus:(NSInteger)status paraDict:(NSDictionary *)paraDict{
     CommonSelectStateController *nestedVC = [CommonSelectStateController new];
     [self.navigationController pushViewController:nestedVC animated:YES];
-    nestedVC.paraDict = paraDict;
+    nestedVC.paraDict = [NSMutableDictionary dictionaryWithDictionary:paraDict];
 }
 
 

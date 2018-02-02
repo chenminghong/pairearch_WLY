@@ -36,9 +36,8 @@
     self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction:)];
 }
 
-- (void)setParaDict:(NSDictionary *)paraDict {
-    _paraDict = paraDict;
-    
+- (void)setParaDict:(NSMutableDictionary *)paraDict {
+    _paraDict = [NSMutableDictionary dictionaryWithDictionary:paraDict];
     [self loadDetailDataFromNet];
 }
 
@@ -57,7 +56,7 @@
             BackDetailModel *model = [self getMinStatusWithModels:self.dataListArr];
             NSInteger status = [model.SHPM_STATUS integerValue];
             if (status > ORDER_STATUS_240) {
-                status = ORDER_STATUS_245;
+                status = model.STATUS.integerValue;
             }
             //根据加载的数据判断跳转界面
             [self judgeJumpToDetailControllerWithStatus:status];
@@ -120,7 +119,13 @@
 
 //根据加载的数据判断跳转界面
 - (void)judgeJumpToDetailControllerWithStatus:(NSInteger)status {
-    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:status orderType:ORDER_TYPE_BACK];
+    NSString *title = self.paraDict[@"title"];
+    if (title.length > 0) {
+        self.title = title;
+        [self.paraDict removeObjectForKey:@"title"];
+    } else {
+        self.title = [OrderStatusManager getStatusTitleWithOrderStatus:status orderType:ORDER_TYPE_BACK];
+    }
     switch (status) {
         case ORDER_STATUS_212:
         {
@@ -211,6 +216,11 @@
             break;
             
         default:
+        {
+            if (status > ORDER_STATUS_245) {
+                [ProgressHUD bwm_showTitle:@"该订单已结束！" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL / 2.0];
+            }
+        }
             break;
     }
 }

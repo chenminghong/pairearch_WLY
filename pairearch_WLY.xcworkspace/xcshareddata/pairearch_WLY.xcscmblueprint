@@ -1,0 +1,44 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "DB3F30294FF60E3D86F6608BD8491AF5A393B510+++8ED2D99",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "DB3F30294FF60E3D86F6608BD8491AF5A393B510+++0988DB5" : 9223372036854775807,
+    "FFEF89B055C4AD5A06D1AF5C6B32DEF346E07EF6+++29BA3FA" : 9223372036854775807,
+    "DB3F30294FF60E3D86F6608BD8491AF5A393B510+++8ED2D99" : 9223372036854775807,
+    "DB3F30294FF60E3D86F6608BD8491AF5A393B510+++40EC667" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E76D17ED-9542-47AD-A849-3A4CD0F84481",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "DB3F30294FF60E3D86F6608BD8491AF5A393B510+++0988DB5" : "",
+    "FFEF89B055C4AD5A06D1AF5C6B32DEF346E07EF6+++29BA3FA" : "SCMC\/",
+    "DB3F30294FF60E3D86F6608BD8491AF5A393B510+++8ED2D99" : "pairearch_WLY\/",
+    "DB3F30294FF60E3D86F6608BD8491AF5A393B510+++40EC667" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "pairearch_WLY",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "pairearch_WLY.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/chenminghong\/pairearch_WLY.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DB3F30294FF60E3D86F6608BD8491AF5A393B510+++0988DB5"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/chenminghong\/pairearch_WLY.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DB3F30294FF60E3D86F6608BD8491AF5A393B510+++40EC667"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/bitbucket.org:chenminghong\/pairearch_wly.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DB3F30294FF60E3D86F6608BD8491AF5A393B510+++8ED2D99"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/chenminghong\/SCMC.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FFEF89B055C4AD5A06D1AF5C6B32DEF346E07EF6+++29BA3FA"
+    }
+  ]
+}

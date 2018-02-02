@@ -41,20 +41,13 @@
     self.navigationItem.leftBarButtonItem = [NavigationController getNavigationBackItemWithTarget:self SEL:@selector(popBackAction:)];
 }
 
-- (void)setParaDict:(NSDictionary *)paraDict {
-    _paraDict = paraDict;
+- (void)setParaDict:(NSMutableDictionary *)paraDict {
+    _paraDict = [NSMutableDictionary dictionaryWithDictionary:paraDict];
     [self loadDetailDataFromNet];
 }
 
 //网络请求数据
 - (void)loadDetailDataFromNet {
-//    if (self.childViewControllers.count > 0) {
-//        for (UIViewController *childVC in self.childViewControllers) {
-//            [childVC.view removeFromSuperview];
-//            [childVC removeFromParentViewController];
-//        }
-//    }
-    
     [OrderDetailModel getDataWithParameters:self.paraDict endBlock:^(id model, NSError *error) {
         if (model) {
             //对model数据进行分类
@@ -80,8 +73,9 @@
             OrderDetailModel *model = [self getMinStatusWithModels:self.dataListArr];
             NSInteger status = model.SHPM_STATUS.integerValue;
             if (status > ORDER_STATUS_240) {
-                status = ORDER_STATUS_245;
+                status = model.STATUS.integerValue;
             }
+
             [self judgeJumpToDetailControllerWithOrderStatus:status];
         } else {
             //添加请求失败视图
@@ -116,7 +110,13 @@
 
 //根据加载的数据判断跳转界面
 - (void)judgeJumpToDetailControllerWithOrderStatus:(NSInteger)orderStatus {
-    self.title = [OrderStatusManager getStatusTitleWithOrderStatus:orderStatus orderType:ORDER_TYPE_KA];
+    NSString *title = self.paraDict[@"title"];
+    if (title.length > 0) {
+        self.title = title;
+        [self.paraDict removeObjectForKey:@"title"];
+    } else {
+        self.title = [OrderStatusManager getStatusTitleWithOrderStatus:orderStatus orderType:ORDER_TYPE_KA];
+    }
     switch (orderStatus) {
         case ORDER_STATUS_212:
         {

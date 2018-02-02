@@ -10,7 +10,7 @@
 
 @interface CommonSelectStateController : OrderStatusKABaseController
 
-@property (nonatomic, strong) NSDictionary *paraDict;  //参数
+@property (nonatomic, strong) NSMutableDictionary *paraDict;  //参数
 
 //@property (nonatomic, assign) NSInteger orderStatus; //load单号状态
 

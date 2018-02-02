@@ -219,33 +219,68 @@
 
 //添加本地通知
 - (void)addNetLocalNotificationWithDesStr:(NSString *)desStr userInfo:(NSDictionary *)userInfo {
-    if ([UIDevice currentDevice].systemVersion.floatValue >= 10.0) {
-        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-        UNMutableNotificationContent *content = [UNMutableNotificationContent new];
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    UNMutableNotificationContent *content = [UNMutableNotificationContent new];
+    if ([UIDevice currentDevice].systemVersion.floatValue < 10.0) {
+        content.body = [NSString stringWithFormat:@"%@", desStr];
+    } else {
         content.body = [NSString localizedUserNotificationStringForKey:desStr arguments:nil];
-        content.sound = [UNNotificationSound defaultSound];
-        if (userInfo) {
-            content.userInfo = userInfo;
-        }
-        NSString *requestIdentifier = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
-        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestIdentifier content:content trigger:nil];
-        
-        //添加推送成功后的处理！
-        [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
-            if (!error) {
-                NSLog(@"本地通知添加成功");
-            }
-        }];
-    } else if ([UIDevice currentDevice].systemVersion.floatValue >= 9.0) {
-        UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-        localNotif.soundName = UILocalNotificationDefaultSoundName;
-        localNotif.alertBody = [NSString stringWithFormat:@"%@", desStr];
-        localNotif.userInfo = userInfo;
-//        localNotif.hasAction = NO;
-        //注意 ：  这里是立刻弹出通知，其实这里也可以来定时发出通知，或者倒计时发出通知
-        [[UIApplication sharedApplication] presentLocalNotificationNow:localNotif];
     }
+    content.sound = [UNNotificationSound defaultSound];
+    if (userInfo) {
+        content.userInfo = userInfo;
+    }
+    NSString *requestIdentifier = [NSString stringWithFormat:@"%@", userInfo[@"orderCode"]];
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestIdentifier content:content trigger:nil];
+    
+    //添加推送成功后的处理！
+    [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        if (!error) {
+            NSLog(@"本地通知添加成功");
+        }
+    }];
+//    if ([UIDevice currentDevice].systemVersion.floatValue >= 10.0) {
+//    } else if ([UIDevice currentDevice].systemVersion.floatValue >= 9.0) {
+//        UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+//        localNotif.soundName = UILocalNotificationDefaultSoundName;
+//        localNotif.alertBody = [NSString stringWithFormat:@"%@", desStr];
+//        if (userInfo) {
+//            localNotif.userInfo = userInfo;
+//        }
+////        localNotif.hasAction = NO;
+//        //注意 ：  这里是立刻弹出通知，其实这里也可以来定时发出通知，或者倒计时发出通知
+//        [[UIApplication sharedApplication] presentLocalNotificationNow:localNotif];
+//    }
 }
+
+/**
+ 移除相应的通知
+ 
+ @param identifier 需要移除的通知的唯一标识
+ */
++ (void)removePendingLocalNotificationWithIdentifier:(NSString *)identifier {
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center removeDeliveredNotificationsWithIdentifiers:@[identifier]];
+//    if ([UIDevice currentDevice].systemVersion.floatValue >= 10.0) {
+//        [center removeDeliveredNotificationsWithIdentifiers:@[identifier]];
+//    } else if ([UIDevice currentDevice].systemVersion.floatValue >= 9.0) {
+//        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+//    }
+}
+
+/**
+ 移除所有的通知
+ */
++ (void)removeAllPendingLocalNotification {
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center removeAllDeliveredNotifications];
+//    if ([UIDevice currentDevice].systemVersion.floatValue >= 10.0) {
+//        [center removeAllDeliveredNotifications];
+//    } else if ([UIDevice currentDevice].systemVersion.floatValue >= 9.0) {
+//        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+//    }
+}
+
 
 /**
  初始化友盟统计SDK
@@ -320,7 +355,7 @@
         NSString *jsonStr = [extras valueForKey:@"params"]; //服务端传递的Extras附加字段，key是自己定义的
         if (jsonStr) {
             NSData *jsonData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary *paraDict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+            NSMutableDictionary *paraDict = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil]];
             NSString *type = [paraDict objectForKey:@"type"];
             if ([type isEqualToString:@"newOrder"]) {
                 [self addNetLocalNotificationWithDesStr:content.length>0? content:@"" userInfo:paraDict];
@@ -402,7 +437,7 @@
         NSString *orderCode = userInfo[@"orderCode"];
         NSString *transportCode = userInfo[@"transportCode"];
         if (orderCode && transportCode) {
-            NSDictionary *paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"orderCode":orderCode, @"userName":[LoginModel shareLoginModel].name, @"transportCode":transportCode};
+            NSDictionary *paraDict = @{@"driverTel":[LoginModel shareLoginModel].tel, @"orderCode":orderCode, @"userName":[LoginModel shareLoginModel].name, @"transportCode":transportCode, @"title":@"消息通知"};
             NavigationController *rootNC = (NavigationController *)self.window.rootViewController;
             if (rootNC.viewControllers.count > 0) {
                 RootTabController *rootVC = rootNC.viewControllers[0];

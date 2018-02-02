@@ -1,0 +1,63 @@
+PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - DYCoordinateInChina (0.1.1)
+  - DYLocationConverter (0.0.4):
+    - DYCoordinateInChina
+  - IQKeyboardManager (3.3.7)
+  - JCore (1.1.1)
+  - JPush (3.0.2):
+    - JCore (= 1.1.1)
+  - Masonry (1.0.2)
+  - MBProgressHUD (0.9.2)
+  - MBProgressHUD+BWMExtension (1.0.1):
+    - MBProgressHUD (~> 0.9.1)
+  - MJRefresh (3.1.12)
+  - SAMKeychain (1.5.2)
+  - TZImagePickerController (1.7.8)
+  - UMengAnalytics-NO-IDFA (4.2.5)
+
+DEPENDENCIES:
+  - AFNetworking
+  - DYLocationConverter (~> 0.0.4)
+  - IQKeyboardManager
+  - JPush (~> 3.0.2)
+  - Masonry (~> 1.0.2)
+  - MBProgressHUD
+  - MBProgressHUD+BWMExtension (~> 1.0.1)
+  - MJRefresh
+  - SAMKeychain (~> 1.5.2)
+  - TZImagePickerController (~> 1.7.8)
+  - UMengAnalytics-NO-IDFA
+
+SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  DYCoordinateInChina: 26eede8f63682536b9f2688cf9cbe4ebf21dcbf9
+  DYLocationConverter: c6046909d23087f808b1515df344870d5e854baf
+  IQKeyboardManager: 249c3946acf61345c18b038eb50863fe2793e3a8
+  JCore: 2210a789c8efb7dc2a46b1c24d2209b995b18ad2
+  JPush: 5d53c88e32e48b559edc3adb20ade30903a5b9e1
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MBProgressHUD+BWMExtension: d0603a1c0b03ef74cae6a0986d63c0bdf34bedfe
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
+  TZImagePickerController: 87a138ae5d585225aaa6c8abe2cface0f0ad19dd
+  UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
+
+PODFILE CHECKSUM: 7afd0008d7479e760ecb26458bdbd98ef96dc7ba
+
+COCOAPODS: 1.2.0

@@ -49,7 +49,7 @@
         }];
         self.placeHoldLabel.font = [UIFont systemFontOfSize:CELL_LABEL_FONTSIZE];
         self.placeHoldLabel.textColor = [UIColor grayColor];
-        self.placeHoldLabel.text = @"其他原因";
+        self.placeHoldLabel.text = @"其它原因";
     }
     return _placeHoldLabel;
 }

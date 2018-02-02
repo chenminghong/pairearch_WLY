@@ -77,10 +77,6 @@
     }
 }
 
-//- (BOOL)prefersStatusBarHidden {
-//    return NO;
-//}
-
 - (void)setUserInfo:(NSDictionary *)userInfo {
     _userInfo = userInfo;
     if (userInfo) {
@@ -123,21 +119,21 @@
 - (void)jumpToKaControllerWithParaDict:(NSDictionary *)paraDict {
     NestedSelectStateController *nestedVC = [NestedSelectStateController new];
     [self.navigationController pushViewController:nestedVC animated:YES];
-    nestedVC.paraDict = paraDict;
+    nestedVC.paraDict = [NSMutableDictionary dictionaryWithDictionary:paraDict];
 }
 
 //BACK界面跳转逻辑
 - (void)jumpToBackControllerWithParaDict:(NSDictionary *)paraDict{
     BACKNestedSelectController *backVC = [BACKNestedSelectController new];
-    backVC.paraDict = paraDict;
     [self.navigationController pushViewController:backVC animated:YES];
+    backVC.paraDict = [NSMutableDictionary dictionaryWithDictionary:paraDict];
 }
 
 //COMMON界面跳转逻辑
 - (void)jumpToCommonControllerWithParaDict:(NSDictionary *)paraDict{
     CommonSelectStateController *nestedVC = [CommonSelectStateController new];
     [self.navigationController pushViewController:nestedVC animated:YES];
-    nestedVC.paraDict = paraDict;
+    nestedVC.paraDict = [NSMutableDictionary dictionaryWithDictionary:paraDict];
 }
 
 

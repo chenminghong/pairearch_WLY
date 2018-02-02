@@ -23,6 +23,7 @@
 		0F4C92681EE02E3A00546AFF /* RejectSignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F4C92661EE02E3A00546AFF /* RejectSignCell.xib */; };
 		0F61988C1F5CEF0C00A1C9D6 /* OrderNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F61988A1F5CEF0C00A1C9D6 /* OrderNotificationController.m */; };
 		0F61988D1F5CEF0C00A1C9D6 /* OrderNotificationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F61988B1F5CEF0C00A1C9D6 /* OrderNotificationController.xib */; };
+		0F8BFC021F7D0736000599F6 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8BFC001F7D04A3000599F6 /* UserNotifications.framework */; };
 		0FAE163C1EEE37E700E5450F /* EarlyWarningController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE163A1EEE37E700E5450F /* EarlyWarningController.m */; };
 		0FAE16411EEE38E200E5450F /* EarlyWarningTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAE163F1EEE38E200E5450F /* EarlyWarningTableCell.m */; };
 		0FAE16421EEE38E200E5450F /* EarlyWarningTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FAE16401EEE38E200E5450F /* EarlyWarningTableCell.xib */; };
@@ -203,6 +204,7 @@
 		0F6198891F5CEF0C00A1C9D6 /* OrderNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderNotificationController.h; sourceTree = "<group>"; };
 		0F61988A1F5CEF0C00A1C9D6 /* OrderNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderNotificationController.m; sourceTree = "<group>"; };
 		0F61988B1F5CEF0C00A1C9D6 /* OrderNotificationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderNotificationController.xib; sourceTree = "<group>"; };
+		0F8BFC001F7D04A3000599F6 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		0FAE16391EEE37E700E5450F /* EarlyWarningController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarlyWarningController.h; sourceTree = "<group>"; };
 		0FAE163A1EEE37E700E5450F /* EarlyWarningController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarlyWarningController.m; sourceTree = "<group>"; };
 		0FAE163E1EEE38E200E5450F /* EarlyWarningTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarlyWarningTableCell.h; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F8BFC021F7D0736000599F6 /* UserNotifications.framework in Frameworks */,
 				76DA3C9EDAD9C136CDB7CBDB /* libPods-pairearch_WLY.a in Frameworks */,
 				B35D79361E666AB800ED730B /* MapKit.framework in Frameworks */,
 				B35727931E556155003F9B2F /* BaiduTraceSDK.framework in Frameworks */,
@@ -554,6 +557,7 @@
 		292A3E722AE506B1E6F3136F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F8BFC001F7D04A3000599F6 /* UserNotifications.framework */,
 				B35D79351E666AB800ED730B /* MapKit.framework */,
 				B357278E1E555515003F9B2F /* BaiduTraceSDK.framework */,
 				E253EE02D936D5B70824B760 /* libPods-pairearch_WLY.a */,
@@ -1568,7 +1572,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "dedac27b-2f86-4106-aa5e-dc4501e4babf";
+				PROVISIONING_PROFILE = "2e7f28c6-861f-45f8-82d2-4d00c1f2ccd0";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1620,7 +1624,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "dedac27b-2f86-4106-aa5e-dc4501e4babf";
+				PROVISIONING_PROFILE = "2e7f28c6-861f-45f8-82d2-4d00c1f2ccd0";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1634,6 +1638,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_ENTITLEMENTS = pairearch_WLY/pairearch_WLY.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Paireach supply chain management Co., Ltd. (CB93LUJYU2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1684,6 +1689,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_ENTITLEMENTS = pairearch_WLY/pairearch_WLY.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Paireach supply chain management Co., Ltd. (CB93LUJYU2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

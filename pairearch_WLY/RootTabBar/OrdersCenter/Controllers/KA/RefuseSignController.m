@@ -116,9 +116,11 @@
     RejectSignCell *cell = (RejectSignCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     RejectReasonListModel *model = cell.selectModel;
     
-    if ([model.name isEqualToString:@"其他"] && cell.reasonTV.text.length <= 0) {
-        [MBProgressHUD bwm_showTitle:@"请输入其他原因" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
-        return;
+    if ([model.name containsString:@"其他"] || [model.name containsString:@"其它"]) {
+        if (cell.reasonTV.text.length <= 0) {
+            [MBProgressHUD bwm_showTitle:@"请输入其它原因" toView:self.view hideAfter:HUD_HIDE_TIMEINTERVAL];
+            return;
+        }
     }
     
     switch (self.lxCode) {

@@ -18,10 +18,10 @@
 //#define PAIREACH_BASE_URL                @"http://192.168.0.124:8086/itip/client/"
 //#define PAIREACH_BASE_URL                @"http://192.168.0.116:8086/itip/client/"
 
-#define PAIREACH_BASE_URL                @"http://106.14.39.65:8285/itip/client/"     //测试线上
+#define PAIREACH_BASE_URL                @"http://106.14.39.65:8285/itip/client/"       //测试线上
 //#define PAIREACH_BASE_URL                @"http://192.168.1.14:8086/itip/client/"     //备用
-//#define PAIREACH_BASE_URL                @"http://dt.paireach.com/itip/client/"       //双至域名
-//#define PAIREACH_BASE_URL                @"http://139.219.188.45/itip/client/"        //双至IP
+//#define PAIREACH_BASE_URL                @"http://42.159.199.65/itip/client/"         //双至线上发布版本IP
+//#define PAIREACH_BASE_URL                @"http://dt.paireach.com/itip/client/"       //双至线上域名
 
 
 
